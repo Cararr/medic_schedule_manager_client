@@ -9,7 +9,7 @@ export default function TableBody(props) {
 		case 'KINEZA':
 			rows = [
 				<TableRow
-					setDailyShift={props.setDailyShift}
+					changeDailyShift={props.changeDailyShift}
 					dailyShift={props.dailyShift}
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}
@@ -19,7 +19,7 @@ export default function TableBody(props) {
 					key="KINEZA_0st_row"
 				/>,
 				<TableRow
-					setDailyShift={props.setDailyShift}
+					changeDailyShift={props.changeDailyShift}
 					dailyShift={props.dailyShift}
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}
@@ -29,7 +29,7 @@ export default function TableBody(props) {
 					key="KINEZA_1nd_row"
 				/>,
 				<TableRow
-					setDailyShift={props.setDailyShift}
+					changeDailyShift={props.changeDailyShift}
 					dailyShift={props.dailyShift}
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}
@@ -43,10 +43,8 @@ export default function TableBody(props) {
 		case 'FIZYKO':
 			rows = [
 				<TableRow
-					setDailyShift={props.setDailyShift}
+					changeDailyShift={props.changeDailyShift}
 					dailyShift={props.dailyShift}
-					tableValues={props.tableValues}
-					setTableValues={props.setTableValues}
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}
 					howManyCells={4}
@@ -55,10 +53,8 @@ export default function TableBody(props) {
 					key="FIZYKO_0st_row"
 				/>,
 				<TableRow
-					setDailyShift={props.setDailyShift}
+					changeDailyShift={props.changeDailyShift}
 					dailyShift={props.dailyShift}
-					tableValues={props.tableValues}
-					setTableValues={props.setTableValues}
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}
 					howManyCells={4}
@@ -71,10 +67,8 @@ export default function TableBody(props) {
 		case 'MASAZ':
 			rows = [
 				<TableRow
-					setDailyShift={props.setDailyShift}
+					changeDailyShift={props.changeDailyShift}
 					dailyShift={props.dailyShift}
-					tableValues={props.tableValues}
-					setTableValues={props.setTableValues}
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}
 					howManyCells={4}

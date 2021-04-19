@@ -3,7 +3,7 @@ const data = {
 		'15.04.2021': {
 			KINEZA: ['', 'test kineza 2', '', '', '', '', '', '', '', ''],
 			FIZYKO: ['test fizyko 1', '', '', '', '', '', '', ''],
-			MASAZ: ['1', '2', '3', '4'],
+			MASAZ: ['', '', '', ''],
 		},
 	},
 	Employees: [

@@ -11,10 +11,16 @@ export default function TableCell(props) {
 				const cellCurrentlyDraged = document.getElementById(
 					props.currentlyDragged
 				);
+				props.changeDailyShift(
+					calulateCellNumberFromId(props.currentlyDragged),
+					getStationNameFromId(props.currentlyDragged),
+					e.target.innerText
+				);
 				cellCurrentlyDraged.innerText = e.target.innerText;
-				e.target.innerText = employee;
 			}
+			props.changeDailyShift(props.cellNumber, props.stationName, employee);
 			e.target.innerText = employee;
+			props.setCurrentlyDragged('');
 		}
 	};
 
@@ -28,7 +34,7 @@ export default function TableCell(props) {
 	};
 	return (
 		<td
-			onClick={() => console.log(props.cellValue)}
+			onClick={() => console.log(props.cellNumber)}
 			id={props.id}
 			draggable={true}
 			onDragStart={onDragStart}
@@ -39,4 +45,11 @@ export default function TableCell(props) {
 			{props.cellValue}
 		</td>
 	);
+}
+function calulateCellNumberFromId(id) {
+	const matches = id.match(/\d/g);
+	return Number(matches[0]) * 4 + Number(matches[1]);
+}
+function getStationNameFromId(id) {
+	return id.split('_')[0];
 }

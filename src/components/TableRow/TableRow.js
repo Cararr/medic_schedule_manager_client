@@ -15,10 +15,8 @@ export default function TableRow(props) {
 			cellsArray.push(
 				<TableCell
 					stationName={props.stationName}
-					setDailyShift={props.setDailyShift}
-					dailyShift={props.dailyShift}
+					changeDailyShift={props.changeDailyShift}
 					cellNumber={cellNumber}
-					cellValue={props.dailyShift[cellNumber]}
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}
 					id={`${props.row}_${cellCounter}`}
