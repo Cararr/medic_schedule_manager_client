@@ -23,6 +23,7 @@ export default function TableCell(props) {
 					props.setCurrentlyDragged('');
 					// alert(`lol :${updatedTable}`);
 					console.log(updatedTable);
+					alert(updatedTable);
 					// console.log({ ...prev, [props.stationName]: updatedTable });
 					return { ...prev, [props.stationName]: updatedTable };
 				}
