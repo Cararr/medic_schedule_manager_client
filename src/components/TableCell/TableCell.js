@@ -5,12 +5,13 @@ import './TableCell.css';
 export default function TableCell(props) {
 	const drop = (e) => {
 		e.preventDefault();
-		// this is for swaping on drag
 		const employee = e.dataTransfer.getData('employee');
 		if (employee) {
 			if (props.currentlyDragged) {
-				document.getElementById(props.currentlyDragged).innerText =
-					e.target.innerText;
+				const cellCurrentlyDraged = document.getElementById(
+					props.currentlyDragged
+				);
+				cellCurrentlyDraged.innerText = e.target.innerText;
 				e.target.innerText = employee;
 			}
 			e.target.innerText = employee;
@@ -23,6 +24,7 @@ export default function TableCell(props) {
 	const onDragStart = (e) => {
 		props.setCurrentlyDragged(e.target.id);
 		e.dataTransfer.setData('employee', e.target.innerText);
+		setTimeout(() => (e.target.innerText = ''), 0);
 	};
 	return (
 		<td
