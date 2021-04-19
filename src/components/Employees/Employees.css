@@ -1,0 +1,7 @@
+.Employees_list {
+	list-style-type: none;
+	padding: 0;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+}

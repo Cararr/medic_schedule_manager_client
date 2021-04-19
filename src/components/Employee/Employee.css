@@ -1,0 +1,9 @@
+.employee {
+	width: fit-content;
+	margin: 0 0 1rem 0;
+}
+.employee:hover {
+	background-color: blue;
+	color: azure;
+	cursor: grab;
+}

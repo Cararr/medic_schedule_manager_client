@@ -1,0 +1,5 @@
+.cell:hover {
+	cursor: grab;
+	background-color: blue;
+	color: azure;
+}
