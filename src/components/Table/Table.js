@@ -9,6 +9,7 @@ export default function Table(props) {
 			<TableHead stationName={props.stationName} />
 			<TableBody
 				currentlyDragged={props.currentlyDragged}
+				dailyShift={props.dailyShift}
 				setCurrentlyDragged={props.setCurrentlyDragged}
 				changeDailyShift={props.changeDailyShift}
 				stationName={props.stationName}

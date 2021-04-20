@@ -17,6 +17,7 @@ export default function TableRow(props) {
 					stationName={props.stationName}
 					changeDailyShift={props.changeDailyShift}
 					cellNumber={cellNumber}
+					cellValue={props.dailyShift[cellNumber]}
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}
 					id={`${props.row}_${cellCounter}`}
