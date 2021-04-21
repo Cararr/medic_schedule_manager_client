@@ -1,6 +1,6 @@
 const data = {
 	Schedules: {
-		'15.04.2021': {
+		'2021-03-12': {
 			KINEZA: ['', 'test kineza 2', '', '', '', '', '', '', '', ''],
 			FIZYKO: ['test fizyko 1', '', '', '', '', '', '', ''],
 			MASAZ: ['', '', '', ''],

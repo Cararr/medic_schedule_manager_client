@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './TableCell.css';
 
 export default function TableCell(props) {

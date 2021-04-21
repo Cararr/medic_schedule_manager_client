@@ -1,0 +1,12 @@
+.select_date_form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column;
+	margin-bottom: 1rem;
+}
+.select_date_form input {
+}
+.select_date_form label {
+	margin-bottom: 1rem;
+}

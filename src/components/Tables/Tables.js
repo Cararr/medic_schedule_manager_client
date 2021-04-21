@@ -1,13 +1,21 @@
 import './Tables.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from '../Table/Table';
+import SelectDate from '../SelectDate/SelectDate';
 import Data from '../../util/fakeData';
 
 export default function Tables() {
 	const { Schedules } = Data;
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
-	const [dailyShift, setDailyShift] = useState(Schedules['15.04.2021']);
-	console.log(dailyShift);
+	const [dateSelected, setDateSelected] = useState(
+		formatDateString(new Date())
+	);
+	const [dailyShift, setDailyShift] = useState(returnEmptyDailyShiftObject());
+	useEffect(() => {
+		if (Schedules[dateSelected]) setDailyShift(Schedules[dateSelected]);
+		else setDailyShift(returnEmptyDailyShiftObject());
+	}, [dateSelected]);
+
 	const changeDailyShift = (cellNumber, stationName, newCellValue) => {
 		setDailyShift((prev) => {
 			const updatedTableValues = prev[stationName];
@@ -17,6 +25,10 @@ export default function Tables() {
 	};
 	return (
 		<div>
+			<SelectDate
+				setDateSelected={setDateSelected}
+				dateSelected={dateSelected}
+			/>
 			<Table
 				dailyShift={dailyShift.KINEZA}
 				changeDailyShift={changeDailyShift}
@@ -40,4 +52,15 @@ export default function Tables() {
 			/>
 		</div>
 	);
+}
+function formatDateString(date) {
+	const dateArray = date.toLocaleDateString().split('.');
+	return `${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`;
+}
+function returnEmptyDailyShiftObject() {
+	return {
+		KINEZA: new Array(10).fill(''),
+		FIZYKO: new Array(8).fill(''),
+		MASAZ: new Array(4).fill(''),
+	};
 }
