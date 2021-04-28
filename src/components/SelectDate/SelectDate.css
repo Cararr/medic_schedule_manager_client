@@ -6,6 +6,9 @@
 	margin-bottom: 1rem;
 }
 .select_date_form input {
+	color: black;
+	font-size: 1rem;
+	font-family: Arial, Helvetica, sans-serif;
 }
 .select_date_form label {
 	margin-bottom: 1rem;

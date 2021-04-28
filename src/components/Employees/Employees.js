@@ -1,16 +1,24 @@
 import React from 'react';
-import data from '../../util/fakeData';
+import { useEmployees } from '../../context/employeesContext';
 import Employee from '../Employee/Employee';
 import './Employees.css';
 
 export default function Employees() {
-	const employeesList = data.Employees.map((worker) => (
-		<Employee name={worker.name} key={worker.name} />
+	const employees = useEmployees();
+	const employeesList = employees?.map((worker) => (
+		<Employee name={worker} key={worker} />
 	));
+
 	return (
-		<div>
+		<div
+			onClick={() => {
+				console.log(employees);
+			}}
+		>
 			<h3>Employees:</h3>
-			<ul className="Employees_list">{employeesList}</ul>
+			<ul className="Employees_list">
+				{(employeesList?.length && employeesList) || 'Loading...'}
+			</ul>
 		</div>
 	);
 }
