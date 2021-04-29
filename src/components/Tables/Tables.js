@@ -2,17 +2,19 @@ import './Tables.css';
 import React, { useState, useEffect } from 'react';
 import Table from '../Table/Table';
 import SelectDate from '../SelectDate/SelectDate';
-import Data from '../../util/fakeData';
+import { loadSchedulesByDate } from '../../util/fetchFromDB';
 
 export default function Tables() {
-	const { Schedules } = Data;
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
 	const [dateSelected, setDateSelected] = useState(
 		formatDateString(new Date())
 	);
 	const [dailyShift, setDailyShift] = useState(returnEmptyDailyShiftObject());
 	useEffect(() => {
-		if (Schedules[dateSelected]) setDailyShift(Schedules[dateSelected]);
+		if (dateSelected)
+			loadSchedulesByDate(dateSelected).then((schedule) => {
+				setDailyShift(schedule[dateSelected]);
+			});
 		else setDailyShift(returnEmptyDailyShiftObject());
 	}, [dateSelected]);
 
