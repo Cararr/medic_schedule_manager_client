@@ -1,10 +1,10 @@
-.station_table {
+.station-table {
 	border-collapse: collapse;
 	margin-bottom: 2rem;
 }
 td {
-	width: 6rem;
-	height: 2rem;
+	width: 8rem;
+	height: 3rem;
 	padding: 0;
 	border: 1px solid black;
 }

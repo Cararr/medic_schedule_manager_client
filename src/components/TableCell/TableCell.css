@@ -3,7 +3,7 @@
 	background-color: blue;
 	color: azure;
 }
-.cell_drag_over {
+.cell-drag-over {
 	cursor: grab;
 	background-color: blue;
 	color: azure;

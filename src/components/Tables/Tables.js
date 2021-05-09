@@ -9,60 +9,59 @@ export default function Tables() {
 	const [dateSelected, setDateSelected] = useState(
 		formatDateString(new Date())
 	);
-	const [dailyShift, setDailyShift] = useState(returnEmptyDailyShiftObject());
-	useEffect(() => {
+	const [selectedSchedule, setSelectedSchedule] = useState(
+		returnEmptyDailyShiftObject()
+	);
+	/* 	useEffect(() => {
 		if (dateSelected)
 			loadSchedulesByDate(dateSelected).then((schedule) => {
 				setDailyShift(schedule[dateSelected]);
 			});
 		else setDailyShift(returnEmptyDailyShiftObject());
-	}, [dateSelected]);
+	}, [dateSelected]); */
 
-	const changeDailyShift = (cellNumber, stationName, newCellValue) => {
-		setDailyShift((prev) => {
+	const editSchedule = (cellNumber, stationName, newCellValue) => {
+		setSelectedSchedule((prev) => {
 			const updatedTableValues = prev[stationName];
-			updatedTableValues[cellNumber] = newCellValue;
+			updatedTableValues[Number(cellNumber)] = newCellValue;
 			return { ...prev, [stationName]: updatedTableValues };
 		});
 	};
+
+	const tables = [];
+	for (const station in selectedSchedule) {
+		tables.push(
+			<Table
+				selectedSchedule={selectedSchedule[station]}
+				editSchedule={editSchedule}
+				currentlyDragged={currentlyDragged}
+				setCurrentlyDragged={setCurrentlyDragged}
+				stationName={station}
+				key={station}
+			/>
+		);
+	}
+
 	return (
-		<div>
+		<div className="tables-section">
 			<SelectDate
 				setDateSelected={setDateSelected}
 				dateSelected={dateSelected}
+				formatDateString={formatDateString}
 			/>
-			<Table
-				dailyShift={dailyShift.KINEZA}
-				changeDailyShift={changeDailyShift}
-				currentlyDragged={currentlyDragged}
-				setCurrentlyDragged={setCurrentlyDragged}
-				stationName="KINEZA"
-			/>
-			<Table
-				dailyShift={dailyShift.FIZYKO}
-				changeDailyShift={changeDailyShift}
-				currentlyDragged={currentlyDragged}
-				setCurrentlyDragged={setCurrentlyDragged}
-				stationName="FIZYKO"
-			/>
-			<Table
-				dailyShift={dailyShift.MASAZ}
-				changeDailyShift={changeDailyShift}
-				currentlyDragged={currentlyDragged}
-				setCurrentlyDragged={setCurrentlyDragged}
-				stationName="MASAZ"
-			/>
+			{(tables.length && tables) || 'Loading...'}
 		</div>
 	);
 }
 function formatDateString(date) {
 	const dateArray = date.toLocaleDateString().split('.');
-	return `${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`;
+	const day = Number(dateArray[0]) < 10 ? `0${dateArray[0]}` : dateArray[0];
+	return `${dateArray[2]}-${dateArray[1]}-${day}`;
 }
 function returnEmptyDailyShiftObject() {
 	return {
-		KINEZA: new Array(10).fill(''),
-		FIZYKO: new Array(8).fill(''),
-		MASAZ: new Array(4).fill(''),
+		KINEZA: new Array(10).fill({ id: '', first_name: '', last_name: '' }),
+		FIZYKO: new Array(8).fill({ id: '', first_name: '', last_name: '' }),
+		MASAZ: new Array(4).fill({ id: '', first_name: '', last_name: '' }),
 	};
 }

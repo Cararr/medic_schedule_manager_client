@@ -13,3 +13,14 @@
 .select_date_form label {
 	margin-bottom: 1rem;
 }
+.today-button {
+	margin-left: 1rem;
+	background-color: aquamarine;
+	border: 1px solid black;
+	font-size: 1rem;
+	cursor: pointer;
+}
+.today-button:hover {
+	transform: translate(-1px, -1px);
+	border-style: dashed;
+}

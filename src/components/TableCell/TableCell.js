@@ -2,68 +2,68 @@ import React from 'react';
 import './TableCell.css';
 
 export default function TableCell(props) {
-	const drop = (e) => {
+	const handleDrop = (e) => {
 		e.preventDefault();
-		const employee = e.dataTransfer.getData('employee');
+		const employee = JSON.parse(e.dataTransfer.getData('employee'));
 		if (employee) {
+			//swap logic
 			if (props.currentlyDragged) {
-				const cellCurrentlyDraged = document.getElementById(
+				const [stationName, cellNumber] = extractStationAndNumberFromId(
 					props.currentlyDragged
 				);
-				props.changeDailyShift(
-					calulateCellNumberFromId(props.currentlyDragged),
-					getStationNameFromId(props.currentlyDragged),
-					e.target.innerText
-				);
-				cellCurrentlyDraged.innerText = e.target.innerText;
+				props.editSchedule(cellNumber, stationName, props.cellValue);
 			}
-			props.changeDailyShift(props.cellNumber, props.stationName, employee);
-			e.target.innerText = employee;
+			props.editSchedule(props.cellNumber, props.stationName, employee);
 			props.setCurrentlyDragged('');
 			removeDragOverClass(e);
 		}
 	};
 
-	const onDragOver = (e) => {
+	const handleOnDragOver = (e) => {
 		e.preventDefault();
-		if (!e.target.className.includes('cell_drag_over'))
-			e.target.className += ' cell_drag_over';
+		if (!e.target.className.includes('cell-drag-over'))
+			e.target.className += ' cell-drag-over';
 	};
-	const onDragLeave = (e) => {
+
+	const handleOnDragLeave = (e) => {
 		e.preventDefault();
 		removeDragOverClass(e);
 	};
-	const onDragStart = (e) => {
+
+	const handleOnDragStart = (e) => {
 		props.setCurrentlyDragged(e.target.id);
-		e.dataTransfer.setData('employee', e.target.innerText);
-		setTimeout(() => (e.target.innerText = ''), 0);
+		e.dataTransfer.setData('employee', JSON.stringify(props.cellValue));
+		setTimeout(
+			() =>
+				props.editSchedule(props.cellNumber, props.stationName, {
+					id: '',
+					first_name: '',
+					last_name: '',
+				}),
+			0
+		);
 	};
-	const onDragEnd = ({ target }) => {
-		if (!target['innerText'])
-			props.changeDailyShift(props.cellNumber, props.stationName, '');
-	};
+
 	return (
 		<td
 			id={props.id}
-			draggable={props.cellValue && true}
-			onDragEnd={onDragEnd}
-			onDragLeave={onDragLeave}
-			onDragStart={onDragStart}
-			onDragOver={onDragOver}
-			onDrop={drop}
-			className={props.cellValue && 'cell'}
+			onClick={() => console.log(props.cellValue)}
+			draggable={props.cellValue.id && true}
+			onDragLeave={handleOnDragLeave}
+			onDragStart={handleOnDragStart}
+			onDragOver={handleOnDragOver}
+			onDrop={handleDrop}
+			className={props.cellValue.id && 'cell'}
 		>
-			{props.cellValue}
+			{`${props.cellValue.first_name} ${props.cellValue.last_name}`}
 		</td>
 	);
 }
-function calulateCellNumberFromId(id) {
-	const matches = id.match(/\d/g);
-	return Number(matches[0]) * 4 + Number(matches[1]);
-}
-function getStationNameFromId(id) {
-	return id.split('_')[0];
-}
+
 function removeDragOverClass({ target }) {
-	target.className = target.className.replace(' cell_drag_over', '');
+	target.className = target.className.replace(' cell-drag-over', '');
+}
+
+function extractStationAndNumberFromId(id) {
+	return id.split('-');
 }

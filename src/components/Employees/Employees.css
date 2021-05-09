@@ -1,7 +1,10 @@
-.Employees_list {
+.employees-list {
 	list-style-type: none;
 	padding: 0;
 	display: flex;
 	flex-flow: column;
 	align-items: center;
+}
+.employees-section {
+	flex-grow: 2;
 }

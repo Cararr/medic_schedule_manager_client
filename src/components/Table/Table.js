@@ -5,13 +5,13 @@ import React from 'react';
 
 export default function Table(props) {
 	return (
-		<table className="station_table">
+		<table className="station-table">
 			<TableHead stationName={props.stationName} />
 			<TableBody
 				currentlyDragged={props.currentlyDragged}
-				dailyShift={props.dailyShift}
+				selectedSchedule={props.selectedSchedule}
+				editSchedule={props.editSchedule}
 				setCurrentlyDragged={props.setCurrentlyDragged}
-				changeDailyShift={props.changeDailyShift}
 				stationName={props.stationName}
 			/>
 		</table>

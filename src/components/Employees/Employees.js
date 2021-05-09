@@ -5,19 +5,15 @@ import './Employees.css';
 
 export default function Employees() {
 	const employees = useEmployees();
-	const employeesList = employees?.map((worker) => (
-		<Employee name={worker} key={worker} />
+	const employeesList = employees.map((employee) => (
+		<Employee employee={employee} key={employee.id} />
 	));
 
 	return (
-		<div
-			onClick={() => {
-				console.log(employees);
-			}}
-		>
+		<div className="employees-section">
 			<h3>Employees:</h3>
-			<ul className="Employees_list">
-				{(employeesList?.length && employeesList) || 'Loading...'}
+			<ul className="employees-list">
+				{(employees.length && employeesList) || 'Loading...'}
 			</ul>
 		</div>
 	);

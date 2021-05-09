@@ -1,87 +1,73 @@
-import TableRow from '../TableRow/TableRow';
 import React from 'react';
+import TableCell from '../TableCell/TableCell';
+import TableCellBlank from '../TableCellBlank/TableCellBlank';
 
 import './TableBody.css';
 
 export default function TableBody(props) {
-	let rows;
-	switch (props.stationName) {
+	let tableBody = returntableBodyByStation(
+		props.stationName,
+		props.selectedSchedule,
+		props.editSchedule,
+		props.currentlyDragged,
+		props.setCurrentlyDragged
+	);
+	return tableBody;
+}
+
+function returntableBodyByStation(
+	station,
+	selectedSchedule,
+	editSchedule,
+	currentlyDragged,
+	setCurrentlyDragged
+) {
+	let cellCounter = 0,
+		tableBody;
+	const cells = selectedSchedule.map(() => {
+		return (
+			<TableCell
+				stationName={station}
+				editSchedule={editSchedule}
+				id={`${station}-${cellCounter}`}
+				cellValue={selectedSchedule[cellCounter]}
+				key={cellCounter}
+				cellNumber={cellCounter++}
+				currentlyDragged={currentlyDragged}
+				setCurrentlyDragged={setCurrentlyDragged}
+			/>
+		);
+	});
+	switch (station) {
 		case 'KINEZA':
-			rows = [
-				<TableRow
-					changeDailyShift={props.changeDailyShift}
-					dailyShift={props.dailyShift}
-					currentlyDragged={props.currentlyDragged}
-					setCurrentlyDragged={props.setCurrentlyDragged}
-					howManyCells={4}
-					stationName={props.stationName}
-					row="KINEZA_0st_row"
-					key="KINEZA_0st_row"
-				/>,
-				<TableRow
-					changeDailyShift={props.changeDailyShift}
-					dailyShift={props.dailyShift}
-					currentlyDragged={props.currentlyDragged}
-					setCurrentlyDragged={props.setCurrentlyDragged}
-					howManyCells={4}
-					stationName={props.stationName}
-					row="KINEZA_1nd_row"
-					key="KINEZA_1nd_row"
-				/>,
-				<TableRow
-					changeDailyShift={props.changeDailyShift}
-					dailyShift={props.dailyShift}
-					currentlyDragged={props.currentlyDragged}
-					setCurrentlyDragged={props.setCurrentlyDragged}
-					howManyCells={2}
-					stationName={props.stationName}
-					row="KINEZA_2rd_row"
-					key="KINEZA_2rd_row"
-				/>,
-			];
+			tableBody = (
+				<tbody>
+					<tr>{cells.slice(0, 4)}</tr>
+					<tr>{cells.slice(4, 8)}</tr>
+					<tr>
+						<TableCellBlank />
+						{cells.slice(8)}
+					</tr>
+				</tbody>
+			);
 			break;
 		case 'FIZYKO':
-			rows = [
-				<TableRow
-					changeDailyShift={props.changeDailyShift}
-					dailyShift={props.dailyShift}
-					currentlyDragged={props.currentlyDragged}
-					setCurrentlyDragged={props.setCurrentlyDragged}
-					howManyCells={4}
-					stationName={props.stationName}
-					row="FIZYKO_0st_row"
-					key="FIZYKO_0st_row"
-				/>,
-				<TableRow
-					changeDailyShift={props.changeDailyShift}
-					dailyShift={props.dailyShift}
-					currentlyDragged={props.currentlyDragged}
-					setCurrentlyDragged={props.setCurrentlyDragged}
-					howManyCells={4}
-					stationName={props.stationName}
-					row="FIZYKO_1nd_row"
-					key="FIZYKO_1nd_row"
-				/>,
-			];
+			tableBody = (
+				<tbody>
+					<tr>{cells.slice(0, 4)}</tr>
+					<tr>{cells.slice(4)}</tr>
+				</tbody>
+			);
 			break;
 		case 'MASAZ':
-			rows = [
-				<TableRow
-					changeDailyShift={props.changeDailyShift}
-					dailyShift={props.dailyShift}
-					currentlyDragged={props.currentlyDragged}
-					setCurrentlyDragged={props.setCurrentlyDragged}
-					howManyCells={4}
-					stationName={props.stationName}
-					row="MASAZ_0st_row"
-					key="MASAZ_0st_row"
-				/>,
-			];
+			tableBody = (
+				<tbody>
+					<tr>{cells.slice(0)}</tr>
+				</tbody>
+			);
 			break;
-
 		default:
-			console.error('invalid staiton name');
-			break;
+			return;
 	}
-	return <tbody>{rows}</tbody>;
+	return tableBody;
 }

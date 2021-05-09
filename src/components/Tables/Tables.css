@@ -1,0 +1,6 @@
+.tables-section {
+	flex-grow: 3;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+}

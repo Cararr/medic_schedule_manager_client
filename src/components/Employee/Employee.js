@@ -2,21 +2,21 @@ import React from 'react';
 import './Employee.css';
 
 export default function Employee(props) {
-	const onDragStart = (e) => {
-		e.dataTransfer.setData('employee', e.target.innerText);
+	const handleOnDragStart = (e) => {
+		e.dataTransfer.setData('employee', JSON.stringify(props.employee));
 	};
-	const onDragOver = (e) => {
+	const handleOnDragOver = (e) => {
 		e.stopPropagation();
 	};
 	return (
 		<li>
 			<p
 				className="employee"
-				onDragOver={onDragOver}
-				onDragStart={onDragStart}
+				onDragOver={handleOnDragOver}
+				onDragStart={handleOnDragStart}
 				draggable={true}
 			>
-				{props.name}
+				{`${props.employee.first_name} ${props.employee.last_name}`}
 			</p>
 		</li>
 	);
