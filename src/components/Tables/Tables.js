@@ -2,7 +2,7 @@ import './Tables.css';
 import React, { useState, useEffect } from 'react';
 import Table from '../Table/Table';
 import SelectDate from '../SelectDate/SelectDate';
-import { loadSchedulesByDate } from '../../util/fetchFromDB';
+import { loadWorkStageSpans } from '../../util/fetchFromDB';
 
 export default function Tables() {
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
@@ -12,13 +12,13 @@ export default function Tables() {
 	const [selectedSchedule, setSelectedSchedule] = useState(
 		returnEmptyDailyShiftObject()
 	);
-	/* 	useEffect(() => {
-		if (dateSelected)
-			loadSchedulesByDate(dateSelected).then((schedule) => {
-				setDailyShift(schedule[dateSelected]);
-			});
-		else setDailyShift(returnEmptyDailyShiftObject());
-	}, [dateSelected]); */
+
+	const [workStageSpans, setworkStageSpans] = useState([]);
+	useEffect(() => {
+		loadWorkStageSpans()
+			.then((stages) => setworkStageSpans(stages))
+			.catch((error) => console.error(setworkStageSpans));
+	}, []);
 
 	const editSchedule = (cellNumber, stationName, newCellValue) => {
 		setSelectedSchedule((prev) => {
@@ -38,6 +38,7 @@ export default function Tables() {
 				setCurrentlyDragged={setCurrentlyDragged}
 				stationName={station}
 				key={station}
+				workStageSpans={workStageSpans}
 			/>
 		);
 	}

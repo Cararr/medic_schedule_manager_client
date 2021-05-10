@@ -12,9 +12,9 @@ export const loadEmployees = async () => {
 	}
 };
 
-export const loadSchedulesByDate = async (date) => {
+export const loadWorkStageSpans = async () => {
 	try {
-		const response = await fetch(`${PATH}/schedules?date=${date}`);
+		const response = await fetch(`${PATH}/workstagespans`);
 		if (response.ok) {
 			const jsonRespone = response.json();
 			return jsonRespone;

@@ -2,6 +2,9 @@ import React from 'react';
 import './TableHead.css';
 
 export default function TableHead(props) {
+	const workStageSpans = props.workStageSpans.map((stage) => (
+		<td key={stage.id}>{`${stage.from} - ${stage.to}`}</td>
+	));
 	return (
 		<thead>
 			<tr>
@@ -9,12 +12,7 @@ export default function TableHead(props) {
 					{props.stationName}
 				</td>
 			</tr>
-			<tr>
-				<td>7:30 - 10:25</td>
-				<td>10:25 - 13:00</td>
-				<td>13:00 - 15:00</td>
-				<td>15:00 - 18:00</td>
-			</tr>
+			<tr>{workStageSpans}</tr>
 		</thead>
 	);
 }
