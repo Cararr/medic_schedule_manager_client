@@ -2,7 +2,7 @@ import './Tables.css';
 import React, { useState, useEffect } from 'react';
 import Table from '../Table/Table';
 import SelectDate from '../SelectDate/SelectDate';
-import { loadWorkStageSpans } from '../../util/fetchFromDB';
+import { loadWorkStageSpans, loadScheduleByDate } from '../../util/fetchFromDB';
 
 export default function Tables() {
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
@@ -12,12 +12,17 @@ export default function Tables() {
 	const [selectedSchedule, setSelectedSchedule] = useState(
 		returnEmptyDailyShiftObject()
 	);
+	useEffect(() => {
+		loadScheduleByDate(dateSelected)
+			.then((schedule) => console.log(schedule))
+			.catch((error) => console.error(error));
+	}, [dateSelected]);
 
 	const [workStageSpans, setworkStageSpans] = useState([]);
 	useEffect(() => {
 		loadWorkStageSpans()
 			.then((stages) => setworkStageSpans(stages))
-			.catch((error) => console.error(setworkStageSpans));
+			.catch((error) => console.error(error));
 	}, []);
 
 	const editSchedule = (cellNumber, stationName, newCellValue) => {
@@ -61,8 +66,9 @@ function formatDateString(date) {
 }
 function returnEmptyDailyShiftObject() {
 	return {
-		KINEZA: new Array(10).fill({ id: '', first_name: '', last_name: '' }),
-		FIZYKO: new Array(8).fill({ id: '', first_name: '', last_name: '' }),
-		MASAZ: new Array(4).fill({ id: '', first_name: '', last_name: '' }),
+		KINEZA: new Array(12).fill({ id: '', firstName: '', lastName: '' }),
+		FIZYKO: new Array(10).fill({ id: '', firstName: '', lastName: '' }),
+		MASAZ: new Array(4).fill({ id: '', firstName: '', lastName: '' }),
+		WIZYTY: new Array(1).fill({ id: '', firstName: '', lastName: '' }),
 	};
 }

@@ -37,8 +37,8 @@ export default function TableCell(props) {
 			() =>
 				props.editSchedule(props.cellNumber, props.stationName, {
 					id: '',
-					first_name: '',
-					last_name: '',
+					firstName: '',
+					lastName: '',
 				}),
 			0
 		);
@@ -55,7 +55,7 @@ export default function TableCell(props) {
 			onDrop={handleDrop}
 			className={props.cellValue.id && 'cell'}
 		>
-			{`${props.cellValue.first_name} ${props.cellValue.last_name}`}
+			{`${props.cellValue.firstName} ${props.cellValue.lastName}`}
 		</td>
 	);
 }

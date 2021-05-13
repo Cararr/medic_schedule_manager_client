@@ -16,7 +16,7 @@ export default function Employee(props) {
 				onDragStart={handleOnDragStart}
 				draggable={true}
 			>
-				{`${props.employee.first_name} ${props.employee.last_name}`}
+				{`${props.employee.firstName} ${props.employee.lastName}`}
 			</p>
 		</li>
 	);

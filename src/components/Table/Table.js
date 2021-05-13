@@ -12,7 +12,6 @@ export default function Table(props) {
 		props.currentlyDragged,
 		props.setCurrentlyDragged
 	);
-
 	return (
 		<table className="station-table">
 			<TableHead
@@ -55,7 +54,12 @@ function returntableBodyByStation(
 					<tr>{cells.slice(4, 8)}</tr>
 					<tr>
 						<TableCellBlank />
-						{cells.slice(8)}
+						{cells.slice(8, 10)}
+						<TableCellBlank />
+					</tr>
+					<tr>
+						<TableCellBlank />
+						{cells.slice(10)}
 					</tr>
 				</tbody>
 			);
@@ -64,11 +68,22 @@ function returntableBodyByStation(
 			tableBody = (
 				<tbody>
 					<tr>{cells.slice(0, 4)}</tr>
-					<tr>{cells.slice(4)}</tr>
+					<tr>{cells.slice(4, 8)}</tr>
+					<tr>
+						<TableCellBlank />
+						{cells.slice(8)}
+					</tr>
 				</tbody>
 			);
 			break;
 		case 'MASAZ':
+			tableBody = (
+				<tbody>
+					<tr>{cells.slice(0)}</tr>
+				</tbody>
+			);
+			break;
+		case 'WIZYTY':
 			tableBody = (
 				<tbody>
 					<tr>{cells.slice(0)}</tr>
