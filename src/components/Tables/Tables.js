@@ -9,12 +9,13 @@ export default function Tables() {
 	const [dateSelected, setDateSelected] = useState(
 		formatDateString(new Date())
 	);
+
 	const [selectedSchedule, setSelectedSchedule] = useState(
 		returnEmptyDailyShiftObject()
 	);
 	useEffect(() => {
 		loadScheduleByDate(dateSelected)
-			.then((schedule) => console.log(schedule))
+			.then((schedule) => setSelectedSchedule(schedule[dateSelected]))
 			.catch((error) => console.error(error));
 	}, [dateSelected]);
 
@@ -66,9 +67,9 @@ function formatDateString(date) {
 }
 function returnEmptyDailyShiftObject() {
 	return {
-		KINEZA: new Array(12).fill({ id: '', firstName: '', lastName: '' }),
-		FIZYKO: new Array(10).fill({ id: '', firstName: '', lastName: '' }),
-		MASAZ: new Array(4).fill({ id: '', firstName: '', lastName: '' }),
-		WIZYTY: new Array(1).fill({ id: '', firstName: '', lastName: '' }),
+		KINEZA: new Array(12).fill(null),
+		FIZYKO: new Array(10).fill(null),
+		MASAZ: new Array(4).fill(null),
+		WIZYTY: new Array(1).fill(null),
 	};
 }

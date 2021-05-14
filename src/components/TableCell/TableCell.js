@@ -34,12 +34,7 @@ export default function TableCell(props) {
 		props.setCurrentlyDragged(e.target.id);
 		e.dataTransfer.setData('employee', JSON.stringify(props.cellValue));
 		setTimeout(
-			() =>
-				props.editSchedule(props.cellNumber, props.stationName, {
-					id: '',
-					firstName: '',
-					lastName: '',
-				}),
+			() => props.editSchedule(props.cellNumber, props.stationName, null),
 			0
 		);
 	};
@@ -47,15 +42,15 @@ export default function TableCell(props) {
 	return (
 		<td
 			id={props.id}
-			onClick={() => console.log(props.cellValue)}
-			draggable={props.cellValue.id && true}
+			draggable={props.cellValue && true}
 			onDragLeave={handleOnDragLeave}
 			onDragStart={handleOnDragStart}
 			onDragOver={handleOnDragOver}
 			onDrop={handleDrop}
-			className={props.cellValue.id && 'cell'}
+			className={props.cellValue && 'cell'}
 		>
-			{`${props.cellValue.firstName} ${props.cellValue.lastName}`}
+			{props.cellValue &&
+				`${props.cellValue.firstName} ${props.cellValue.lastName}`}
 		</td>
 	);
 }
