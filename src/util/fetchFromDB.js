@@ -1,8 +1,8 @@
-const PATH = 'http://localhost:4000';
+import { serverPath } from '../config.json';
 
 export const loadEmployees = async () => {
 	try {
-		const response = await fetch(`${PATH}/employees`);
+		const response = await fetch(`${serverPath}/employees`);
 		if (response.ok) {
 			const jsonRespone = await response.json();
 			return jsonRespone;
@@ -14,7 +14,7 @@ export const loadEmployees = async () => {
 
 export const loadWorkStageSpans = async () => {
 	try {
-		const response = await fetch(`${PATH}/workstagespans`);
+		const response = await fetch(`${serverPath}/workstagespans`);
 		if (response.ok) {
 			const jsonRespone = response.json();
 			return jsonRespone;
@@ -26,7 +26,7 @@ export const loadWorkStageSpans = async () => {
 
 export const loadScheduleByDate = async (date) => {
 	try {
-		const response = await fetch(`${PATH}/schedule?date=${date}`);
+		const response = await fetch(`${serverPath}/schedule?date=${date}`);
 		if (response.ok) {
 			const jsonRespone = response.json();
 			return jsonRespone;

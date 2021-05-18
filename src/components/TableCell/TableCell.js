@@ -39,6 +39,8 @@ export default function TableCell(props) {
 		);
 	};
 
+	const className = `white-background ${props.cellValue && 'cell'}`;
+
 	return (
 		<td
 			id={props.id}
@@ -47,7 +49,7 @@ export default function TableCell(props) {
 			onDragStart={handleOnDragStart}
 			onDragOver={handleOnDragOver}
 			onDrop={handleDrop}
-			className={props.cellValue && 'cell'}
+			className={className}
 		>
 			{props.cellValue &&
 				`${props.cellValue.firstName} ${props.cellValue.lastName}`}

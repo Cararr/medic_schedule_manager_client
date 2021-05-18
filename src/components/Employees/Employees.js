@@ -9,11 +9,17 @@ export default function Employees() {
 		<Employee employee={employee} key={employee.id} />
 	));
 
+	const loading = (
+		<li>
+			<p className="list-item">Loading...</p>
+		</li>
+	);
+
 	return (
 		<div className="employees-section">
 			<h3>Employees:</h3>
-			<ul className="employees-list">
-				{(employees?.length && employeesList) || 'Loading...'}
+			<ul className="list">
+				{(employees?.length && employeesList) || loading}
 			</ul>
 		</div>
 	);

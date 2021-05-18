@@ -11,7 +11,7 @@ export default function Employee(props) {
 	return (
 		<li>
 			<p
-				className="employee"
+				className="list-item employee"
 				onDragOver={handleOnDragOver}
 				onDragStart={handleOnDragStart}
 				draggable={true}
