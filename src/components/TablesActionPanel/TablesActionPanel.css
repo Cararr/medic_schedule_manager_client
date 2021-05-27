@@ -1,11 +1,22 @@
 .action-panel {
 	width: 5rem;
 	background-color: #eaf3c8;
-	height: 15rem;
+	height: fit-content;
 	position: sticky;
 	flex-grow: 2;
 	top: 3rem;
 	padding: 0 1rem;
 	border: 1px solid black;
 	margin-right: 0.5rem;
+}
+.action-panel-status {
+}
+.status-text {
+	margin: 0;
+	font-size: 0.9rem;
+}
+.status-bar {
+	height: 1rem;
+	width: 100%;
+	margin-bottom: 0.8rem;
 }

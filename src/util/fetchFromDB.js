@@ -35,3 +35,15 @@ export const loadScheduleByDate = async (date) => {
 		console.error(error);
 	}
 };
+
+export const generateSchedule = async () => {
+	try {
+		const response = await fetch(`${serverPath}/schedule/generate`);
+		if (response.ok) {
+			const jsonRespone = response.json();
+			return jsonRespone;
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};

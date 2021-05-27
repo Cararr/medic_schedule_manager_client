@@ -20,14 +20,14 @@ export default function Tables(props) {
 	}
 
 	return (
-		<div className="tables-section">
+		<main className="tables-section">
 			<SelectDate
 				setDateSelected={props.setDateSelected}
 				dateSelected={props.dateSelected}
 				formatDateString={props.formatDateString}
 			/>
 			{(tables.length && tables) || 'Loading...'}
-		</div>
+		</main>
 	);
 }
 

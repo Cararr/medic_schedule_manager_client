@@ -16,11 +16,11 @@ export default function Employees() {
 	);
 
 	return (
-		<div className="employees-section">
+		<section className="employees-section">
 			<h3>Employees:</h3>
 			<ul className="list">
 				{(employees?.length && employeesList) || loading}
 			</ul>
-		</div>
+		</section>
 	);
 }

@@ -2,8 +2,12 @@ import React from 'react';
 import './TablesActionPanel.css';
 
 export default function TablesActionPanel(props) {
+	const statusColor = props.isChangesSaved ? 'green' : 'yellow';
+	const statusText = props.isChangesSaved
+		? 'No changes to save'
+		: 'Unsaved changes!';
 	return (
-		<div className="action-panel">
+		<section className="action-panel">
 			<h3>Actions:</h3>
 			<ul className="list">
 				<li>
@@ -14,7 +18,31 @@ export default function TablesActionPanel(props) {
 						Save
 					</button>
 				</li>
+				<li>
+					<button
+						onClick={props.autoGenerateSchedule}
+						className="list-item button-generic"
+					>
+						Generate
+					</button>
+				</li>
+				<li>
+					<button
+						onClick={props.clearSchedule}
+						className="list-item button-generic"
+					>
+						Clear
+					</button>
+				</li>
 			</ul>
-		</div>
+			<h3>Status:</h3>
+			<div className="action-panel-status">
+				<p className="status-text">{statusText}</p>
+				<div
+					className="status-bar"
+					style={{ backgroundColor: statusColor }}
+				></div>
+			</div>
+		</section>
 	);
 }

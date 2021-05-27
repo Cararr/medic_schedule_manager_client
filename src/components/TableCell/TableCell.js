@@ -8,7 +8,7 @@ export default function TableCell(props) {
 		if (employee) {
 			//swap logic
 			if (props.currentlyDragged) {
-				const [stationName, cellNumber] = extractStationAndNumberFromId(
+				const [stationName, cellNumber] = extractStationAndCellNumberFromId(
 					props.currentlyDragged
 				);
 				props.editSchedule(cellNumber, stationName, props.cellValue);
@@ -44,6 +44,7 @@ export default function TableCell(props) {
 	return (
 		<td
 			id={props.id}
+			// onDragEnd={() => console.log(666)}
 			draggable={props.cellValue && true}
 			onDragLeave={handleOnDragLeave}
 			onDragStart={handleOnDragStart}
@@ -61,6 +62,6 @@ function removeDragOverClass({ target }) {
 	target.className = target.className.replace(' cell-drag-over', '');
 }
 
-function extractStationAndNumberFromId(id) {
+function extractStationAndCellNumberFromId(id) {
 	return id.split('-');
 }
