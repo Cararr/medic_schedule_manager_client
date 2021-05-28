@@ -19,15 +19,3 @@
 	height: 1.5rem;
 	margin: 0 0 0.8rem 0;
 }
-.button-generic {
-	background-color: #cdc0f9;
-	border: 1px solid black;
-	border-radius: 5px;
-	font-size: 1rem;
-	padding: 1px 0.5rem;
-	cursor: pointer;
-}
-.button-generic:hover {
-	transform: translate(+1px, +1px);
-	border-style: dashed;
-}

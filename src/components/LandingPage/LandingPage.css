@@ -1,0 +1,26 @@
+.landing-page {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+}
+.landing-page-header {
+	margin-top: 3rem;
+	font-size: 3rem;
+	margin-bottom: 7px;
+	width: 25rem;
+	text-align: center;
+}
+.landing-page main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.landing-page button {
+	font-size: 2rem;
+	padding: 10px;
+	width: fit-content;
+}
+.landing-page img {
+	height: 15rem;
+}

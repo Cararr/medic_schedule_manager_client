@@ -1,7 +1,7 @@
 import React from 'react';
-import './Employee.css';
+import './EmployeeListItem.css';
 
-export default function Employee(props) {
+export default function EmployeeListItem(props) {
 	const handleOnDragStart = (e) => {
 		e.dataTransfer.setData('employee', JSON.stringify(props.employee));
 	};

@@ -5,7 +5,7 @@ import {
 	generateSchedule,
 } from '../../util/fetchFromDB';
 import { postSchedule } from '../../util/postToDB';
-import Employees from '../Employees/Employees';
+import EmployeesList from '../EmployeesList/EmployeesList';
 import Tables from '../Tables/Tables';
 import TablesActionPanel from '../TablesActionPanel/TablesActionPanel';
 import { Utilities } from '../../util/util';
@@ -65,7 +65,7 @@ export default function Schedule() {
 
 	return (
 		<div className="schedule">
-			<Employees />
+			<EmployeesList />
 			<Tables
 				currentlyDragged={currentlyDragged}
 				setCurrentlyDragged={setCurrentlyDragged}

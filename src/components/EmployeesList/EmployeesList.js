@@ -1,12 +1,12 @@
 import React from 'react';
 import { useEmployees } from '../../context/employeesContext';
-import Employee from '../Employee/Employee';
-import './Employees.css';
+import EmployeeListItem from '../EmployeeListItem/EmployeeListItem';
+import './EmployeesList.css';
 
-export default function Employees() {
+export default function EmployeesList() {
 	const employees = useEmployees();
 	const employeesList = employees?.map((employee) => (
-		<Employee employee={employee} key={employee.id} />
+		<EmployeeListItem employee={employee} key={employee.id} />
 	));
 
 	const loading = (
