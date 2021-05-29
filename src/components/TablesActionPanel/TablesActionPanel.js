@@ -7,7 +7,7 @@ export default function TablesActionPanel(props) {
 		? 'No changes to save'
 		: 'Unsaved changes!';
 	return (
-		<section className="action-panel">
+		<aside className="action-panel">
 			<h3>Actions:</h3>
 			<ul className="list">
 				<li>
@@ -43,6 +43,6 @@ export default function TablesActionPanel(props) {
 					style={{ backgroundColor: statusColor }}
 				></div>
 			</div>
-		</section>
+		</aside>
 	);
 }

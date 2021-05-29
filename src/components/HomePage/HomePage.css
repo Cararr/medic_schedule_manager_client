@@ -1,0 +1,21 @@
+.home-page {
+	display: grid;
+	place-items: center;
+	height: 100vh;
+}
+.home-page-figure {
+	width: 10rem;
+	background-color: #eaf3c8;
+	border-radius: 5px;
+	padding-bottom: 0.5rem;
+}
+.home-page-figure:hover {
+	cursor: pointer;
+	border: 3px solid black;
+}
+.home-page-figure figcaption {
+	text-align: center;
+	width: 100%;
+	font-size: 1.5rem;
+	font-weight: bold;
+}

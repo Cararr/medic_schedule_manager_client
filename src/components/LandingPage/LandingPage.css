@@ -24,3 +24,35 @@
 .landing-page img {
 	height: 15rem;
 }
+.wb-title {
+	color: black;
+	text-align: center;
+	font-size: 25px !important;
+}
+.wb-icon {
+	filter: invert(1);
+}
+.wb-body {
+	background-color: #eaf3c8 !important;
+	display: grid;
+	place-items: center;
+}
+.wb-body h1 {
+	margin: 0;
+	padding: 0;
+}
+#login-form {
+	display: flex;
+	flex-direction: column;
+	width: 60%;
+	align-items: center;
+}
+#login-form input {
+	font-size: 1rem;
+	margin-bottom: 1rem;
+	padding: 5px;
+}
+#login-form button {
+	width: fit-content;
+	font-size: 1.5rem;
+}
