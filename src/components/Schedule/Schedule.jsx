@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import {
-	loadWorkStageSpans,
-	loadScheduleByDate,
+	getWorkStageSpans,
+	getScheduleByDate,
 	generateSchedule,
 } from '../../util/fetchFromDB';
-import { postSchedule } from '../../util/postToDB';
-import EmployeesList from '../EmployeesList/EmployeesList';
-import Tables from '../Tables/Tables';
-import TablesActionPanel from '../TablesActionPanel/TablesActionPanel';
+import { putSchedule } from '../../util/postToDB';
+import EmployeesList from '../EmployeesList/EmployeesList.jsx';
+import Tables from '../Tables/Tables.jsx';
+import TablesActionPanel from '../TablesActionPanel/TablesActionPanel.jsx';
 import { Utilities } from '../../util/util';
 import './Schedule.css';
 
@@ -22,7 +22,7 @@ export default function Schedule() {
 	);
 	useEffect(() => {
 		setIsChangesSaved(true);
-		loadScheduleByDate(dateSelected)
+		getScheduleByDate(dateSelected)
 			.then((schedule) => {
 				if (schedule) setSelectedSchedule(schedule[dateSelected]);
 			})
@@ -31,7 +31,7 @@ export default function Schedule() {
 
 	const [workStageSpans, setworkStageSpans] = useState([]);
 	useEffect(() => {
-		loadWorkStageSpans()
+		getWorkStageSpans()
 			.then((stages) => setworkStageSpans(stages))
 			.catch((error) => console.error(error));
 	}, []);
@@ -48,13 +48,13 @@ export default function Schedule() {
 
 	const saveScheudle = async () => {
 		setIsChangesSaved(true);
-		await postSchedule(dateSelected, selectedSchedule);
+		await putSchedule(dateSelected, selectedSchedule);
 	};
 
 	const autoGenerateSchedule = async () => {
 		generateSchedule().then((schedule) => {
 			setIsChangesSaved(false);
-			setSelectedSchedule(schedule);
+			setSelectedSchedule(schedule || returnEmptyDailyShiftObject());
 		});
 	};
 

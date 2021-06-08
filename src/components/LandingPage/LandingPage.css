@@ -16,7 +16,7 @@
 	flex-direction: column;
 	align-items: center;
 }
-.landing-page button {
+.landing-page-button {
 	font-size: 2rem;
 	padding: 10px;
 	width: fit-content;
@@ -33,26 +33,12 @@
 	filter: invert(1);
 }
 .wb-body {
-	background-color: #eaf3c8 !important;
+	background-color: #eaf3c8;
 	display: grid;
 	place-items: center;
 }
-.wb-body h1 {
+.wb-body h2 {
+	text-align: center;
 	margin: 0;
 	padding: 0;
-}
-#login-form {
-	display: flex;
-	flex-direction: column;
-	width: 60%;
-	align-items: center;
-}
-#login-form input {
-	font-size: 1rem;
-	margin-bottom: 1rem;
-	padding: 5px;
-}
-#login-form button {
-	width: fit-content;
-	font-size: 1.5rem;
 }

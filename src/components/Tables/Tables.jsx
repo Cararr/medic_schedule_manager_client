@@ -1,7 +1,7 @@
-import './Tables.css';
 import React from 'react';
-import Table from '../Table/Table';
-import SelectDate from '../SelectDate/SelectDate';
+import Table from '../Table/Table.jsx';
+import SelectDate from '../SelectDate/SelectDate.jsx';
+import './Tables.css';
 
 export default function Tables(props) {
 	const tables = new Array(4);

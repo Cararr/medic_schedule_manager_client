@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEmployees } from '../../context/employeesContext';
-import EmployeeListItem from '../EmployeeListItem/EmployeeListItem';
+import EmployeeListItem from '../EmployeeListItem/EmployeeListItem.jsx';
 import './EmployeesList.css';
 
 export default function EmployeesList() {

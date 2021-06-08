@@ -1,8 +1,8 @@
-import './Table.css';
-import TableHead from '../TableHead/TableHead';
 import React from 'react';
-import TableCell from '../TableCell/TableCell';
-import TableCellBlank from '../TableCellBlank/TableCellBlank';
+import TableHead from '../TableHead/TableHead.jsx';
+import TableCell from '../TableCell/TableCell.jsx';
+import TableCellBlank from '../TableCellBlank/TableCellBlank.jsx';
+import './Table.css';
 
 export default function Table(props) {
 	let tableBody = returntableBodyByStation(

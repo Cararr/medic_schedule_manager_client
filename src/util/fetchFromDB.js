@@ -1,6 +1,6 @@
 import { serverPath } from '../config.json';
 
-export const loadEmployees = async () => {
+export const getEmployees = async () => {
 	try {
 		const response = await fetch(`${serverPath}/employees`);
 		if (response.ok) {
@@ -12,7 +12,7 @@ export const loadEmployees = async () => {
 	}
 };
 
-export const loadWorkStageSpans = async () => {
+export const getWorkStageSpans = async () => {
 	try {
 		const response = await fetch(`${serverPath}/workstagespans`);
 		if (response.ok) {
@@ -24,9 +24,9 @@ export const loadWorkStageSpans = async () => {
 	}
 };
 
-export const loadScheduleByDate = async (date) => {
+export const getScheduleByDate = async (date) => {
 	try {
-		const response = await fetch(`${serverPath}/schedule?date=${date}`);
+		const response = await fetch(`${serverPath}/schedules?date=${date}`);
 		if (response.ok) {
 			const jsonRespone = response.json();
 			return jsonRespone;
@@ -38,7 +38,7 @@ export const loadScheduleByDate = async (date) => {
 
 export const generateSchedule = async () => {
 	try {
-		const response = await fetch(`${serverPath}/schedule/generate`);
+		const response = await fetch(`${serverPath}/schedules/generate`);
 		if (response.ok) {
 			const jsonRespone = response.json();
 			return jsonRespone;
