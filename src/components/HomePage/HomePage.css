@@ -1,7 +1,7 @@
 .home-page {
 	display: grid;
 	place-items: center;
-	height: 100vh;
+	margin-top: 10%;
 }
 .home-page-figure {
 	width: 10rem;

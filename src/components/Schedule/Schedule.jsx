@@ -9,6 +9,7 @@ import EmployeesList from '../EmployeesList/EmployeesList.jsx';
 import Tables from '../Tables/Tables.jsx';
 import TablesActionPanel from '../TablesActionPanel/TablesActionPanel.jsx';
 import { Utilities } from '../../util/util';
+import NavBar from '../NavBar/NavBar.jsx';
 import './Schedule.css';
 
 export default function Schedule() {
@@ -64,23 +65,26 @@ export default function Schedule() {
 	};
 
 	return (
-		<div className="schedule">
-			<EmployeesList />
-			<Tables
-				currentlyDragged={currentlyDragged}
-				setCurrentlyDragged={setCurrentlyDragged}
-				dateSelected={dateSelected}
-				setDateSelected={setDateSelected}
-				selectedSchedule={selectedSchedule}
-				editSchedule={editSchedule}
-				workStageSpans={workStageSpans}
-			/>
-			<TablesActionPanel
-				isChangesSaved={isChangesSaved}
-				saveScheudle={saveScheudle}
-				autoGenerateSchedule={autoGenerateSchedule}
-				clearSchedule={clearSchedule}
-			/>
+		<div>
+			<NavBar />
+			<div className="schedule">
+				<EmployeesList />
+				<Tables
+					currentlyDragged={currentlyDragged}
+					setCurrentlyDragged={setCurrentlyDragged}
+					dateSelected={dateSelected}
+					setDateSelected={setDateSelected}
+					selectedSchedule={selectedSchedule}
+					editSchedule={editSchedule}
+					workStageSpans={workStageSpans}
+				/>
+				<TablesActionPanel
+					isChangesSaved={isChangesSaved}
+					saveScheudle={saveScheudle}
+					autoGenerateSchedule={autoGenerateSchedule}
+					clearSchedule={clearSchedule}
+				/>
+			</div>
 		</div>
 	);
 }

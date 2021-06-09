@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
 		? JSON.parse(Cookies.get('user'))
 		: null;
 	const [user, setUser] = useState(currentUser);
-	const changeUser = (newUser) => setUser(newUser);
+	const changeUser = (newUser = null) => setUser(newUser);
 
 	return (
 		<UserContext.Provider value={user}>

@@ -1,0 +1,18 @@
+.wb-title {
+	color: black;
+	text-align: center;
+	font-size: 25px !important;
+}
+.wb-icon {
+	filter: invert(1);
+}
+.wb-body {
+	background-color: #eaf3c8;
+	display: grid;
+	place-items: center;
+}
+.wb-body h2 {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}

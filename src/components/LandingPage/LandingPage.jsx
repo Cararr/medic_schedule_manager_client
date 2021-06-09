@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import scheduleCalendar from './resources/ScheduleEntryLogo.jpg';
+import scheduleCalendarImage from './resources/ScheduleEntryLogo.jpg';
 import LoginPanel from '../LoginPanel/LoginPanel.jsx';
-import { loginWarning } from '../../util/winboxMessages';
+import { loginWarning } from '../../WinBox/winboxMessages';
 import { login } from '../../util/postToDB';
 import { useChangeUser } from '../../context/userContext';
 import { useEmployees, useLoadEmployees } from '../../context/employeesContext';
@@ -46,7 +46,7 @@ export default function LandingPage({ history }) {
 				<header>
 					<h1 className="landing-page-header">Medic Schedule Manager</h1>
 				</header>
-				<img alt="Schedule Calendar" src={scheduleCalendar} />
+				<img alt="Schedule Calendar" src={scheduleCalendarImage} />
 				<button
 					onClick={isLoginOn ? closeLoginPanel : openLoginPanel}
 					className="button-generic landing-page-button"

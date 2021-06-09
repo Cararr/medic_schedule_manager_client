@@ -1,0 +1,17 @@
+.navbar {
+	width: 100%;
+	height: 3rem;
+	padding: 0 1rem;
+	box-sizing: border-box;
+	background-color: #eaf3c8;
+	border-bottom: 1px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.header-navbar {
+	flex-grow: 2;
+	text-align: center;
+}
+.button-logout {
+}

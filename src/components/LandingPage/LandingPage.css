@@ -5,9 +5,9 @@
 	justify-content: center;
 }
 .landing-page-header {
-	margin-top: 3rem;
+	margin-top: 1rem;
 	font-size: 3rem;
-	margin-bottom: 7px;
+	margin-bottom: 1rem;
 	width: 25rem;
 	text-align: center;
 }
@@ -20,25 +20,8 @@
 	font-size: 2rem;
 	padding: 10px;
 	width: fit-content;
+	margin-top: 1rem;
 }
 .landing-page img {
 	height: 15rem;
-}
-.wb-title {
-	color: black;
-	text-align: center;
-	font-size: 25px !important;
-}
-.wb-icon {
-	filter: invert(1);
-}
-.wb-body {
-	background-color: #eaf3c8;
-	display: grid;
-	place-items: center;
-}
-.wb-body h2 {
-	text-align: center;
-	margin: 0;
-	padding: 0;
 }
