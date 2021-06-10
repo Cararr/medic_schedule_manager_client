@@ -8,7 +8,7 @@ const genericWarningSettings = {
 	height: 250,
 	width: 400,
 	class: 'no-full no-max no-min',
-	background: '#cdc0f9',
+	background: '#f9cdc0',
 };
 
 export const loginWarning = (message) => {
@@ -26,5 +26,5 @@ export const pleaseLogInFirstWarning = () => {
 		...genericWarningSettings,
 		html: `<h2>${'You must be logged to access this page!'}</h2>`,
 	};
-	new WinBox('Login failed', loginPanelConfig);
+	new WinBox('Access denied!', loginPanelConfig);
 };

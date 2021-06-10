@@ -11,15 +11,21 @@ export default function NavBar() {
 		changeUser();
 		Cookies.remove('user');
 	};
+
+	const isThisHomePage = window.location.pathname === '/home';
+
 	return (
 		<nav className="navbar">
+			{!isThisHomePage && (
+				<Link to="/home">
+					<button className="button-generic" type="button">
+						Home
+					</button>
+				</Link>
+			)}
 			<h3 className="header-navbar">{`${user.firstName} ${user.lastName}`}</h3>
 			<Link to="/">
-				<button
-					onClick={logOut}
-					className="button-generic button-logout"
-					type="button"
-				>
+				<button onClick={logOut} className="button-generic" type="button">
 					Log out
 				</button>
 			</Link>

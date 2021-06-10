@@ -10,6 +10,7 @@ import Tables from '../Tables/Tables.jsx';
 import TablesActionPanel from '../TablesActionPanel/TablesActionPanel.jsx';
 import { Utilities } from '../../util/util';
 import NavBar from '../NavBar/NavBar.jsx';
+import { useUser } from '../../context/userContext';
 import './Schedule.css';
 
 export default function Schedule() {
@@ -64,11 +65,12 @@ export default function Schedule() {
 		setSelectedSchedule(returnEmptyDailyShiftObject());
 	};
 
+	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 	return (
 		<div>
 			<NavBar />
 			<div className="schedule">
-				<EmployeesList />
+				{isUserAdmin && <EmployeesList />}
 				<Tables
 					currentlyDragged={currentlyDragged}
 					setCurrentlyDragged={setCurrentlyDragged}
@@ -78,12 +80,14 @@ export default function Schedule() {
 					editSchedule={editSchedule}
 					workStageSpans={workStageSpans}
 				/>
-				<TablesActionPanel
-					isChangesSaved={isChangesSaved}
-					saveScheudle={saveScheudle}
-					autoGenerateSchedule={autoGenerateSchedule}
-					clearSchedule={clearSchedule}
-				/>
+				{isUserAdmin && (
+					<TablesActionPanel
+						isChangesSaved={isChangesSaved}
+						saveScheudle={saveScheudle}
+						autoGenerateSchedule={autoGenerateSchedule}
+						clearSchedule={clearSchedule}
+					/>
+				)}
 			</div>
 		</div>
 	);

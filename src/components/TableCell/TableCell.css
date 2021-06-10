@@ -1,4 +1,4 @@
-.cell:hover {
+.cell-dragable:hover {
 	cursor: grab;
 	background-color: blue;
 	color: azure;

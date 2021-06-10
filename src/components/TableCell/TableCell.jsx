@@ -1,7 +1,11 @@
 import React from 'react';
+import { useUser } from '../../context/userContext';
+import { Utilities } from '../../util/util';
 import './TableCell.css';
 
 export default function TableCell(props) {
+	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+
 	const handleDrop = (e) => {
 		e.preventDefault();
 		const employee = JSON.parse(e.dataTransfer.getData('employee'));
@@ -39,17 +43,18 @@ export default function TableCell(props) {
 		);
 	};
 
-	const className = `white-background ${props.cellValue && 'cell'}`;
+	const className = `white-background ${
+		props.cellValue && isUserAdmin && 'cell-dragable'
+	}`;
 
 	return (
 		<td
 			id={props.id}
-			// onDragEnd={() => console.log(666)}
-			draggable={props.cellValue && true}
-			onDragLeave={handleOnDragLeave}
-			onDragStart={handleOnDragStart}
-			onDragOver={handleOnDragOver}
-			onDrop={handleDrop}
+			draggable={props.cellValue && isUserAdmin && true}
+			onDragLeave={isUserAdmin ? handleOnDragLeave : undefined}
+			onDragStart={isUserAdmin ? handleOnDragStart : undefined}
+			onDragOver={isUserAdmin ? handleOnDragOver : undefined}
+			onDrop={isUserAdmin ? handleDrop : undefined}
 			className={className}
 		>
 			{props.cellValue &&

@@ -4,7 +4,8 @@ import { EmployeesProvider } from '../../context/employeesContext';
 import '../../WinBox/winBox.css';
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import ProtectedRoute from '../../ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from '../../SpecialRoutes/ProtectedRoute';
+import LandingRoute from '../../SpecialRoutes/LandingRoute';
 import Schedule from '../Schedule/Schedule.jsx';
 import LandingPage from '../LandingPage/LandingPage.jsx';
 import HomePage from '../HomePage/HomePage.jsx';
@@ -16,7 +17,7 @@ function App() {
 			<EmployeesProvider>
 				<BrowserRouter>
 					<Switch>
-						<Route path="/" exact component={LandingPage} />
+						<LandingRoute path="/" exact component={LandingPage} />
 						<ProtectedRoute path="/schedule" exact component={Schedule} />
 						<ProtectedRoute path="/home" exact component={HomePage} />
 						<Route path="/" component={NotFound} />

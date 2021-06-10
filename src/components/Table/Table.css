@@ -10,4 +10,5 @@ td {
 }
 .white-background {
 	background-color: #fff;
+	cursor: default;
 }
