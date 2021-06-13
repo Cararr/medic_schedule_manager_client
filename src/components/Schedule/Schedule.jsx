@@ -8,7 +8,6 @@ import { putSchedule } from '../../util/postToDB';
 import EmployeesList from '../EmployeesList/EmployeesList.jsx';
 import Tables from '../Tables/Tables.jsx';
 import TablesActionPanel from '../TablesActionPanel/TablesActionPanel.jsx';
-import HomeRehabilitaitons from '../HomeRehabilitaitons/HomeRehabilitaitons.jsx';
 import { Utilities } from '../../util/util';
 import NavBar from '../NavBar/NavBar.jsx';
 import { useUser } from '../../context/userContext';
@@ -90,7 +89,6 @@ export default function Schedule() {
 					/>
 				)}
 			</div>
-			<HomeRehabilitaitons />
 		</div>
 	);
 }

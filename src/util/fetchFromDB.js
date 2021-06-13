@@ -47,3 +47,17 @@ export const generateSchedule = async () => {
 		console.error(error);
 	}
 };
+
+export const getHomeRehabilitationsByDate = async (date) => {
+	try {
+		const response = await fetch(
+			`${serverPath}/home-rehabilitaitons?date=${date}`
+		);
+		if (response.ok) {
+			const jsonRespone = response.json();
+			return jsonRespone;
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};

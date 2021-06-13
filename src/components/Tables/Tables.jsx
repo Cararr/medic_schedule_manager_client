@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from '../Table/Table.jsx';
 import SelectDate from '../SelectDate/SelectDate.jsx';
+import HomeRehabilitaitons from '../HomeRehabilitaitons/HomeRehabilitaitons.jsx';
 import './Tables.css';
 
 export default function Tables(props) {
@@ -27,6 +28,7 @@ export default function Tables(props) {
 				formatDateString={props.formatDateString}
 			/>
 			{(tables.length && tables) || 'Loading...'}
+			<HomeRehabilitaitons dateSelected={props.dateSelected} />
 		</main>
 	);
 }

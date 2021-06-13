@@ -12,6 +12,10 @@ td {
 	padding: 0;
 	border: 1px solid black;
 }
+.station-table {
+	border-collapse: collapse;
+	margin-bottom: 2rem;
+}
 .white-background {
 	background-color: #fff;
 	cursor: default;
