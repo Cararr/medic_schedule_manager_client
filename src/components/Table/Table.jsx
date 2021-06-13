@@ -1,5 +1,4 @@
 import React from 'react';
-import TableHead from '../TableHead/TableHead.jsx';
 import TableCell from '../TableCell/TableCell.jsx';
 import TableCellBlank from '../TableCellBlank/TableCellBlank.jsx';
 import './Table.css';
@@ -14,10 +13,14 @@ export default function Table(props) {
 	);
 	return (
 		<table className="station-table">
-			<TableHead
-				workStageSpans={props.workStageSpans}
-				stationName={props.stationName}
-			/>
+			<thead>
+				<tr>
+					<td className="table-title" colSpan={4}>
+						{props.stationName}
+					</td>
+				</tr>
+				<tr>{returnWorkStageSpans(props.workStageSpans, props.stationName)}</tr>
+			</thead>
 			{tableBody}
 		</table>
 	);
@@ -94,4 +97,10 @@ function returntableBodyByStation(
 			return;
 	}
 	return tableBody;
+}
+function returnWorkStageSpans(workStageSpans, stationName) {
+	return workStageSpans?.map((stage, index) => {
+		if (stationName === 'WIZYTY' && index !== 2) return false;
+		return <td key={stage.id}>{`${stage.from} - ${stage.to}`}</td>;
+	});
 }

@@ -9,10 +9,8 @@
 	border: 1px solid black;
 	margin-right: 0.5rem;
 }
-.action-panel-status {
-}
 .status-text {
-	margin: 0;
+	margin: 0 0 5px 0;
 	font-size: 0.9rem;
 }
 .status-bar {

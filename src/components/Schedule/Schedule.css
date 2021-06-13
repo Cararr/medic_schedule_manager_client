@@ -3,8 +3,18 @@
 	width: 100%;
 	display: flex;
 	justify-content: space-evenly;
-	padding-top: 2rem;
+	padding-top: 1rem;
 	display: flex;
+}
+td {
+	min-width: 8rem;
+	height: 3rem;
+	padding: 0;
+	border: 1px solid black;
+}
+.white-background {
+	background-color: #fff;
+	cursor: default;
 }
 .list {
 	list-style-type: none;
