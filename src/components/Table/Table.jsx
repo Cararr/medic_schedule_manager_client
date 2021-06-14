@@ -6,7 +6,7 @@ import './Table.css';
 export default function Table(props) {
 	let tableBody = returntableBodyByStation(
 		props.stationName,
-		props.selectedSchedule,
+		props.stationSchedule,
 		props.editSchedule,
 		props.currentlyDragged,
 		props.setCurrentlyDragged
@@ -28,27 +28,27 @@ export default function Table(props) {
 
 function returntableBodyByStation(
 	station,
-	selectedSchedule,
+	stationSchedule,
 	editSchedule,
 	currentlyDragged,
 	setCurrentlyDragged
 ) {
-	let cellCounter = 0,
-		tableBody;
-	const cells = selectedSchedule.map(() => {
+	const cells = stationSchedule.map((cell, index) => {
 		return (
 			<TableCell
 				stationName={station}
 				editSchedule={editSchedule}
-				id={`${station}-${cellCounter}`}
-				cellValue={selectedSchedule[cellCounter]}
-				key={cellCounter}
-				cellNumber={cellCounter++}
+				id={`${station}-${index}`}
+				cellValue={stationSchedule[index]}
+				cellNumber={index}
 				currentlyDragged={currentlyDragged}
 				setCurrentlyDragged={setCurrentlyDragged}
+				key={index}
 			/>
 		);
 	});
+
+	let tableBody;
 	switch (station) {
 		case 'KINEZA':
 			tableBody = (

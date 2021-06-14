@@ -2,14 +2,16 @@ import React from 'react';
 import Table from '../Table/Table.jsx';
 import SelectDate from '../SelectDate/SelectDate.jsx';
 import HomeRehabilitaitons from '../HomeRehabilitaitons/HomeRehabilitaitons.jsx';
+import { useUser } from '../../context/userContext';
+import { Utilities } from '../../util/util';
 import './Tables.css';
 
 export default function Tables(props) {
-	const tables = new Array(4);
-	for (const station in props.selectedSchedule) {
+	const tables = [];
+	for (const station in props.currentSchedule.schedules) {
 		tables[returnIndexByStation(station)] = (
 			<Table
-				selectedSchedule={props.selectedSchedule[station]}
+				stationSchedule={props.currentSchedule.schedules[station]}
 				editSchedule={props.editSchedule}
 				currentlyDragged={props.currentlyDragged}
 				setCurrentlyDragged={props.setCurrentlyDragged}
@@ -20,6 +22,8 @@ export default function Tables(props) {
 		);
 	}
 
+	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+
 	return (
 		<main className="tables-section">
 			<SelectDate
@@ -27,8 +31,15 @@ export default function Tables(props) {
 				dateSelected={props.dateSelected}
 				formatDateString={props.formatDateString}
 			/>
-			{(tables.length && tables) || 'Loading...'}
-			<HomeRehabilitaitons dateSelected={props.dateSelected} />
+			{(props.currentSchedule.schedules && tables) || <h2>Loading...</h2>}
+			{(props.currentSchedule.homeRehabilitations.length || isUserAdmin) && (
+				<HomeRehabilitaitons
+					editSchedule={props.editSchedule}
+					currentlyDragged={props.currentlyDragged}
+					setCurrentlyDragged={props.setCurrentlyDragged}
+					homeRehabilitations={props.currentSchedule.homeRehabilitations}
+				/>
+			)}
 		</main>
 	);
 }

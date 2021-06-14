@@ -4,3 +4,13 @@
 	flex-grow: 10;
 	align-items: center;
 }
+.cell-dragable:hover {
+	cursor: grab;
+	background-color: blue;
+	color: azure;
+}
+.cell-drag-over {
+	cursor: grab;
+	background-color: rgb(38, 38, 228) !important;
+	color: azure;
+}

@@ -1,24 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { getHomeRehabilitationsByDate } from '../../util/fetchFromDB';
+import React from 'react';
+import TableCell from '../TableCell/TableCell.jsx';
 import './HomeRehabilitaitons.css';
 
 export default function HomeRehabilitaitons(props) {
-	const [homeRehabilitaitons, setHomeRehabilitaitons] = useState([]);
-
-	useEffect(() => {
-		getHomeRehabilitationsByDate(props.dateSelected).then((hRs) =>
-			setHomeRehabilitaitons(hRs.sort(sortByStartTime))
-		);
-	}, [props.dateSelected]);
-
-	const homeRehabilitaitonsView = homeRehabilitaitons.map((hR) => (
-		<tr key={hR.id} className="white-background">
-			<td>{hR.startTime.slice(0, 5)}</td>
-			<td>{`${hR.employee.firstName} ${hR.employee.lastName}`}</td>
-			<td>{hR.patient}</td>
-		</tr>
-	));
-
+	const homeRehabilitaitonsView = props.homeRehabilitations
+		.sort(sortByStartTime)
+		.map((hR, index) => (
+			<tr key={hR.id} className="white-background">
+				<td>{hR.startTime.slice(0, 5)}</td>
+				<TableCell
+					stationName={'homeRehabilitations'}
+					editSchedule={editSchedule}
+					id={`homeRehabilitations-${index}`}
+					cellValue={hR.employee}
+					cellNumber={index}
+					currentlyDragged={currentlyDragged}
+					setCurrentlyDragged={setCurrentlyDragged}
+					key={index}
+				>{`${hR.employee.firstName} ${hR.employee.lastName}`}</TableCell>
+				<td>{hR.patient}</td>
+			</tr>
+		));
+	// przekaz w propsie do homerehabilitations te rzeczy
 	return (
 		<table className="station-table">
 			<thead>

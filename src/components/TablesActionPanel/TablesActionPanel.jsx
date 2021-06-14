@@ -2,8 +2,8 @@ import React from 'react';
 import './TablesActionPanel.css';
 
 export default function TablesActionPanel(props) {
-	const statusColor = props.isChangesSaved ? 'green' : 'yellow';
-	const statusText = props.isChangesSaved
+	const statusColor = props.areChangesSaved ? 'green' : 'yellow';
+	const statusText = props.areChangesSaved
 		? 'No changes to save'
 		: 'Unsaved changes!';
 	return (

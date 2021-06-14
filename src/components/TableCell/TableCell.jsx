@@ -4,8 +4,6 @@ import { Utilities } from '../../util/util';
 import './TableCell.css';
 
 export default function TableCell(props) {
-	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
-
 	const handleDrop = (e) => {
 		e.preventDefault();
 		const employee = JSON.parse(e.dataTransfer.getData('employee'));
@@ -42,6 +40,8 @@ export default function TableCell(props) {
 			0
 		);
 	};
+
+	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 
 	const className = `white-background ${
 		props.cellValue && isUserAdmin && 'cell-dragable'

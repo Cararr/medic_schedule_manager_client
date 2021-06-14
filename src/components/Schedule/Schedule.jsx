@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
 	getWorkStageSpans,
-	getScheduleByDate,
+	getSchedulesByDate,
 	generateSchedule,
+	getHomeRehabilitationsByDate,
 } from '../../util/fetchFromDB';
 import { putSchedule } from '../../util/postToDB';
 import EmployeesList from '../EmployeesList/EmployeesList.jsx';
@@ -19,53 +20,58 @@ export default function Schedule() {
 		Utilities.formatDateString(new Date())
 	);
 
-	const [selectedSchedule, setSelectedSchedule] = useState(
-		returnEmptyDailyShiftObject()
-	);
+	const [currentSchedule, setCurrentSchedule] = useState({
+		schedules: null,
+		homeRehabilitations: [],
+	});
 	useEffect(() => {
-		setIsChangesSaved(true);
-		getScheduleByDate(dateSelected)
-			.then((schedule) => {
-				if (schedule) setSelectedSchedule(schedule[dateSelected]);
-			})
-			.catch((error) => console.error(error));
+		setAreChangesSaved(true);
+		(async function () {
+			const schedules = await getSchedulesByDate(dateSelected);
+			const homeRehabilitations = await getHomeRehabilitationsByDate(
+				dateSelected
+			);
+			setCurrentSchedule({ schedules, homeRehabilitations });
+		})();
 	}, [dateSelected]);
 
 	const [workStageSpans, setworkStageSpans] = useState([]);
 	useEffect(() => {
-		getWorkStageSpans()
-			.then((stages) => setworkStageSpans(stages))
-			.catch((error) => console.error(error));
+		getWorkStageSpans().then((stages) => setworkStageSpans(stages));
 	}, []);
 
-	const [isChangesSaved, setIsChangesSaved] = useState(true);
+	const [areChangesSaved, setAreChangesSaved] = useState(true);
 	const editSchedule = (cellNumber, stationName, newCellValue) => {
-		if (isChangesSaved) setIsChangesSaved(false);
-		setSelectedSchedule((prev) => {
-			const updatedStationTable = [...prev[stationName]];
-			updatedStationTable[Number(cellNumber)] = newCellValue;
-			return { ...prev, [stationName]: updatedStationTable };
+		if (areChangesSaved) setAreChangesSaved(false);
+		setCurrentSchedule((prev) => {
+			const updatedSchedule = { ...prev };
+			updatedSchedule.schedules[stationName][Number(cellNumber)] = newCellValue;
+			return updatedSchedule;
 		});
 	};
 
 	const saveScheudle = async () => {
-		setIsChangesSaved(true);
-		await putSchedule(dateSelected, selectedSchedule);
+		setAreChangesSaved(true);
+		await putSchedule(dateSelected, currentSchedule.schedules);
 	};
 
 	const autoGenerateSchedule = async () => {
-		generateSchedule().then((schedule) => {
-			setIsChangesSaved(false);
-			setSelectedSchedule(schedule || returnEmptyDailyShiftObject());
+		generateSchedule().then((schedules) => {
+			setAreChangesSaved(false);
+			setCurrentSchedule((prev) => (schedules ? { ...prev, schedules } : prev));
 		});
 	};
 
 	const clearSchedule = () => {
-		setIsChangesSaved(false);
-		setSelectedSchedule(returnEmptyDailyShiftObject());
+		setAreChangesSaved(false);
+		setCurrentSchedule((prev) => ({
+			...prev,
+			schedules: Utilities.returnEmptyDailyShiftObject(),
+		}));
 	};
 
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+
 	return (
 		<div>
 			<NavBar />
@@ -76,13 +82,13 @@ export default function Schedule() {
 					setCurrentlyDragged={setCurrentlyDragged}
 					dateSelected={dateSelected}
 					setDateSelected={setDateSelected}
-					selectedSchedule={selectedSchedule}
+					currentSchedule={currentSchedule}
 					editSchedule={editSchedule}
 					workStageSpans={workStageSpans}
 				/>
 				{isUserAdmin && (
 					<TablesActionPanel
-						isChangesSaved={isChangesSaved}
+						areChangesSaved={areChangesSaved}
 						saveScheudle={saveScheudle}
 						autoGenerateSchedule={autoGenerateSchedule}
 						clearSchedule={clearSchedule}
@@ -91,13 +97,4 @@ export default function Schedule() {
 			</div>
 		</div>
 	);
-}
-
-function returnEmptyDailyShiftObject() {
-	return {
-		KINEZA: new Array(12).fill(null),
-		FIZYKO: new Array(10).fill(null),
-		MASAZ: new Array(4).fill(null),
-		WIZYTY: new Array(1).fill(null),
-	};
 }

@@ -7,4 +7,12 @@ export class Utilities {
 	static checkIfUserIsAdmin(user) {
 		return user.role === 'BOSS';
 	}
+	static returnEmptyDailyShiftObject() {
+		return {
+			KINEZA: new Array(12).fill(null),
+			FIZYKO: new Array(10).fill(null),
+			MASAZ: new Array(4).fill(null),
+			WIZYTY: new Array(1).fill(null),
+		};
+	}
 }
