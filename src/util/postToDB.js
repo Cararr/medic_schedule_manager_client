@@ -1,6 +1,6 @@
 import { serverPath } from '../config.json';
 
-export const putSchedule = async (date, schedules) => {
+export const updateSchedule = async (date, schedules) => {
 	try {
 		const body = JSON.stringify({ schedules });
 		const config = {

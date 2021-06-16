@@ -10,32 +10,47 @@ export default function HomeRehabilitaitons(props) {
 				<td>{hR.startTime.slice(0, 5)}</td>
 				<TableCell
 					stationName={'homeRehabilitations'}
-					editSchedule={editSchedule}
+					editSchedule={props.editSchedule}
 					id={`homeRehabilitations-${index}`}
 					cellValue={hR.employee}
 					cellNumber={index}
-					currentlyDragged={currentlyDragged}
-					setCurrentlyDragged={setCurrentlyDragged}
+					currentlyDragged={props.currentlyDragged}
+					setCurrentlyDragged={props.setCurrentlyDragged}
 					key={index}
-				>{`${hR.employee.firstName} ${hR.employee.lastName}`}</TableCell>
+				/>
 				<td>{hR.patient}</td>
 			</tr>
 		));
-	// przekaz w propsie do homerehabilitations te rzeczy
+
 	return (
-		<table className="station-table">
-			<thead>
-				<tr className="table-title">
-					<td colSpan={3}>HOME REHABILITATIONS</td>
-				</tr>
-				<tr>
-					<td>Start at</td>
-					<td>Employee</td>
-					<td>Patient</td>
-				</tr>
-			</thead>
-			<tbody>{homeRehabilitaitonsView}</tbody>
-		</table>
+		<section className="section-home-rehabilitations">
+			<table className="station-table">
+				<thead>
+					<tr className="table-title">
+						<td colSpan={3}>HOME REHABILITATIONS</td>
+					</tr>
+					<tr>
+						<td>Start at</td>
+						<td>Employee</td>
+						<td>Patient</td>
+					</tr>
+				</thead>
+				<tbody>{homeRehabilitaitonsView}</tbody>
+			</table>
+			{props.isUserAdmin && (
+				<button
+					disabled={!props.wereHomeRehabilitationsEdited}
+					style={{
+						pointerEvents: props.wereHomeRehabilitationsEdited
+							? 'auto'
+							: 'none',
+					}}
+					className="button-generic"
+				>
+					Save home rehabilitaitons
+				</button>
+			)}
+		</section>
 	);
 }
 

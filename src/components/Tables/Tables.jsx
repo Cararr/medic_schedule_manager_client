@@ -34,6 +34,8 @@ export default function Tables(props) {
 			{(props.currentSchedule.schedules && tables) || <h2>Loading...</h2>}
 			{(props.currentSchedule.homeRehabilitations.length || isUserAdmin) && (
 				<HomeRehabilitaitons
+					isUserAdmin={isUserAdmin}
+					wereHomeRehabilitationsEdited={props.wereHomeRehabilitationsEdited}
 					editSchedule={props.editSchedule}
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}

@@ -5,7 +5,7 @@ import {
 	generateSchedule,
 	getHomeRehabilitationsByDate,
 } from '../../util/fetchFromDB';
-import { putSchedule } from '../../util/postToDB';
+import { updateSchedule } from '../../util/postToDB';
 import EmployeesList from '../EmployeesList/EmployeesList.jsx';
 import Tables from '../Tables/Tables.jsx';
 import TablesActionPanel from '../TablesActionPanel/TablesActionPanel.jsx';
@@ -24,6 +24,10 @@ export default function Schedule() {
 		schedules: null,
 		homeRehabilitations: [],
 	});
+
+	const [wereHomeRehabilitationsEdited, setWereHomeRehabilitationsEdited] =
+		useState(false);
+
 	useEffect(() => {
 		setAreChangesSaved(true);
 		(async function () {
@@ -42,17 +46,24 @@ export default function Schedule() {
 
 	const [areChangesSaved, setAreChangesSaved] = useState(true);
 	const editSchedule = (cellNumber, stationName, newCellValue) => {
-		if (areChangesSaved) setAreChangesSaved(false);
 		setCurrentSchedule((prev) => {
 			const updatedSchedule = { ...prev };
-			updatedSchedule.schedules[stationName][Number(cellNumber)] = newCellValue;
+			if (stationName === 'homeRehabilitations') {
+				updatedSchedule.homeRehabilitations[Number(cellNumber)].employee =
+					newCellValue;
+				setWereHomeRehabilitationsEdited(true);
+			} else {
+				if (areChangesSaved) setAreChangesSaved(false);
+				updatedSchedule.schedules[stationName][Number(cellNumber)] =
+					newCellValue;
+			}
 			return updatedSchedule;
 		});
 	};
 
 	const saveScheudle = async () => {
 		setAreChangesSaved(true);
-		await putSchedule(dateSelected, currentSchedule.schedules);
+		await updateSchedule(dateSelected, currentSchedule.schedules);
 	};
 
 	const autoGenerateSchedule = async () => {
@@ -85,6 +96,7 @@ export default function Schedule() {
 					currentSchedule={currentSchedule}
 					editSchedule={editSchedule}
 					workStageSpans={workStageSpans}
+					wereHomeRehabilitationsEdited={wereHomeRehabilitationsEdited}
 				/>
 				{isUserAdmin && (
 					<TablesActionPanel

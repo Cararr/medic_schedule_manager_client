@@ -16,3 +16,6 @@ a {
 	transform: translate(+1px, +1px);
 	border-style: dashed;
 }
+.button-disabled {
+	pointer-events: none;
+}
