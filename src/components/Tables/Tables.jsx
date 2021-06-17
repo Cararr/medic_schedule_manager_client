@@ -35,11 +35,12 @@ export default function Tables(props) {
 			{(props.currentSchedule.homeRehabilitations.length || isUserAdmin) && (
 				<HomeRehabilitaitons
 					isUserAdmin={isUserAdmin}
-					wereHomeRehabilitationsEdited={props.wereHomeRehabilitationsEdited}
 					editSchedule={props.editSchedule}
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}
 					homeRehabilitations={props.currentSchedule.homeRehabilitations}
+					homeRehabilitationsEdited={props.homeRehabilitationsEdited}
+					removeHomeRehabilitation={props.removeHomeRehabilitation}
 				/>
 			)}
 		</main>

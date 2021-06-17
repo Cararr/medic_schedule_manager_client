@@ -6,12 +6,14 @@ import {
 	getHomeRehabilitationsByDate,
 } from '../../util/fetchFromDB';
 import { updateSchedule } from '../../util/postToDB';
+import { deleteHomeRehabilitation } from '../../util/deleteFromDB';
 import EmployeesList from '../EmployeesList/EmployeesList.jsx';
 import Tables from '../Tables/Tables.jsx';
 import TablesActionPanel from '../TablesActionPanel/TablesActionPanel.jsx';
 import { Utilities } from '../../util/util';
 import NavBar from '../NavBar/NavBar.jsx';
 import { useUser } from '../../context/userContext';
+import { genericWarning } from '../../WinBox/winboxMessages';
 import './Schedule.css';
 
 export default function Schedule() {
@@ -25,8 +27,23 @@ export default function Schedule() {
 		homeRehabilitations: [],
 	});
 
-	const [wereHomeRehabilitationsEdited, setWereHomeRehabilitationsEdited] =
-		useState(false);
+	const [homeRehabilitationsEdited, setHomeRehabilitationsEdited] = useState(
+		[]
+	);
+
+	const removeHomeRehabilitation = async (homeRehabilitaitonId) => {
+		if (await deleteHomeRehabilitation(homeRehabilitaitonId)) {
+			setHomeRehabilitationsEdited((prev) =>
+				prev.filter((hR) => hR !== homeRehabilitaitonId)
+			);
+			setCurrentSchedule((prev) => ({
+				...prev,
+				homeRehabilitations: prev.homeRehabilitations.filter(
+					(hR) => hR.id !== homeRehabilitaitonId
+				),
+			}));
+		} else genericWarning();
+	};
 
 	useEffect(() => {
 		setAreChangesSaved(true);
@@ -51,7 +68,7 @@ export default function Schedule() {
 			if (stationName === 'homeRehabilitations') {
 				updatedSchedule.homeRehabilitations[Number(cellNumber)].employee =
 					newCellValue;
-				setWereHomeRehabilitationsEdited(true);
+				setHomeRehabilitationsEdited((prev) => [...prev, Number(cellNumber)]);
 			} else {
 				if (areChangesSaved) setAreChangesSaved(false);
 				updatedSchedule.schedules[stationName][Number(cellNumber)] =
@@ -72,6 +89,8 @@ export default function Schedule() {
 			setCurrentSchedule((prev) => (schedules ? { ...prev, schedules } : prev));
 		});
 	};
+
+	const saveHomeRehabilitations = async () => {};
 
 	const clearSchedule = () => {
 		setAreChangesSaved(false);
@@ -96,7 +115,8 @@ export default function Schedule() {
 					currentSchedule={currentSchedule}
 					editSchedule={editSchedule}
 					workStageSpans={workStageSpans}
-					wereHomeRehabilitationsEdited={wereHomeRehabilitationsEdited}
+					homeRehabilitationsEdited={homeRehabilitationsEdited}
+					removeHomeRehabilitation={removeHomeRehabilitation}
 				/>
 				{isUserAdmin && (
 					<TablesActionPanel

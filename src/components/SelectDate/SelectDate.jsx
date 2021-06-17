@@ -1,7 +1,6 @@
 import React from 'react';
 import { Utilities } from '../../util/util';
 import './SelectDate.css';
-import '../../fontello/css/fontello.css';
 
 export default function SelectDate(props) {
 	const setDate = ({ target }) => {
@@ -34,7 +33,7 @@ export default function SelectDate(props) {
 					className="button-generic button-fontello"
 					type="button"
 				>
-					<i className="icon-left-dir fontello" />
+					<i className="icon-left-dir" />
 				</button>
 				<button
 					onClick={changeDateToToday}
@@ -48,7 +47,7 @@ export default function SelectDate(props) {
 					className="button-generic button-fontello"
 					type="button"
 				>
-					<i className="icon-right-dir fontello" />
+					<i className="icon-right-dir" />
 				</button>
 			</div>
 		</form>

@@ -21,6 +21,30 @@ export const updateSchedule = async (date, schedules) => {
 	}
 };
 
+export const updateHomeRehabilitation = async (homeRehabilitation) => {
+	try {
+		const body = JSON.stringify({ homeRehabilitation });
+		const config = {
+			method: 'PUT',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body,
+		};
+		const response = await fetch(
+			`${serverPath}/home-rehabilitaitons/${homeRehabilitation.id}`,
+			config
+		);
+		if (response.ok) {
+			const jsonRespone = await response.json();
+			return jsonRespone;
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};
+
 export const login = async (inputValues) => {
 	try {
 		const body = JSON.stringify(inputValues);

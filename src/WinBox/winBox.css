@@ -7,6 +7,7 @@
 	filter: invert(1);
 }
 .wb-body {
+	padding: 0 1rem;
 	background-color: #eaf3c8;
 	display: grid;
 	place-items: center;

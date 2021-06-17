@@ -11,6 +11,14 @@ const genericWarningSettings = {
 	background: '#f9cdc0',
 };
 
+export const genericWarning = () => {
+	const loginPanelConfig = {
+		...genericWarningSettings,
+		html: `<h2>Action aborted, something went wrong. Sorry!</h2>`,
+	};
+	new WinBox('Error', loginPanelConfig);
+};
+
 export const loginWarning = (message) => {
 	const loginPanelConfig = {
 		...genericWarningSettings,
@@ -24,7 +32,7 @@ export const loginWarning = (message) => {
 export const pleaseLogInFirstWarning = () => {
 	const loginPanelConfig = {
 		...genericWarningSettings,
-		html: `<h2>${'You must be logged to access this page!'}</h2>`,
+		html: `<h2>You must be logged to access this page!</h2>`,
 	};
 	new WinBox('Access denied!', loginPanelConfig);
 };
