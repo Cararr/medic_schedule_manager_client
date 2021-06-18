@@ -6,7 +6,7 @@ export default function HomeRehabilitaitons(props) {
 	const homeRehabilitaitonsView = props.homeRehabilitations
 		.sort(sortByStartTime)
 		.map((hR, index) => {
-			const wasItEdited = props.homeRehabilitationsEdited.includes(index);
+			const wasItEdited = props.homeRehabilitationsEdited.includes(hR.id);
 			return (
 				<tr key={hR.id} className="white-background">
 					<td>{hR.startTime.slice(0, 5)}</td>
@@ -24,10 +24,15 @@ export default function HomeRehabilitaitons(props) {
 					{props.isUserAdmin && (
 						<td style={{ backgroundColor: '#eaf3c8' }}>
 							{wasItEdited && (
-								<i style={{ marginRight: '1rem' }} className="icon-floppy" />
+								<i
+									onClick={() => props.saveChangedHomeRehabilitation(hR)}
+									style={{ marginRight: '1rem', fontSize: '1.2rem' }}
+									className="icon-floppy"
+								/>
 							)}
 							<i
 								onClick={() => props.removeHomeRehabilitation(hR.id)}
+								style={{ fontSize: '1.2rem' }}
 								className="icon-trash-empty"
 							/>
 						</td>

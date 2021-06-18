@@ -41,6 +41,7 @@ export default function Tables(props) {
 					homeRehabilitations={props.currentSchedule.homeRehabilitations}
 					homeRehabilitationsEdited={props.homeRehabilitationsEdited}
 					removeHomeRehabilitation={props.removeHomeRehabilitation}
+					saveChangedHomeRehabilitation={props.saveChangedHomeRehabilitation}
 				/>
 			)}
 		</main>

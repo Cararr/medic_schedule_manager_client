@@ -5,7 +5,7 @@ import {
 	generateSchedule,
 	getHomeRehabilitationsByDate,
 } from '../../util/fetchFromDB';
-import { updateSchedule } from '../../util/postToDB';
+import { updateSchedule, updateHomeRehabilitation } from '../../util/postToDB';
 import { deleteHomeRehabilitation } from '../../util/deleteFromDB';
 import EmployeesList from '../EmployeesList/EmployeesList.jsx';
 import Tables from '../Tables/Tables.jsx';
@@ -34,7 +34,7 @@ export default function Schedule() {
 	const removeHomeRehabilitation = async (homeRehabilitaitonId) => {
 		if (await deleteHomeRehabilitation(homeRehabilitaitonId)) {
 			setHomeRehabilitationsEdited((prev) =>
-				prev.filter((hR) => hR !== homeRehabilitaitonId)
+				prev.filter((id) => id !== homeRehabilitaitonId)
 			);
 			setCurrentSchedule((prev) => ({
 				...prev,
@@ -53,6 +53,7 @@ export default function Schedule() {
 				dateSelected
 			);
 			setCurrentSchedule({ schedules, homeRehabilitations });
+			setHomeRehabilitationsEdited([]);
 		})();
 	}, [dateSelected]);
 
@@ -68,7 +69,10 @@ export default function Schedule() {
 			if (stationName === 'homeRehabilitations') {
 				updatedSchedule.homeRehabilitations[Number(cellNumber)].employee =
 					newCellValue;
-				setHomeRehabilitationsEdited((prev) => [...prev, Number(cellNumber)]);
+				setHomeRehabilitationsEdited((prev) => [
+					...prev,
+					currentSchedule.homeRehabilitations[Number(cellNumber)].id,
+				]);
 			} else {
 				if (areChangesSaved) setAreChangesSaved(false);
 				updatedSchedule.schedules[stationName][Number(cellNumber)] =
@@ -90,7 +94,13 @@ export default function Schedule() {
 		});
 	};
 
-	const saveHomeRehabilitations = async () => {};
+	const saveChangedHomeRehabilitation = async (homeRehabilitation) => {
+		// ZRÓB TAK ŻEBY NIE DAŁO SIĘ ZAPISAĆ HR BEZ EMPLISA. I ZRÓB PORZĄDEK W TYM KOMPO
+		if (await updateHomeRehabilitation(homeRehabilitation))
+			setHomeRehabilitationsEdited((prev) =>
+				prev.filter((id) => id !== homeRehabilitation.id)
+			);
+	};
 
 	const clearSchedule = () => {
 		setAreChangesSaved(false);
@@ -101,7 +111,7 @@ export default function Schedule() {
 	};
 
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
-
+	console.log(homeRehabilitationsEdited);
 	return (
 		<div>
 			<NavBar />
@@ -117,6 +127,7 @@ export default function Schedule() {
 					workStageSpans={workStageSpans}
 					homeRehabilitationsEdited={homeRehabilitationsEdited}
 					removeHomeRehabilitation={removeHomeRehabilitation}
+					saveChangedHomeRehabilitations={saveChangedHomeRehabilitation}
 				/>
 				{isUserAdmin && (
 					<TablesActionPanel
