@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from '../Table/Table.jsx';
 import SelectDate from '../SelectDate/SelectDate.jsx';
-import HomeRehabilitaitons from '../HomeRehabilitaitons/HomeRehabilitaitons.jsx';
+import HomeRehabilitations from '../HomeRehabilitations/HomeRehabilitations.jsx';
 import { useUser } from '../../context/userContext';
 import { Utilities } from '../../util/util';
 import './Tables.css';
@@ -32,8 +32,8 @@ export default function Tables(props) {
 				formatDateString={props.formatDateString}
 			/>
 			{(props.currentSchedule.schedules && tables) || <h2>Loading...</h2>}
-			{(props.currentSchedule.homeRehabilitations.length || isUserAdmin) && (
-				<HomeRehabilitaitons
+			{props.currentSchedule.homeRehabilitations.length !== 0 && (
+				<HomeRehabilitations
 					isUserAdmin={isUserAdmin}
 					editSchedule={props.editSchedule}
 					currentlyDragged={props.currentlyDragged}

@@ -33,7 +33,7 @@ export const updateHomeRehabilitation = async (homeRehabilitation) => {
 			body,
 		};
 		const response = await fetch(
-			`${serverPath}/home-rehabilitaitons/${homeRehabilitation.id}`,
+			`${serverPath}/home-rehabilitations/${homeRehabilitation.id}`,
 			config
 		);
 		if (response.ok) {

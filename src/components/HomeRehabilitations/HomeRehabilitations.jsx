@@ -1,9 +1,9 @@
 import React from 'react';
 import TableCell from '../TableCell/TableCell.jsx';
-import './HomeRehabilitaitons.css';
+import './HomeRehabilitations.css';
 
-export default function HomeRehabilitaitons(props) {
-	const homeRehabilitaitonsView = props.homeRehabilitations
+export default function HomeRehabilitations(props) {
+	const homeRehabilitationsView = props.homeRehabilitations
 		.sort(sortByStartTime)
 		.map((hR, index) => {
 			const wasItEdited = props.homeRehabilitationsEdited.includes(hR.id);
@@ -49,12 +49,12 @@ export default function HomeRehabilitaitons(props) {
 						<td colSpan={3}>HOME REHABILITATIONS</td>
 					</tr>
 					<tr>
-						<td>Start at</td>
+						<td>Starts at</td>
 						<td>Employee</td>
 						<td>Patient</td>
 					</tr>
 				</thead>
-				<tbody>{homeRehabilitaitonsView}</tbody>
+				<tbody>{homeRehabilitationsView}</tbody>
 			</table>
 		</section>
 	);

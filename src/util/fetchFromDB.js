@@ -30,7 +30,7 @@ export const getSchedulesByDate = async (date) => {
 			`${serverPath}/schedules?date=${date}`
 		);
 		const homeRehabilitationsResponse = await fetch(
-			`${serverPath}/home-rehabilitaitons?date=${date}`
+			`${serverPath}/home-rehabilitations?date=${date}`
 		);
 
 		if (schedulesResponse.ok && homeRehabilitationsResponse.ok) {
@@ -57,7 +57,7 @@ export const generateSchedule = async () => {
 export const getHomeRehabilitationsByDate = async (date) => {
 	try {
 		const response = await fetch(
-			`${serverPath}/home-rehabilitaitons?date=${date}`
+			`${serverPath}/home-rehabilitations?date=${date}`
 		);
 		if (response.ok) {
 			const jsonRespone = await response.json();

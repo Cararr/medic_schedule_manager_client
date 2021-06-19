@@ -3,7 +3,7 @@ import { serverPath } from '../config.json';
 export const deleteHomeRehabilitation = async (homeRehabilitationId) => {
 	try {
 		const response = await fetch(
-			`${serverPath}/home-rehabilitaitons/${homeRehabilitationId}`,
+			`${serverPath}/home-rehabilitations/${homeRehabilitationId}`,
 			{
 				method: 'DELETE',
 				headers: {

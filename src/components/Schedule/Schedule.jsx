@@ -13,7 +13,7 @@ import TablesActionPanel from '../TablesActionPanel/TablesActionPanel.jsx';
 import { Utilities } from '../../util/util';
 import NavBar from '../NavBar/NavBar.jsx';
 import { useUser } from '../../context/userContext';
-import { genericWarning } from '../../WinBox/winboxMessages';
+import { genericWarning, noEmployeeWarning } from '../../WinBox/winboxMessages';
 import './Schedule.css';
 
 export default function Schedule() {
@@ -31,15 +31,15 @@ export default function Schedule() {
 		[]
 	);
 
-	const removeHomeRehabilitation = async (homeRehabilitaitonId) => {
-		if (await deleteHomeRehabilitation(homeRehabilitaitonId)) {
+	const removeHomeRehabilitation = async (homeRehabilitationId) => {
+		if (await deleteHomeRehabilitation(homeRehabilitationId)) {
 			setHomeRehabilitationsEdited((prev) =>
-				prev.filter((id) => id !== homeRehabilitaitonId)
+				prev.filter((id) => id !== homeRehabilitationId)
 			);
 			setCurrentSchedule((prev) => ({
 				...prev,
 				homeRehabilitations: prev.homeRehabilitations.filter(
-					(hR) => hR.id !== homeRehabilitaitonId
+					(hR) => hR.id !== homeRehabilitationId
 				),
 			}));
 		} else genericWarning();
@@ -95,7 +95,7 @@ export default function Schedule() {
 	};
 
 	const saveChangedHomeRehabilitation = async (homeRehabilitation) => {
-		// ZRÓB TAK ŻEBY NIE DAŁO SIĘ ZAPISAĆ HR BEZ EMPLISA. I ZRÓB PORZĄDEK W TYM KOMPO
+		if (!homeRehabilitation.employee) return noEmployeeWarning();
 		if (await updateHomeRehabilitation(homeRehabilitation))
 			setHomeRehabilitationsEdited((prev) =>
 				prev.filter((id) => id !== homeRehabilitation.id)
@@ -111,7 +111,7 @@ export default function Schedule() {
 	};
 
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
-	console.log(homeRehabilitationsEdited);
+
 	return (
 		<div>
 			<NavBar />
@@ -127,7 +127,7 @@ export default function Schedule() {
 					workStageSpans={workStageSpans}
 					homeRehabilitationsEdited={homeRehabilitationsEdited}
 					removeHomeRehabilitation={removeHomeRehabilitation}
-					saveChangedHomeRehabilitations={saveChangedHomeRehabilitation}
+					saveChangedHomeRehabilitation={saveChangedHomeRehabilitation}
 				/>
 				{isUserAdmin && (
 					<TablesActionPanel

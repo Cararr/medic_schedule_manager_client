@@ -36,3 +36,11 @@ export const pleaseLogInFirstWarning = () => {
 	};
 	new WinBox('Access denied!', loginPanelConfig);
 };
+
+export const noEmployeeWarning = () => {
+	const loginPanelConfig = {
+		...genericWarningSettings,
+		html: `<h2>An employee must be present on the home rehabilitation!</h2>`,
+	};
+	new WinBox('Employee is missing', loginPanelConfig);
+};
