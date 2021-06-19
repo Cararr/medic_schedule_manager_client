@@ -8,8 +8,21 @@ export default function HomeRehabilitations(props) {
 		.map((hR, index) => {
 			const wasItEdited = props.homeRehabilitationsEdited.includes(hR.id);
 			return (
-				<tr key={hR.id} className="white-background">
-					<td>{hR.startTime.slice(0, 5)}</td>
+				<tr key={hR.id}>
+					<td>
+						{props.isUserAdmin ? (
+							<input
+								onChange={(e) => props.handleHomeRehabilitationEdit(e, index)}
+								name="startTime"
+								className="input-home-rehabilitaiton"
+								value={formatTimeView(hR.startTime)}
+								required
+								type="time"
+							></input>
+						) : (
+							formatTimeView(hR.startTime)
+						)}
+					</td>
 					<TableCell
 						stationName={'homeRehabilitations'}
 						editSchedule={props.editSchedule}
@@ -20,7 +33,20 @@ export default function HomeRehabilitations(props) {
 						setCurrentlyDragged={props.setCurrentlyDragged}
 						key={index}
 					/>
-					<td>{hR.patient}</td>
+					<td>
+						{props.isUserAdmin ? (
+							<input
+								onChange={(e) => props.handleHomeRehabilitationEdit(e, index)}
+								name="patient"
+								className="input-home-rehabilitaiton"
+								value={hR.patient}
+								required
+								type="text"
+							></input>
+						) : (
+							hR.patient
+						)}
+					</td>
 					{props.isUserAdmin && (
 						<td style={{ backgroundColor: '#eaf3c8' }}>
 							{wasItEdited && (
@@ -54,7 +80,7 @@ export default function HomeRehabilitations(props) {
 						<td>Patient</td>
 					</tr>
 				</thead>
-				<tbody>{homeRehabilitationsView}</tbody>
+				<tbody className="white-background">{homeRehabilitationsView}</tbody>
 			</table>
 		</section>
 	);
@@ -68,4 +94,8 @@ function sortByStartTime(a, b) {
 		return 1;
 	}
 	return 0;
+}
+
+function formatTimeView(time) {
+	return time.slice(0, 5);
 }

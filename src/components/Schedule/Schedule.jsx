@@ -63,6 +63,7 @@ export default function Schedule() {
 	}, []);
 
 	const [areChangesSaved, setAreChangesSaved] = useState(true);
+
 	const editSchedule = (cellNumber, stationName, newCellValue) => {
 		setCurrentSchedule((prev) => {
 			const updatedSchedule = { ...prev };
@@ -102,6 +103,19 @@ export default function Schedule() {
 			);
 	};
 
+	const handleHomeRehabilitationEdit = ({ target }, index) => {
+		setHomeRehabilitationsEdited((prev) => [
+			...prev,
+			currentSchedule.homeRehabilitations[index].id,
+		]);
+		setCurrentSchedule((prev) => {
+			const homeRehabilitations = prev.homeRehabilitations;
+			homeRehabilitations[index][target.name] =
+				target.name === 'startTime' ? `${target.value}:00` : target.value;
+			return { ...prev, homeRehabilitations };
+		});
+	};
+
 	const clearSchedule = () => {
 		setAreChangesSaved(false);
 		setCurrentSchedule((prev) => ({
@@ -126,6 +140,7 @@ export default function Schedule() {
 					editSchedule={editSchedule}
 					workStageSpans={workStageSpans}
 					homeRehabilitationsEdited={homeRehabilitationsEdited}
+					handleHomeRehabilitationEdit={handleHomeRehabilitationEdit}
 					removeHomeRehabilitation={removeHomeRehabilitation}
 					saveChangedHomeRehabilitation={saveChangedHomeRehabilitation}
 				/>

@@ -39,6 +39,7 @@ export default function Tables(props) {
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}
 					homeRehabilitations={props.currentSchedule.homeRehabilitations}
+					handleHomeRehabilitationEdit={props.handleHomeRehabilitationEdit}
 					homeRehabilitationsEdited={props.homeRehabilitationsEdited}
 					removeHomeRehabilitation={props.removeHomeRehabilitation}
 					saveChangedHomeRehabilitation={props.saveChangedHomeRehabilitation}
