@@ -48,7 +48,7 @@ export default function HomeRehabilitations(props) {
 						)}
 					</td>
 					{props.isUserAdmin && (
-						<td style={{ backgroundColor: '#eaf3c8' }}>
+						<td style={{ backgroundColor: 'var(--backgroundYellow)' }}>
 							{wasItEdited && (
 								<i
 									onClick={() => props.saveChangedHomeRehabilitation(hR)}

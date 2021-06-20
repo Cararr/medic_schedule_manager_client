@@ -1,9 +1,8 @@
 .action-panel {
 	width: 5rem;
-	background-color: #eaf3c8;
+	background-color: var(--backgroundYellow);
 	height: fit-content;
 	position: sticky;
-	flex-grow: 2;
 	top: 3rem;
 	padding: 0 1rem;
 	border: 1px solid black;

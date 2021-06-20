@@ -1,8 +1,7 @@
 .employees-section {
-	background-color: #cdc0f9;
+	background-color: var(--backgroundViolet);
 	position: sticky;
 	top: 3rem;
-	flex-grow: 1;
 	margin-left: 0.5rem;
 	border: 1px solid black;
 	padding: 0 1rem;

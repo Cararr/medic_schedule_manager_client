@@ -12,35 +12,43 @@ const genericWarningSettings = {
 };
 
 export const genericWarning = () => {
-	const loginPanelConfig = {
+	const config = {
 		...genericWarningSettings,
 		html: `<h2>Action aborted, something went wrong. Sorry!</h2>`,
 	};
-	new WinBox('Error', loginPanelConfig);
+	new WinBox('Error', config);
 };
 
 export const loginWarning = (message) => {
-	const loginPanelConfig = {
+	const config = {
 		...genericWarningSettings,
 		html: `<h2>${
 			message || "Can't login right now 😔 Please try again later. "
 		}</h2>`,
 	};
-	new WinBox('Login failed', loginPanelConfig);
+	new WinBox('Login failed', config);
 };
 
 export const pleaseLogInFirstWarning = () => {
-	const loginPanelConfig = {
+	const config = {
 		...genericWarningSettings,
 		html: `<h2>You must be logged to access this page!</h2>`,
 	};
-	new WinBox('Access denied!', loginPanelConfig);
+	new WinBox('Access denied!', config);
 };
 
 export const noEmployeeWarning = () => {
-	const loginPanelConfig = {
+	const config = {
 		...genericWarningSettings,
-		html: `<h2>An employee must be present on the home rehabilitation!</h2>`,
+		html: `<h2>An employee must be present at home rehabilitation!</h2>`,
 	};
-	new WinBox('Employee is missing', loginPanelConfig);
+	new WinBox('Employee is missing', config);
+};
+
+export const adminContentWarning = () => {
+	const config = {
+		...genericWarningSettings,
+		html: `<h2>You are not authorized to visit this section.</h2>`,
+	};
+	new WinBox('Access denied!', config);
 };

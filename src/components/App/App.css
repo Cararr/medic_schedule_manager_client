@@ -1,11 +1,9 @@
-#root {
-}
 a {
 	color: inherit;
 	text-decoration: none;
 }
 .button-generic {
-	background-color: #cdc0f9;
+	background-color: var(--backgroundViolet);
 	border: 1px solid black;
 	border-radius: 5px;
 	font-size: 1rem;

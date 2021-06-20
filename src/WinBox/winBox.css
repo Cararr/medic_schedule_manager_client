@@ -8,7 +8,7 @@
 }
 .wb-body {
 	padding: 0 1rem;
-	background-color: #eaf3c8;
+	background-color: var(--backgroundYellow);
 	display: grid;
 	place-items: center;
 }

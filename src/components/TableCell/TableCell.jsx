@@ -44,7 +44,7 @@ export default function TableCell(props) {
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 
 	const className = `white-background ${
-		props.cellValue && isUserAdmin && 'cell-dragable'
+		props.cellValue && isUserAdmin && 'draggable'
 	}`;
 
 	return (

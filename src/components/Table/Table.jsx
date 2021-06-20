@@ -1,6 +1,5 @@
 import React from 'react';
 import TableCell from '../TableCell/TableCell.jsx';
-import TableCellBlank from '../TableCellBlank/TableCellBlank.jsx';
 import './Table.css';
 
 export default function Table(props) {
@@ -56,12 +55,12 @@ function returntableBodyByStation(
 					<tr>{cells.slice(0, 4)}</tr>
 					<tr>{cells.slice(4, 8)}</tr>
 					<tr>
-						<TableCellBlank />
+						{blankCell()}
 						{cells.slice(8, 10)}
-						<TableCellBlank />
+						{blankCell()}
 					</tr>
 					<tr>
-						<TableCellBlank />
+						{blankCell()}
 						{cells.slice(10)}
 					</tr>
 				</tbody>
@@ -73,7 +72,7 @@ function returntableBodyByStation(
 					<tr>{cells.slice(0, 4)}</tr>
 					<tr>{cells.slice(4, 8)}</tr>
 					<tr>
-						<TableCellBlank />
+						{blankCell()}
 						{cells.slice(8)}
 					</tr>
 				</tbody>
@@ -98,9 +97,14 @@ function returntableBodyByStation(
 	}
 	return tableBody;
 }
+
 function returnWorkStageSpans(workStageSpans, stationName) {
 	return workStageSpans?.map((stage, index) => {
 		if (stationName === 'WIZYTY' && index !== 2) return false;
 		return <td key={stage.id}>{`${stage.from} - ${stage.to}`}</td>;
 	});
+}
+
+function blankCell() {
+	return <td style={{ border: 'none' }} className="blank_cell"></td>;
 }

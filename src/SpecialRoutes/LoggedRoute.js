@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { useUser } from '../context/userContext';
 import { pleaseLogInFirstWarning } from '../WinBox/winboxMessages';
 
-export default function ProtectedRoute({ component: Component, ...rest }) {
+export default function LoggedRoute({ component: Component, ...rest }) {
 	const user = useUser();
 	return (
 		<Route

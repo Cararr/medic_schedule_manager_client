@@ -31,7 +31,9 @@ export default function Tables(props) {
 				dateSelected={props.dateSelected}
 				formatDateString={props.formatDateString}
 			/>
-			{(props.currentSchedule.schedules && tables) || <h2>Loading...</h2>}
+			{(props.currentSchedule.schedules && tables) || (
+				<i style={{ marginTop: '4rem' }} className="icon-spin6" />
+			)}
 			{props.currentSchedule.homeRehabilitations.length !== 0 && (
 				<HomeRehabilitations
 					isUserAdmin={isUserAdmin}

@@ -5,7 +5,7 @@ export class Utilities {
 		return `${dateArray[2]}-${dateArray[1]}-${day}`;
 	}
 	static checkIfUserIsAdmin(user) {
-		return user.role === 'BOSS';
+		return user?.role === 'BOSS';
 	}
 	static returnEmptyDailyShiftObject() {
 		return {

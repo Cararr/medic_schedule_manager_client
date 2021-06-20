@@ -1,5 +1,9 @@
 @import-normalize;
-html {
+:root {
+	--backgroundTheme: #c8eaf3;
+	--fontColor: #0c1a1f;
+	--backgroundYellow: #eaf3c8;
+	--backgroundViolet: #cdc0f9;
 	font-size: 20px;
 }
 body {
@@ -9,8 +13,8 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: #c8eaf3;
-	color: #0c1a1f;
+	background-color: var(--backgroundTheme);
+	color: var(--fontColor);
 }
 
 code {
