@@ -21,3 +21,8 @@ a {
 	padding-left: 1px !important;
 	padding-right: 1px !important;
 }
+.container-card {
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 5%;
+}

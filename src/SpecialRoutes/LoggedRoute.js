@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useUser } from '../context/userContext';
-import { pleaseLogInFirstWarning } from '../WinBox/winboxMessages';
+import { accessDeniedWarning } from '../WinBox/winboxMessages';
 
 export default function LoggedRoute({ component: Component, ...rest }) {
 	const user = useUser();
@@ -12,7 +12,7 @@ export default function LoggedRoute({ component: Component, ...rest }) {
 				if (user) return <Component {...props} />;
 				else {
 					setTimeout(() => {
-						pleaseLogInFirstWarning();
+						accessDeniedWarning('You must be logged to access this page!');
 					}, 1);
 					return <Redirect to={{ pathname: '/' }} />;
 				}

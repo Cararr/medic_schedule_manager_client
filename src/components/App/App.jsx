@@ -21,9 +21,9 @@ function App() {
 				<BrowserRouter>
 					<Switch>
 						<NonLoggedRoute path="/" exact component={LandingPage} />
-						<LoggedRoute path="/schedule" exact component={Schedule} />
+						<LoggedRoute path="/schedules" exact component={Schedule} />
 						<LoggedRoute path="/home" exact component={HomePage} />
-						<AdminRoute path="/create" exact component={Create} />
+						<AdminRoute path="/create" component={Create} />
 						<Route path="/" component={NotFound} />
 					</Switch>
 				</BrowserRouter>

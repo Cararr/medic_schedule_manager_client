@@ -1,10 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useUser } from '../context/userContext';
-import {
-	pleaseLogInFirstWarning,
-	adminContentWarning,
-} from '../WinBox/winboxMessages';
+import { accessDeniedWarning } from '../WinBox/winboxMessages';
 import { Utilities } from '../util/util';
 
 export default function AdminRoute({ component: Component, ...rest }) {
@@ -16,12 +13,14 @@ export default function AdminRoute({ component: Component, ...rest }) {
 				if (Utilities.checkIfUserIsAdmin(user)) return <Component {...props} />;
 				else if (user) {
 					setTimeout(() => {
-						adminContentWarning();
+						accessDeniedWarning(
+							'You are not authorized to visit this section.'
+						);
 					}, 1);
 					return <Redirect to={{ pathname: '/home' }} />;
 				} else {
 					setTimeout(() => {
-						pleaseLogInFirstWarning();
+						accessDeniedWarning('You must be logged to access this page!');
 					}, 1);
 					return <Redirect to={{ pathname: '/' }} />;
 				}

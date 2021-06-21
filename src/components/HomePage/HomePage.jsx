@@ -1,9 +1,9 @@
 import React from 'react';
-import GoToSchedulesImage from './resources/GoToSchedules.png';
-import GoToVacationsImage from './resources/GoToVacations.png';
-import GoToCreateImage from './resources/GoToCreate.png';
-import { Link } from 'react-router-dom';
+import SchedulesImage from '../../resources/images/SchedulesImage.png';
+import VacationsImage from '../../resources/images/VacationsImage.png';
+import CreateImage from '../../resources/images/CreateImage.png';
 import NavBar from '../NavBar/NavBar.jsx';
+import CardsContainer from '../CardsContainer/CardsContainer.jsx';
 import { useUser } from '../../context/userContext';
 import { Utilities } from '../../util/util';
 import './HomePage.css';
@@ -11,31 +11,29 @@ import './HomePage.css';
 export default function HomePage() {
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 
+	const cards = [
+		{
+			path: '/schedules',
+			name: 'Schedules',
+			image: SchedulesImage,
+		},
+		{
+			path: '/vacations',
+			name: 'Vacations',
+			image: VacationsImage,
+		},
+		{
+			path: '/create',
+			name: 'Create',
+			image: CreateImage,
+			adminOnly: true,
+		},
+	];
+
 	return (
 		<div>
 			<NavBar />
-			<main className="home-page">
-				<Link to="/schedule">
-					<figure className="home-page-figure">
-						<img alt="schedules" src={GoToSchedulesImage} />
-						<figcaption>Schedules</figcaption>
-					</figure>
-				</Link>
-				<Link to="/vacations">
-					<figure className="home-page-figure">
-						<img alt="schedules" src={GoToVacationsImage} />
-						<figcaption>Vacations</figcaption>
-					</figure>
-				</Link>
-				{isUserAdmin && (
-					<Link to="/create">
-						<figure className="home-page-figure">
-							<img alt="schedules" src={GoToCreateImage} />
-							<figcaption>Create</figcaption>
-						</figure>
-					</Link>
-				)}
-			</main>
+			<CardsContainer isUserAdmin={isUserAdmin} cards={cards} />
 		</div>
 	);
 }

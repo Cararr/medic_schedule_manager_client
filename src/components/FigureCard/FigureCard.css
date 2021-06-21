@@ -1,0 +1,22 @@
+.figure-card {
+	box-sizing: border-box;
+	padding: 5px;
+	margin: 0;
+	max-width: 12rem;
+	background-color: var(--backgroundYellow);
+	border-radius: 5px;
+	border: 3px solid black;
+	padding-bottom: 0.5rem;
+	text-align: center;
+}
+.figure-card:hover {
+	cursor: pointer;
+	transform: translate(+2px, +2px);
+	border-style: dashed;
+}
+.figure-card figcaption {
+	width: 100%;
+	padding: 0 5px;
+	font-size: 1.5rem;
+	font-weight: bold;
+}

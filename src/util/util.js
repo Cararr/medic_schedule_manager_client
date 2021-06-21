@@ -4,9 +4,11 @@ export class Utilities {
 		const day = Number(dateArray[0]) < 10 ? `0${dateArray[0]}` : dateArray[0];
 		return `${dateArray[2]}-${dateArray[1]}-${day}`;
 	}
+	
 	static checkIfUserIsAdmin(user) {
 		return user?.role === 'BOSS';
 	}
+	
 	static returnEmptyDailyShiftObject() {
 		return {
 			KINEZA: new Array(12).fill(null),

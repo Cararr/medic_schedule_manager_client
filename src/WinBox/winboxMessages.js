@@ -29,10 +29,10 @@ export const loginWarning = (message) => {
 	new WinBox('Login failed', config);
 };
 
-export const pleaseLogInFirstWarning = () => {
+export const accessDeniedWarning = (reason) => {
 	const config = {
 		...genericWarningSettings,
-		html: `<h2>You must be logged to access this page!</h2>`,
+		html: `<h2>${reason}</h2>`,
 	};
 	new WinBox('Access denied!', config);
 };
@@ -43,12 +43,4 @@ export const noEmployeeWarning = () => {
 		html: `<h2>An employee must be present at home rehabilitation!</h2>`,
 	};
 	new WinBox('Employee is missing', config);
-};
-
-export const adminContentWarning = () => {
-	const config = {
-		...genericWarningSettings,
-		html: `<h2>You are not authorized to visit this section.</h2>`,
-	};
-	new WinBox('Access denied!', config);
 };
