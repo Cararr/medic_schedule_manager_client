@@ -8,7 +8,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import LoggedRoute from '../../SpecialRoutes/LoggedRoute';
 import NonLoggedRoute from '../../SpecialRoutes/NonLoggedRoute';
 import AdminRoute from '../../SpecialRoutes/AdminRoute';
-import Schedule from '../schedule/Schedule';
+import Schedules from '../schedules/Schedules';
 import LandingPage from '../landingPage/LandingPage.jsx';
 import HomePage from '../homePage/HomePage.jsx';
 import Create from '../create/Create.jsx';
@@ -21,7 +21,7 @@ function App() {
 				<BrowserRouter>
 					<Switch>
 						<NonLoggedRoute path="/" exact component={LandingPage} />
-						<LoggedRoute path="/schedules" exact component={Schedule} />
+						<LoggedRoute path="/schedules" exact component={Schedules} />
 						<LoggedRoute path="/home" exact component={HomePage} />
 						<AdminRoute path="/create" component={Create} />
 						<Route path="/" component={NotFound} />

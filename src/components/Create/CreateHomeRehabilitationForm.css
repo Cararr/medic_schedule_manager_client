@@ -1,0 +1,22 @@
+.form-create {
+	box-sizing: border-box;
+	background-color: var(--backgroundYellow);
+	width: clamp(40rem, 80%, 50rem);
+	height: 30rem;
+	margin: 1rem auto;
+	padding: 0.5rem;
+}
+.form-create-header {
+	text-align: center;
+	margin-top: 0.5rem;
+}
+.form-create-inputs {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.form-create-inputs-input {
+	width: 10rem;
+	margin-bottom: 1rem;
+}

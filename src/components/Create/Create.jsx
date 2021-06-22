@@ -1,9 +1,10 @@
 import React from 'react';
-import NavBar from '../navBar/NavBar.jsx';
 import SchedulesImage from '../../resources/images/SchedulesImage.png';
 import VacationsImage from '../../resources/images/VacationsImage.png';
 import HomeImage from '../../resources/images/HomeImage.png';
+import NavBar from '../navBar/NavBar.jsx';
 import CardsContainer from '../cardsContainer/CardsContainer.jsx';
+import CreateHomeRehabilitationForm from './CreateHomeRehabilitationForm.jsx';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import './Create.css';
 
@@ -27,6 +28,7 @@ export default function Create() {
 			image: HomeImage,
 		},
 	];
+
 	// ZACZNIJ OD DODANIA PANELU DO TWORZENIA HRÓW
 	return (
 		<div>
@@ -42,7 +44,7 @@ export default function Create() {
 					<h3>vacations</h3>
 				</Route>
 				<Route exact path={`${path}/home-rehabilitaitons`}>
-					<h3>home-rehabilitaitons</h3>
+					<CreateHomeRehabilitationForm />
 				</Route>
 			</Switch>
 		</div>

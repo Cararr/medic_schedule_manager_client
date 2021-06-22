@@ -14,7 +14,7 @@ import NavBar from '../navBar/NavBar.jsx';
 import { Utilities } from '../../util/util';
 import { useUser } from '../../context/userContext';
 import { genericWarning, noEmployeeWarning } from '../../WinBox/winboxMessages';
-import './Schedule.css';
+import './Schedules.css';
 
 export default function Schedule() {
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
