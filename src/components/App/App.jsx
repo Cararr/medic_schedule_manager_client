@@ -8,11 +8,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import LoggedRoute from '../../SpecialRoutes/LoggedRoute';
 import NonLoggedRoute from '../../SpecialRoutes/NonLoggedRoute';
 import AdminRoute from '../../SpecialRoutes/AdminRoute';
-import Schedule from '../Schedule/Schedule.jsx';
-import LandingPage from '../LandingPage/LandingPage.jsx';
-import HomePage from '../HomePage/HomePage.jsx';
-import Create from '../Create/Create.jsx';
-import NotFound from '../NotFound/NotFound.jsx';
+import Schedule from '../schedule/Schedule';
+import LandingPage from '../landingPage/LandingPage.jsx';
+import HomePage from '../homePage/HomePage.jsx';
+import Create from '../create/Create.jsx';
+import NotFound from '../notFound/NotFound.jsx';
 
 function App() {
 	return (

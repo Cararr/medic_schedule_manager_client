@@ -1,9 +1,9 @@
 import React from 'react';
-import NavBar from '../NavBar/NavBar.jsx';
+import NavBar from '../navBar/NavBar.jsx';
 import SchedulesImage from '../../resources/images/SchedulesImage.png';
 import VacationsImage from '../../resources/images/VacationsImage.png';
 import HomeImage from '../../resources/images/HomeImage.png';
-import CardsContainer from '../CardsContainer/CardsContainer.jsx';
+import CardsContainer from '../cardsContainer/CardsContainer.jsx';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import './Create.css';
 

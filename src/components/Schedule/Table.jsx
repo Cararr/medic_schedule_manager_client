@@ -1,5 +1,5 @@
 import React from 'react';
-import TableCell from '../TableCell/TableCell.jsx';
+import TableCell from './TableCell.jsx';
 import './Table.css';
 
 export default function Table(props) {

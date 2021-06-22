@@ -7,11 +7,11 @@ import {
 } from '../../util/fetchFromDB';
 import { updateSchedule, updateHomeRehabilitation } from '../../util/postToDB';
 import { deleteHomeRehabilitation } from '../../util/deleteFromDB';
-import EmployeesList from '../EmployeesList/EmployeesList.jsx';
-import Tables from '../Tables/Tables.jsx';
-import TablesActionPanel from '../TablesActionPanel/TablesActionPanel.jsx';
+import EmployeesList from './EmployeesList.jsx';
+import Tables from './Tables.jsx';
+import TablesActionPanel from './TablesActionPanel.jsx';
+import NavBar from '../navBar/NavBar.jsx';
 import { Utilities } from '../../util/util';
-import NavBar from '../NavBar/NavBar.jsx';
 import { useUser } from '../../context/userContext';
 import { genericWarning, noEmployeeWarning } from '../../WinBox/winboxMessages';
 import './Schedule.css';

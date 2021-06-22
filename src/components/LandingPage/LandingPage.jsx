@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import LandingImage from '../../resources/images/LandingImage.jpg';
-import LoginPanel from '../LoginPanel/LoginPanel.jsx';
+import LoginPanel from '../landingPage/LoginPanel.jsx';
 import { loginWarning } from '../../WinBox/winboxMessages';
 import { login } from '../../util/postToDB';
 import { useChangeUser } from '../../context/userContext';
