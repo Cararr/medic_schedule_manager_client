@@ -3,7 +3,7 @@ import Table from './Table.jsx';
 import SelectDate from './SelectDate.jsx';
 import HomeRehabilitations from './HomeRehabilitations.jsx';
 import { useUser } from '../../context/userContext';
-import { Utilities } from '../../util/util';
+import Utilities from '../../util/util';
 import './Tables.css';
 
 export default function Tables(props) {

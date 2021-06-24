@@ -1,4 +1,4 @@
-export class Utilities {
+export default class Utilities {
 	static formatDateString(date) {
 		const dateArray = date.toLocaleDateString().split('.');
 		const day = Number(dateArray[0]) < 10 ? `0${dateArray[0]}` : dateArray[0];
@@ -20,5 +20,9 @@ export class Utilities {
 
 	static formatTimeView(time) {
 		return time.slice(0, 5);
+	}
+
+	static incrementDateByDay(date) {
+		return new Date(date.setDate(date.getDate() + 1));
 	}
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useUser } from '../../context/userContext';
-import { Utilities } from '../../util/util';
+import Utilities from '../../util/util';
 import './TableCell.css';
 
 export default function TableCell(props) {

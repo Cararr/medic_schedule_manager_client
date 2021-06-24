@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import {
-	getWorkStageSpans,
-	getSchedulesByDate,
-	generateSchedule,
-	getHomeRehabilitationsByDate,
-} from '../../util/get';
-import { updateSchedule, updateHomeRehabilitation } from '../../util/update';
-import { deleteHomeRehabilitation } from '../../util/delete';
+import Get from '../../util/Get';
+import Put from '../../util/Put';
+import Delete from '../../util/Delete';
 import EmployeesList from './EmployeesList.jsx';
 import Tables from './Tables.jsx';
 import TablesActionPanel from './TablesActionPanel.jsx';
 import NavBar from '../navBar/NavBar.jsx';
-import { Utilities } from '../../util/util';
+import Utilities from '../../util/util';
 import { useUser } from '../../context/userContext';
 import { genericWarning, noEmployeeWarning } from '../../WinBox/winboxMessages';
 import './Schedules.css';
@@ -32,7 +27,7 @@ export default function Schedule() {
 	);
 
 	const removeHomeRehabilitation = async (homeRehabilitationId) => {
-		if (await deleteHomeRehabilitation(homeRehabilitationId)) {
+		if (await Delete.homeRehabilitation(homeRehabilitationId)) {
 			setHomeRehabilitationsEdited((prev) =>
 				prev.filter((id) => id !== homeRehabilitationId)
 			);
@@ -48,8 +43,8 @@ export default function Schedule() {
 	useEffect(() => {
 		setAreChangesSaved(true);
 		(async function () {
-			const schedules = await getSchedulesByDate(dateSelected);
-			const homeRehabilitations = await getHomeRehabilitationsByDate(
+			const schedules = await Get.schedulesByDate(dateSelected);
+			const homeRehabilitations = await Get.homeRehabilitationsByDate(
 				dateSelected
 			);
 			setCurrentSchedule({ schedules, homeRehabilitations });
@@ -59,7 +54,7 @@ export default function Schedule() {
 
 	const [workStageSpans, setworkStageSpans] = useState([]);
 	useEffect(() => {
-		getWorkStageSpans().then((stages) => setworkStageSpans(stages));
+		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
 	}, []);
 
 	const [areChangesSaved, setAreChangesSaved] = useState(true);
@@ -85,11 +80,11 @@ export default function Schedule() {
 
 	const saveScheudle = async () => {
 		setAreChangesSaved(true);
-		await updateSchedule(dateSelected, currentSchedule.schedules);
+		await Put.schedule(dateSelected, currentSchedule.schedules);
 	};
 
 	const autoGenerateSchedule = async () => {
-		generateSchedule().then((schedules) => {
+		Get.generateSchedule().then((schedules) => {
 			setAreChangesSaved(false);
 			setCurrentSchedule((prev) => (schedules ? { ...prev, schedules } : prev));
 		});
@@ -97,7 +92,7 @@ export default function Schedule() {
 
 	const saveChangedHomeRehabilitation = async (homeRehabilitation) => {
 		if (!homeRehabilitation.employee) return noEmployeeWarning();
-		if (await updateHomeRehabilitation(homeRehabilitation))
+		if (await Put.homeRehabilitation(homeRehabilitation))
 			setHomeRehabilitationsEdited((prev) =>
 				prev.filter((id) => id !== homeRehabilitation.id)
 			);

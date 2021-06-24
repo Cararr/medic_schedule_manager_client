@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useEmployees } from '../../context/employeesContext';
-import { postHomeRehabilitations } from '../../util/post';
-import { Utilities } from '../../util/util';
+import post from '../../util/post';
+import Utilities from '../../util/util';
 import { wrongDateSet } from '../../WinBox/winboxMessages';
 import './CreateHomeRehabilitationForm.css';
 
@@ -30,7 +30,7 @@ export default function CreateHomeRehabilitationForm() {
 
 	const resetForm = () => {
 		setSubmitResponse(null);
-		setFormValues(returnEmptyForm());
+		setFormValues({ ...returnEmptyForm(), employee: employees[0] });
 	};
 
 	const handleSubmit = async (e) => {
@@ -38,15 +38,24 @@ export default function CreateHomeRehabilitationForm() {
 		if (!checkIfEndDateIsAfterBegin(formValues.dateBegin, formValues.dateEnd))
 			return wrongDateSet();
 		const loading = <i className="icon-spin6" />;
-		const createSuccess = <h3>Created</h3>;
-		const createFail = <h3>Create failed. Please try again later</h3>;
 		setSubmitResponse(
 			<div className="response-create-home-rehabilitation">{loading}</div>
 		);
-		const repsonse = await postHomeRehabilitations(formValues);
+		const failMessage = 'Create failed. Reason: ';
+		const response = await post.homeRehabilitations(formValues);
+		const jsonResponse =
+			response.status === 500 ? 'server failed' : await response.json();
+
 		setSubmitResponse(
-			<div className="response-create-home-rehabilitation">
-				{repsonse ? createSuccess : createFail}
+			<div
+				style={response.ok ? {} : { marginTop: 0 }}
+				className="response-create-home-rehabilitation"
+			>
+				<h3>
+					{response.ok
+						? jsonResponse.message
+						: failMessage + jsonResponse.message}
+				</h3>
 				<button onClick={resetForm} type="button" className="button-generic">
 					Back
 				</button>
@@ -120,7 +129,6 @@ export default function CreateHomeRehabilitationForm() {
 		</section>
 	);
 }
-
 function checkIfEndDateIsAfterBegin(startDate, endDate) {
 	return new Date(endDate) >= new Date(startDate);
 }

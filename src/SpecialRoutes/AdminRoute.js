@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useUser } from '../context/userContext';
 import { accessDeniedWarning } from '../WinBox/winboxMessages';
-import { Utilities } from '../util/util';
+import Utilities from '../util/util';
 
 export default function AdminRoute({ component: Component, ...rest }) {
 	const user = useUser();

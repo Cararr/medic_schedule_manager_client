@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { getEmployees } from '../util/get';
+import Get from '../util/Get';
 
 const EmployeesContext = React.createContext([]);
-const LoadEmployeesContext = React.createContext(() => {});
+const LoadEmployeesContext = React.createContext(() => { });
 
 export const useEmployees = () => useContext(EmployeesContext);
 export const useLoadEmployees = () => useContext(LoadEmployeesContext);
@@ -10,11 +10,11 @@ export const useLoadEmployees = () => useContext(LoadEmployeesContext);
 export const EmployeesProvider = ({ children }) => {
 	const [employees, setEmployees] = useState([]);
 	const loadEmployees = async () => {
-		setEmployees(await getEmployees());
+		setEmployees(await Get.employees());
 	};
 
 	useEffect(() => {
-		getEmployees().then((employeesList) => {
+		Get.employees().then((employeesList) => {
 			if (employeesList) setEmployees(employeesList.sort(sortByLastNameAlphabetically));
 		});
 	}, []);

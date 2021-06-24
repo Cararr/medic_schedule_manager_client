@@ -5,7 +5,7 @@ import CreateImage from '../../resources/images/CreateImage.png';
 import NavBar from '../navBar/NavBar.jsx';
 import CardsContainer from '../cardsContainer/CardsContainer.jsx';
 import { useUser } from '../../context/userContext';
-import { Utilities } from '../../util/util';
+import Utilities from '../../util/util';
 import './HomePage.css';
 
 export default function HomePage() {

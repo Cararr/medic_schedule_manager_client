@@ -1,5 +1,5 @@
 import React from 'react';
-import { Utilities } from '../../util/util';
+import Utilities from '../../util/util';
 import './SelectDate.css';
 
 export default function SelectDate(props) {
