@@ -4,9 +4,9 @@ import {
 	getSchedulesByDate,
 	generateSchedule,
 	getHomeRehabilitationsByDate,
-} from '../../util/fetchFromDB';
-import { updateSchedule, updateHomeRehabilitation } from '../../util/postToDB';
-import { deleteHomeRehabilitation } from '../../util/deleteFromDB';
+} from '../../util/get';
+import { updateSchedule, updateHomeRehabilitation } from '../../util/update';
+import { deleteHomeRehabilitation } from '../../util/delete';
 import EmployeesList from './EmployeesList.jsx';
 import Tables from './Tables.jsx';
 import TablesActionPanel from './TablesActionPanel.jsx';

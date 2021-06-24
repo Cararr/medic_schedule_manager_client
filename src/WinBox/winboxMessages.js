@@ -22,9 +22,8 @@ export const genericWarning = () => {
 export const loginWarning = (message) => {
 	const config = {
 		...genericWarningSettings,
-		html: `<h2>${
-			message || "Can't login right now 😔 Please try again later. "
-		}</h2>`,
+		html: `<h2>${message || "Can't login right now 😔 Please try again later. "
+			}</h2>`,
 	};
 	new WinBox('Login failed', config);
 };
@@ -43,4 +42,13 @@ export const noEmployeeWarning = () => {
 		html: `<h2>An employee must be present at home rehabilitation!</h2>`,
 	};
 	new WinBox('Employee is missing', config);
+};
+
+export const wrongDateSet = () => {
+	const config = {
+		...genericWarningSettings,
+		y: 170,
+		html: `<h2>The end cannot come before the beginning!</h2>`,
+	};
+	new WinBox('Wrong date set!', config);
 };

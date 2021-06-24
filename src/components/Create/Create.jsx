@@ -29,7 +29,6 @@ export default function Create() {
 		},
 	];
 
-	// ZACZNIJ OD DODANIA PANELU DO TWORZENIA HRÓW
 	return (
 		<div>
 			<NavBar />

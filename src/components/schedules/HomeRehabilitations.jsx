@@ -1,5 +1,6 @@
 import React from 'react';
 import TableCell from './TableCell.jsx';
+import { Utilities } from '../../util/util.js';
 import './HomeRehabilitations.css';
 
 export default function HomeRehabilitations(props) {
@@ -15,12 +16,12 @@ export default function HomeRehabilitations(props) {
 								onChange={(e) => props.handleHomeRehabilitationEdit(e, index)}
 								name="startTime"
 								className="input-home-rehabilitaiton"
-								value={formatTimeView(hR.startTime)}
+								value={Utilities.formatTimeView(hR.startTime)}
 								required
 								type="time"
 							></input>
 						) : (
-							formatTimeView(hR.startTime)
+							Utilities.formatTimeView(hR.startTime)
 						)}
 					</td>
 					<TableCell
@@ -38,6 +39,7 @@ export default function HomeRehabilitations(props) {
 							<input
 								onChange={(e) => props.handleHomeRehabilitationEdit(e, index)}
 								name="patient"
+								maxLength={250}
 								className="input-home-rehabilitaiton"
 								value={hR.patient}
 								required
@@ -94,8 +96,4 @@ function sortByStartTime(a, b) {
 		return 1;
 	}
 	return 0;
-}
-
-function formatTimeView(time) {
-	return time.slice(0, 5);
 }

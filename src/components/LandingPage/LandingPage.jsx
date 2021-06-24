@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import LandingImage from '../../resources/images/LandingImage.jpg';
 import LoginPanel from '../landingPage/LoginPanel.jsx';
 import { loginWarning } from '../../WinBox/winboxMessages';
-import { login } from '../../util/postToDB';
+import { login } from '../../util/login';
 import { useChangeUser } from '../../context/userContext';
 import { useEmployees, useLoadEmployees } from '../../context/employeesContext';
 import './LandingPage.css';
