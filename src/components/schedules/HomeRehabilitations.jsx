@@ -1,6 +1,6 @@
 import React from 'react';
 import TableCell from './TableCell.jsx';
-import Utilities from '../../util/util.js';
+import Utilities from '../../util/api/util.js';
 import './HomeRehabilitations.css';
 
 export default function HomeRehabilitations(props) {

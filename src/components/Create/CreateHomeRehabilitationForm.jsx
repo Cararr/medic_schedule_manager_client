@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useEmployees } from '../../context/employeesContext';
-import post from '../../util/post';
+import post from '../../util/api/post';
 import Utilities from '../../util/util';
 import { wrongDateSet } from '../../WinBox/winboxMessages';
 import './CreateHomeRehabilitationForm.css';

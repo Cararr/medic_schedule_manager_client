@@ -1,4 +1,4 @@
-import { serverPath } from '../config.json';
+import { serverPath } from '../../config.json';
 
 export default class Delete {
 	static homeRehabilitation = async (homeRehabilitationId) => {

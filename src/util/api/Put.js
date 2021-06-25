@@ -1,4 +1,4 @@
-import { serverPath } from '../config.json';
+import { serverPath } from '../../config.json';
 
 export default class Put {
 	static schedule = async (date, schedules) => {

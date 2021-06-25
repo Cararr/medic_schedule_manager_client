@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Get from '../../util/Get';
-import Put from '../../util/Put';
-import Delete from '../../util/Delete';
+import Get from '../../util/api/Get';
+import Put from '../../util/api/Put';
+import Delete from '../../util/api/Delete';
 import EmployeesList from './EmployeesList.jsx';
 import Tables from './Tables.jsx';
 import TablesActionPanel from './TablesActionPanel.jsx';

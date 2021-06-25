@@ -1,5 +1,5 @@
-import { serverPath } from '../config.json';
-import Utilities from './util';
+import { serverPath } from '../../config.json';
+import Utilities from '../util';
 
 export default class Post {
   static homeRehabilitations = async homeRehabilitationConfig => {
