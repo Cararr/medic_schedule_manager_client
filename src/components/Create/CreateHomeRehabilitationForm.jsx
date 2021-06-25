@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useEmployees } from '../../context/employeesContext';
-import post from '../../util/api/post';
+import Post from '../../util/api/Post';
 import Utilities from '../../util/util';
 import { wrongDateSet } from '../../WinBox/winboxMessages';
 import './CreateHomeRehabilitationForm.css';
@@ -42,7 +42,7 @@ export default function CreateHomeRehabilitationForm() {
 			<div className="response-create-home-rehabilitation">{loading}</div>
 		);
 		const failMessage = 'Create failed. Reason: ';
-		const response = await post.homeRehabilitations(formValues);
+		const response = await Post.homeRehabilitations(formValues);
 		const jsonResponse =
 			response.status === 500 ? 'server failed' : await response.json();
 
