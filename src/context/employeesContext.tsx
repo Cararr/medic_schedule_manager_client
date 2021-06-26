@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Get from '../util/api/Get';
+import { Employee } from '../types';
 
 const EmployeesContext = React.createContext([]);
-const LoadEmployeesContext = React.createContext(() => { });
+const LoadEmployeesContext = React.createContext(() => {});
 
 export const useEmployees = () => useContext(EmployeesContext);
 export const useLoadEmployees = () => useContext(LoadEmployeesContext);
@@ -15,7 +16,8 @@ export const EmployeesProvider = ({ children }) => {
 
 	useEffect(() => {
 		Get.employees().then((employeesList) => {
-			if (employeesList) setEmployees(employeesList.sort(sortByLastNameAlphabetically));
+			if (employeesList)
+				setEmployees(employeesList.sort(sortByLastNameAlphabetically));
 		});
 	}, []);
 
@@ -28,7 +30,7 @@ export const EmployeesProvider = ({ children }) => {
 	);
 };
 
-function sortByLastNameAlphabetically(a, b) {
+function sortByLastNameAlphabetically(a: Employee, b: Employee) {
 	if (a.lastName < b.lastName) {
 		return -1;
 	}

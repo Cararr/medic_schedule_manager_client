@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Card from './Card.jsx';
+import Card from './Card';
 import './CardsContainer.css';
 
 export default function CardsContainer(props) {

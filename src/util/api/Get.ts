@@ -25,7 +25,7 @@ export default class Get {
 		}
 	};
 
-	static schedulesByDate = async (date) => {
+	static schedulesByDate = async (date: string) => {
 		try {
 			const schedulesResponse = await fetch(
 				`${serverPath}/schedules?date=${date}`
@@ -55,7 +55,7 @@ export default class Get {
 		}
 	};
 
-	static homeRehabilitationsByDate = async (date) => {
+	static homeRehabilitationsByDate = async (date: string) => {
 		try {
 			const response = await fetch(
 				`${serverPath}/home-rehabilitations?date=${date}`

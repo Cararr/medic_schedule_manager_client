@@ -1,13 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, ReactNode } from 'react';
 import Cookies from 'js-cookie';
 
+interface UserCrudentials {
+	lastName: string;
+	password: string;
+}
+
 const UserContext = React.createContext(null);
-const ChangeUserContext = React.createContext(({ lastName, password }) => {});
+const ChangeUserContext = React.createContext(
+	({ lastName, password }: UserCrudentials) => {}
+);
 
 export const useUser = () => useContext(UserContext);
 export const useChangeUser = () => useContext(ChangeUserContext);
 
-export const UserProvider = ({ children }) => {
+export const UserProvider = ({ children }: { children: ReactNode }) => {
 	const currentUser = Cookies.get('user')
 		? JSON.parse(Cookies.get('user'))
 		: null;

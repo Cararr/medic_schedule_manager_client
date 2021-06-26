@@ -1,7 +1,8 @@
 import { serverPath } from '../../config.json';
+import { Schedules, HomeRehabilitation } from '../../types';
 
 export default class Put {
-	static schedule = async (date, schedules) => {
+	static schedule = async (date: string, schedules: Schedules) => {
 		try {
 			const body = JSON.stringify({ schedules });
 			const config = {
@@ -22,7 +23,9 @@ export default class Put {
 		}
 	};
 
-	static homeRehabilitation = async (homeRehabilitation) => {
+	static homeRehabilitation = async (
+		homeRehabilitation: HomeRehabilitation
+	) => {
 		try {
 			const body = JSON.stringify({ homeRehabilitation });
 			const config = {
@@ -45,6 +48,4 @@ export default class Put {
 			console.error(error);
 		}
 	};
-
-
 }

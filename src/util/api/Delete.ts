@@ -1,7 +1,7 @@
 import { serverPath } from '../../config.json';
 
 export default class Delete {
-	static homeRehabilitation = async (homeRehabilitationId) => {
+	static homeRehabilitation = async (homeRehabilitationId: string) => {
 		try {
 			const response = await fetch(
 				`${serverPath}/home-rehabilitations/${homeRehabilitationId}`,
@@ -18,4 +18,3 @@ export default class Delete {
 		}
 	};
 }
-

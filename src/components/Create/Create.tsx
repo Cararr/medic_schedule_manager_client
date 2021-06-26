@@ -2,9 +2,9 @@ import React from 'react';
 import SchedulesImage from '../../resources/images/SchedulesImage.png';
 import VacationsImage from '../../resources/images/VacationsImage.png';
 import HomeImage from '../../resources/images/HomeImage.png';
-import NavBar from '../navBar/NavBar.jsx';
-import CardsContainer from '../cardsContainer/CardsContainer.jsx';
-import CreateHomeRehabilitationForm from './CreateHomeRehabilitationForm.jsx';
+import NavBar from '../navBar/NavBar';
+import CardsContainer from '../cardsContainer/CardsContainer';
+import CreateHomeRehabilitationForm from './CreateHomeRehabilitationForm';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import './Create.css';
 

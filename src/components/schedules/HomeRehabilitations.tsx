@@ -1,5 +1,5 @@
 import React from 'react';
-import TableCell from './TableCell.jsx';
+import TableCell from './TableCell';
 import Utilities from '../../util/util.js';
 import './HomeRehabilitations.css';
 

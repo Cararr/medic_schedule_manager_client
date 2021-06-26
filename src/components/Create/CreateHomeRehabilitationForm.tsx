@@ -3,7 +3,16 @@ import { useEmployees } from '../../context/employeesContext';
 import Post from '../../util/api/Post';
 import Utilities from '../../util/util';
 import { wrongDateSet } from '../../WinBox/winboxMessages';
+import { Employee } from '../../types';
 import './CreateHomeRehabilitationForm.css';
+
+export interface CreateHomeRehabilitationFormValues {
+	employee: Employee;
+	patient: string;
+	startTime: string;
+	dateBegin: Date;
+	dateEnd: Date;
+}
 
 export default function CreateHomeRehabilitationForm() {
 	const employees = useEmployees();
@@ -129,6 +138,7 @@ export default function CreateHomeRehabilitationForm() {
 		</section>
 	);
 }
+
 function checkIfEndDateIsAfterBegin(startDate, endDate) {
 	return new Date(endDate) >= new Date(startDate);
 }

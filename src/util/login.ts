@@ -1,6 +1,6 @@
 import { serverPath } from '../config.json';
 
-export const login = async (inputValues) => {
+export const login = async (inputValues: {}) => {
 	try {
 		const body = JSON.stringify(inputValues);
 		const config = {

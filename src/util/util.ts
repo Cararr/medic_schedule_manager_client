@@ -1,11 +1,13 @@
+import { Employee } from '../types';
+
 export default class Utilities {
-	static formatDateString(date) {
+	static formatDateString(date: Date) {
 		const dateArray = date.toLocaleDateString().split('.');
 		const day = Number(dateArray[0]) < 10 ? `0${dateArray[0]}` : dateArray[0];
 		return `${dateArray[2]}-${dateArray[1]}-${day}`;
 	}
 
-	static checkIfUserIsAdmin(user) {
+	static checkIfUserIsAdmin(user: Employee) {
 		return user?.role === 'BOSS';
 	}
 
@@ -18,11 +20,11 @@ export default class Utilities {
 		};
 	}
 
-	static formatTimeView(time) {
+	static formatTimeView(time: string) {
 		return time.slice(0, 5);
 	}
 
-	static incrementDateByDay(date) {
+	static incrementDateByDay(date: Date) {
 		return new Date(date.setDate(date.getDate() + 1));
 	}
 }

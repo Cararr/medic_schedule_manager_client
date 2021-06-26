@@ -9,12 +9,12 @@ import LoggedRoute from '../../RouteTypes/LoggedRoute';
 import NonLoggedRoute from '../../RouteTypes/NonLoggedRoute';
 import AdminRoute from '../../RouteTypes/AdminRoute';
 import Schedules from '../schedules/Schedules';
-import LandingPage from '../landingPage/LandingPage.jsx';
-import HomePage from '../homePage/HomePage.jsx';
-import Create from '../create/Create.jsx';
-import NotFound from '../notFound/NotFound.jsx';
+import LandingPage from '../landingPage/LandingPage';
+import HomePage from '../homePage/HomePage';
+import Create from '../create/Create';
+import NotFound from '../notFound/NotFound';
 
-function App() {
+const App: React.FC = () => {
 	return (
 		<UserProvider>
 			<EmployeesProvider>
@@ -30,6 +30,6 @@ function App() {
 			</EmployeesProvider>
 		</UserProvider>
 	);
-}
+};
 
 export default App;
