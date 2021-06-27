@@ -1,32 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import Get from '../../util/api/Get';
 import Put from '../../util/api/Put';
 import Delete from '../../util/api/Delete';
-import EmployeesList from './EmployeesList';
-import Tables from './Tables';
-import TablesActionPanel from './TablesActionPanel';
-import NavBar from '../navBar/NavBar';
+import { EmployeesList } from './EmployeesList';
+import { Tables } from './Tables';
+import { TablesActionPanel } from './TablesActionPanel';
+import { NavBar } from '../navBar/NavBar';
 import Utilities from '../../util/util';
 import { useUser } from '../../context/userContext';
 import { genericWarning, noEmployeeWarning } from '../../WinBox/winboxMessages';
+import {
+	Employee,
+	HomeRehabilitation,
+	WorkStageSpans,
+	Schedules as ISchedules,
+} from '../../types';
 import './Schedules.css';
 
-export default function Schedule() {
+export interface CurrentSchedule {
+	schedules: ISchedules;
+	homeRehabilitations: HomeRehabilitation[];
+}
+
+export const Schedules: React.FunctionComponent = () => {
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
 	const [dateSelected, setDateSelected] = useState(
 		Utilities.formatDateString(new Date())
 	);
 
-	const [currentSchedule, setCurrentSchedule] = useState({
-		schedules: null,
+	const [currentSchedule, setCurrentSchedule] = useState<CurrentSchedule>({
+		schedules: Utilities.returnEmptyDailyShiftObject(),
 		homeRehabilitations: [],
 	});
 
-	const [homeRehabilitationsEdited, setHomeRehabilitationsEdited] = useState(
-		[]
-	);
+	const [homeRehabilitationsEdited, setHomeRehabilitationsEdited] = useState<
+		number[]
+	>([]);
 
-	const removeHomeRehabilitation = async (homeRehabilitationId) => {
+	const removeHomeRehabilitation = async (homeRehabilitationId: number) => {
 		if (await Delete.homeRehabilitation(homeRehabilitationId)) {
 			setHomeRehabilitationsEdited((prev) =>
 				prev.filter((id) => id !== homeRehabilitationId)
@@ -34,7 +45,7 @@ export default function Schedule() {
 			setCurrentSchedule((prev) => ({
 				...prev,
 				homeRehabilitations: prev.homeRehabilitations.filter(
-					(hR) => hR.id !== homeRehabilitationId
+					(hR: HomeRehabilitation) => hR.id !== homeRehabilitationId
 				),
 			}));
 		} else genericWarning();
@@ -52,27 +63,29 @@ export default function Schedule() {
 		})();
 	}, [dateSelected]);
 
-	const [workStageSpans, setworkStageSpans] = useState([]);
+	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
 	useEffect(() => {
 		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
 	}, []);
 
 	const [areChangesSaved, setAreChangesSaved] = useState(true);
 
-	const editSchedule = (cellNumber, stationName, newCellValue) => {
+	const editSchedule = (
+		cellNumber: number,
+		stationName: string,
+		newCellValue: Employee | null
+	) => {
 		setCurrentSchedule((prev) => {
 			const updatedSchedule = { ...prev };
 			if (stationName === 'homeRehabilitations') {
-				updatedSchedule.homeRehabilitations[Number(cellNumber)].employee =
-					newCellValue;
+				updatedSchedule.homeRehabilitations[cellNumber].employee = newCellValue;
 				setHomeRehabilitationsEdited((prev) => [
 					...prev,
-					currentSchedule.homeRehabilitations[Number(cellNumber)].id,
+					currentSchedule.homeRehabilitations[cellNumber].id,
 				]);
 			} else {
 				if (areChangesSaved) setAreChangesSaved(false);
-				updatedSchedule.schedules[stationName][Number(cellNumber)] =
-					newCellValue;
+				updatedSchedule.schedules[stationName][cellNumber] = newCellValue;
 			}
 			return updatedSchedule;
 		});
@@ -80,7 +93,8 @@ export default function Schedule() {
 
 	const saveScheudle = async () => {
 		setAreChangesSaved(true);
-		await Put.schedule(dateSelected, currentSchedule.schedules);
+		if (currentSchedule.schedules)
+			await Put.schedule(dateSelected, currentSchedule.schedules);
 	};
 
 	const autoGenerateSchedule = async () => {
@@ -90,7 +104,9 @@ export default function Schedule() {
 		});
 	};
 
-	const saveChangedHomeRehabilitation = async (homeRehabilitation) => {
+	const saveChangedHomeRehabilitation = async (
+		homeRehabilitation: HomeRehabilitation
+	) => {
 		if (!homeRehabilitation.employee) return noEmployeeWarning();
 		if (await Put.homeRehabilitation(homeRehabilitation))
 			setHomeRehabilitationsEdited((prev) =>
@@ -98,15 +114,24 @@ export default function Schedule() {
 			);
 	};
 
-	const handleHomeRehabilitationEdit = ({ target }, index) => {
+	const handleHomeRehabilitationEdit = (
+		{ target }: ChangeEvent<HTMLInputElement>,
+		index: number
+	) => {
 		setHomeRehabilitationsEdited((prev) => [
 			...prev,
 			currentSchedule.homeRehabilitations[index].id,
 		]);
 		setCurrentSchedule((prev) => {
 			const homeRehabilitations = prev.homeRehabilitations;
-			homeRehabilitations[index][target.name] =
-				target.name === 'startTime' ? `${target.value}:00` : target.value;
+			switch (target.name) {
+				case 'startTime':
+					homeRehabilitations[index].startTime = `${target.value}:00`;
+					break;
+				case 'patient':
+					homeRehabilitations[index].patient = target.value;
+					break;
+			}
 			return { ...prev, homeRehabilitations };
 		});
 	};
@@ -150,4 +175,4 @@ export default function Schedule() {
 			</div>
 		</div>
 	);
-}
+};

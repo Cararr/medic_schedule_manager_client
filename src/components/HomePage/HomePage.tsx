@@ -2,13 +2,13 @@ import React from 'react';
 import SchedulesImage from '../../resources/images/SchedulesImage.png';
 import VacationsImage from '../../resources/images/VacationsImage.png';
 import CreateImage from '../../resources/images/CreateImage.png';
-import NavBar from '../navBar/NavBar';
-import CardsContainer from '../cardsContainer/CardsContainer';
+import { NavBar } from '../navBar/NavBar';
+import { CardsContainer } from '../cardsContainer/CardsContainer';
 import { useUser } from '../../context/userContext';
 import Utilities from '../../util/util';
 import './HomePage.css';
 
-export default function HomePage() {
+export const HomePage: React.FunctionComponent = () => {
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 
 	const cards = [
@@ -36,4 +36,4 @@ export default function HomePage() {
 			<CardsContainer isUserAdmin={isUserAdmin} cards={cards} />
 		</div>
 	);
-}
+};

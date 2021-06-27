@@ -1,8 +1,12 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useUser } from '../context/userContext';
+import { RoutingProperties } from '../types';
 
-export default function LandingRoute({ component: Component, ...rest }) {
+export const NonLoggedUsersRoute = ({
+	component: Component,
+	...rest
+}: RoutingProperties) => {
 	const user = useUser();
 	return (
 		<Route
@@ -16,4 +20,4 @@ export default function LandingRoute({ component: Component, ...rest }) {
 			}}
 		/>
 	);
-}
+};

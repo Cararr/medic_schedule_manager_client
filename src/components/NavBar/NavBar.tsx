@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import './NavBar.css';
 
-export default function NavBar() {
+export const NavBar: React.FunctionComponent = () => {
 	const user = useUser();
 	const changeUser = useChangeUser();
 	const logOut = () => {
@@ -23,7 +23,7 @@ export default function NavBar() {
 					</button>
 				</Link>
 			)}
-			<h3 className="header-navbar">{`${user.firstName} ${user.lastName}`}</h3>
+			<h3 className="header-navbar">{`${user?.firstName} ${user?.lastName}`}</h3>
 			<Link to="/">
 				<button onClick={logOut} className="button-generic" type="button">
 					Log out
@@ -31,4 +31,4 @@ export default function NavBar() {
 			</Link>
 		</nav>
 	);
-}
+};

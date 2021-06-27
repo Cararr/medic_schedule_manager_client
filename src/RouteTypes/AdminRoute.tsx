@@ -1,10 +1,13 @@
-import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useUser } from '../context/userContext';
 import { accessDeniedWarning } from '../WinBox/winboxMessages';
 import Utilities from '../util/util';
+import { RoutingProperties } from '../types';
 
-export default function AdminRoute({ component: Component, ...rest }) {
+export const AdminRoute = ({
+	component: Component,
+	...rest
+}: RoutingProperties) => {
 	const user = useUser();
 	return (
 		<Route
@@ -27,4 +30,4 @@ export default function AdminRoute({ component: Component, ...rest }) {
 			}}
 		/>
 	);
-}
+};

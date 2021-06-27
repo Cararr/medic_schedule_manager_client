@@ -2,13 +2,13 @@ import React from 'react';
 import SchedulesImage from '../../resources/images/SchedulesImage.png';
 import VacationsImage from '../../resources/images/VacationsImage.png';
 import HomeImage from '../../resources/images/HomeImage.png';
-import NavBar from '../navBar/NavBar';
-import CardsContainer from '../cardsContainer/CardsContainer';
-import CreateHomeRehabilitationForm from './CreateHomeRehabilitationForm';
+import { NavBar } from '../navBar/NavBar';
+import { CardsContainer } from '../cardsContainer/CardsContainer';
+import { CreateHomeRehabilitationForm } from './CreateHomeRehabilitationForm';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import './Create.css';
 
-export default function Create() {
+export const Create: React.FunctionComponent = () => {
 	const { path } = useRouteMatch();
 
 	const cards = [
@@ -48,4 +48,4 @@ export default function Create() {
 			</Switch>
 		</div>
 	);
-}
+};

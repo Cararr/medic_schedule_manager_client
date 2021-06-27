@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { useEmployees } from '../../context/employeesContext';
 import Post from '../../util/api/Post';
 import Utilities from '../../util/util';
@@ -7,18 +7,21 @@ import { Employee } from '../../types';
 import './CreateHomeRehabilitationForm.css';
 
 export interface CreateHomeRehabilitationFormValues {
-	employee: Employee;
+	employee: Employee | null;
 	patient: string;
 	startTime: string;
-	dateBegin: Date;
-	dateEnd: Date;
+	dateBegin: string;
+	dateEnd: string;
 }
 
-export default function CreateHomeRehabilitationForm() {
+export const CreateHomeRehabilitationForm: React.FunctionComponent = () => {
 	const employees = useEmployees();
-	const [formValues, setFormValues] = useState(returnEmptyForm());
+	const [formValues, setFormValues] =
+		useState<CreateHomeRehabilitationFormValues>(returnEmptyForm());
 
-	const [submitResponse, setSubmitResponse] = useState(null);
+	const [submitResponse, setSubmitResponse] = useState<JSX.Element | null>(
+		null
+	);
 
 	useEffect(() => {
 		setFormValues((prev) => ({ ...prev, employee: employees[0] }));
@@ -31,7 +34,9 @@ export default function CreateHomeRehabilitationForm() {
 		>{`${employee.firstName} ${employee.lastName}`}</option>
 	));
 
-	const handleChange = ({ target }) =>
+	const handleChange = ({
+		target,
+	}: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
 		setFormValues((prev) => ({
 			...prev,
 			[target.name]: returnValueByInputName(target),
@@ -42,7 +47,7 @@ export default function CreateHomeRehabilitationForm() {
 		setFormValues({ ...returnEmptyForm(), employee: employees[0] });
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: SyntheticEvent) => {
 		e.preventDefault();
 		if (!checkIfEndDateIsAfterBegin(formValues.dateBegin, formValues.dateEnd))
 			return wrongDateSet();
@@ -53,15 +58,15 @@ export default function CreateHomeRehabilitationForm() {
 		const failMessage = 'Create failed. Reason: ';
 		const response = await Post.homeRehabilitations(formValues);
 		const jsonResponse =
-			response.status === 500 ? 'server failed' : await response.json();
+			response?.status === 500 ? 'server failed' : await response?.json();
 
 		setSubmitResponse(
 			<div
-				style={response.ok ? {} : { marginTop: 0 }}
+				style={response?.ok ? {} : { marginTop: 0 }}
 				className="response-create-home-rehabilitation"
 			>
 				<h3>
-					{response.ok
+					{response?.ok
 						? jsonResponse.message
 						: failMessage + jsonResponse.message}
 				</h3>
@@ -137,13 +142,15 @@ export default function CreateHomeRehabilitationForm() {
 			)}
 		</section>
 	);
-}
+};
 
-function checkIfEndDateIsAfterBegin(startDate, endDate) {
+function checkIfEndDateIsAfterBegin(startDate: string, endDate: string) {
 	return new Date(endDate) >= new Date(startDate);
 }
 
-function returnValueByInputName(eventTarget) {
+function returnValueByInputName(
+	eventTarget: EventTarget & (HTMLInputElement | HTMLSelectElement)
+) {
 	switch (eventTarget.name) {
 		case 'employee':
 			return JSON.parse(eventTarget.value);
@@ -156,7 +163,7 @@ function returnValueByInputName(eventTarget) {
 
 function returnEmptyForm() {
 	return {
-		employee: {},
+		employee: null,
 		patient: '',
 		startTime: '',
 		dateBegin: Utilities.formatDateString(new Date()),

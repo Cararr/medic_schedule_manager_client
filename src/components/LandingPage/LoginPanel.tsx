@@ -1,7 +1,15 @@
 import React from 'react';
+import { UserCrudentials } from '../../types';
 import './LoginPanel.css';
 
-export default function LoginPanel(props) {
+interface Props {
+	handleInputChange: (eventTarget: React.ChangeEvent<HTMLInputElement>) => void;
+	loginInputValue: UserCrudentials;
+	handleLogin: (e: React.SyntheticEvent) => void;
+	closeLoginPanel: () => void;
+}
+
+export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 	return (
 		<form onSubmit={props.handleLogin} className="login-form">
 			<input
@@ -36,4 +44,4 @@ export default function LoginPanel(props) {
 			</button>
 		</form>
 	);
-}
+};

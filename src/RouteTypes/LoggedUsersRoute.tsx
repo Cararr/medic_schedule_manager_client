@@ -1,9 +1,12 @@
-import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useUser } from '../context/userContext';
 import { accessDeniedWarning } from '../WinBox/winboxMessages';
+import { RoutingProperties } from '../types';
 
-export default function LoggedRoute({ component: Component, ...rest }) {
+export const LoggedUsersRoute = ({
+	component: Component,
+	...rest
+}: RoutingProperties) => {
 	const user = useUser();
 	return (
 		<Route
@@ -19,4 +22,4 @@ export default function LoggedRoute({ component: Component, ...rest }) {
 			}}
 		/>
 	);
-}
+};

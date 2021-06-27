@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { DragEvent } from 'react';
 import { useEmployees } from '../../context/employeesContext';
+import { Employee } from '../../types';
 import './EmployeesList.css';
 
-export default function EmployeesList() {
-	const handleOnDragStart = (e, employee) => {
+export const EmployeesList: React.FunctionComponent = () => {
+	const handleOnDragStart = (e: DragEvent, employee: Employee) => {
 		e.dataTransfer.setData('employee', JSON.stringify(employee));
 	};
-	const handleOnDragOver = (e) => {
+	const handleOnDragOver = (e: DragEvent) => {
 		e.stopPropagation();
 	};
 	const employees = useEmployees();
@@ -37,4 +38,4 @@ export default function EmployeesList() {
 			</ul>
 		</aside>
 	);
-}
+};

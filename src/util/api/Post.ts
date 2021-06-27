@@ -1,13 +1,12 @@
 import { serverPath } from '../../config.json';
 import Utilities from '../util';
 import { CreateHomeRehabilitationFormValues } from '../../components/create/CreateHomeRehabilitationForm';
-import { HomeRehabilitation } from '../../types';
 
 export default class Post {
 	static homeRehabilitations = async (
 		homeRehabilitationConfig: CreateHomeRehabilitationFormValues
 	) => {
-		const body: { homeRehabilitations: HomeRehabilitation[] } = {
+		const body: { homeRehabilitations: {}[] } = {
 			homeRehabilitations: [],
 		};
 

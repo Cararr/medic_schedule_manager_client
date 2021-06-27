@@ -1,4 +1,4 @@
-import WinBox from 'winbox/src/js/winbox';
+import WinBox from 'winbox';
 import 'winbox/dist/css/winbox.min.css';
 
 const genericWarningSettings = {
@@ -19,16 +19,17 @@ export const genericWarning = () => {
 	new WinBox('Error', config);
 };
 
-export const loginWarning = (message) => {
+export const loginWarning = (message: string | undefined) => {
 	const config = {
 		...genericWarningSettings,
-		html: `<h2>${message || "Can't login right now 😔 Please try again later. "
-			}</h2>`,
+		html: `<h2>${
+			message || "Can't login right now 😔 Please try again later. "
+		}</h2>`,
 	};
 	new WinBox('Login failed', config);
 };
 
-export const accessDeniedWarning = (reason) => {
+export const accessDeniedWarning = (reason: string) => {
 	const config = {
 		...genericWarningSettings,
 		html: `<h2>${reason}</h2>`,

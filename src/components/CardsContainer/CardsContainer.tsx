@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
-import Card from './Card';
+import { Card } from './Card';
+import { CardProperties } from '../../types';
 import './CardsContainer.css';
 
-export default function CardsContainer(props) {
-	const [cardClicked, setCardClicked] = useState(null);
-	const handleCardClick = (index) => setCardClicked(index);
+interface Props {
+	cards: CardProperties[];
+	isUserAdmin?: boolean;
+}
 
-	const cards = props.cards.map((card, index) => {
+export const CardsContainer: React.FunctionComponent<Props> = (props) => {
+	const [cardClicked, setCardClicked] = useState<number | null>(null);
+
+	const handleCardClick = (index: number) => setCardClicked(index);
+
+	const cards = props.cards.map((card: CardProperties, index: number) => {
 		if (!card.adminOnly || (card.adminOnly && props.isUserAdmin))
 			return (
 				<Card
@@ -14,12 +21,13 @@ export default function CardsContainer(props) {
 					pathName={card.path}
 					itemName={card.name}
 					image={card.image}
+					cardIndex={index}
 					clickedClass={cardClicked === index && 'card-clicked'}
-					handleCardClick={() => handleCardClick(index)}
+					handleCardClick={handleCardClick}
 				/>
 			);
 		return '';
 	});
 
 	return <section className="container-card">{cards}</section>;
-}
+};

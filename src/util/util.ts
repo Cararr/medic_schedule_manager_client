@@ -7,7 +7,7 @@ export default class Utilities {
 		return `${dateArray[2]}-${dateArray[1]}-${day}`;
 	}
 
-	static checkIfUserIsAdmin(user: Employee) {
+	static checkIfUserIsAdmin(user: Employee | null) {
 		return user?.role === 'BOSS';
 	}
 

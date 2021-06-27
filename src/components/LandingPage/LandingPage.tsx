@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
 import LandingImage from '../../resources/images/LandingImage.jpg';
-import LoginPanel from './LoginPanel';
+import { LoginPanel } from './LoginPanel';
 import { loginWarning } from '../../WinBox/winboxMessages';
 import { login } from '../../util/login';
 import { useChangeUser } from '../../context/userContext';
 import { useEmployees, useLoadEmployees } from '../../context/employeesContext';
+import { RouteComponentProps } from 'react-router-dom';
+import { UserCrudentials } from '../../types';
 import './LandingPage.css';
 
-export default function LandingPage({ history }) {
+export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
+	history,
+}) => {
 	const [isLoginOn, setIsLoginOn] = useState(false);
 	const [loginInputValue, setLoginInputValue] = useState(
 		returnEmptyLoginValues()
 	);
-	const handleInputChange = ({ target }) =>
+	const handleInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
 		setLoginInputValue((prev) => ({ ...prev, [target.name]: target.value }));
 
 	const changeUser = useChangeUser();
 	const employees = useEmployees();
 	const loadEmployees = useLoadEmployees();
 
-	const handleLogin = async (e) => {
+	const handleLogin = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		const loginReponse = await login(loginInputValue);
 		if (loginReponse?.passed) {
@@ -64,9 +68,9 @@ export default function LandingPage({ history }) {
 			</main>
 		</div>
 	);
-}
+};
 
-const returnEmptyLoginValues = () => ({
+const returnEmptyLoginValues = (): UserCrudentials => ({
 	lastName: '',
 	password: '',
 });

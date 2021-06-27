@@ -1,14 +1,14 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, ReactNode } from 'react';
 import Get from '../util/api/Get';
 import { Employee } from '../types';
 
-const EmployeesContext = React.createContext([]);
+const EmployeesContext = React.createContext<Employee[]>([]);
 const LoadEmployeesContext = React.createContext(() => {});
 
 export const useEmployees = () => useContext(EmployeesContext);
 export const useLoadEmployees = () => useContext(LoadEmployeesContext);
 
-export const EmployeesProvider = ({ children }) => {
+export const EmployeesProvider = ({ children }: { children: ReactNode }) => {
 	const [employees, setEmployees] = useState([]);
 	const loadEmployees = async () => {
 		setEmployees(await Get.employees());

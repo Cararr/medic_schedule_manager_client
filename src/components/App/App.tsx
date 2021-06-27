@@ -5,24 +5,24 @@ import '../../WinBox/winBox.css';
 import './App.css';
 import '../../fontello/css/styles.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import LoggedRoute from '../../RouteTypes/LoggedRoute';
-import NonLoggedRoute from '../../RouteTypes/NonLoggedRoute';
-import AdminRoute from '../../RouteTypes/AdminRoute';
-import Schedules from '../schedules/Schedules';
-import LandingPage from '../landingPage/LandingPage';
-import HomePage from '../homePage/HomePage';
-import Create from '../create/Create';
-import NotFound from '../notFound/NotFound';
+import { LoggedUsersRoute } from '../../RouteTypes/LoggedUsersRoute';
+import { NonLoggedUsersRoute } from '../../RouteTypes/NonLoggedUsersRoute';
+import { AdminRoute } from '../../RouteTypes/AdminRoute';
+import { Schedules } from '../schedules/Schedules';
+import { LandingPage } from '../landingPage/LandingPage';
+import { HomePage } from '../homePage/HomePage';
+import { Create } from '../create/Create';
+import { NotFound } from '../notFound/NotFound';
 
-const App: React.FC = () => {
+const App: React.FunctionComponent = () => {
 	return (
 		<UserProvider>
 			<EmployeesProvider>
 				<BrowserRouter>
 					<Switch>
-						<NonLoggedRoute path="/" exact component={LandingPage} />
-						<LoggedRoute path="/schedules" exact component={Schedules} />
-						<LoggedRoute path="/home" exact component={HomePage} />
+						<NonLoggedUsersRoute path="/" exact component={LandingPage} />
+						<LoggedUsersRoute path="/schedules" exact component={Schedules} />
+						<LoggedUsersRoute path="/home" exact component={HomePage} />
 						<AdminRoute path="/create" component={Create} />
 						<Route path="/" component={NotFound} />
 					</Switch>

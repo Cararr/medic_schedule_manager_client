@@ -1,12 +1,37 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import Table from './Table';
 import SelectDate from './SelectDate';
 import HomeRehabilitations from './HomeRehabilitations';
 import { useUser } from '../../context/userContext';
 import Utilities from '../../util/util';
+import { CurrentSchedule } from './Schedules';
+import { WorkStageSpans, Employee, HomeRehabilitation } from '../../types';
 import './Tables.css';
 
-export default function Tables(props) {
+interface Props {
+	currentlyDragged: string;
+	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
+	dateSelected: string;
+	setDateSelected: React.Dispatch<React.SetStateAction<string>>;
+	currentSchedule: CurrentSchedule;
+	editSchedule: (
+		cellNumber: number,
+		stationName: string,
+		newCellValue: Employee | null
+	) => void;
+	workStageSpans: WorkStageSpans[];
+	homeRehabilitationsEdited: number[];
+	handleHomeRehabilitationEdit: (
+		{ target }: ChangeEvent<HTMLInputElement>,
+		index: number
+	) => void;
+	removeHomeRehabilitation: (homeRehabilitationId: number) => Promise<void>;
+	saveChangedHomeRehabilitation: (
+		homeRehabilitation: HomeRehabilitation
+	) => Promise<void>;
+}
+
+export const Tables: React.FunctionComponent<Props> = (props) => {
 	const tables = [];
 	for (const station in props.currentSchedule.schedules) {
 		tables[returnIndexByStation(station)] = (
@@ -49,7 +74,7 @@ export default function Tables(props) {
 			)}
 		</main>
 	);
-}
+};
 
 function returnIndexByStation(stationName) {
 	switch (stationName) {

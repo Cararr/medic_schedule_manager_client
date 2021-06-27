@@ -1,7 +1,14 @@
 import React from 'react';
 import './TablesActionPanel.css';
 
-export default function TablesActionPanel(props) {
+interface Props {
+	areChangesSaved: boolean;
+	saveScheudle: () => void;
+	autoGenerateSchedule: () => void;
+	clearSchedule: () => void;
+}
+
+export const TablesActionPanel: React.FunctionComponent<Props> = (props) => {
 	const statusColor = props.areChangesSaved ? 'green' : 'yellow';
 	const statusText = props.areChangesSaved
 		? 'No changes to save'
@@ -45,4 +52,4 @@ export default function TablesActionPanel(props) {
 			</div>
 		</aside>
 	);
-}
+};
