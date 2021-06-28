@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
-import Table from './Table';
-import SelectDate from './SelectDate';
-import HomeRehabilitations from './HomeRehabilitations';
+import { Table } from './Table';
+import { SelectDate } from './SelectDate';
+import { HomeRehabilitations } from './HomeRehabilitations';
 import { useUser } from '../../context/userContext';
 import Utilities from '../../util/util';
 import { CurrentSchedule } from './Schedules';
@@ -32,19 +32,21 @@ interface Props {
 }
 
 export const Tables: React.FunctionComponent<Props> = (props) => {
-	const tables = [];
+	const tables: JSX.Element[] = [];
 	for (const station in props.currentSchedule.schedules) {
-		tables[returnIndexByStation(station)] = (
-			<Table
-				stationSchedule={props.currentSchedule.schedules[station]}
-				editSchedule={props.editSchedule}
-				currentlyDragged={props.currentlyDragged}
-				setCurrentlyDragged={props.setCurrentlyDragged}
-				stationName={station}
-				key={station}
-				workStageSpans={props.workStageSpans}
-			/>
-		);
+		const index = returnIndexByStation(station);
+		if (index)
+			tables[index] = (
+				<Table
+					key={station}
+					stationSchedule={props.currentSchedule.schedules[station]}
+					editSchedule={props.editSchedule}
+					currentlyDragged={props.currentlyDragged}
+					setCurrentlyDragged={props.setCurrentlyDragged}
+					stationName={station}
+					workStageSpans={props.workStageSpans}
+				/>
+			);
 	}
 
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
@@ -54,7 +56,6 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 			<SelectDate
 				setDateSelected={props.setDateSelected}
 				dateSelected={props.dateSelected}
-				formatDateString={props.formatDateString}
 			/>
 			{(props.currentSchedule.schedules && tables) || (
 				<i style={{ marginTop: '4rem' }} className="icon-spin6" />
@@ -76,7 +77,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 	);
 };
 
-function returnIndexByStation(stationName) {
+function returnIndexByStation(stationName: string) {
 	switch (stationName) {
 		case 'KINEZA':
 			return 0;
@@ -87,6 +88,6 @@ function returnIndexByStation(stationName) {
 		case 'WIZYTY':
 			return 3;
 		default:
-			break;
+			console.error('Station name not recognized.');
 	}
 }

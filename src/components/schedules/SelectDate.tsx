@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import Utilities from '../../util/util';
 import './SelectDate.css';
 
-export default function SelectDate(props) {
-	const setDate = ({ target }) => {
+interface Props {
+	setDateSelected: React.Dispatch<React.SetStateAction<string>>;
+	dateSelected: string;
+}
+
+export const SelectDate: React.FunctionComponent<Props> = (props) => {
+	const setDate = ({ target }: ChangeEvent<HTMLInputElement>) => {
 		if (target.value) props.setDateSelected(target.value);
 	};
 	const changeDateToToday = () =>
 		props.setDateSelected(Utilities.formatDateString(new Date()));
-	const toggleDate = (dayChange) => {
+	const toggleDate = (dayChange: number) => {
 		const currentDate = new Date(props.dateSelected);
 		const newDate = new Date(
 			currentDate.setDate(currentDate.getDate() + dayChange)
@@ -52,4 +57,4 @@ export default function SelectDate(props) {
 			</div>
 		</form>
 	);
-}
+};

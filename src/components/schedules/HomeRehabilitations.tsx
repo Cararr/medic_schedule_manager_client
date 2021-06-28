@@ -1,9 +1,31 @@
-import React from 'react';
-import TableCell from './TableCell';
-import Utilities from '../../util/util.js';
+import React, { ChangeEvent } from 'react';
+import { TableCell } from './TableCell';
+import Utilities from '../../util/util';
 import './HomeRehabilitations.css';
+import { HomeRehabilitation, Employee } from '../../types';
 
-export default function HomeRehabilitations(props) {
+interface Props {
+	isUserAdmin: boolean;
+	editSchedule: (
+		cellNumber: number,
+		stationName: string,
+		newCellValue: Employee | null
+	) => void;
+	currentlyDragged: string;
+	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
+	homeRehabilitations: HomeRehabilitation[];
+	handleHomeRehabilitationEdit: (
+		{ target }: ChangeEvent<HTMLInputElement>,
+		index: number
+	) => void;
+	homeRehabilitationsEdited: number[];
+	removeHomeRehabilitation: (homeRehabilitationId: number) => Promise<void>;
+	saveChangedHomeRehabilitation: (
+		homeRehabilitation: HomeRehabilitation
+	) => Promise<void>;
+}
+
+export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 	const homeRehabilitationsView = props.homeRehabilitations
 		.sort(sortByStartTime)
 		.map((hR, index) => {
@@ -27,7 +49,6 @@ export default function HomeRehabilitations(props) {
 					<TableCell
 						stationName={'homeRehabilitations'}
 						editSchedule={props.editSchedule}
-						id={`homeRehabilitations-${index}`}
 						cellValue={hR.employee}
 						cellNumber={index}
 						currentlyDragged={props.currentlyDragged}
@@ -86,9 +107,9 @@ export default function HomeRehabilitations(props) {
 			</table>
 		</section>
 	);
-}
+};
 
-function sortByStartTime(a, b) {
+function sortByStartTime(a: HomeRehabilitation, b: HomeRehabilitation) {
 	if (a.startTime < b.startTime) {
 		return -1;
 	}

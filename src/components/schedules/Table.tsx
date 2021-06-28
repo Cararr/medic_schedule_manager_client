@@ -1,8 +1,22 @@
 import React from 'react';
-import TableCell from './TableCell';
+import { TableCell } from './TableCell';
 import './Table.css';
+import { WorkStageSpans, Employee } from '../../types';
 
-export default function Table(props) {
+interface Props {
+	stationName: string;
+	stationSchedule: (Employee | null)[];
+	editSchedule: (
+		cellNumber: number,
+		stationName: string,
+		newCellValue: Employee | null
+	) => void;
+	currentlyDragged: string;
+	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
+	workStageSpans: WorkStageSpans[];
+}
+
+export const Table: React.FunctionComponent<Props> = (props) => {
 	let tableBody = returntableBodyByStation(
 		props.stationName,
 		props.stationSchedule,
@@ -23,31 +37,34 @@ export default function Table(props) {
 			{tableBody}
 		</table>
 	);
-}
+};
 
 function returntableBodyByStation(
-	station,
-	stationSchedule,
-	editSchedule,
-	currentlyDragged,
-	setCurrentlyDragged
+	station: string,
+	stationSchedule: (Employee | null)[],
+	editSchedule: (
+		cellNumber: number,
+		stationName: string,
+		newCellValue: Employee | null
+	) => void,
+	currentlyDragged: string,
+	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>
 ) {
 	const cells = stationSchedule.map((cell, index) => {
 		return (
 			<TableCell
+				key={index}
+				cellNumber={index}
 				stationName={station}
 				editSchedule={editSchedule}
-				id={`${station}-${index}`}
 				cellValue={stationSchedule[index]}
-				cellNumber={index}
 				currentlyDragged={currentlyDragged}
 				setCurrentlyDragged={setCurrentlyDragged}
-				key={index}
 			/>
 		);
 	});
 
-	let tableBody;
+	let tableBody: JSX.Element;
 	switch (station) {
 		case 'KINEZA':
 			tableBody = (
@@ -98,13 +115,16 @@ function returntableBodyByStation(
 	return tableBody;
 }
 
-function returnWorkStageSpans(workStageSpans, stationName) {
+function returnWorkStageSpans(
+	workStageSpans: WorkStageSpans[],
+	stationName: string
+) {
 	return workStageSpans?.map((stage, index) => {
 		if (stationName === 'WIZYTY' && index !== 2) return false;
-		return <td key={stage.id}>{`${stage.from} - ${stage.to}`}</td>;
+		return <td key={index}>{`${stage.from} - ${stage.to}`}</td>;
 	});
 }
 
 function blankCell() {
-	return <td style={{ border: 'none' }} className="blank_cell"></td>;
+	return <td style={{ border: 'none' }} className="blank_cell" />;
 }
