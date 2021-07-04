@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { TableCell } from './TableCell';
-import Utilities from '../../util/util';
+import Utilities from '../../util/Utilities';
 import './HomeRehabilitations.css';
 import { HomeRehabilitation, Employee } from '../../types';
 
@@ -92,7 +92,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 
 	return (
 		<section className="section-home-rehabilitations">
-			<table className="station-table">
+			<table className="table-station">
 				<thead>
 					<tr className="table-title">
 						<td colSpan={3}>HOME REHABILITATIONS</td>

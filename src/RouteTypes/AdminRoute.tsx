@@ -1,7 +1,7 @@
 import { Route, Redirect } from 'react-router-dom';
 import { useUser } from '../context/userContext';
 import { accessDeniedWarning } from '../WinBox/winboxMessages';
-import Utilities from '../util/util';
+import Utilities from '../util/Utilities';
 import { RoutingProperties } from '../types';
 
 export const AdminRoute = ({

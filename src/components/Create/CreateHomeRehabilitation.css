@@ -34,7 +34,8 @@
 	margin-bottom: 0.5rem;
 	font-weight: bold;
 }
-.form-create-home-rehabilitation-input {
+.form-create-home-rehabilitation input,
+.form-create-home-rehabilitation select {
 	width: 10rem;
 	font-size: 1rem;
 	border-radius: 5px;
@@ -45,7 +46,7 @@
 	background-color: var(--backgroundViolet);
 }
 .form-create-home-rehabilitation input[type='date'],
-input[type='time'] {
+.form-create-home-rehabilitation input[type='time'] {
 	width: fit-content;
 }
 .form-create-home-rehabilitation button {

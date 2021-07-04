@@ -4,7 +4,8 @@ import VacationsImage from '../../resources/images/VacationsImage.png';
 import HomeImage from '../../resources/images/HomeImage.png';
 import { NavBar } from '../navBar/NavBar';
 import { CardsContainer } from '../cardsContainer/CardsContainer';
-import { CreateHomeRehabilitationForm } from './CreateHomeRehabilitationForm';
+import { CreateHomeRehabilitation } from './CreateHomeRehabilitation';
+import { CreateSchedules } from './CreateSchedules';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import './Create.css';
 
@@ -34,16 +35,15 @@ export const Create: React.FunctionComponent = () => {
 			<NavBar />
 			<h1 className="title-create">Select topic to create:</h1>
 			<CardsContainer cards={cards} />
-
 			<Switch>
 				<Route exact path={`${path}/schedules`}>
-					<h3>schedules</h3>
+					<CreateSchedules />
 				</Route>
 				<Route exact path={`${path}/vacations`}>
 					<h3>vacations</h3>
 				</Route>
 				<Route exact path={`${path}/home-rehabilitaitons`}>
-					<CreateHomeRehabilitationForm />
+					<CreateHomeRehabilitation />
 				</Route>
 			</Switch>
 		</div>

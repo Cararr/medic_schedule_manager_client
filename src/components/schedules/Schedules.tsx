@@ -4,23 +4,19 @@ import Put from '../../util/api/Put';
 import Delete from '../../util/api/Delete';
 import { EmployeesList } from './EmployeesList';
 import { Tables } from './Tables';
-import { TablesActionPanel } from './TablesActionPanel';
+import { SchedulesActionPanel } from './SchedulesActionPanel';
 import { NavBar } from '../navBar/NavBar';
-import Utilities from '../../util/util';
+import { SelectDate } from './SelectDate';
+import Utilities from '../../util/Utilities';
 import { useUser } from '../../context/userContext';
 import { genericWarning, noEmployeeWarning } from '../../WinBox/winboxMessages';
 import {
 	Employee,
 	HomeRehabilitation,
 	WorkStageSpans,
-	Schedules as ISchedules,
+	CompleteSchedule,
 } from '../../types';
 import './Schedules.css';
-
-export interface CurrentSchedule {
-	schedules: ISchedules;
-	homeRehabilitations: HomeRehabilitation[];
-}
 
 export const Schedules: React.FunctionComponent = () => {
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
@@ -28,7 +24,7 @@ export const Schedules: React.FunctionComponent = () => {
 		Utilities.formatDateString(new Date())
 	);
 
-	const [currentSchedule, setCurrentSchedule] = useState<CurrentSchedule>({
+	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
 		schedules: Utilities.returnEmptyDailyShiftObject(),
 		homeRehabilitations: [],
 	});
@@ -149,27 +145,33 @@ export const Schedules: React.FunctionComponent = () => {
 	return (
 		<div>
 			<NavBar />
-			<div className="schedule">
+			<div className="schedules">
 				{isUserAdmin && <EmployeesList />}
-				<Tables
-					currentlyDragged={currentlyDragged}
-					setCurrentlyDragged={setCurrentlyDragged}
-					dateSelected={dateSelected}
-					setDateSelected={setDateSelected}
-					currentSchedule={currentSchedule}
-					editSchedule={editSchedule}
-					workStageSpans={workStageSpans}
-					homeRehabilitationsEdited={homeRehabilitationsEdited}
-					handleHomeRehabilitationEdit={handleHomeRehabilitationEdit}
-					removeHomeRehabilitation={removeHomeRehabilitation}
-					saveChangedHomeRehabilitation={saveChangedHomeRehabilitation}
-				/>
+				<main className="section-schedules-central">
+					<SelectDate
+						setDateSelected={setDateSelected}
+						dateSelected={dateSelected}
+					/>
+
+					<Tables
+						currentlyDragged={currentlyDragged}
+						setCurrentlyDragged={setCurrentlyDragged}
+						currentSchedule={currentSchedule}
+						editSchedule={editSchedule}
+						workStageSpans={workStageSpans}
+						homeRehabilitationsEdited={homeRehabilitationsEdited}
+						handleHomeRehabilitationEdit={handleHomeRehabilitationEdit}
+						removeHomeRehabilitation={removeHomeRehabilitation}
+						saveChangedHomeRehabilitation={saveChangedHomeRehabilitation}
+					/>
+				</main>
+
 				{isUserAdmin && (
-					<TablesActionPanel
-						areChangesSaved={areChangesSaved}
-						saveScheudle={saveScheudle}
+					<SchedulesActionPanel
 						autoGenerateSchedule={autoGenerateSchedule}
 						clearSchedule={clearSchedule}
+						areChangesSaved={areChangesSaved}
+						saveScheudle={saveScheudle}
 					/>
 				)}
 			</div>

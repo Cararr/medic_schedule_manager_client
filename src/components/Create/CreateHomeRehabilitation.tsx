@@ -1,12 +1,12 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { useEmployees } from '../../context/employeesContext';
 import Post from '../../util/api/Post';
-import Utilities from '../../util/util';
+import Utilities from '../../util/Utilities';
 import { wrongDateSet } from '../../WinBox/winboxMessages';
 import { Employee } from '../../types';
-import './CreateHomeRehabilitationForm.css';
+import './CreateHomeRehabilitation.css';
 
-export interface CreateHomeRehabilitationFormValues {
+export interface CreateHomeRehabilitationForm {
 	employee: Employee | null;
 	patient: string;
 	startTime: string;
@@ -14,10 +14,11 @@ export interface CreateHomeRehabilitationFormValues {
 	dateEnd: string;
 }
 
-export const CreateHomeRehabilitationForm: React.FunctionComponent = () => {
+export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 	const employees = useEmployees();
-	const [formValues, setFormValues] =
-		useState<CreateHomeRehabilitationFormValues>(returnEmptyForm());
+	const [formValues, setFormValues] = useState<CreateHomeRehabilitationForm>(
+		returnEmptyForm()
+	);
 
 	const [submitResponse, setSubmitResponse] = useState<JSX.Element | null>(
 		null
@@ -87,53 +88,45 @@ export const CreateHomeRehabilitationForm: React.FunctionComponent = () => {
 					onSubmit={handleSubmit}
 					className="form-create-home-rehabilitation"
 				>
-					<label>Employee:</label>
-					<select
-						onChange={handleChange}
-						name="employee"
-						className="form-create-home-rehabilitation-input"
-					>
+					<label>Employee</label>
+					<select onChange={handleChange} name="employee">
 						{employeesListOptions}
 					</select>
 
-					<label>Patient:</label>
+					<label>Patient</label>
 					<input
 						maxLength={250}
 						onChange={handleChange}
 						value={formValues.patient}
 						name="patient"
 						required
-						className="form-create-home-rehabilitation-input"
 					/>
 
-					<label>Starts at:</label>
+					<label>Starts at</label>
 					<input
 						onChange={handleChange}
 						value={Utilities.formatTimeView(formValues.startTime)}
 						name="startTime"
 						required
 						type="time"
-						className="form-create-home-rehabilitation-input"
 					/>
 
-					<label>Select start date:</label>
+					<label>Start date</label>
 					<input
 						onChange={handleChange}
 						value={formValues.dateBegin}
 						name="dateBegin"
 						type="date"
 						required
-						className="form-create-home-rehabilitation-input"
 					/>
 
-					<label>Select end date:</label>
+					<label>End date</label>
 					<input
 						onChange={handleChange}
 						value={formValues.dateEnd}
 						name="dateEnd"
 						type="date"
 						required
-						className="form-create-home-rehabilitation-input"
 					/>
 					<button className="button-generic" type="submit">
 						Create
@@ -167,6 +160,8 @@ function returnEmptyForm() {
 		patient: '',
 		startTime: '',
 		dateBegin: Utilities.formatDateString(new Date()),
-		dateEnd: Utilities.formatDateString(new Date()),
+		dateEnd: Utilities.formatDateString(
+			Utilities.incrementDateByDay(new Date())
+		),
 	};
 }

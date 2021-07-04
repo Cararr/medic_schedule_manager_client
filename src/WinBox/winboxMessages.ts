@@ -1,4 +1,4 @@
-import WinBox from 'winbox';
+import WinBox from 'winbox/src/js/winbox';
 import 'winbox/dist/css/winbox.min.css';
 
 const genericWarningSettings = {

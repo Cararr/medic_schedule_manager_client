@@ -17,27 +17,46 @@ interface Props {
 }
 
 export const Table: React.FunctionComponent<Props> = (props) => {
-	let tableBody = returntableBodyByStation(
-		props.stationName,
-		props.stationSchedule,
-		props.editSchedule,
-		props.currentlyDragged,
-		props.setCurrentlyDragged
-	);
 	return (
-		<table className="station-table">
+		<table className="table-station">
 			<thead>
 				<tr>
-					<td className="table-title" colSpan={4}>
+					{props.stationName === 'WIZYTY'
+						? [invisibleCell(0), invisibleCell(1)]
+						: undefined}
+					<td
+						className="table-title"
+						colSpan={props.stationName === 'WIZYTY' ? 1 : 4}
+					>
 						{props.stationName}
 					</td>
 				</tr>
 				<tr>{returnWorkStageSpans(props.workStageSpans, props.stationName)}</tr>
 			</thead>
-			{tableBody}
+			{returntableBodyByStation(
+				props.stationName,
+				props.stationSchedule,
+				props.editSchedule,
+				props.currentlyDragged,
+				props.setCurrentlyDragged
+			)}
 		</table>
 	);
 };
+
+function invisibleCell(key?: number) {
+	return <td key={key} style={{ border: 'none' }} className="blank_cell" />;
+}
+
+function returnWorkStageSpans(
+	workStageSpans: WorkStageSpans[],
+	stationName: string
+) {
+	return workStageSpans?.map((stage, index) => {
+		if (stationName === 'WIZYTY' && index !== 2) return invisibleCell(index);
+		return <td key={index}>{`${stage.from} - ${stage.to}`}</td>;
+	});
+}
 
 function returntableBodyByStation(
 	station: string,
@@ -64,67 +83,51 @@ function returntableBodyByStation(
 		);
 	});
 
-	let tableBody: JSX.Element;
 	switch (station) {
 		case 'KINEZA':
-			tableBody = (
+			return (
 				<tbody>
 					<tr>{cells.slice(0, 4)}</tr>
 					<tr>{cells.slice(4, 8)}</tr>
 					<tr>
-						{blankCell()}
+						{invisibleCell()}
 						{cells.slice(8, 10)}
-						{blankCell()}
+						{invisibleCell()}
 					</tr>
 					<tr>
-						{blankCell()}
+						{invisibleCell()}
 						{cells.slice(10)}
 					</tr>
 				</tbody>
 			);
-			break;
 		case 'FIZYKO':
-			tableBody = (
+			return (
 				<tbody>
 					<tr>{cells.slice(0, 4)}</tr>
 					<tr>{cells.slice(4, 8)}</tr>
 					<tr>
-						{blankCell()}
+						{invisibleCell()}
 						{cells.slice(8)}
 					</tr>
 				</tbody>
 			);
-			break;
 		case 'MASAZ':
-			tableBody = (
+			return (
 				<tbody>
 					<tr>{cells.slice(0)}</tr>
 				</tbody>
 			);
-			break;
 		case 'WIZYTY':
-			tableBody = (
+			return (
 				<tbody>
-					<tr>{cells.slice(0)}</tr>
+					<tr>
+						{invisibleCell()}
+						{invisibleCell()}
+						{cells.slice(0)}
+					</tr>
 				</tbody>
 			);
-			break;
 		default:
 			return;
 	}
-	return tableBody;
-}
-
-function returnWorkStageSpans(
-	workStageSpans: WorkStageSpans[],
-	stationName: string
-) {
-	return workStageSpans?.map((stage, index) => {
-		if (stationName === 'WIZYTY' && index !== 2) return false;
-		return <td key={index}>{`${stage.from} - ${stage.to}`}</td>;
-	});
-}
-
-function blankCell() {
-	return <td style={{ border: 'none' }} className="blank_cell" />;
 }

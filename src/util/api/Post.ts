@@ -1,10 +1,10 @@
 import { serverPath } from '../../config.json';
-import Utilities from '../util';
-import { CreateHomeRehabilitationFormValues } from '../../components/create/CreateHomeRehabilitationForm';
+import Utilities from '../Utilities';
+import { CreateHomeRehabilitationForm } from '../../components/create/CreateHomeRehabilitation';
 
 export default class Post {
 	static homeRehabilitations = async (
-		homeRehabilitationConfig: CreateHomeRehabilitationFormValues
+		homeRehabilitationConfig: CreateHomeRehabilitationForm
 	) => {
 		const body: { homeRehabilitations: {}[] } = {
 			homeRehabilitations: [],

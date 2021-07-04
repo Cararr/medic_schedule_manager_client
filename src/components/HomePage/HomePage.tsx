@@ -5,7 +5,7 @@ import CreateImage from '../../resources/images/CreateImage.png';
 import { NavBar } from '../navBar/NavBar';
 import { CardsContainer } from '../cardsContainer/CardsContainer';
 import { useUser } from '../../context/userContext';
-import Utilities from '../../util/util';
+import Utilities from '../../util/Utilities';
 import './HomePage.css';
 
 export const HomePage: React.FunctionComponent = () => {

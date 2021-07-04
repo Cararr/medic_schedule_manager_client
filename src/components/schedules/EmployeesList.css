@@ -1,6 +1,8 @@
 .employees-section {
+	box-sizing: border-box;
 	background-color: var(--backgroundViolet);
 	position: sticky;
+	width: 8rem;
 	top: 3rem;
 	margin-left: 0.5rem;
 	border: 1px solid black;

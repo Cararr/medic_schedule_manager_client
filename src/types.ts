@@ -12,7 +12,7 @@ export interface Employee {
 	role: employeeRole;
 }
 
-export interface Schedules {
+export interface StationSchedules {
 	[stationName: string]: (Employee | null)[];
 }
 
@@ -22,6 +22,11 @@ export interface HomeRehabilitation {
 	patient: string;
 	date: string;
 	startTime: string;
+}
+
+export interface CompleteSchedule {
+	schedules: StationSchedules;
+	homeRehabilitations: HomeRehabilitation[];
 }
 
 export interface UserCrudentials {
@@ -43,6 +48,11 @@ export interface RoutingProperties {
 }
 
 export interface WorkStageSpans {
+	from: string;
+	to: string;
+}
+
+export interface DateForm {
 	from: string;
 	to: string;
 }
