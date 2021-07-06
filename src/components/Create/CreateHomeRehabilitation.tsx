@@ -3,16 +3,8 @@ import { useEmployees } from '../../context/employeesContext';
 import Post from '../../util/api/Post';
 import Utilities from '../../util/Utilities';
 import { wrongDateSet } from '../../WinBox/winboxMessages';
-import { Employee } from '../../types';
+import { CreateHomeRehabilitationForm } from '../../types';
 import './CreateHomeRehabilitation.css';
-
-export interface CreateHomeRehabilitationForm {
-	employee: Employee | null;
-	patient: string;
-	startTime: string;
-	dateBegin: string;
-	dateEnd: string;
-}
 
 export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 	const employees = useEmployees();
@@ -154,7 +146,7 @@ function returnValueByInputName(
 	}
 }
 
-function returnEmptyForm() {
+function returnEmptyForm(): CreateHomeRehabilitationForm {
 	return {
 		employee: null,
 		patient: '',

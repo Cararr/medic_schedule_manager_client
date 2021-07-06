@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Get from '../../util/api/Get';
+import Post from '../../util/api/Post';
 import { EmployeesList } from '../schedules/EmployeesList';
 import { Tables } from '../schedules/Tables';
 import { SchedulesActionPanel } from '../schedules/SchedulesActionPanel';
@@ -56,6 +57,16 @@ export const CreateSchedules: React.FunctionComponent = () => {
 		}));
 	};
 
+	const createSchedules = async (e: React.SyntheticEvent) => {
+		e.preventDefault();
+		const response = await Post.schedules({
+			from: dateForm.from,
+			to: dateForm.to,
+			schedules: currentSchedule.schedules,
+		});
+		console.log(response);
+	};
+
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 
 	return (
@@ -77,6 +88,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 						clearSchedule={clearSchedule}
 						dateForm={dateForm}
 						setDateForm={setDateForm}
+						createSchedules={createSchedules}
 					/>
 				}
 			</div>

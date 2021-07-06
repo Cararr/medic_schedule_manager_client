@@ -9,6 +9,7 @@ interface Props {
 	saveScheudle?: () => Promise<void>;
 	dateForm?: DateForm;
 	setDateForm?: React.Dispatch<React.SetStateAction<DateForm>>;
+	createSchedules?: (e: React.SyntheticEvent) => Promise<void>;
 }
 
 export const SchedulesActionPanel: React.FunctionComponent<Props> = (props) => {
@@ -16,11 +17,12 @@ export const SchedulesActionPanel: React.FunctionComponent<Props> = (props) => {
 		if (props.setDateForm)
 			props.setDateForm((prev) => ({ ...prev, [target.name]: target.value }));
 	};
-
-	const dateForm = (
-		<form className="form-date">
+	// MOŻE JAKIEŚ ŁADOWANIE PO CREATE ?
+	const dateForm = props.dateForm ? (
+		<form onSubmit={props.createSchedules} className="form-date">
 			<label>From</label>
 			<input
+				required
 				onChange={handleDateChange}
 				type="date"
 				name="from"
@@ -28,13 +30,17 @@ export const SchedulesActionPanel: React.FunctionComponent<Props> = (props) => {
 			/>
 			<label>To</label>
 			<input
+				required
 				onChange={handleDateChange}
 				type="date"
 				name="to"
 				value={props.dateForm?.to}
 			/>
+			<button className="button-generic" type="submit">
+				Create
+			</button>
 		</form>
-	);
+	) : undefined;
 	const statusColor = props.areChangesSaved ? 'green' : 'yellow';
 	const statusText = props.areChangesSaved
 		? 'No changes to save'
@@ -71,16 +77,6 @@ export const SchedulesActionPanel: React.FunctionComponent<Props> = (props) => {
 					</li>
 				)}
 				{dateForm}
-				{props.saveScheudle && (
-					<li>
-						<button
-							onClick={props.saveScheudle}
-							className="list-item button-generic"
-						>
-							Save
-						</button>
-					</li>
-				)}
 			</ul>
 			{props.saveScheudle && (
 				<div className="action-panel-status">

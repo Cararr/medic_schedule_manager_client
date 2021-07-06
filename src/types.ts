@@ -56,3 +56,17 @@ export interface DateForm {
 	from: string;
 	to: string;
 }
+
+export interface postSchedulesPayload {
+	from: string;
+	to: string;
+	schedules: StationSchedules;
+}
+
+export interface CreateHomeRehabilitationForm {
+	employee: Employee | null;
+	patient: string;
+	startTime: string;
+	dateBegin: string;
+	dateEnd: string;
+}

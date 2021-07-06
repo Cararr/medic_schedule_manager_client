@@ -7,7 +7,7 @@ const genericWarningSettings = {
 	border: 5,
 	height: 250,
 	width: 400,
-	class: 'no-full no-max no-min',
+	class: 'no-full no-max no-min modern',
 	background: '#f9cdc0',
 };
 
