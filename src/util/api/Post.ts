@@ -1,5 +1,4 @@
 import { serverPath } from '../../config.json';
-import Utilities from '../Utilities';
 import {
 	postSchedulesPayload,
 	CreateHomeRehabilitationForm,
@@ -9,28 +8,15 @@ export default class Post {
 	static homeRehabilitations = async (
 		homeRehabilitationConfig: CreateHomeRehabilitationForm
 	) => {
-		const body: { homeRehabilitations: {}[] } = {
-			homeRehabilitations: [],
+		const body = {
+			from: homeRehabilitationConfig.dateBegin,
+			to: homeRehabilitationConfig.dateEnd,
+			homeRehabilitation: {
+				startTime: homeRehabilitationConfig.startTime,
+				employee: homeRehabilitationConfig.employee,
+				patient: homeRehabilitationConfig.patient,
+			},
 		};
-
-		const homeRehabilitationTemplate = {
-			employee: homeRehabilitationConfig.employee,
-			patient: homeRehabilitationConfig.patient,
-			startTime: homeRehabilitationConfig.startTime,
-		};
-
-		let date = new Date(homeRehabilitationConfig.dateBegin);
-
-		while (date <= new Date(homeRehabilitationConfig.dateEnd)) {
-			const homeRehabilitation = {
-				...homeRehabilitationTemplate,
-				date: Utilities.formatDateString(date),
-			};
-			if (![6, 0].includes(date.getDay()))
-				//saturdays/sundays shouldn't be saved
-				body.homeRehabilitations.push(homeRehabilitation);
-			date = Utilities.incrementDateByDay(date);
-		}
 
 		try {
 			const response = await fetch(`${serverPath}/home-rehabilitations`, {

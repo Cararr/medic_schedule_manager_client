@@ -44,10 +44,12 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 		e.preventDefault();
 		if (!checkIfEndDateIsAfterBegin(formValues.dateBegin, formValues.dateEnd))
 			return wrongDateSet();
+
 		const loading = <i className="icon-spin6" />;
 		setSubmitResponse(
 			<div className="response-create-home-rehabilitation">{loading}</div>
 		);
+		
 		const failMessage = 'Create failed. Reason: ';
 		const response = await Post.homeRehabilitations(formValues);
 		const jsonResponse =

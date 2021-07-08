@@ -11,13 +11,21 @@ export const SelectDate: React.FunctionComponent<Props> = (props) => {
 	const setDate = ({ target }: ChangeEvent<HTMLInputElement>) => {
 		if (target.value) props.setDateSelected(target.value);
 	};
+
 	const changeDateToToday = () =>
 		props.setDateSelected(Utilities.formatDateString(new Date()));
-	const toggleDate = (dayChange: number) => {
+
+	const toggleDate = (dayChange: 1 | -1) => {
 		const currentDate = new Date(props.dateSelected);
-		const newDate = new Date(
+		let newDate = new Date(
 			currentDate.setDate(currentDate.getDate() + dayChange)
 		);
+
+		while ([0, 6].includes(newDate.getDay())) {
+			newDate = new Date(
+				currentDate.setDate(currentDate.getDate() + dayChange)
+			);
+		}
 		props.setDateSelected(Utilities.formatDateString(newDate));
 	};
 
