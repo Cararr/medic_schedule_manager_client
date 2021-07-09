@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Get from '../../util/api/Get';
 import Post from '../../util/api/Post';
 import { EmployeesList } from '../schedules/EmployeesList';
-import { Tables } from '../schedules/Tables';
-import { SchedulesActionPanel } from '../schedules/SchedulesActionPanel';
+import { Tables } from '../tables/Tables';
+import { ActionPanel } from '../tables/ActionPanel';
 import Utilities from '../../util/Utilities';
 import { useUser } from '../../context/userContext';
 import {
@@ -13,6 +13,11 @@ import {
 	DateForm,
 } from '../../types';
 import './CreateSchedules.css';
+import {
+	incorrectDateWarning,
+	createdMessage,
+	genericWarning,
+} from '../../WinBox/winboxMessages';
 
 export const CreateSchedules: React.FunctionComponent = () => {
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
@@ -21,6 +26,8 @@ export const CreateSchedules: React.FunctionComponent = () => {
 		from: Utilities.formatDateString(new Date()),
 		to: Utilities.formatDateString(Utilities.incrementDateByDay(new Date())),
 	});
+
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
 		schedules: Utilities.returnEmptyDailyShiftObject(),
@@ -59,12 +66,19 @@ export const CreateSchedules: React.FunctionComponent = () => {
 
 	const createSchedules = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
+		if (!Utilities.checkIfEndDateIsAfterBegin(dateForm.from, dateForm.to))
+			return incorrectDateWarning();
+
+		setIsLoading(true);
+
 		const response = await Post.schedules({
 			from: dateForm.from,
 			to: dateForm.to,
 			schedules: currentSchedule.schedules,
 		});
-		console.log(response);
+
+		setIsLoading(false);
+		response?.ok ? createdMessage() : genericWarning(170);
 	};
 
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
@@ -83,12 +97,13 @@ export const CreateSchedules: React.FunctionComponent = () => {
 					/>
 				</main>
 				{
-					<SchedulesActionPanel
+					<ActionPanel
 						autoGenerateSchedule={autoGenerateSchedule}
 						clearSchedule={clearSchedule}
 						dateForm={dateForm}
 						setDateForm={setDateForm}
 						createSchedules={createSchedules}
+						isLoading={isLoading}
 					/>
 				}
 			</div>

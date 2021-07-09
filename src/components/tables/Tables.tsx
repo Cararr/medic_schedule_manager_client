@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { Table } from './Table';
-import { HomeRehabilitations } from './HomeRehabilitations';
+import { HomeRehabilitations } from '../schedules/HomeRehabilitationsView';
 import { useUser } from '../../context/userContext';
 import Utilities from '../../util/Utilities';
 import {
@@ -54,7 +54,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 
 	return (
 		<section>
-			{(props.workStageSpans.length && tables) || (
+			{(props.workStageSpans?.length && tables) || (
 				<i style={{ marginTop: '4rem' }} className="icon-spin6" />
 			)}
 			{props.currentSchedule.homeRehabilitations.length !== 0 &&

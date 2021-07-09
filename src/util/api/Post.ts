@@ -44,7 +44,7 @@ export default class Post {
 				},
 				body,
 			});
-			return response.json();
+			return response;
 		} catch (error) {
 			console.error(error);
 		}

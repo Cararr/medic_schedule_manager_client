@@ -1,19 +1,28 @@
 import WinBox from 'winbox/src/js/winbox';
 import 'winbox/dist/css/winbox.min.css';
 
-const genericWarningSettings = {
+const genericSettings = {
 	x: 'center',
 	y: 'center',
 	border: 5,
 	height: 250,
 	width: 400,
 	class: 'no-full no-max no-min modern',
+};
+
+const warningSettings = {
 	background: '#f9cdc0',
 };
 
-export const genericWarning = () => {
+const successSettings = {
+	background: '#d2e589',
+};
+
+export const genericWarning = (y: number | 'center' = 'center') => {
 	const config = {
-		...genericWarningSettings,
+		...genericSettings,
+		...warningSettings,
+		y,
 		html: `<h2>Action aborted, something went wrong. Sorry!</h2>`,
 	};
 	new WinBox('Error', config);
@@ -21,7 +30,8 @@ export const genericWarning = () => {
 
 export const loginWarning = (message: string | undefined) => {
 	const config = {
-		...genericWarningSettings,
+		...genericSettings,
+		...warningSettings,
 		html: `<h2>${
 			message || "Can't login right now 😔 Please try again later. "
 		}</h2>`,
@@ -31,7 +41,8 @@ export const loginWarning = (message: string | undefined) => {
 
 export const accessDeniedWarning = (reason: string) => {
 	const config = {
-		...genericWarningSettings,
+		...genericSettings,
+		...warningSettings,
 		html: `<h2>${reason}</h2>`,
 	};
 	new WinBox('Access denied!', config);
@@ -39,17 +50,29 @@ export const accessDeniedWarning = (reason: string) => {
 
 export const noEmployeeWarning = () => {
 	const config = {
-		...genericWarningSettings,
+		...genericSettings,
+		...warningSettings,
 		html: `<h2>An employee must be present at home rehabilitation!</h2>`,
 	};
 	new WinBox('Employee is missing', config);
 };
 
-export const wrongDateSet = () => {
+export const incorrectDateWarning = () => {
 	const config = {
-		...genericWarningSettings,
+		...genericSettings,
+		...warningSettings,
 		y: 170,
-		html: `<h2>The end cannot come before the beginning!</h2>`,
+		html: `<h2>End date cannot come before the beginning!</h2>`,
 	};
 	new WinBox('Wrong date set!', config);
+};
+
+export const createdMessage = () => {
+	const config = {
+		...genericSettings,
+		...successSettings,
+		y: 170,
+		html: `<h2>👍</h2>`,
+	};
+	new WinBox('Created!', config);
 };

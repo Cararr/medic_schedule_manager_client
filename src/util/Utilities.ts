@@ -27,4 +27,8 @@ export default class Utilities {
 	static incrementDateByDay(date: Date) {
 		return new Date(date.setDate(date.getDate() + 1));
 	}
+
+	static checkIfEndDateIsAfterBegin(startDate: string, endDate: string) {
+		return new Date(endDate) >= new Date(startDate);
+	}
 }

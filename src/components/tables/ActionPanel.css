@@ -20,13 +20,13 @@
 	height: 1rem;
 	width: 100%;
 }
-.form-date {
+.form-create-schedules-date {
 	width: 100%;
 }
-.form-date label {
+.form-create-schedules-date label {
 	font-weight: bold;
 }
-.form-date input {
+.form-create-schedules-date input {
 	font-size: 0.8rem;
 	border-radius: 5px;
 	margin: 0.5rem 0;

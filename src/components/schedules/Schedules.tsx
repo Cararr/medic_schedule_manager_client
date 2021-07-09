@@ -3,10 +3,10 @@ import Get from '../../util/api/Get';
 import Put from '../../util/api/Put';
 import Delete from '../../util/api/Delete';
 import { EmployeesList } from './EmployeesList';
-import { Tables } from './Tables';
-import { SchedulesActionPanel } from './SchedulesActionPanel';
+import { Tables } from '../tables/Tables';
+import { ActionPanel } from '../tables/ActionPanel';
 import { NavBar } from '../navBar/NavBar';
-import { SelectDate } from './SelectDate';
+import { SelectDate } from '../tables/SelectDate';
 import Utilities from '../../util/Utilities';
 import { useUser } from '../../context/userContext';
 import { genericWarning, noEmployeeWarning } from '../../WinBox/winboxMessages';
@@ -167,7 +167,7 @@ export const Schedules: React.FunctionComponent = () => {
 				</main>
 
 				{isUserAdmin && (
-					<SchedulesActionPanel
+					<ActionPanel
 						autoGenerateSchedule={autoGenerateSchedule}
 						clearSchedule={clearSchedule}
 						areChangesSaved={areChangesSaved}

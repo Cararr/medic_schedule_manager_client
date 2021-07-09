@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
-import { TableCell } from './TableCell';
+import { TableCell } from '../tables/TableCell';
 import Utilities from '../../util/Utilities';
-import './HomeRehabilitations.css';
+import './HomeRehabilitationsView.css';
 import { HomeRehabilitation, Employee } from '../../types';
 
 interface Props {

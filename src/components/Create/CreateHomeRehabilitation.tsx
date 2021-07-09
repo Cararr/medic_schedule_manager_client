@@ -2,7 +2,7 @@ import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { useEmployees } from '../../context/employeesContext';
 import Post from '../../util/api/Post';
 import Utilities from '../../util/Utilities';
-import { wrongDateSet } from '../../WinBox/winboxMessages';
+import { incorrectDateWarning } from '../../WinBox/winboxMessages';
 import { CreateHomeRehabilitationForm } from '../../types';
 import './CreateHomeRehabilitation.css';
 
@@ -42,14 +42,19 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 
 	const handleSubmit = async (e: SyntheticEvent) => {
 		e.preventDefault();
-		if (!checkIfEndDateIsAfterBegin(formValues.dateBegin, formValues.dateEnd))
-			return wrongDateSet();
+		if (
+			!Utilities.checkIfEndDateIsAfterBegin(
+				formValues.dateBegin,
+				formValues.dateEnd
+			)
+		)
+			return incorrectDateWarning();
 
 		const loading = <i className="icon-spin6" />;
 		setSubmitResponse(
 			<div className="response-create-home-rehabilitation">{loading}</div>
 		);
-		
+
 		const failMessage = 'Create failed. Reason: ';
 		const response = await Post.homeRehabilitations(formValues);
 		const jsonResponse =
@@ -130,10 +135,6 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 		</section>
 	);
 };
-
-function checkIfEndDateIsAfterBegin(startDate: string, endDate: string) {
-	return new Date(endDate) >= new Date(startDate);
-}
 
 function returnValueByInputName(
 	eventTarget: EventTarget & (HTMLInputElement | HTMLSelectElement)
