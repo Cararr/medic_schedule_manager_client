@@ -76,7 +76,6 @@
 .icon-spin6:before {
 	color: var(--fontColor);
 	content: '\e839';
-	font-size: 3rem;
 	animation: rotate 1s linear infinite;
 } /* '' */
 @keyframes rotate {

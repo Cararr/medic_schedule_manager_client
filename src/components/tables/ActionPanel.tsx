@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import { DateForm } from '../../types';
 import './ActionPanel.css';
 
@@ -22,6 +22,8 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 	const isCreate = Boolean(props.dateForm);
 	const isView = Boolean(props.saveScheudle);
 
+	const loading = <i className="icon-spin6" style={{ fontSize: '1.5rem' }} />;
+
 	const dateForm = (
 		<form
 			onSubmit={props.createSchedules}
@@ -44,7 +46,7 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 				value={props.dateForm?.to}
 			/>
 			{props.isLoading ? (
-				<i className="icon-spin6" />
+				loading
 			) : (
 				<button
 					style={{ marginTop: '.5rem' }}
@@ -104,8 +106,8 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 						</button>
 					</li>
 				)}
-				{isCreate && dateForm}
 			</ul>
+			{isCreate && dateForm}
 			{isView && statusBar}
 		</aside>
 	);

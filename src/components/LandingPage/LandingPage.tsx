@@ -16,6 +16,8 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 	const [loginInputValue, setLoginInputValue] = useState(
 		returnEmptyLoginValues()
 	);
+	const [isLoading, setIsLoading] = useState(false);
+
 	const handleInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
 		setLoginInputValue((prev) => ({ ...prev, [target.name]: target.value }));
 
@@ -25,7 +27,9 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 
 	const handleLogin = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
+		setIsLoading(true);
 		const loginReponse = await login(loginInputValue);
+		setIsLoading(false);
 		if (loginReponse?.passed) {
 			if (!employees.length) loadEmployees();
 			changeUser(loginReponse.user);
@@ -63,6 +67,7 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 						loginInputValue={loginInputValue}
 						handleLogin={handleLogin}
 						closeLoginPanel={closeLoginPanel}
+						isLoading={isLoading}
 					/>
 				)}
 			</main>

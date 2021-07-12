@@ -34,7 +34,7 @@ td {
 .draggable:hover {
 	cursor: grab;
 	background-color: blue;
-	color: azure;
+	color: azure !important;
 }
 .cell-drag-over {
 	cursor: grab;

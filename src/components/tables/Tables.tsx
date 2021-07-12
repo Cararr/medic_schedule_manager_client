@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { Table } from './Table';
-import { HomeRehabilitations } from '../schedules/HomeRehabilitationsView';
+import { HomeRehabilitations } from '../schedulesView/HomeRehabilitationsView';
 import { useUser } from '../../context/userContext';
 import Utilities from '../../util/Utilities';
 import {
@@ -51,12 +51,16 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 	}
 
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+	const loading = (
+		<i
+			style={{ marginTop: '4rem', fontSize: '4rem', display: 'block' }}
+			className="icon-spin6"
+		/>
+	);
 
 	return (
 		<section>
-			{(props.workStageSpans?.length && tables) || (
-				<i style={{ marginTop: '4rem' }} className="icon-spin6" />
-			)}
+			{(props.workStageSpans?.length && tables) || loading}
 			{props.currentSchedule.homeRehabilitations.length !== 0 &&
 				props.handleHomeRehabilitationEdit &&
 				props.homeRehabilitationsEdited &&

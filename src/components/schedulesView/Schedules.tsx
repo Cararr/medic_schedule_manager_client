@@ -19,15 +19,15 @@ import {
 import './Schedules.css';
 
 export const Schedules: React.FunctionComponent = () => {
-	const [currentlyDragged, setCurrentlyDragged] = useState('');
-	const [dateSelected, setDateSelected] = useState(
-		Utilities.formatDateString(new Date())
-	);
-
 	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
 		schedules: Utilities.returnEmptyDailyShiftObject(),
 		homeRehabilitations: [],
 	});
+
+	const [currentlyDragged, setCurrentlyDragged] = useState('');
+	const [dateSelected, setDateSelected] = useState(
+		Utilities.formatDateString(new Date())
+	);
 
 	const [homeRehabilitationsEdited, setHomeRehabilitationsEdited] = useState<
 		number[]
@@ -146,7 +146,7 @@ export const Schedules: React.FunctionComponent = () => {
 		<div>
 			<NavBar />
 			<div className="schedules">
-				{isUserAdmin && <EmployeesList />}
+				{isUserAdmin && <EmployeesList currentSchedule={currentSchedule} />}
 				<main className="section-schedules-central">
 					<SelectDate
 						setDateSelected={setDateSelected}

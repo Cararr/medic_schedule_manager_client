@@ -50,7 +50,7 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 		)
 			return incorrectDateWarning();
 
-		const loading = <i className="icon-spin6" />;
+		const loading = <i className="icon-spin6" style={{ fontSize: '5rem' }} />;
 		setSubmitResponse(
 			<div className="response-create-home-rehabilitation">{loading}</div>
 		);

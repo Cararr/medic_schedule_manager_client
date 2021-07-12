@@ -7,11 +7,19 @@ interface Props {
 	loginInputValue: UserCrudentials;
 	handleLogin: (e: React.SyntheticEvent) => void;
 	closeLoginPanel: () => void;
+	isLoading: boolean;
 }
 
 export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 	return (
 		<form onSubmit={props.handleLogin} className="login-form">
+			<button
+				type="button"
+				onClick={props.closeLoginPanel}
+				className="button-generic button-close-window"
+			>
+				X
+			</button>
 			<input
 				required
 				max={20}
@@ -32,16 +40,13 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 				type="password"
 				maxLength={10}
 			></input>
-			<button type="submit" className="submit-login-button button-generic">
-				Log in
-			</button>
-			<button
-				type="button"
-				onClick={props.closeLoginPanel}
-				className="button-generic button-close-window"
-			>
-				X
-			</button>
+			{props.isLoading ? (
+				<i className="icon-spin6" style={{ fontSize: '1.7rem' }} />
+			) : (
+				<button type="submit" className="submit-login-button button-generic">
+					Log in
+				</button>
+			)}
 		</form>
 	);
 };

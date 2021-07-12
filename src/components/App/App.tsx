@@ -8,7 +8,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { LoggedUsersRoute } from '../../RouteTypes/LoggedUsersRoute';
 import { NonLoggedUsersRoute } from '../../RouteTypes/NonLoggedUsersRoute';
 import { AdminRoute } from '../../RouteTypes/AdminRoute';
-import { Schedules } from '../schedules/Schedules';
+import { Schedules } from '../schedulesView/Schedules';
 import { LandingPage } from '../landingPage/LandingPage';
 import { HomePage } from '../homePage/HomePage';
 import { Create } from '../create/Create';

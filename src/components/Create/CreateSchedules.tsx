@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Get from '../../util/api/Get';
 import Post from '../../util/api/Post';
-import { EmployeesList } from '../schedules/EmployeesList';
+import { EmployeesList } from '../schedulesView/EmployeesList';
 import { Tables } from '../tables/Tables';
 import { ActionPanel } from '../tables/ActionPanel';
 import Utilities from '../../util/Utilities';
@@ -20,6 +20,11 @@ import {
 } from '../../WinBox/winboxMessages';
 
 export const CreateSchedules: React.FunctionComponent = () => {
+	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
+		schedules: Utilities.returnEmptyDailyShiftObject(),
+		homeRehabilitations: [],
+	});
+
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
 
 	const [dateForm, setDateForm] = useState<DateForm>({
@@ -28,11 +33,6 @@ export const CreateSchedules: React.FunctionComponent = () => {
 	});
 
 	const [isLoading, setIsLoading] = useState(false);
-
-	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
-		schedules: Utilities.returnEmptyDailyShiftObject(),
-		homeRehabilitations: [],
-	});
 
 	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
 	useEffect(() => {
@@ -70,14 +70,13 @@ export const CreateSchedules: React.FunctionComponent = () => {
 			return incorrectDateWarning();
 
 		setIsLoading(true);
-
 		const response = await Post.schedules({
 			from: dateForm.from,
 			to: dateForm.to,
 			schedules: currentSchedule.schedules,
 		});
-
 		setIsLoading(false);
+
 		response?.ok ? createdMessage() : genericWarning(170);
 	};
 
@@ -86,7 +85,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 	return (
 		<div>
 			<div className="schedules">
-				{isUserAdmin && <EmployeesList />}
+				{isUserAdmin && <EmployeesList currentSchedule={currentSchedule} />}
 				<main className="section-schedules-central">
 					<Tables
 						currentlyDragged={currentlyDragged}
