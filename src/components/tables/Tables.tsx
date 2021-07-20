@@ -30,6 +30,8 @@ interface Props {
 	saveChangedHomeRehabilitation?: (
 		homeRehabilitation: HomeRehabilitation
 	) => Promise<void>;
+	comments?: string;
+	handleEditComments?: ({ target }: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 export const Tables: React.FunctionComponent<Props> = (props) => {
@@ -78,6 +80,17 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 						saveChangedHomeRehabilitation={props.saveChangedHomeRehabilitation}
 					/>
 				)}
+			{/* Comments section only for view schedules */}
+			{props.handleHomeRehabilitationEdit && (
+				<textarea
+					rows={10}
+					maxLength={450}
+					value={props.comments}
+					onChange={props.handleEditComments}
+					readOnly={!isUserAdmin}
+					className="input-comments"
+				/>
+			)}
 		</section>
 	);
 };

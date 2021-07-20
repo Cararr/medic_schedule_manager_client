@@ -24,6 +24,11 @@ export const Schedules: React.FunctionComponent = () => {
 		homeRehabilitations: [],
 	});
 
+	const [comments, setComments] = useState('');
+
+	const handleEditComments = ({ target }: ChangeEvent<HTMLTextAreaElement>) =>
+		setComments(target.value);
+
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
 	const [dateSelected, setDateSelected] = useState(
 		Utilities.formatDateString(new Date())
@@ -148,6 +153,8 @@ export const Schedules: React.FunctionComponent = () => {
 						handleHomeRehabilitationEdit={handleHomeRehabilitationEdit}
 						removeHomeRehabilitation={removeHomeRehabilitation}
 						saveChangedHomeRehabilitation={saveChangedHomeRehabilitation}
+						comments={comments}
+						handleEditComments={handleEditComments}
 					/>
 				</main>
 

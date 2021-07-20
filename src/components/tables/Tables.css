@@ -5,3 +5,12 @@
 	flex-grow: 2;
 	flex-shrink: 0;
 }
+.input-comments {
+	width: 32rem;
+	resize: none;
+	box-sizing: border-box;
+	margin-bottom: 1rem;
+	font-size: 1rem;
+	font-family: inherit;
+	padding: 5px;
+}
