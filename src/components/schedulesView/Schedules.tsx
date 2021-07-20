@@ -93,13 +93,6 @@ export const Schedules: React.FunctionComponent = () => {
 			await Put.schedule(dateSelected, currentSchedule.schedules);
 	};
 
-	const autoGenerateSchedule = async () => {
-		Get.generateSchedule().then((schedules) => {
-			setAreChangesSaved(false);
-			setCurrentSchedule((prev) => (schedules ? { ...prev, schedules } : prev));
-		});
-	};
-
 	const saveChangedHomeRehabilitation = async (
 		homeRehabilitation: HomeRehabilitation
 	) => {
@@ -132,14 +125,6 @@ export const Schedules: React.FunctionComponent = () => {
 		});
 	};
 
-	const clearSchedule = () => {
-		setAreChangesSaved(false);
-		setCurrentSchedule((prev) => ({
-			...prev,
-			schedules: Utilities.returnEmptyDailyShiftObject(),
-		}));
-	};
-
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 
 	return (
@@ -168,8 +153,6 @@ export const Schedules: React.FunctionComponent = () => {
 
 				{isUserAdmin && (
 					<ActionPanel
-						autoGenerateSchedule={autoGenerateSchedule}
-						clearSchedule={clearSchedule}
 						areChangesSaved={areChangesSaved}
 						saveScheudle={saveScheudle}
 					/>

@@ -13,7 +13,7 @@ export default class Utilities {
 
 	static returnEmptyDailyShiftObject() {
 		return {
-			KINEZA: new Array(12).fill(null),
+			KINEZA: new Array(14).fill(null),
 			FIZYKO: new Array(10).fill(null),
 			MASAZ: new Array(4).fill(null),
 			WIZYTY: new Array(1).fill(null),

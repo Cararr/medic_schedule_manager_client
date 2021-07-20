@@ -52,7 +52,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 	};
 
 	const autoGenerateSchedule = async () => {
-		Get.generateSchedule().then((schedules) => {
+		Get.generateSchedule(dateForm.from).then((schedules) => {
 			setCurrentSchedule((prev) => (schedules ? { ...prev, schedules } : prev));
 		});
 	};

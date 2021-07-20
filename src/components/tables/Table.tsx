@@ -96,7 +96,11 @@ function returntableBodyByStation(
 					</tr>
 					<tr>
 						{invisibleCell()}
-						{cells.slice(10)}
+						{cells.slice(10, 12)}
+					</tr>
+					<tr>
+						{invisibleCell()}
+						{cells.slice(12)}
 					</tr>
 				</tbody>
 			);

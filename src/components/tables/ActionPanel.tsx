@@ -3,8 +3,8 @@ import { DateForm } from '../../types';
 import './ActionPanel.css';
 
 interface Props {
-	autoGenerateSchedule: () => Promise<void>;
-	clearSchedule: () => void;
+	autoGenerateSchedule?: () => Promise<void>;
+	clearSchedule?: () => void;
 	areChangesSaved?: boolean;
 	saveScheudle?: () => Promise<void>;
 	dateForm?: DateForm;
@@ -34,6 +34,7 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 				required
 				onChange={handleDateChange}
 				type="date"
+				min="2020-01-01"
 				name="from"
 				value={props.dateForm?.from}
 			/>
@@ -42,6 +43,7 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 				required
 				onChange={handleDateChange}
 				type="date"
+				max="2030-12-31"
 				name="to"
 				value={props.dateForm?.to}
 			/>
