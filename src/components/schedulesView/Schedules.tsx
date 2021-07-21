@@ -24,7 +24,7 @@ export const Schedules: React.FunctionComponent = () => {
 		homeRehabilitations: [],
 	});
 
-	const [comments, setComments] = useState('');
+	const [comments, setComments] = useState('lol');
 
 	const handleEditComments = ({ target }: ChangeEvent<HTMLTextAreaElement>) =>
 		setComments(target.value);

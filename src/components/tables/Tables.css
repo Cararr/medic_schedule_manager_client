@@ -5,11 +5,25 @@
 	flex-grow: 2;
 	flex-shrink: 0;
 }
-.input-comments {
-	width: 32rem;
-	resize: none;
+.article-comments {
 	box-sizing: border-box;
 	margin-bottom: 1rem;
+}
+.article-comments h3 {
+	background-color: var(--backgroundViolet);
+	height: 3rem;
+	margin: 0;
+	border: 1px solid black;
+	border-bottom: none;
+	letter-spacing: 1px;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.textarea-comments {
+	width: 32rem;
+	resize: none;
 	font-size: 1rem;
 	font-family: inherit;
 	padding: 5px;

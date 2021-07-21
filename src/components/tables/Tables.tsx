@@ -53,6 +53,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 	}
 
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+	const isLoading = !Boolean(props.workStageSpans?.length);
 	const loading = (
 		<i
 			style={{ marginTop: '4rem', fontSize: '4rem', display: 'block' }}
@@ -62,7 +63,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 
 	return (
 		<section>
-			{(props.workStageSpans?.length && tables) || loading}
+			{isLoading ? loading : tables}
 			{props.currentSchedule.homeRehabilitations.length !== 0 &&
 				props.handleHomeRehabilitationEdit &&
 				props.homeRehabilitationsEdited &&
@@ -81,15 +82,18 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 					/>
 				)}
 			{/* Comments section only for view schedules */}
-			{props.handleHomeRehabilitationEdit && (
-				<textarea
-					rows={10}
-					maxLength={450}
-					value={props.comments}
-					onChange={props.handleEditComments}
-					readOnly={!isUserAdmin}
-					className="input-comments"
-				/>
+			{props.handleHomeRehabilitationEdit && !isLoading && props.comments && (
+				<article className="article-comments">
+					<h3>COMMENTS</h3>
+					<textarea
+						rows={10}
+						maxLength={450}
+						value={props.comments}
+						onChange={props.handleEditComments}
+						readOnly={!isUserAdmin}
+						className="textarea-comments"
+					/>
+				</article>
 			)}
 		</section>
 	);

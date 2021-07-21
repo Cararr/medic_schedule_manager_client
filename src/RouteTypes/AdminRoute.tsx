@@ -17,7 +17,7 @@ export const AdminRoute = ({
 				else if (user) {
 					setTimeout(() => {
 						accessDeniedWarning(
-							'You are not authorized to visit this section.'
+							'You are not authorized to visit this section!'
 						);
 					}, 1);
 					return <Redirect to={{ pathname: '/home' }} />;
