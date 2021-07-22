@@ -70,3 +70,9 @@ export interface CreateHomeRehabilitationForm {
 	dateBegin: string;
 	dateEnd: string;
 }
+
+export interface Comment {
+	id: number;
+	date: string;
+	content: string;
+}

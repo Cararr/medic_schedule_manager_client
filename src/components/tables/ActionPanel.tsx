@@ -5,7 +5,7 @@ import './ActionPanel.css';
 interface Props {
 	autoGenerateSchedule?: () => Promise<void>;
 	clearSchedule?: () => void;
-	areChangesSaved?: boolean;
+	wasScheduleEdited?: boolean;
 	saveScheudle?: () => Promise<void>;
 	dateForm?: DateForm;
 	setDateForm?: React.Dispatch<React.SetStateAction<DateForm>>;
@@ -65,11 +65,13 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 		<div className="action-panel-status">
 			<h3>Status</h3>
 			<p className="status-text">
-				{props.areChangesSaved ? 'No changes to save' : 'Unsaved changes!'}
+				{props.wasScheduleEdited ? 'Unsaved changes!' : 'No changes to save'}
 			</p>
 			<div
 				className="status-bar"
-				style={{ backgroundColor: props.areChangesSaved ? 'green' : 'yellow' }}
+				style={{
+					backgroundColor: props.wasScheduleEdited ? 'yellow' : 'green',
+				}}
 			></div>
 		</div>
 	);
@@ -101,8 +103,11 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 				{isView && (
 					<li>
 						<button
-							onClick={props.saveScheudle}
-							className="list-item button-generic"
+							disabled={!props.wasScheduleEdited}
+							onClick={props.wasScheduleEdited ? props.saveScheudle : undefined}
+							className={`list-item button-generic ${
+								!props.wasScheduleEdited && 'button-disabled'
+							}`}
 						>
 							Save
 						</button>

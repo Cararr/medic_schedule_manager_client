@@ -8,6 +8,7 @@ import {
 	Employee,
 	HomeRehabilitation,
 	CompleteSchedule,
+	Comment,
 } from '../../types';
 import './Tables.css';
 
@@ -30,8 +31,9 @@ interface Props {
 	saveChangedHomeRehabilitation?: (
 		homeRehabilitation: HomeRehabilitation
 	) => Promise<void>;
-	comments?: string;
-	handleEditComments?: ({ target }: ChangeEvent<HTMLTextAreaElement>) => void;
+	comment?: Comment;
+	wasCommentEdited?: boolean;
+	handleEditComment?: ({ target }: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 export const Tables: React.FunctionComponent<Props> = (props) => {
@@ -82,19 +84,32 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 					/>
 				)}
 			{/* Comments section only for view schedules */}
-			{props.handleHomeRehabilitationEdit && !isLoading && props.comments && (
-				<article className="article-comments">
-					<h3>COMMENTS</h3>
-					<textarea
-						rows={10}
-						maxLength={450}
-						value={props.comments}
-						onChange={props.handleEditComments}
-						readOnly={!isUserAdmin}
-						className="textarea-comments"
-					/>
-				</article>
-			)}
+			{props.handleHomeRehabilitationEdit &&
+				!isLoading &&
+				(props.comment?.content || isUserAdmin) && (
+					<form className="article-comments">
+						<h3>COMMENTS</h3>
+						<textarea
+							required
+							rows={10}
+							maxLength={450}
+							value={props.comment?.content}
+							onChange={props.handleEditComment}
+							readOnly={!isUserAdmin}
+							className="textarea-comments"
+						/>
+						<button
+							type="submit"
+							style={{ marginTop: '.5rem', fontSize: '1.2rem' }}
+							disabled={!props.wasCommentEdited}
+							className={`button-generic ${
+								!props.wasCommentEdited && 'button-disabled'
+							}`}
+						>
+							Save
+						</button>
+					</form>
+				)}
 		</section>
 	);
 };

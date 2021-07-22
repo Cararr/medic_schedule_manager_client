@@ -21,7 +21,7 @@ import {
 
 export const CreateSchedules: React.FunctionComponent = () => {
 	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
-		schedules: Utilities.returnEmptyDailyShiftObject(),
+		schedules: Utilities.returnEmptyDailyShift(),
 		homeRehabilitations: [],
 	});
 
@@ -60,7 +60,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 	const clearSchedule = () => {
 		setCurrentSchedule((prev) => ({
 			...prev,
-			schedules: Utilities.returnEmptyDailyShiftObject(),
+			schedules: Utilities.returnEmptyDailyShift(),
 		}));
 	};
 

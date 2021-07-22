@@ -1,4 +1,4 @@
-import { Employee } from '../types';
+import { Employee, Comment } from '../types';
 
 export default class Utilities {
 	static formatDateString(date: Date) {
@@ -11,12 +11,20 @@ export default class Utilities {
 		return user?.role === 'BOSS';
 	}
 
-	static returnEmptyDailyShiftObject() {
+	static returnEmptyDailyShift() {
 		return {
 			KINEZA: new Array(14).fill(null),
 			FIZYKO: new Array(10).fill(null),
 			MASAZ: new Array(4).fill(null),
 			WIZYTY: new Array(1).fill(null),
+		};
+	}
+
+	static returnEmptyComment(): Comment {
+		return {
+			id: 0,
+			date: this.formatDateString(new Date()),
+			content: '',
 		};
 	}
 

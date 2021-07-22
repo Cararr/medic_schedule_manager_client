@@ -15,24 +15,32 @@ import {
 	HomeRehabilitation,
 	WorkStageSpans,
 	CompleteSchedule,
+	Comment,
 } from '../../types';
 import './Schedules.css';
 
 export const Schedules: React.FunctionComponent = () => {
 	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
-		schedules: Utilities.returnEmptyDailyShiftObject(),
+		schedules: Utilities.returnEmptyDailyShift(),
 		homeRehabilitations: [],
 	});
+	const [wasScheduleEdited, setWasScheduleEdited] = useState(false);
 
-	const [comments, setComments] = useState('lol');
-
-	const handleEditComments = ({ target }: ChangeEvent<HTMLTextAreaElement>) =>
-		setComments(target.value);
+	const [comment, setComment] = useState<Comment>(
+		Utilities.returnEmptyComment()
+	);
+	const [wasCommentEdited, setWasCommentEdited] = useState(false);
+	//ZAPISYWANIE: JEŻELI KOMENT O TMY ID BYŁ TO PUT JAK NIE TO POST
+	const handleEditComment = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
+		if (!wasCommentEdited) setWasCommentEdited(true);
+		setComment((prev) => ({ ...prev, content: target.value }));
+	};
 
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
 	const [dateSelected, setDateSelected] = useState(
 		Utilities.formatDateString(new Date())
 	);
+	console.log(comment);
 
 	const [homeRehabilitationsEdited, setHomeRehabilitationsEdited] = useState<
 		number[]
@@ -53,12 +61,15 @@ export const Schedules: React.FunctionComponent = () => {
 	};
 
 	useEffect(() => {
-		setAreChangesSaved(true);
+		setWasScheduleEdited(false);
+		setWasCommentEdited(false);
 		(async function () {
 			const schedules = await Get.schedulesByDate(dateSelected);
 			const homeRehabilitations = await Get.homeRehabilitationsByDate(
 				dateSelected
 			);
+			const comment = await Get.commentByDate(dateSelected);
+			setComment(comment || Utilities.returnEmptyComment());
 			setCurrentSchedule({ schedules, homeRehabilitations });
 			setHomeRehabilitationsEdited([]);
 		})();
@@ -68,8 +79,6 @@ export const Schedules: React.FunctionComponent = () => {
 	useEffect(() => {
 		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
 	}, []);
-
-	const [areChangesSaved, setAreChangesSaved] = useState(true);
 
 	const editSchedule = (
 		cellNumber: number,
@@ -85,7 +94,7 @@ export const Schedules: React.FunctionComponent = () => {
 					currentSchedule.homeRehabilitations[cellNumber].id,
 				]);
 			} else {
-				if (areChangesSaved) setAreChangesSaved(false);
+				if (!wasScheduleEdited) setWasScheduleEdited(true);
 				updatedSchedule.schedules[stationName][cellNumber] = newCellValue;
 			}
 			return updatedSchedule;
@@ -93,7 +102,7 @@ export const Schedules: React.FunctionComponent = () => {
 	};
 
 	const saveScheudle = async () => {
-		setAreChangesSaved(true);
+		setWasScheduleEdited(false);
 		if (currentSchedule.schedules)
 			await Put.schedule(dateSelected, currentSchedule.schedules);
 	};
@@ -153,14 +162,15 @@ export const Schedules: React.FunctionComponent = () => {
 						handleHomeRehabilitationEdit={handleHomeRehabilitationEdit}
 						removeHomeRehabilitation={removeHomeRehabilitation}
 						saveChangedHomeRehabilitation={saveChangedHomeRehabilitation}
-						comments={comments}
-						handleEditComments={handleEditComments}
+						comment={comment}
+						wasCommentEdited={wasCommentEdited}
+						handleEditComment={handleEditComment}
 					/>
 				</main>
 
 				{isUserAdmin && (
 					<ActionPanel
-						areChangesSaved={areChangesSaved}
+						wasScheduleEdited={wasScheduleEdited}
 						saveScheudle={saveScheudle}
 					/>
 				)}

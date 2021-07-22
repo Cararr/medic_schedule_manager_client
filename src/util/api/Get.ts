@@ -43,6 +43,21 @@ export default class Get {
 		}
 	};
 
+	static commentByDate = async (date: string) => {
+		try {
+			const commentResponse = await fetch(
+				`${serverPath}/comments?date=${date}`
+			);
+
+			if (commentResponse.ok) {
+				const jsonRespone = await commentResponse.json();
+				return jsonRespone.comment;
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	static generateSchedule = async (from: string) => {
 		try {
 			const response = await fetch(
