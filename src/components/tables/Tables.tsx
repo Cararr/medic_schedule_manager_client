@@ -27,13 +27,16 @@ interface Props {
 		{ target }: ChangeEvent<HTMLInputElement>,
 		index: number
 	) => void;
-	removeHomeRehabilitation?: (homeRehabilitationId: number) => Promise<void>;
-	saveChangedHomeRehabilitation?: (
+	removeHomeRehabilitation?: (
+		homeRehabilitation: HomeRehabilitation
+	) => Promise<void>;
+	saveHomeRehabilitationChanges?: (
 		homeRehabilitation: HomeRehabilitation
 	) => Promise<void>;
 	comment?: Comment;
 	wasCommentEdited?: boolean;
 	handleEditComment?: ({ target }: ChangeEvent<HTMLTextAreaElement>) => void;
+	saveComment?: (e: React.SyntheticEvent) => Promise<void>;
 }
 
 export const Tables: React.FunctionComponent<Props> = (props) => {
@@ -70,7 +73,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 				props.handleHomeRehabilitationEdit &&
 				props.homeRehabilitationsEdited &&
 				props.removeHomeRehabilitation &&
-				props.saveChangedHomeRehabilitation && (
+				props.saveHomeRehabilitationChanges && (
 					<HomeRehabilitations
 						isUserAdmin={isUserAdmin}
 						editSchedule={props.editSchedule}
@@ -80,7 +83,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 						handleHomeRehabilitationEdit={props.handleHomeRehabilitationEdit}
 						homeRehabilitationsEdited={props.homeRehabilitationsEdited}
 						removeHomeRehabilitation={props.removeHomeRehabilitation}
-						saveChangedHomeRehabilitation={props.saveChangedHomeRehabilitation}
+						saveHomeRehabilitationChanges={props.saveHomeRehabilitationChanges}
 					/>
 				)}
 			{/* Comments section only for view schedules */}
@@ -100,6 +103,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 						/>
 						<button
 							type="submit"
+							onClick={props.saveComment}
 							style={{ marginTop: '.5rem', fontSize: '1.2rem' }}
 							disabled={!props.wasCommentEdited}
 							className={`button-generic ${

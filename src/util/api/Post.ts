@@ -2,6 +2,7 @@ import { serverPath } from '../../config.json';
 import {
 	postSchedulesPayload,
 	CreateHomeRehabilitationForm,
+	Comment,
 } from '../../types';
 
 export default class Post {
@@ -45,6 +46,27 @@ export default class Post {
 				body,
 			});
 			return response;
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	static comment = async (comment: Comment) => {
+		try {
+			const body = JSON.stringify({ comment });
+			const config = {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body,
+			};
+			const response = await fetch(`${serverPath}/comments/`, config);
+			if (response.ok) {
+				const jsonRespone = await response.json();
+				return jsonRespone.comment;
+			}
 		} catch (error) {
 			console.error(error);
 		}

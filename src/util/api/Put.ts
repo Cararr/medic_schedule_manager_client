@@ -1,5 +1,5 @@
 import { serverPath } from '../../config.json';
-import { StationSchedules, HomeRehabilitation } from '../../types';
+import { StationSchedules, HomeRehabilitation, Comment } from '../../types';
 
 export default class Put {
 	static schedule = async (date: string, schedules: StationSchedules) => {
@@ -38,6 +38,30 @@ export default class Put {
 			};
 			const response = await fetch(
 				`${serverPath}/home-rehabilitations/${homeRehabilitation.id}`,
+				config
+			);
+			if (response.ok) {
+				const jsonRespone = await response.json();
+				return jsonRespone;
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	static comment = async (comment: Comment) => {
+		try {
+			const body = JSON.stringify({ comment });
+			const config = {
+				method: 'PUT',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body,
+			};
+			const response = await fetch(
+				`${serverPath}/comments/${comment.id}`,
 				config
 			);
 			if (response.ok) {

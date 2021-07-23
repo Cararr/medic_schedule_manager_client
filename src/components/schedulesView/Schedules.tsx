@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import Get from '../../util/api/Get';
+import Post from '../../util/api/Post';
 import Put from '../../util/api/Put';
 import Delete from '../../util/api/Delete';
 import { EmployeesList } from './EmployeesList';
@@ -20,66 +21,15 @@ import {
 import './Schedules.css';
 
 export const Schedules: React.FunctionComponent = () => {
+	const [dateSelected, setDateSelected] = useState(
+		Utilities.formatDateString(new Date())
+	);
+
 	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
 		schedules: Utilities.returnEmptyDailyShift(),
 		homeRehabilitations: [],
 	});
 	const [wasScheduleEdited, setWasScheduleEdited] = useState(false);
-
-	const [comment, setComment] = useState<Comment>(
-		Utilities.returnEmptyComment()
-	);
-	const [wasCommentEdited, setWasCommentEdited] = useState(false);
-	//ZAPISYWANIE: JEŻELI KOMENT O TMY ID BYŁ TO PUT JAK NIE TO POST
-	const handleEditComment = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
-		if (!wasCommentEdited) setWasCommentEdited(true);
-		setComment((prev) => ({ ...prev, content: target.value }));
-	};
-
-	const [currentlyDragged, setCurrentlyDragged] = useState('');
-	const [dateSelected, setDateSelected] = useState(
-		Utilities.formatDateString(new Date())
-	);
-	console.log(comment);
-
-	const [homeRehabilitationsEdited, setHomeRehabilitationsEdited] = useState<
-		number[]
-	>([]);
-
-	const removeHomeRehabilitation = async (homeRehabilitationId: number) => {
-		if (await Delete.homeRehabilitation(homeRehabilitationId)) {
-			setHomeRehabilitationsEdited((prev) =>
-				prev.filter((id) => id !== homeRehabilitationId)
-			);
-			setCurrentSchedule((prev) => ({
-				...prev,
-				homeRehabilitations: prev.homeRehabilitations.filter(
-					(hR: HomeRehabilitation) => hR.id !== homeRehabilitationId
-				),
-			}));
-		} else genericWarning();
-	};
-
-	useEffect(() => {
-		setWasScheduleEdited(false);
-		setWasCommentEdited(false);
-		(async function () {
-			const schedules = await Get.schedulesByDate(dateSelected);
-			const homeRehabilitations = await Get.homeRehabilitationsByDate(
-				dateSelected
-			);
-			const comment = await Get.commentByDate(dateSelected);
-			setComment(comment || Utilities.returnEmptyComment());
-			setCurrentSchedule({ schedules, homeRehabilitations });
-			setHomeRehabilitationsEdited([]);
-		})();
-	}, [dateSelected]);
-
-	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
-	useEffect(() => {
-		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
-	}, []);
-
 	const editSchedule = (
 		cellNumber: number,
 		stationName: string,
@@ -100,14 +50,53 @@ export const Schedules: React.FunctionComponent = () => {
 			return updatedSchedule;
 		});
 	};
-
 	const saveScheudle = async () => {
 		setWasScheduleEdited(false);
 		if (currentSchedule.schedules)
 			await Put.schedule(dateSelected, currentSchedule.schedules);
 	};
+	const [currentlyDragged, setCurrentlyDragged] = useState('');
 
-	const saveChangedHomeRehabilitation = async (
+	const [comment, setComment] = useState<Comment>(
+		Utilities.returnEmptyComment(dateSelected)
+	);
+	const [wasCommentEdited, setWasCommentEdited] = useState(false);
+	const saveComment = async (e: React.SyntheticEvent) => {
+		e.preventDefault();
+		setWasCommentEdited(false);
+		if (comment.id && !comment.content) {
+			await Delete.comment(comment);
+			setComment(Utilities.returnEmptyComment(dateSelected));
+		} else if (comment.id) await Put.comment(comment);
+		else {
+			const createdComment: Comment = await Post.comment(comment);
+			setComment(createdComment);
+		}
+	};
+	const handleEditComment = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
+		if (!wasCommentEdited) setWasCommentEdited(true);
+		setComment((prev) => ({ ...prev, content: target.value }));
+	};
+
+	const [homeRehabilitationsEdited, setHomeRehabilitationsEdited] = useState<
+		number[]
+	>([]);
+	const removeHomeRehabilitation = async (
+		homeRehabilitation: HomeRehabilitation
+	) => {
+		if (await Delete.homeRehabilitation(homeRehabilitation)) {
+			setHomeRehabilitationsEdited((prev) =>
+				prev.filter((id) => id !== homeRehabilitation.id)
+			);
+			setCurrentSchedule((prev) => ({
+				...prev,
+				homeRehabilitations: prev.homeRehabilitations.filter(
+					(hR: HomeRehabilitation) => hR.id !== homeRehabilitation.id
+				),
+			}));
+		} else genericWarning();
+	};
+	const saveHomeRehabilitationChanges = async (
 		homeRehabilitation: HomeRehabilitation
 	) => {
 		if (!homeRehabilitation.employee) return noEmployeeWarning();
@@ -116,7 +105,6 @@ export const Schedules: React.FunctionComponent = () => {
 				prev.filter((id) => id !== homeRehabilitation.id)
 			);
 	};
-
 	const handleHomeRehabilitationEdit = (
 		{ target }: ChangeEvent<HTMLInputElement>,
 		index: number
@@ -138,6 +126,26 @@ export const Schedules: React.FunctionComponent = () => {
 			return { ...prev, homeRehabilitations };
 		});
 	};
+
+	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
+	useEffect(() => {
+		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
+	}, []);
+
+	useEffect(() => {
+		setWasScheduleEdited(false);
+		setWasCommentEdited(false);
+		(async function () {
+			const schedules = await Get.schedulesByDate(dateSelected);
+			const homeRehabilitations = await Get.homeRehabilitationsByDate(
+				dateSelected
+			);
+			const comment = await Get.commentByDate(dateSelected);
+			setComment(comment || Utilities.returnEmptyComment(dateSelected));
+			setCurrentSchedule({ schedules, homeRehabilitations });
+			setHomeRehabilitationsEdited([]);
+		})();
+	}, [dateSelected]);
 
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 
@@ -161,13 +169,13 @@ export const Schedules: React.FunctionComponent = () => {
 						homeRehabilitationsEdited={homeRehabilitationsEdited}
 						handleHomeRehabilitationEdit={handleHomeRehabilitationEdit}
 						removeHomeRehabilitation={removeHomeRehabilitation}
-						saveChangedHomeRehabilitation={saveChangedHomeRehabilitation}
+						saveHomeRehabilitationChanges={saveHomeRehabilitationChanges}
 						comment={comment}
 						wasCommentEdited={wasCommentEdited}
 						handleEditComment={handleEditComment}
+						saveComment={saveComment}
 					/>
 				</main>
-
 				{isUserAdmin && (
 					<ActionPanel
 						wasScheduleEdited={wasScheduleEdited}

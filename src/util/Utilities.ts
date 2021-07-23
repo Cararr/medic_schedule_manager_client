@@ -20,10 +20,10 @@ export default class Utilities {
 		};
 	}
 
-	static returnEmptyComment(): Comment {
+	static returnEmptyComment(date: string): Comment {
 		return {
 			id: 0,
-			date: this.formatDateString(new Date()),
+			date,
 			content: '',
 		};
 	}

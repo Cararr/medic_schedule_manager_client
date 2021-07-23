@@ -20,13 +20,6 @@ import {
 } from '../../WinBox/winboxMessages';
 
 export const CreateSchedules: React.FunctionComponent = () => {
-	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
-		schedules: Utilities.returnEmptyDailyShift(),
-		homeRehabilitations: [],
-	});
-
-	const [currentlyDragged, setCurrentlyDragged] = useState('');
-
 	const [dateForm, setDateForm] = useState<DateForm>({
 		from: Utilities.formatDateString(new Date()),
 		to: Utilities.formatDateString(Utilities.incrementDateByDay(new Date())),
@@ -34,11 +27,10 @@ export const CreateSchedules: React.FunctionComponent = () => {
 
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
-	useEffect(() => {
-		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
-	}, []);
-
+	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
+		schedules: Utilities.returnEmptyDailyShift(),
+		homeRehabilitations: [],
+	});
 	const editSchedule = (
 		cellNumber: number,
 		stationName: string,
@@ -50,20 +42,17 @@ export const CreateSchedules: React.FunctionComponent = () => {
 			return updatedSchedule;
 		});
 	};
-
 	const autoGenerateSchedule = async () => {
 		Get.generateSchedule(dateForm.from).then((schedules) => {
 			setCurrentSchedule((prev) => (schedules ? { ...prev, schedules } : prev));
 		});
 	};
-
 	const clearSchedule = () => {
 		setCurrentSchedule((prev) => ({
 			...prev,
 			schedules: Utilities.returnEmptyDailyShift(),
 		}));
 	};
-
 	const createSchedules = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		if (!Utilities.checkIfEndDateIsAfterBegin(dateForm.from, dateForm.to))
@@ -79,6 +68,12 @@ export const CreateSchedules: React.FunctionComponent = () => {
 
 		response?.ok ? createdMessage() : genericWarning(170);
 	};
+	const [currentlyDragged, setCurrentlyDragged] = useState('');
+
+	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
+	useEffect(() => {
+		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
+	}, []);
 
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 

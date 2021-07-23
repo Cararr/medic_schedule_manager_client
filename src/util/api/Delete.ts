@@ -1,10 +1,13 @@
 import { serverPath } from '../../config.json';
+import { HomeRehabilitation, Comment } from '../../types';
 
 export default class Delete {
-	static homeRehabilitation = async (homeRehabilitationId: number) => {
+	static homeRehabilitation = async (
+		homeRehabilitation: HomeRehabilitation
+	) => {
 		try {
 			const response = await fetch(
-				`${serverPath}/home-rehabilitations/${homeRehabilitationId}`,
+				`${serverPath}/home-rehabilitations/${homeRehabilitation.id}`,
 				{
 					method: 'DELETE',
 					headers: {
@@ -12,6 +15,20 @@ export default class Delete {
 					},
 				}
 			);
+			return response.ok;
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	static comment = async (comment: Comment) => {
+		try {
+			const response = await fetch(`${serverPath}/comments/${comment.id}`, {
+				method: 'DELETE',
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				},
+			});
 			return response.ok;
 		} catch (error) {
 			console.error(error);

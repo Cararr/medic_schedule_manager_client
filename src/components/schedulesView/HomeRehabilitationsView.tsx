@@ -19,8 +19,10 @@ interface Props {
 		index: number
 	) => void;
 	homeRehabilitationsEdited: number[];
-	removeHomeRehabilitation: (homeRehabilitationId: number) => Promise<void>;
-	saveChangedHomeRehabilitation: (
+	removeHomeRehabilitation: (
+		homeRehabilitation: HomeRehabilitation
+	) => Promise<void>;
+	saveHomeRehabilitationChanges: (
 		homeRehabilitation: HomeRehabilitation
 	) => Promise<void>;
 }
@@ -74,13 +76,13 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 						<td style={{ backgroundColor: 'var(--backgroundYellow)' }}>
 							{wasItEdited && (
 								<i
-									onClick={() => props.saveChangedHomeRehabilitation(hR)}
+									onClick={() => props.saveHomeRehabilitationChanges(hR)}
 									style={{ marginRight: '1rem', fontSize: '1.2rem' }}
 									className="icon-floppy"
 								/>
 							)}
 							<i
-								onClick={() => props.removeHomeRehabilitation(hR.id)}
+								onClick={() => props.removeHomeRehabilitation(hR)}
 								style={{ fontSize: '1.2rem' }}
 								className="icon-trash-empty"
 							/>
