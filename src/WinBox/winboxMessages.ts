@@ -25,7 +25,7 @@ export const genericWarning = (y: number | 'center' = 'center') => {
 		y,
 		html: `<h2>Action aborted, something went wrong. Sorry!</h2>`,
 	};
-	new WinBox('Error', config);
+	return new WinBox('Error', config);
 };
 
 export const loginWarning = (message: string | undefined) => {
@@ -36,7 +36,7 @@ export const loginWarning = (message: string | undefined) => {
 			message || "Can't login right now 😔 Please try again later. "
 		}</h2>`,
 	};
-	new WinBox('Login failed', config);
+	return new WinBox('Login failed', config);
 };
 
 export const accessDeniedWarning = (reason: string) => {
@@ -45,7 +45,7 @@ export const accessDeniedWarning = (reason: string) => {
 		...warningSettings,
 		html: `<h2>${reason}</h2>`,
 	};
-	new WinBox('Access denied!', config);
+	return new WinBox('Access denied!', config);
 };
 
 export const noEmployeeWarning = () => {
@@ -54,7 +54,7 @@ export const noEmployeeWarning = () => {
 		...warningSettings,
 		html: `<h2>An employee must be present at home rehabilitation!</h2>`,
 	};
-	new WinBox('Employee is missing', config);
+	return new WinBox('Employee is missing', config);
 };
 
 export const incorrectDateWarning = () => {
@@ -64,7 +64,7 @@ export const incorrectDateWarning = () => {
 		y: 170,
 		html: `<h2>End date cannot come before the beginning!</h2>`,
 	};
-	new WinBox('Wrong date set!', config);
+	return new WinBox('Wrong date set!', config);
 };
 
 export const createdMessage = () => {
@@ -74,5 +74,5 @@ export const createdMessage = () => {
 		y: 170,
 		html: `<h2>👍</h2>`,
 	};
-	new WinBox('Created!', config);
+	return new WinBox('Created!', config);
 };

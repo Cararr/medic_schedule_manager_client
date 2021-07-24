@@ -90,7 +90,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 			{props.handleHomeRehabilitationEdit &&
 				!isLoading &&
 				(props.comment?.content || isUserAdmin) && (
-					<form className="article-comments">
+					<form className="form-comments">
 						<h3>COMMENTS</h3>
 						<textarea
 							required
@@ -101,17 +101,19 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 							readOnly={!isUserAdmin}
 							className="textarea-comments"
 						/>
-						<button
-							type="submit"
-							onClick={props.saveComment}
-							style={{ marginTop: '.5rem', fontSize: '1.2rem' }}
-							disabled={!props.wasCommentEdited}
-							className={`button-generic ${
-								!props.wasCommentEdited && 'button-disabled'
-							}`}
-						>
-							Save
-						</button>
+						{isUserAdmin && (
+							<button
+								type="submit"
+								onClick={props.saveComment}
+								style={{ marginTop: '.5rem', fontSize: '1.2rem' }}
+								disabled={!props.wasCommentEdited}
+								className={`button-generic ${
+									!props.wasCommentEdited && 'button-disabled'
+								}`}
+							>
+								Save
+							</button>
+						)}
 					</form>
 				)}
 		</section>

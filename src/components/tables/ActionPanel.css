@@ -1,5 +1,4 @@
 .action-panel {
-	box-sizing: border-box;
 	width: 8rem;
 	background-color: var(--backgroundYellow);
 	height: fit-content;

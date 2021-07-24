@@ -99,8 +99,8 @@ export const Schedules: React.FunctionComponent = () => {
 	const saveHomeRehabilitationChanges = async (
 		homeRehabilitation: HomeRehabilitation
 	) => {
-		if (!homeRehabilitation.employee) return noEmployeeWarning();
-		if (await Put.homeRehabilitation(homeRehabilitation))
+		if (!homeRehabilitation.employee) noEmployeeWarning();
+		else if (await Put.homeRehabilitation(homeRehabilitation))
 			setHomeRehabilitationsEdited((prev) =>
 				prev.filter((id) => id !== homeRehabilitation.id)
 			);
