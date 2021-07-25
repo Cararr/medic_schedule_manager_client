@@ -1,0 +1,20 @@
+.main-calendar {
+	width: 80%;
+	margin: 3rem auto;
+}
+.main-calendar td {
+	border: 1px solid black !important;
+}
+.fc-col-header-cell-cushion {
+	font-size: 1.5rem !important;
+	line-height: 2rem !important;
+}
+.fc-icon-chevron-right::before {
+	content: '▶' !important;
+}
+.fc-icon-chevron-left::before {
+	content: '◀' !important;
+}
+.fc-theme-standard .fc-scrollgrid {
+	border: none !important;
+}

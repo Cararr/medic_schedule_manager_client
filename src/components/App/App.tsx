@@ -12,6 +12,7 @@ import { Schedules } from '../schedulesView/Schedules';
 import { LandingPage } from '../landingPage/LandingPage';
 import { HomePage } from '../homePage/HomePage';
 import { Create } from '../create/Create';
+import { Vacations } from '../vacations/Vacations';
 import { NotFound } from '../notFound/NotFound';
 
 const App: React.FunctionComponent = () => {
@@ -23,6 +24,7 @@ const App: React.FunctionComponent = () => {
 						<NonLoggedUsersRoute path="/" exact component={LandingPage} />
 						<LoggedUsersRoute path="/schedules" exact component={Schedules} />
 						<LoggedUsersRoute path="/home" exact component={HomePage} />
+						<LoggedUsersRoute path="/vacations" exact component={Vacations} />
 						<AdminRoute path="/create" component={Create} />
 						<Route path="/" component={NotFound} />
 					</Switch>

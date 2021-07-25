@@ -17,14 +17,14 @@ export const NavBar: React.FunctionComponent = () => {
 	return (
 		<nav className="navbar">
 			{!isThisHomePage && (
-				<Link to="/home">
+				<Link style={{ gridColumnStart: 1, justifySelf: 'start' }} to="/home">
 					<button className="button-generic" type="button">
 						Home
 					</button>
 				</Link>
 			)}
 			<h3 className="header-navbar">{`${user?.firstName} ${user?.lastName}`}</h3>
-			<Link to="/">
+			<Link style={{ gridColumnStart: 3, justifySelf: 'end' }} to="/">
 				<button onClick={logOut} className="button-generic" type="button">
 					Log out
 				</button>
