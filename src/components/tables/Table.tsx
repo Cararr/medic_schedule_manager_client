@@ -25,7 +25,7 @@ export const Table: React.FunctionComponent<Props> = (props) => {
 						? [invisibleCell(0), invisibleCell(1)]
 						: undefined}
 					<td
-						className="table-title"
+						className=" table-title"
 						colSpan={props.stationName === 'WIZYTY' ? 1 : 4}
 					>
 						{props.stationName}
@@ -45,7 +45,7 @@ export const Table: React.FunctionComponent<Props> = (props) => {
 };
 
 function invisibleCell(key?: number) {
-	return <td key={key} style={{ border: 'none' }} className="blank_cell" />;
+	return <td key={key} style={{ border: 'none' }} />;
 }
 
 function returnWorkStageSpans(

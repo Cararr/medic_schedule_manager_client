@@ -1,5 +1,5 @@
 .table-title {
 	font-weight: bold;
 	letter-spacing: 1px;
-	background-color: var(--backgroundViolet);
+	background-color: var(--backgroundViolet) !important;
 }
