@@ -10,7 +10,7 @@ import { NavBar } from '../navBar/NavBar';
 import { SelectDate } from '../tables/SelectDate';
 import Utilities from '../../util/Utilities';
 import { useUser } from '../../context/userContext';
-import { genericWarning, noEmployeeWarning } from '../../WinBox/winboxMessages';
+import { warningMessage } from '../../WinBox/winboxMessages';
 import {
 	Employee,
 	HomeRehabilitation,
@@ -94,12 +94,17 @@ export const Schedules: React.FunctionComponent = () => {
 					(hR: HomeRehabilitation) => hR.id !== homeRehabilitation.id
 				),
 			}));
-		} else genericWarning();
+		} else
+			warningMessage('Error', 'Action aborted, something went wrong. Sorry!');
 	};
 	const saveHomeRehabilitationChanges = async (
 		homeRehabilitation: HomeRehabilitation
 	) => {
-		if (!homeRehabilitation.employee) noEmployeeWarning();
+		if (!homeRehabilitation.employee)
+			warningMessage(
+				'Employee is missing',
+				'An employee must be present at home rehabilitation!'
+			);
 		else if (await Put.homeRehabilitation(homeRehabilitation))
 			setHomeRehabilitationsEdited((prev) =>
 				prev.filter((id) => id !== homeRehabilitation.id)

@@ -1,6 +1,6 @@
 import { Route, Redirect } from 'react-router-dom';
 import { useUser } from '../context/userContext';
-import { accessDeniedWarning } from '../WinBox/winboxMessages';
+import { warningMessage } from '../WinBox/winboxMessages';
 import Utilities from '../util/Utilities';
 import { RoutingProperties } from '../types';
 
@@ -16,14 +16,18 @@ export const AdminRoute = ({
 				if (Utilities.checkIfUserIsAdmin(user)) return <Component {...props} />;
 				else if (user) {
 					setTimeout(() => {
-						accessDeniedWarning(
+						warningMessage(
+							'Access denied!',
 							'You are not authorized to visit this section!'
 						);
 					}, 1);
 					return <Redirect to={{ pathname: '/home' }} />;
 				} else {
 					setTimeout(() => {
-						accessDeniedWarning('You must be logged to access this page!');
+						warningMessage(
+							'Access denied!',
+							'You must be logged to access this page!'
+						);
 					}, 1);
 					return <Redirect to={{ pathname: '/' }} />;
 				}

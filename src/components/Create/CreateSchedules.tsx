@@ -13,11 +13,7 @@ import {
 	DateForm,
 } from '../../types';
 import './CreateSchedules.css';
-import {
-	incorrectDateWarning,
-	createdMessage,
-	genericWarning,
-} from '../../WinBox/winboxMessages';
+import { createdMessage, warningMessage } from '../../WinBox/winboxMessages';
 
 export const CreateSchedules: React.FunctionComponent = () => {
 	const [dateForm, setDateForm] = useState<DateForm>({
@@ -56,7 +52,11 @@ export const CreateSchedules: React.FunctionComponent = () => {
 	const createSchedules = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		if (!Utilities.checkIfEndDateIsAfterBegin(dateForm.from, dateForm.to))
-			return incorrectDateWarning();
+			warningMessage(
+				'Wrong date set!',
+				'End date cannot come before the beginning!',
+				170
+			);
 
 		setIsLoading(true);
 		const response = await Post.schedules({
@@ -66,7 +66,13 @@ export const CreateSchedules: React.FunctionComponent = () => {
 		});
 		setIsLoading(false);
 
-		response?.ok ? createdMessage() : genericWarning(170);
+		response?.ok
+			? createdMessage()
+			: warningMessage(
+					'Error',
+					'Action aborted, something went wrong. Sorry!',
+					170
+			  );
 	};
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
 

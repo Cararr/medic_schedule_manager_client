@@ -2,7 +2,7 @@ import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { useEmployees } from '../../context/employeesContext';
 import Post from '../../util/api/Post';
 import Utilities from '../../util/Utilities';
-import { incorrectDateWarning } from '../../WinBox/winboxMessages';
+import { warningMessage } from '../../WinBox/winboxMessages';
 import { CreateHomeRehabilitationForm } from '../../types';
 import './CreateHomeRehabilitation.css';
 
@@ -48,7 +48,11 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 				formValues.dateEnd
 			)
 		)
-			return incorrectDateWarning();
+			return warningMessage(
+				'Wrong date set!',
+				'End date cannot come before the beginning!',
+				170
+			);
 
 		const loading = <i className="icon-spin6" style={{ fontSize: '5rem' }} />;
 		setSubmitResponse(

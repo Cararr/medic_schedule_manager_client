@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import LandingImage from '../../resources/images/LandingImage.jpg';
 import { LoginPanel } from './LoginPanel';
-import { loginWarning } from '../../WinBox/winboxMessages';
+import { warningMessage } from '../../WinBox/winboxMessages';
 import { login } from '../../util/login';
 import { useChangeUser } from '../../context/userContext';
 import { useEmployees, useLoadEmployees } from '../../context/employeesContext';
@@ -36,7 +36,7 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 			history.push('/home');
 		} else {
 			setLoginInputValue(returnEmptyLoginValues());
-			loginWarning(loginReponse?.message);
+			warningMessage('Login failed', loginReponse?.message);
 			setIsLoginOn(false);
 		}
 	};
