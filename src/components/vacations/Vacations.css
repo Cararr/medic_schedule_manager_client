@@ -1,13 +1,34 @@
 .main-calendar {
-	width: 80%;
-	margin: 3rem auto;
+	width: 60rem;
+	margin: 2rem auto;
+	background-color: var(--backgroundYellow);
+	border: 1px solid black;
+	border-radius: 15px;
+	padding: 1rem;
 }
-
-.fc-theme-standard td {
+.fc-daygrid-body {
 	border: 1px solid black !important;
 }
 .fc-col-header-cell-cushion {
 	font-size: 1.5rem;
 	line-height: 2rem;
 }
-/* DOPRACUJ STYLE */
+.fc-scrollgrid-section-body {
+	background-color: #fff;
+}
+.fc-col-header {
+	background-color: var(--backgroundViolet);
+	border: 1px solid black !important;
+}
+.fc-daygrid-day {
+	height: 6rem;
+}
+.fc-col-header-cell {
+	border: none !important;
+}
+.fc-view-harness-active {
+	border-radius: 1rem !important;
+}
+.fc .fc-daygrid-day.fc-day-today {
+	background-color: rgba(134, 163, 28, 0.15) !important;
+}
