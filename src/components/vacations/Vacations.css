@@ -7,7 +7,9 @@
 	padding: 1rem;
 }
 .fc-daygrid-body {
-	border: 1px solid black !important;
+	border-bottom: 1px solid black !important;
+	border-left: 1px solid black !important;
+	border-right: 1px solid black !important;
 }
 .fc-col-header-cell-cushion {
 	font-size: 1.5rem;
@@ -29,6 +31,13 @@
 .fc-view-harness-active {
 	border-radius: 1rem !important;
 }
-.fc .fc-daygrid-day.fc-day-today {
+.fc-daygrid-day.fc-day-today {
 	background-color: rgba(134, 163, 28, 0.15) !important;
+}
+.fc-daygrid-day-number {
+	padding: 10px !important;
+}
+td.fc-day-sat,
+td.fc-day-sun {
+	background-color: rgba(206, 63, 20, 0.15) !important;
 }

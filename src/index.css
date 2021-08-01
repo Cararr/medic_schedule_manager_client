@@ -19,8 +19,3 @@ body {
 	background-color: var(--backgroundTheme);
 	color: var(--fontColor);
 }
-
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-		monospace;
-}
