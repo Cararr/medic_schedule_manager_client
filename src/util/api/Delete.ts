@@ -1,4 +1,4 @@
-import { serverPath } from '../../config.json';
+import { PATH } from '../../config.json';
 import { HomeRehabilitation, Comment } from '../../types';
 
 export default class Delete {
@@ -7,7 +7,7 @@ export default class Delete {
 	) => {
 		try {
 			const response = await fetch(
-				`${serverPath}/home-rehabilitations/${homeRehabilitation.id}`,
+				`${PATH}/home-rehabilitations/${homeRehabilitation.id}`,
 				{
 					method: 'DELETE',
 					headers: {
@@ -23,7 +23,7 @@ export default class Delete {
 
 	static comment = async (comment: Comment) => {
 		try {
-			const response = await fetch(`${serverPath}/comments/${comment.id}`, {
+			const response = await fetch(`${PATH}/comments/${comment.id}`, {
 				method: 'DELETE',
 				headers: {
 					'Content-type': 'application/json; charset=UTF-8',

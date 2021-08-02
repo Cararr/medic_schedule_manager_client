@@ -1,4 +1,4 @@
-import { serverPath } from '../../config.json';
+import { PATH } from '../../config.json';
 import { StationSchedules, HomeRehabilitation, Comment } from '../../types';
 
 export default class Put {
@@ -13,7 +13,7 @@ export default class Put {
 				},
 				body,
 			};
-			const response = await fetch(`${serverPath}/schedules/${date}`, config);
+			const response = await fetch(`${PATH}/schedules/${date}`, config);
 			if (response.ok) {
 				const jsonRespone = await response.json();
 				return jsonRespone;
@@ -37,7 +37,7 @@ export default class Put {
 				body,
 			};
 			const response = await fetch(
-				`${serverPath}/home-rehabilitations/${homeRehabilitation.id}`,
+				`${PATH}/home-rehabilitations/${homeRehabilitation.id}`,
 				config
 			);
 			if (response.ok) {
@@ -60,10 +60,7 @@ export default class Put {
 				},
 				body,
 			};
-			const response = await fetch(
-				`${serverPath}/comments/${comment.id}`,
-				config
-			);
+			const response = await fetch(`${PATH}/comments/${comment.id}`, config);
 			if (response.ok) {
 				const jsonRespone = await response.json();
 				return jsonRespone;

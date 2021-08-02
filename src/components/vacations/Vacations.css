@@ -5,6 +5,8 @@
 	border: 1px solid black;
 	border-radius: 15px;
 	padding: 1rem;
+	min-height: 800px;
+	text-align: center;
 }
 .fc-daygrid-body {
 	border-bottom: 1px solid black !important;
@@ -40,4 +42,7 @@
 td.fc-day-sat,
 td.fc-day-sun {
 	background-color: rgba(206, 63, 20, 0.15) !important;
+}
+.fc-event-title-container {
+	text-align: center;
 }

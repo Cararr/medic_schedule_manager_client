@@ -1,9 +1,9 @@
-import { serverPath } from '../../config.json';
+import { PATH } from '../../config.json';
 
 export default class Get {
 	static employees = async () => {
 		try {
-			const response = await fetch(`${serverPath}/employees`);
+			const response = await fetch(`${PATH}/employees`);
 			if (response.ok) {
 				const jsonRespone = await response.json();
 				return jsonRespone.employees;
@@ -15,7 +15,7 @@ export default class Get {
 
 	static workStageSpans = async () => {
 		try {
-			const response = await fetch(`${serverPath}/workstagespans`);
+			const response = await fetch(`${PATH}/workstagespans`);
 			if (response.ok) {
 				const jsonRespone = await response.json();
 				return jsonRespone.workStageSpans;
@@ -27,11 +27,9 @@ export default class Get {
 
 	static schedulesByDate = async (date: string) => {
 		try {
-			const schedulesResponse = await fetch(
-				`${serverPath}/schedules?date=${date}`
-			);
+			const schedulesResponse = await fetch(`${PATH}/schedules?date=${date}`);
 			const homeRehabilitationsResponse = await fetch(
-				`${serverPath}/home-rehabilitations?date=${date}`
+				`${PATH}/home-rehabilitations?date=${date}`
 			);
 
 			if (schedulesResponse.ok && homeRehabilitationsResponse.ok) {
@@ -45,9 +43,7 @@ export default class Get {
 
 	static commentByDate = async (date: string) => {
 		try {
-			const commentResponse = await fetch(
-				`${serverPath}/comments?date=${date}`
-			);
+			const commentResponse = await fetch(`${PATH}/comments?date=${date}`);
 
 			if (commentResponse.ok) {
 				const jsonRespone = await commentResponse.json();
@@ -60,9 +56,7 @@ export default class Get {
 
 	static generateSchedule = async (from: string) => {
 		try {
-			const response = await fetch(
-				`${serverPath}/schedules/generate?date=${from}`
-			);
+			const response = await fetch(`${PATH}/schedules/generate?date=${from}`);
 			if (response.ok) {
 				const jsonRespone = await response.json();
 				return jsonRespone.generatedSchedule;
@@ -74,12 +68,22 @@ export default class Get {
 
 	static homeRehabilitationsByDate = async (date: string) => {
 		try {
-			const response = await fetch(
-				`${serverPath}/home-rehabilitations?date=${date}`
-			);
+			const response = await fetch(`${PATH}/home-rehabilitations?date=${date}`);
 			if (response.ok) {
 				const jsonRespone = await response.json();
 				return jsonRespone.homeRehabilitations;
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	static vacationsByYear = async (year: number) => {
+		try {
+			const response = await fetch(`${PATH}/vacations?year=${year}`);
+			if (response.ok) {
+				const jsonRespone = await response.json();
+				return jsonRespone.vacations;
 			}
 		} catch (error) {
 			console.error(error);

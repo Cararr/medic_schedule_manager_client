@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavBar } from '../navBar/NavBar';
 import './Vacations.css';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import Get from '../../util/api/Get';
+import Utilities from '../../util/Utilities';
+import { Vacation } from '../../types';
 
 export const Vacations: React.FunctionComponent = () => {
 	const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-	const events = [
-		{ title: 'event 1', date: '2021-06-01', color: 'red' },
-		{
-			title: 'event 2',
-			start: '2021-07-01',
-			end: '2021-07-06',
-			color: 'green',
-		},
-		{ title: 'event 2', date: '2021-07-01' },
-	];
+	const [vacations, setVacations] = useState([]);
+
+	useEffect(() => {
+		setVacations([]);
+		(async function () {
+			const annualVacations = await Get.vacationsByYear(selectedYear);
+			if (annualVacations)
+				setVacations(
+					annualVacations.map((vacation: Vacation) => ({
+						title: `${vacation.employee.firstName} ${vacation.employee.lastName}`,
+						start: vacation.from,
+						end: Utilities.formatDateString(
+							Utilities.incrementDateByDay(new Date(vacation.to))
+						),
+					}))
+				);
+		})();
+	}, [selectedYear]);
 
 	return (
 		<div>
@@ -31,7 +42,7 @@ export const Vacations: React.FunctionComponent = () => {
 						if (displayedYear !== selectedYear) setSelectedYear(displayedYear);
 					}}
 					headerToolbar={{ left: 'prevYear nextYear', center: 'title' }}
-					events={events}
+					events={vacations}
 					height="auto"
 					plugins={[dayGridPlugin]}
 					locale={'pl'}

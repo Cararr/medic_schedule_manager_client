@@ -1,4 +1,4 @@
-import { serverPath } from '../../config.json';
+import { PATH } from '../../config.json';
 import {
 	postSchedulesPayload,
 	CreateHomeRehabilitationForm,
@@ -20,7 +20,7 @@ export default class Post {
 		};
 
 		try {
-			const response = await fetch(`${serverPath}/home-rehabilitations`, {
+			const response = await fetch(`${PATH}/home-rehabilitations`, {
 				method: 'POST',
 				headers: {
 					Accept: 'application/json',
@@ -37,7 +37,7 @@ export default class Post {
 	static schedules = async (payload: postSchedulesPayload) => {
 		const body = JSON.stringify(payload);
 		try {
-			const response = await fetch(`${serverPath}/schedules`, {
+			const response = await fetch(`${PATH}/schedules`, {
 				method: 'POST',
 				headers: {
 					Accept: 'application/json',
@@ -62,7 +62,7 @@ export default class Post {
 				},
 				body,
 			};
-			const response = await fetch(`${serverPath}/comments/`, config);
+			const response = await fetch(`${PATH}/comments/`, config);
 			if (response.ok) {
 				const jsonRespone = await response.json();
 				return jsonRespone.comment;

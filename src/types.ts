@@ -76,3 +76,10 @@ export interface Comment {
 	date: string;
 	content: string;
 }
+
+export interface Vacation {
+	id: number;
+	from: string;
+	to: string;
+	employee: Employee;
+}

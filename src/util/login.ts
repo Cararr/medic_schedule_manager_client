@@ -1,4 +1,4 @@
-import { serverPath } from '../config.json';
+import { PATH } from '../config.json';
 
 export const login = async (inputValues: {}) => {
 	try {
@@ -11,7 +11,7 @@ export const login = async (inputValues: {}) => {
 			},
 			body,
 		};
-		const response = await fetch(`${serverPath}/login`, config);
+		const response = await fetch(`${PATH}/login`, config);
 		if ([201, 400, 401].includes(response.status)) {
 			const jsonRespone = await response.json();
 			jsonRespone.passed = response.ok;
