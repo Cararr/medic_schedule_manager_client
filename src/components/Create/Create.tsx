@@ -4,8 +4,9 @@ import VacationsImage from '../../resources/images/VacationsImage.png';
 import HomeImage from '../../resources/images/HomeImage.png';
 import { NavBar } from '../navBar/NavBar';
 import { CardsContainer } from '../cardsContainer/CardsContainer';
-import { CreateHomeRehabilitation } from './CreateHomeRehabilitation';
 import { CreateSchedules } from './CreateSchedules';
+import { CreateVacation } from './CreateVacation';
+import { CreateHomeRehabilitation } from './CreateHomeRehabilitation';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import './Create.css';
 
@@ -40,7 +41,7 @@ export const Create: React.FunctionComponent = () => {
 					<CreateSchedules />
 				</Route>
 				<Route exact path={`${path}/vacations`}>
-					<h3>vacations</h3>
+					<CreateVacation />
 				</Route>
 				<Route exact path={`${path}/home-rehabilitaitons`}>
 					<CreateHomeRehabilitation />

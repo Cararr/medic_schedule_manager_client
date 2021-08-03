@@ -1,51 +1,49 @@
-.section-create-home-rehabilitation {
+.section-create {
 	background-color: var(--backgroundYellow);
 	border: 3px solid black;
 	border-radius: 5px;
 	width: clamp(25rem, 80%, 30rem);
-	height: 29rem;
 	margin: 2rem auto 1rem auto;
 	padding: 0.5rem;
 	position: relative;
 }
-.response-create-home-rehabilitation {
+.response-create {
 	text-align: center;
 	font-size: 2rem;
-	margin-top: 8rem;
 }
-.response-create-home-rehabilitation button {
+.response-create button {
 	font-size: 1.5rem;
 }
-.header-create-home-rehabilitation {
+.header-create {
 	text-align: center;
 	margin-top: 0.5rem;
 }
-.form-create-home-rehabilitation {
+.form-create {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
-.form-create-home-rehabilitation label {
+.form-create label {
 	margin-bottom: 0.5rem;
 	font-weight: bold;
 }
-.form-create-home-rehabilitation input,
-.form-create-home-rehabilitation select {
+.form-create input,
+.form-create select {
 	width: 10rem;
 	font-size: 1rem;
 	border-radius: 5px;
 	margin-bottom: 1rem;
 	text-align: center;
 }
-.form-create-home-rehabilitation select {
+.form-create select {
 	background-color: var(--backgroundViolet);
 }
-.form-create-home-rehabilitation input[type='date'],
-.form-create-home-rehabilitation input[type='time'] {
+.form-create input[type='date'],
+.form-create input[type='time'] {
 	width: fit-content;
 }
-.form-create-home-rehabilitation button {
+.form-create button {
 	margin-top: 1rem;
 	margin-bottom: 1rem;
 	font-size: 1.5rem;

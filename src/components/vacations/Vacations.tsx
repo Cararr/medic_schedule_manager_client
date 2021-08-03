@@ -19,6 +19,7 @@ export const Vacations: React.FunctionComponent = () => {
 				setVacations(
 					annualVacations.map((vacation: Vacation) => ({
 						title: `${vacation.employee.firstName} ${vacation.employee.lastName}`,
+						color: Utilities.returnColorPerEmployee(vacation.employee.lastName),
 						start: vacation.from,
 						end: Utilities.formatDateString(
 							Utilities.incrementDateByDay(new Date(vacation.to))

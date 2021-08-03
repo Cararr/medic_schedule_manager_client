@@ -3,9 +3,45 @@ import {
 	postSchedulesPayload,
 	CreateHomeRehabilitationForm,
 	Comment,
+	CreateVacationForm,
 } from '../../types';
 
 export default class Post {
+	static schedules = async (payload: postSchedulesPayload) => {
+		const body = JSON.stringify(payload);
+		try {
+			const response = await fetch(`${PATH}/schedules`, {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body,
+			});
+			return response;
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	static vacation = async (vacation: CreateVacationForm) => {
+		try {
+			const body = JSON.stringify({ vacation });
+			const config = {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body,
+			};
+			const response = await fetch(`${PATH}/vacations/`, config);
+			return response;
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	static homeRehabilitations = async (
 		homeRehabilitationConfig: CreateHomeRehabilitationForm
 	) => {
@@ -27,23 +63,6 @@ export default class Post {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify(body),
-			});
-			return response;
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	static schedules = async (payload: postSchedulesPayload) => {
-		const body = JSON.stringify(payload);
-		try {
-			const response = await fetch(`${PATH}/schedules`, {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body,
 			});
 			return response;
 		} catch (error) {

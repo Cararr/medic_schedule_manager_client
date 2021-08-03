@@ -3,12 +3,12 @@ import { useEmployees } from '../../context/employeesContext';
 import Post from '../../util/api/Post';
 import Utilities from '../../util/Utilities';
 import { warningMessage } from '../../WinBox/winboxMessages';
-import { CreateHomeRehabilitationForm } from '../../types';
+import { CreateVacationForm } from '../../types';
 import './CreateForm.css';
 
-export const CreateHomeRehabilitation: React.FunctionComponent = () => {
+export const CreateVacation: React.FunctionComponent = () => {
 	const employees = useEmployees();
-	const [formValues, setFormValues] = useState<CreateHomeRehabilitationForm>(
+	const [formValues, setFormValues] = useState<CreateVacationForm>(
 		returnEmptyForm()
 	);
 
@@ -42,12 +42,7 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 
 	const handleSubmit = async (e: SyntheticEvent) => {
 		e.preventDefault();
-		if (
-			!Utilities.checkIfEndDateIsAfterBegin(
-				formValues.dateBegin,
-				formValues.dateEnd
-			)
-		)
+		if (!Utilities.checkIfEndDateIsAfterBegin(formValues.from, formValues.to))
 			return warningMessage(
 				'Wrong date set!',
 				'End date cannot come before the beginning!',
@@ -55,19 +50,19 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 			);
 
 		setSubmitResponse(
-			<div style={{ marginTop: '8rem' }} className="response-create">
+			<div className="response-create" style={{ marginTop: '5rem' }}>
 				{<i className="icon-spin6" style={{ fontSize: '5rem' }} />}
 			</div>
 		);
 
 		const failMessage = 'Create failed. Reason: ';
-		const response = await Post.homeRehabilitations(formValues);
+		const response = await Post.vacation(formValues);
 		const jsonResponse =
 			response?.status === 500 ? 'server failed' : await response?.json();
 
 		setSubmitResponse(
 			<div
-				style={{ marginTop: response?.ok ? '8rem' : 0 }}
+				style={{ marginTop: response?.ok ? '5rem' : 0 }}
 				className="response-create"
 			>
 				<h3>
@@ -83,8 +78,8 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 	};
 
 	return (
-		<section className="section-create" style={{ height: '29rem' }}>
-			<h2 className="header-create">Create home rehabilitation</h2>
+		<section className="section-create" style={{ height: '21rem' }}>
+			<h2 className="header-create">Create vacation</h2>
 			{submitResponse || (
 				<form onSubmit={handleSubmit} className="form-create">
 					<label>Employee</label>
@@ -92,41 +87,24 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 						{employeesListOptions}
 					</select>
 
-					<label>Patient</label>
-					<input
-						maxLength={250}
-						onChange={handleChange}
-						value={formValues.patient}
-						name="patient"
-						required
-					/>
-
-					<label>Starts at</label>
-					<input
-						onChange={handleChange}
-						value={Utilities.formatTimeView(formValues.startTime)}
-						name="startTime"
-						required
-						type="time"
-					/>
-
 					<label>Start date</label>
 					<input
 						onChange={handleChange}
-						value={formValues.dateBegin}
-						name="dateBegin"
-						type="date"
+						value={formValues.from}
+						name="from"
 						required
+						type="date"
 					/>
 
 					<label>End date</label>
 					<input
 						onChange={handleChange}
-						value={formValues.dateEnd}
-						name="dateEnd"
+						value={formValues.to}
+						name="to"
 						type="date"
 						required
 					/>
+
 					<button className="button-generic" type="submit">
 						Create
 					</button>
@@ -149,14 +127,10 @@ function returnValueByInputName(
 	}
 }
 
-function returnEmptyForm(): CreateHomeRehabilitationForm {
+function returnEmptyForm(): CreateVacationForm {
 	return {
 		employee: null,
-		patient: '',
-		startTime: '',
-		dateBegin: Utilities.formatDateString(new Date()),
-		dateEnd: Utilities.formatDateString(
-			Utilities.incrementDateByDay(new Date())
-		),
+		from: Utilities.formatDateString(new Date()),
+		to: Utilities.formatDateString(Utilities.incrementDateByDay(new Date())),
 	};
 }

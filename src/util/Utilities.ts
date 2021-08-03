@@ -39,4 +39,29 @@ export default class Utilities {
 	static checkIfEndDateIsAfterBegin(startDate: string, endDate: string) {
 		return new Date(endDate) >= new Date(startDate);
 	}
+
+	static returnColorPerEmployee(lastName: string): string {
+		switch (lastName) {
+			case 'Ka.':
+				return 'black';
+			case 'Ks.':
+				return '';
+			case 'Ku.':
+				return 'deeppink';
+			case 'P.':
+				return 'brown';
+			case 'S.':
+				return 'darkgoldenrod';
+			case 'T.':
+				return 'darkolivegreen';
+			case 'W-N.':
+				return 'navy';
+			case 'Wó.':
+				return 'orange';
+			case 'Sz.':
+				return 'red';
+			default:
+				return '';
+		}
+	}
 }

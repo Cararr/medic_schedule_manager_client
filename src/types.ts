@@ -71,6 +71,12 @@ export interface CreateHomeRehabilitationForm {
 	dateEnd: string;
 }
 
+export interface CreateVacationForm {
+	employee: Employee | null;
+	from: string;
+	to: string;
+}
+
 export interface Comment {
 	id: number;
 	date: string;
