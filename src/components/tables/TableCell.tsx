@@ -75,6 +75,7 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 			onDragStart={isUserAdmin ? handleOnDragStart : undefined}
 			onDragOver={isUserAdmin ? handleOnDragOver : undefined}
 			onDrop={isUserAdmin ? handleDrop : undefined}
+			onDragEnd={() => console.log(1)}
 			className={className}
 		>
 			{props.cellValue &&

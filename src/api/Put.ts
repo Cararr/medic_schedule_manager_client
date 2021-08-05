@@ -1,5 +1,5 @@
-import { PATH } from '../../config.json';
-import { StationSchedules, HomeRehabilitation, Comment } from '../../types';
+import { PATH } from '../config.json';
+import { StationSchedules, HomeRehabilitation, Comment } from '../types';
 
 export default class Put {
 	static schedule = async (date: string, schedules: StationSchedules) => {

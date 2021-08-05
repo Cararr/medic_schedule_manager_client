@@ -9,6 +9,7 @@ import {
 	HomeRehabilitation,
 	CompleteSchedule,
 	Comment,
+	StationName,
 } from '../../types';
 import './Tables.css';
 
@@ -122,13 +123,13 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 
 function returnIndexByStation(stationName: string) {
 	switch (stationName) {
-		case 'KINEZA':
+		case StationName.KINEZA:
 			return 0;
-		case 'FIZYKO':
+		case StationName.FIZYKO:
 			return 1;
-		case 'MASAZ':
+		case StationName.MASAZ:
 			return 2;
-		case 'WIZYTY':
+		case StationName.WIZYTY:
 			return 3;
 		default:
 			console.error('Station name not recognized.');

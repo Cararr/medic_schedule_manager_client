@@ -1,4 +1,4 @@
-import { Employee, Comment } from '../types';
+import { Employee, Comment, StationSchedules } from '../types';
 
 export default class Utilities {
 	static formatDateString(date: Date) {
@@ -11,7 +11,7 @@ export default class Utilities {
 		return user?.role === 'BOSS';
 	}
 
-	static returnEmptyDailyShift() {
+	static returnEmptyDailyShift(): StationSchedules {
 		return {
 			KINEZA: new Array(14).fill(null),
 			FIZYKO: new Array(10).fill(null),

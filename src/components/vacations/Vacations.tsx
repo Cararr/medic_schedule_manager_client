@@ -3,7 +3,7 @@ import { NavBar } from '../navBar/NavBar';
 import './Vacations.css';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import Get from '../../util/api/Get';
+import Get from '../../api/Get';
 import Utilities from '../../util/Utilities';
 import { Vacation } from '../../types';
 

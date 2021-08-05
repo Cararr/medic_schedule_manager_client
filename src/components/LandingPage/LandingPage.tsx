@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import LandingImage from '../../resources/images/LandingImage.jpg';
 import { LoginPanel } from './LoginPanel';
 import { warningMessage } from '../../WinBox/winboxMessages';
-import { login } from '../../util/login';
+import { login } from '../../api/login';
 import { useChangeUser } from '../../context/userContext';
 import { useEmployees, useLoadEmployees } from '../../context/employeesContext';
 import { RouteComponentProps } from 'react-router-dom';

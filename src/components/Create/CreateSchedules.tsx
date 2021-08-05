@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Get from '../../util/api/Get';
-import Post from '../../util/api/Post';
+import Get from '../../api/Get';
+import Post from '../../api/Post';
 import { EmployeesList } from '../schedulesView/EmployeesList';
 import { Tables } from '../tables/Tables';
 import { ActionPanel } from '../tables/ActionPanel';

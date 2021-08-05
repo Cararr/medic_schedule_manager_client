@@ -1,6 +1,6 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { useEmployees } from '../../context/employeesContext';
-import Post from '../../util/api/Post';
+import Post from '../../api/Post';
 import Utilities from '../../util/Utilities';
 import { warningMessage } from '../../WinBox/winboxMessages';
 import { CreateVacationForm } from '../../types';

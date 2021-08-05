@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, ReactNode } from 'react';
-import Get from '../util/api/Get';
+import Get from '../api/Get';
 import { Employee } from '../types';
 
 const EmployeesContext = React.createContext<Employee[]>([]);

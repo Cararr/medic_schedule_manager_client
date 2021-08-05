@@ -1,4 +1,4 @@
-import { PATH } from '../../config.json';
+import { PATH } from '../config.json';
 
 export default class Get {
 	static employees = async () => {

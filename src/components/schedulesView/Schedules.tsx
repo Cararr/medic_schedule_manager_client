@@ -1,8 +1,8 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import Get from '../../util/api/Get';
-import Post from '../../util/api/Post';
-import Put from '../../util/api/Put';
-import Delete from '../../util/api/Delete';
+import Get from '../../api/Get';
+import Post from '../../api/Post';
+import Put from '../../api/Put';
+import Delete from '../../api/Delete';
 import { EmployeesList } from './EmployeesList';
 import { Tables } from '../tables/Tables';
 import { ActionPanel } from '../tables/ActionPanel';
@@ -18,6 +18,7 @@ import {
 	CompleteSchedule,
 	Comment,
 } from '../../types';
+import _ from 'lodash';
 import './Schedules.css';
 
 export const Schedules: React.FunctionComponent = () => {
@@ -25,6 +26,9 @@ export const Schedules: React.FunctionComponent = () => {
 		Utilities.formatDateString(new Date())
 	);
 
+	const [initialSchedule, setInitialSchedule] = useState({
+		schedules: Utilities.returnEmptyDailyShift(),
+	});
 	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
 		schedules: Utilities.returnEmptyDailyShift(),
 		homeRehabilitations: [],
@@ -147,7 +151,11 @@ export const Schedules: React.FunctionComponent = () => {
 			);
 			const comment = await Get.commentByDate(dateSelected);
 			setComment(comment || Utilities.returnEmptyComment(dateSelected));
-			setCurrentSchedule({ schedules, homeRehabilitations });
+			setInitialSchedule({ schedules });
+			setCurrentSchedule({
+				schedules: _.cloneDeep(schedules),
+				homeRehabilitations,
+			});
 			setHomeRehabilitationsEdited([]);
 		})();
 	}, [dateSelected]);

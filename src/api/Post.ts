@@ -1,10 +1,10 @@
-import { PATH } from '../../config.json';
+import { PATH } from '../config.json';
 import {
 	postSchedulesPayload,
 	CreateHomeRehabilitationForm,
 	Comment,
 	CreateVacationForm,
-} from '../../types';
+} from '../types';
 
 export default class Post {
 	static schedules = async (payload: postSchedulesPayload) => {

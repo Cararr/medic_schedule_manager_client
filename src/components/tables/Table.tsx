@@ -1,7 +1,7 @@
 import React from 'react';
 import { TableCell } from './TableCell';
 import './Table.css';
-import { WorkStageSpans, Employee } from '../../types';
+import { WorkStageSpans, Employee, StationName } from '../../types';
 
 interface Props {
 	stationName: string;
@@ -21,12 +21,12 @@ export const Table: React.FunctionComponent<Props> = (props) => {
 		<table className="table-station">
 			<thead>
 				<tr>
-					{props.stationName === 'WIZYTY'
+					{props.stationName === StationName.WIZYTY
 						? [invisibleCell(0), invisibleCell(1)]
 						: undefined}
 					<td
 						className=" table-title"
-						colSpan={props.stationName === 'WIZYTY' ? 1 : 4}
+						colSpan={props.stationName === StationName.WIZYTY ? 1 : 4}
 					>
 						{props.stationName}
 					</td>
@@ -53,7 +53,8 @@ function returnWorkStageSpans(
 	stationName: string
 ) {
 	return workStageSpans?.map((stage, index) => {
-		if (stationName === 'WIZYTY' && index !== 2) return invisibleCell(index);
+		if (stationName === StationName.WIZYTY && index !== 2)
+			return invisibleCell(index);
 		return <td key={index}>{`${stage.from} - ${stage.to}`}</td>;
 	});
 }
@@ -84,7 +85,7 @@ function returntableBodyByStation(
 	});
 
 	switch (station) {
-		case 'KINEZA':
+		case StationName.KINEZA:
 			return (
 				<tbody>
 					<tr>{cells.slice(0, 4)}</tr>
@@ -104,7 +105,7 @@ function returntableBodyByStation(
 					</tr>
 				</tbody>
 			);
-		case 'FIZYKO':
+		case StationName.FIZYKO:
 			return (
 				<tbody>
 					<tr>{cells.slice(0, 4)}</tr>
@@ -115,13 +116,13 @@ function returntableBodyByStation(
 					</tr>
 				</tbody>
 			);
-		case 'MASAZ':
+		case StationName.MASAZ:
 			return (
 				<tbody>
 					<tr>{cells.slice(0)}</tr>
 				</tbody>
 			);
-		case 'WIZYTY':
+		case StationName.WIZYTY:
 			return (
 				<tbody>
 					<tr>

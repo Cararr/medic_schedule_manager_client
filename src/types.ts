@@ -5,6 +5,13 @@ export enum employeeRole {
 	EMPLOYEE = 'EMPLOYEE',
 }
 
+export enum StationName {
+	KINEZA = 'KINEZA',
+	FIZYKO = 'FIZYKO',
+	MASAZ = 'MASAZ',
+	WIZYTY = 'WIZYTY',
+}
+
 export interface Employee {
 	id: string;
 	firstName: string;
