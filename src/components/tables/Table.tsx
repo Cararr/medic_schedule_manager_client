@@ -11,6 +11,7 @@ interface Props {
 		stationName: string,
 		newCellValue: Employee | null
 	) => void;
+	checkForScheduleChanges?: () => void;
 	currentlyDragged: string;
 	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
 	workStageSpans: WorkStageSpans[];
@@ -38,7 +39,8 @@ export const Table: React.FunctionComponent<Props> = (props) => {
 				props.stationSchedule,
 				props.editSchedule,
 				props.currentlyDragged,
-				props.setCurrentlyDragged
+				props.setCurrentlyDragged,
+				props.checkForScheduleChanges
 			)}
 		</table>
 	);
@@ -68,7 +70,8 @@ function returntableBodyByStation(
 		newCellValue: Employee | null
 	) => void,
 	currentlyDragged: string,
-	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>
+	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>,
+	checkForScheduleChanges?: () => void
 ) {
 	const cells = stationSchedule.map((cell, index) => {
 		return (
@@ -77,6 +80,7 @@ function returntableBodyByStation(
 				cellNumber={index}
 				stationName={station}
 				editSchedule={editSchedule}
+				checkForScheduleChanges={checkForScheduleChanges}
 				cellValue={stationSchedule[index]}
 				currentlyDragged={currentlyDragged}
 				setCurrentlyDragged={setCurrentlyDragged}

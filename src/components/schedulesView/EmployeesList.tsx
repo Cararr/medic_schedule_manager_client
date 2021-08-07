@@ -5,6 +5,7 @@ import './EmployeesList.css';
 
 interface Props {
 	currentSchedule: CompleteSchedule;
+	checkForScheduleChanges?: () => void;
 }
 
 export const EmployeesList: React.FunctionComponent<Props> = (props) => {
@@ -23,9 +24,10 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 			<li key={employee.id}>
 				<p
 					className="list-item draggable"
+					draggable={true}
 					onDragOver={handleOnDragOver}
 					onDragStart={(e) => handleOnDragStart(e, employee)}
-					draggable={true}
+					onDragEnd={props.checkForScheduleChanges}
 					style={{ color: fontColor, fontWeight: 'bold' }}
 				>
 					{`${employee.firstName} ${employee.lastName}`}

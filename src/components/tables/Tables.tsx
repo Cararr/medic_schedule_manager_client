@@ -22,6 +22,7 @@ interface Props {
 		stationName: string,
 		newCellValue: Employee | null
 	) => void;
+	checkForScheduleChanges?: () => void;
 	workStageSpans: WorkStageSpans[];
 	homeRehabilitationsEdited?: number[];
 	handleHomeRehabilitationEdit?: (
@@ -50,6 +51,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 					key={station}
 					stationSchedule={props.currentSchedule.schedules[station]}
 					editSchedule={props.editSchedule}
+					checkForScheduleChanges={props.checkForScheduleChanges}
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}
 					stationName={station}
@@ -94,7 +96,6 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 					<form className="form-comments">
 						<h3>COMMENTS</h3>
 						<textarea
-							required
 							rows={10}
 							maxLength={450}
 							value={props.comment?.content}

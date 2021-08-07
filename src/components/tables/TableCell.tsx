@@ -12,6 +12,7 @@ interface Props {
 		stationName: string,
 		newCellValue: Employee | null
 	) => void;
+	checkForScheduleChanges?: () => void;
 	cellValue: Employee | null;
 	currentlyDragged: string;
 	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
@@ -70,13 +71,13 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 	return (
 		<td
 			id={`${props.stationName}-${props.cellNumber}`}
+			className={className}
 			draggable={isCellDraggable}
 			onDragLeave={isUserAdmin ? handleOnDragLeave : undefined}
 			onDragStart={isUserAdmin ? handleOnDragStart : undefined}
 			onDragOver={isUserAdmin ? handleOnDragOver : undefined}
+			onDragEnd={props.checkForScheduleChanges}
 			onDrop={isUserAdmin ? handleDrop : undefined}
-			onDragEnd={() => console.log(1)}
-			className={className}
 		>
 			{props.cellValue &&
 				`${props.cellValue.firstName} ${props.cellValue.lastName}`}

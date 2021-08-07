@@ -18,7 +18,7 @@ import {
 	CompleteSchedule,
 	Comment,
 } from '../../types';
-import _ from 'lodash';
+import { cloneDeep } from 'lodash';
 import './Schedules.css';
 
 export const Schedules: React.FunctionComponent = () => {
@@ -26,14 +26,23 @@ export const Schedules: React.FunctionComponent = () => {
 		Utilities.formatDateString(new Date())
 	);
 
+	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
+
+	useEffect(() => {
+		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
+	}, []);
+
 	const [initialSchedule, setInitialSchedule] = useState({
 		schedules: Utilities.returnEmptyDailyShift(),
 	});
+
 	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
 		schedules: Utilities.returnEmptyDailyShift(),
 		homeRehabilitations: [],
 	});
+
 	const [wasScheduleEdited, setWasScheduleEdited] = useState(false);
+
 	const editSchedule = (
 		cellNumber: number,
 		stationName: string,
@@ -47,24 +56,42 @@ export const Schedules: React.FunctionComponent = () => {
 					...prev,
 					currentSchedule.homeRehabilitations[cellNumber].id,
 				]);
-			} else {
-				if (!wasScheduleEdited) setWasScheduleEdited(true);
-				updatedSchedule.schedules[stationName][cellNumber] = newCellValue;
-			}
+			} else updatedSchedule.schedules[stationName][cellNumber] = newCellValue;
+
 			return updatedSchedule;
 		});
 	};
+
+	const checkForScheduleChanges = () => {
+		for (const station in initialSchedule.schedules) {
+			if (
+				Object.prototype.hasOwnProperty.call(initialSchedule.schedules, station)
+			) {
+				const initialStationCells = initialSchedule.schedules[station];
+				const updatedStationCells = currentSchedule.schedules[station];
+				for (let index = 0; index < initialStationCells.length; index++) {
+					if (initialStationCells[index]?.id !== updatedStationCells[index]?.id)
+						return setWasScheduleEdited(true);
+				}
+			}
+		}
+
+		return setWasScheduleEdited(false);
+	};
+
 	const saveScheudle = async () => {
 		setWasScheduleEdited(false);
-		if (currentSchedule.schedules)
-			await Put.schedule(dateSelected, currentSchedule.schedules);
+		setInitialSchedule({ schedules: cloneDeep(currentSchedule.schedules) });
+		await Put.schedule(dateSelected, currentSchedule.schedules);
 	};
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
 
 	const [comment, setComment] = useState<Comment>(
 		Utilities.returnEmptyComment(dateSelected)
 	);
+
 	const [wasCommentEdited, setWasCommentEdited] = useState(false);
+
 	const saveComment = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		setWasCommentEdited(false);
@@ -77,6 +104,7 @@ export const Schedules: React.FunctionComponent = () => {
 			setComment(createdComment);
 		}
 	};
+
 	const handleEditComment = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
 		if (!wasCommentEdited) setWasCommentEdited(true);
 		setComment((prev) => ({ ...prev, content: target.value }));
@@ -85,6 +113,7 @@ export const Schedules: React.FunctionComponent = () => {
 	const [homeRehabilitationsEdited, setHomeRehabilitationsEdited] = useState<
 		number[]
 	>([]);
+
 	const removeHomeRehabilitation = async (
 		homeRehabilitation: HomeRehabilitation
 	) => {
@@ -101,6 +130,7 @@ export const Schedules: React.FunctionComponent = () => {
 		} else
 			warningMessage('Error', 'Action aborted, something went wrong. Sorry!');
 	};
+
 	const saveHomeRehabilitationChanges = async (
 		homeRehabilitation: HomeRehabilitation
 	) => {
@@ -114,6 +144,7 @@ export const Schedules: React.FunctionComponent = () => {
 				prev.filter((id) => id !== homeRehabilitation.id)
 			);
 	};
+
 	const handleHomeRehabilitationEdit = (
 		{ target }: ChangeEvent<HTMLInputElement>,
 		index: number
@@ -136,11 +167,6 @@ export const Schedules: React.FunctionComponent = () => {
 		});
 	};
 
-	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
-	useEffect(() => {
-		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
-	}, []);
-
 	useEffect(() => {
 		setWasScheduleEdited(false);
 		setWasCommentEdited(false);
@@ -153,7 +179,7 @@ export const Schedules: React.FunctionComponent = () => {
 			setComment(comment || Utilities.returnEmptyComment(dateSelected));
 			setInitialSchedule({ schedules });
 			setCurrentSchedule({
-				schedules: _.cloneDeep(schedules),
+				schedules: cloneDeep(schedules),
 				homeRehabilitations,
 			});
 			setHomeRehabilitationsEdited([]);
@@ -166,7 +192,12 @@ export const Schedules: React.FunctionComponent = () => {
 		<div>
 			<NavBar />
 			<div className="schedules">
-				{isUserAdmin && <EmployeesList currentSchedule={currentSchedule} />}
+				{isUserAdmin && (
+					<EmployeesList
+						checkForScheduleChanges={checkForScheduleChanges}
+						currentSchedule={currentSchedule}
+					/>
+				)}
 				<main className="section-schedules-central">
 					<SelectDate
 						setDateSelected={setDateSelected}
@@ -178,6 +209,7 @@ export const Schedules: React.FunctionComponent = () => {
 						setCurrentlyDragged={setCurrentlyDragged}
 						currentSchedule={currentSchedule}
 						editSchedule={editSchedule}
+						checkForScheduleChanges={checkForScheduleChanges}
 						workStageSpans={workStageSpans}
 						homeRehabilitationsEdited={homeRehabilitationsEdited}
 						handleHomeRehabilitationEdit={handleHomeRehabilitationEdit}
