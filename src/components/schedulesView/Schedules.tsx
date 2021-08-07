@@ -15,7 +15,7 @@ import {
 	Employee,
 	HomeRehabilitation,
 	WorkStageSpans,
-	CompleteSchedule,
+	FullSchedule,
 	Comment,
 } from '../../types';
 import { cloneDeep } from 'lodash';
@@ -36,9 +36,10 @@ export const Schedules: React.FunctionComponent = () => {
 		schedules: Utilities.returnEmptyDailyShift(),
 	});
 
-	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
+	const [fullSchedule, setFullSchedule] = useState<FullSchedule>({
 		schedules: Utilities.returnEmptyDailyShift(),
 		homeRehabilitations: [],
+		comment: Utilities.returnEmptyComment(dateSelected),
 	});
 
 	const [wasScheduleEdited, setWasScheduleEdited] = useState(false);
@@ -48,13 +49,13 @@ export const Schedules: React.FunctionComponent = () => {
 		stationName: string,
 		newCellValue: Employee | null
 	) => {
-		setCurrentSchedule((prev) => {
+		setFullSchedule((prev) => {
 			const updatedSchedule = { ...prev };
 			if (stationName === 'homeRehabilitations') {
 				updatedSchedule.homeRehabilitations[cellNumber].employee = newCellValue;
 				setHomeRehabilitationsEdited((prev) => [
 					...prev,
-					currentSchedule.homeRehabilitations[cellNumber].id,
+					fullSchedule.homeRehabilitations[cellNumber].id,
 				]);
 			} else updatedSchedule.schedules[stationName][cellNumber] = newCellValue;
 
@@ -68,7 +69,7 @@ export const Schedules: React.FunctionComponent = () => {
 				Object.prototype.hasOwnProperty.call(initialSchedule.schedules, station)
 			) {
 				const initialStationCells = initialSchedule.schedules[station];
-				const updatedStationCells = currentSchedule.schedules[station];
+				const updatedStationCells = fullSchedule.schedules[station];
 				for (let index = 0; index < initialStationCells.length; index++) {
 					if (initialStationCells[index]?.id !== updatedStationCells[index]?.id)
 						return setWasScheduleEdited(true);
@@ -81,8 +82,8 @@ export const Schedules: React.FunctionComponent = () => {
 
 	const saveScheudle = async () => {
 		setWasScheduleEdited(false);
-		setInitialSchedule({ schedules: cloneDeep(currentSchedule.schedules) });
-		await Put.schedule(dateSelected, currentSchedule.schedules);
+		setInitialSchedule({ schedules: cloneDeep(fullSchedule.schedules) });
+		await Put.schedule(dateSelected, fullSchedule.schedules);
 	};
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
 
@@ -121,7 +122,7 @@ export const Schedules: React.FunctionComponent = () => {
 			setHomeRehabilitationsEdited((prev) =>
 				prev.filter((id) => id !== homeRehabilitation.id)
 			);
-			setCurrentSchedule((prev) => ({
+			setFullSchedule((prev) => ({
 				...prev,
 				homeRehabilitations: prev.homeRehabilitations.filter(
 					(hR: HomeRehabilitation) => hR.id !== homeRehabilitation.id
@@ -151,9 +152,9 @@ export const Schedules: React.FunctionComponent = () => {
 	) => {
 		setHomeRehabilitationsEdited((prev) => [
 			...prev,
-			currentSchedule.homeRehabilitations[index].id,
+			fullSchedule.homeRehabilitations[index].id,
 		]);
-		setCurrentSchedule((prev) => {
+		setFullSchedule((prev) => {
 			const homeRehabilitations = prev.homeRehabilitations;
 			switch (target.name) {
 				case 'startTime':
@@ -175,12 +176,15 @@ export const Schedules: React.FunctionComponent = () => {
 			const homeRehabilitations = await Get.homeRehabilitationsByDate(
 				dateSelected
 			);
-			const comment = await Get.commentByDate(dateSelected);
-			setComment(comment || Utilities.returnEmptyComment(dateSelected));
+			const comment =
+				(await Get.commentByDate(dateSelected)) ||
+				Utilities.returnEmptyComment(dateSelected);
+			setComment(comment);
 			setInitialSchedule({ schedules });
-			setCurrentSchedule({
+			setFullSchedule({
 				schedules: cloneDeep(schedules),
 				homeRehabilitations,
+				comment,
 			});
 			setHomeRehabilitationsEdited([]);
 		})();
@@ -195,7 +199,7 @@ export const Schedules: React.FunctionComponent = () => {
 				{isUserAdmin && (
 					<EmployeesList
 						checkForScheduleChanges={checkForScheduleChanges}
-						currentSchedule={currentSchedule}
+						schedules={fullSchedule.schedules}
 					/>
 				)}
 				<main className="section-schedules-central">
@@ -207,10 +211,11 @@ export const Schedules: React.FunctionComponent = () => {
 					<Tables
 						currentlyDragged={currentlyDragged}
 						setCurrentlyDragged={setCurrentlyDragged}
-						currentSchedule={currentSchedule}
+						schedules={fullSchedule.schedules}
 						editSchedule={editSchedule}
 						checkForScheduleChanges={checkForScheduleChanges}
 						workStageSpans={workStageSpans}
+						homeRehabilitations={fullSchedule.homeRehabilitations}
 						homeRehabilitationsEdited={homeRehabilitationsEdited}
 						handleHomeRehabilitationEdit={handleHomeRehabilitationEdit}
 						removeHomeRehabilitation={removeHomeRehabilitation}

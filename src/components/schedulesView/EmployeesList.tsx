@@ -1,10 +1,10 @@
 import React, { DragEvent } from 'react';
 import { useEmployees } from '../../context/employeesContext';
-import { CompleteSchedule, Employee } from '../../types';
+import { StationSchedules, Employee } from '../../types';
 import './EmployeesList.css';
 
 interface Props {
-	currentSchedule: CompleteSchedule;
+	schedules: StationSchedules;
 	checkForScheduleChanges?: () => void;
 }
 
@@ -18,7 +18,7 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 
 	const employees = useEmployees();
 	const employeesList = employees?.map((employee) => {
-		const occurrences = countOccurrences(props.currentSchedule, employee.id);
+		const occurrences = countOccurrences(props.schedules, employee.id);
 		const fontColor = returnFontColor(occurrences);
 		return (
 			<li key={employee.id}>
@@ -52,11 +52,11 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 	);
 };
 
-function countOccurrences(schedule: CompleteSchedule, id: string): number {
+function countOccurrences(schedule: StationSchedules, id: string): number {
 	let counter = 0;
-	for (const station in schedule.schedules) {
-		if (Object.prototype.hasOwnProperty.call(schedule.schedules, station)) {
-			const stationSchedule = schedule.schedules[station];
+	for (const station in schedule) {
+		if (Object.prototype.hasOwnProperty.call(schedule, station)) {
+			const stationSchedule = schedule[station];
 			for (const employee of stationSchedule) {
 				if (employee?.id === id) counter++;
 			}

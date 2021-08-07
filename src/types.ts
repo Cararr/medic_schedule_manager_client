@@ -31,9 +31,16 @@ export interface HomeRehabilitation {
 	startTime: string;
 }
 
-export interface CompleteSchedule {
+export interface Comment {
+	id: number;
+	date: string;
+	content: string;
+}
+
+export interface FullSchedule {
 	schedules: StationSchedules;
 	homeRehabilitations: HomeRehabilitation[];
+	comment: Comment;
 }
 
 export interface UserCrudentials {
@@ -82,12 +89,6 @@ export interface CreateVacationForm {
 	employee: Employee | null;
 	from: string;
 	to: string;
-}
-
-export interface Comment {
-	id: number;
-	date: string;
-	content: string;
 }
 
 export interface Vacation {

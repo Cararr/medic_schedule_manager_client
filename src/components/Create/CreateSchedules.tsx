@@ -9,7 +9,7 @@ import { useUser } from '../../context/userContext';
 import {
 	Employee,
 	WorkStageSpans,
-	CompleteSchedule,
+	StationSchedules,
 	DateForm,
 } from '../../types';
 import './CreateSchedules.css';
@@ -20,34 +20,30 @@ export const CreateSchedules: React.FunctionComponent = () => {
 		from: Utilities.formatDateString(new Date()),
 		to: Utilities.formatDateString(Utilities.incrementDateByDay(new Date())),
 	});
-
+	//zmiana currenta
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [currentSchedule, setCurrentSchedule] = useState<CompleteSchedule>({
-		schedules: Utilities.returnEmptyDailyShift(),
-		homeRehabilitations: [],
-	});
+	const [schedules, setschedules] = useState<StationSchedules>(
+		Utilities.returnEmptyDailyShift()
+	);
 	const editSchedule = (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
 	) => {
-		setCurrentSchedule((prev) => {
+		setschedules((prev) => {
 			const updatedSchedule = { ...prev };
-			updatedSchedule.schedules[stationName][cellNumber] = newCellValue;
+			updatedSchedule[stationName][cellNumber] = newCellValue;
 			return updatedSchedule;
 		});
 	};
 	const autoGenerateSchedule = async () => {
 		Get.generateSchedule(dateForm.from).then((schedules) => {
-			setCurrentSchedule((prev) => (schedules ? { ...prev, schedules } : prev));
+			setschedules((prev) => (schedules ? { ...prev, schedules } : prev));
 		});
 	};
 	const clearSchedule = () => {
-		setCurrentSchedule((prev) => ({
-			...prev,
-			schedules: Utilities.returnEmptyDailyShift(),
-		}));
+		setschedules(Utilities.returnEmptyDailyShift());
 	};
 	const createSchedules = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
@@ -62,7 +58,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 		const response = await Post.schedules({
 			from: dateForm.from,
 			to: dateForm.to,
-			schedules: currentSchedule.schedules,
+			schedules: schedules,
 		});
 		setIsLoading(false);
 
@@ -86,12 +82,12 @@ export const CreateSchedules: React.FunctionComponent = () => {
 	return (
 		<div>
 			<div className="schedules">
-				{isUserAdmin && <EmployeesList currentSchedule={currentSchedule} />}
+				{isUserAdmin && <EmployeesList schedules={schedules} />}
 				<main className="section-schedules-central">
 					<Tables
 						currentlyDragged={currentlyDragged}
 						setCurrentlyDragged={setCurrentlyDragged}
-						currentSchedule={currentSchedule}
+						schedules={schedules}
 						editSchedule={editSchedule}
 						workStageSpans={workStageSpans}
 					/>

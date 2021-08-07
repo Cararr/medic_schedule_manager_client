@@ -57,12 +57,12 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 						setCurrentlyDragged={props.setCurrentlyDragged}
 						key={index}
 					/>
-					<td>
+					<td style={{ width: '14rem' }}>
 						{props.isUserAdmin ? (
 							<input
 								onChange={(e) => props.handleHomeRehabilitationEdit(e, index)}
 								name="patient"
-								maxLength={250}
+								maxLength={30}
 								className="input-home-rehabilitaiton"
 								value={hR.patient}
 								required
@@ -73,7 +73,12 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 						)}
 					</td>
 					{props.isUserAdmin && (
-						<td style={{ backgroundColor: 'var(--backgroundYellow)' }}>
+						<td
+							style={{
+								backgroundColor: 'var(--backgroundYellow)',
+								width: '2rem',
+							}}
+						>
 							{wasItEdited && (
 								<i
 									onClick={() => props.saveHomeRehabilitationChanges(hR)}

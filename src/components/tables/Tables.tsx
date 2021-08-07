@@ -4,19 +4,19 @@ import { HomeRehabilitations } from '../schedulesView/HomeRehabilitationsView';
 import { useUser } from '../../context/userContext';
 import Utilities from '../../util/Utilities';
 import {
+	StationName,
 	WorkStageSpans,
 	Employee,
+	StationSchedules,
 	HomeRehabilitation,
-	CompleteSchedule,
 	Comment,
-	StationName,
 } from '../../types';
 import './Tables.css';
 
 interface Props {
 	currentlyDragged: string;
 	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
-	currentSchedule: CompleteSchedule;
+	schedules: StationSchedules;
 	editSchedule: (
 		cellNumber: number,
 		stationName: string,
@@ -24,6 +24,7 @@ interface Props {
 	) => void;
 	checkForScheduleChanges?: () => void;
 	workStageSpans: WorkStageSpans[];
+	homeRehabilitations?: HomeRehabilitation[];
 	homeRehabilitationsEdited?: number[];
 	handleHomeRehabilitationEdit?: (
 		{ target }: ChangeEvent<HTMLInputElement>,
@@ -43,13 +44,13 @@ interface Props {
 
 export const Tables: React.FunctionComponent<Props> = (props) => {
 	const tables: JSX.Element[] = [];
-	for (const station in props.currentSchedule.schedules) {
+	for (const station in props.schedules) {
 		const index = returnIndexByStation(station);
 		if (index !== undefined)
 			tables[index] = (
 				<Table
 					key={station}
-					stationSchedule={props.currentSchedule.schedules[station]}
+					stationSchedule={props.schedules[station]}
 					editSchedule={props.editSchedule}
 					checkForScheduleChanges={props.checkForScheduleChanges}
 					currentlyDragged={props.currentlyDragged}
@@ -72,7 +73,8 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 	return (
 		<section>
 			{isLoading ? loading : tables}
-			{props.currentSchedule.homeRehabilitations.length !== 0 &&
+			{props.homeRehabilitations &&
+				props.homeRehabilitations.length !== 0 &&
 				props.handleHomeRehabilitationEdit &&
 				props.homeRehabilitationsEdited &&
 				props.removeHomeRehabilitation &&
@@ -82,14 +84,13 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 						editSchedule={props.editSchedule}
 						currentlyDragged={props.currentlyDragged}
 						setCurrentlyDragged={props.setCurrentlyDragged}
-						homeRehabilitations={props.currentSchedule.homeRehabilitations}
+						homeRehabilitations={props.homeRehabilitations}
 						handleHomeRehabilitationEdit={props.handleHomeRehabilitationEdit}
 						homeRehabilitationsEdited={props.homeRehabilitationsEdited}
 						removeHomeRehabilitation={props.removeHomeRehabilitation}
 						saveHomeRehabilitationChanges={props.saveHomeRehabilitationChanges}
 					/>
 				)}
-			{/* Comments section only for view schedules */}
 			{props.handleHomeRehabilitationEdit &&
 				!isLoading &&
 				(props.comment?.content || isUserAdmin) && (
