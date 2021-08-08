@@ -8,7 +8,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { LoggedUsersRoute } from '../../RouteTypes/LoggedUsersRoute';
 import { NonLoggedUsersRoute } from '../../RouteTypes/NonLoggedUsersRoute';
 import { AdminRoute } from '../../RouteTypes/AdminRoute';
-import { Schedules } from '../schedulesView/Schedules';
+import { ViewSchedules } from '../schedulesView/ViewSchedules';
 import { LandingPage } from '../landingPage/LandingPage';
 import { HomePage } from '../homePage/HomePage';
 import { Create } from '../create/Create';
@@ -22,7 +22,11 @@ const App: React.FunctionComponent = () => {
 				<BrowserRouter>
 					<Switch>
 						<NonLoggedUsersRoute path="/" exact component={LandingPage} />
-						<LoggedUsersRoute path="/schedules" exact component={Schedules} />
+						<LoggedUsersRoute
+							path="/schedules"
+							exact
+							component={ViewSchedules}
+						/>
 						<LoggedUsersRoute path="/home" exact component={HomePage} />
 						<LoggedUsersRoute path="/vacations" exact component={Vacations} />
 						<AdminRoute path="/create" component={Create} />

@@ -6,23 +6,20 @@ import { HomeRehabilitation, Employee } from '../../types';
 
 interface Props {
 	isUserAdmin: boolean;
-	editSchedule: (
+	editCells: (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
 	) => void;
+	checkForSchedulesChanges?: () => void;
 	currentlyDragged: string;
 	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
 	homeRehabilitations: HomeRehabilitation[];
-	handleHomeRehabilitationEdit: (
+	handleHomeRehabilitationChanges: (
 		{ target }: ChangeEvent<HTMLInputElement>,
 		index: number
 	) => void;
-	homeRehabilitationsEdited: number[];
 	removeHomeRehabilitation: (
-		homeRehabilitation: HomeRehabilitation
-	) => Promise<void>;
-	saveHomeRehabilitationChanges: (
 		homeRehabilitation: HomeRehabilitation
 	) => Promise<void>;
 }
@@ -31,13 +28,14 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 	const homeRehabilitationsView = props.homeRehabilitations
 		.sort(sortByStartTime)
 		.map((hR, index) => {
-			const wasItEdited = props.homeRehabilitationsEdited.includes(hR.id);
 			return (
 				<tr key={hR.id}>
 					<td>
 						{props.isUserAdmin ? (
 							<input
-								onChange={(e) => props.handleHomeRehabilitationEdit(e, index)}
+								onChange={(e) =>
+									props.handleHomeRehabilitationChanges(e, index)
+								}
 								name="startTime"
 								className="input-home-rehabilitaiton"
 								value={Utilities.formatTimeView(hR.startTime)}
@@ -49,18 +47,21 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 						)}
 					</td>
 					<TableCell
+						key={index}
 						stationName={'homeRehabilitations'}
-						editSchedule={props.editSchedule}
+						checkForSchedulesChanges={props.checkForSchedulesChanges}
+						editCells={props.editCells}
 						cellValue={hR.employee}
 						cellNumber={index}
 						currentlyDragged={props.currentlyDragged}
 						setCurrentlyDragged={props.setCurrentlyDragged}
-						key={index}
 					/>
 					<td style={{ width: '14rem' }}>
 						{props.isUserAdmin ? (
 							<input
-								onChange={(e) => props.handleHomeRehabilitationEdit(e, index)}
+								onChange={(e) =>
+									props.handleHomeRehabilitationChanges(e, index)
+								}
 								name="patient"
 								maxLength={30}
 								className="input-home-rehabilitaiton"
@@ -79,13 +80,6 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 								width: '2rem',
 							}}
 						>
-							{wasItEdited && (
-								<i
-									onClick={() => props.saveHomeRehabilitationChanges(hR)}
-									style={{ marginRight: '1rem', fontSize: '1.2rem' }}
-									className="icon-floppy"
-								/>
-							)}
 							<i
 								onClick={() => props.removeHomeRehabilitation(hR)}
 								style={{ fontSize: '1.2rem' }}

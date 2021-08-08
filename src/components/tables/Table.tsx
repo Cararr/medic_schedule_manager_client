@@ -6,12 +6,12 @@ import { WorkStageSpans, Employee, StationName } from '../../types';
 interface Props {
 	stationName: string;
 	stationSchedule: (Employee | null)[];
-	editSchedule: (
+	editCells: (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
 	) => void;
-	checkForScheduleChanges?: () => void;
+	checkForSchedulesChanges?: () => void;
 	currentlyDragged: string;
 	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
 	workStageSpans: WorkStageSpans[];
@@ -37,10 +37,10 @@ export const Table: React.FunctionComponent<Props> = (props) => {
 			{returntableBodyByStation(
 				props.stationName,
 				props.stationSchedule,
-				props.editSchedule,
+				props.editCells,
 				props.currentlyDragged,
 				props.setCurrentlyDragged,
-				props.checkForScheduleChanges
+				props.checkForSchedulesChanges
 			)}
 		</table>
 	);
@@ -64,14 +64,14 @@ function returnWorkStageSpans(
 function returntableBodyByStation(
 	station: string,
 	stationSchedule: (Employee | null)[],
-	editSchedule: (
+	editCells: (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
 	) => void,
 	currentlyDragged: string,
 	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>,
-	checkForScheduleChanges?: () => void
+	checkForSchedulesChanges?: () => void
 ) {
 	const cells = stationSchedule.map((cell, index) => {
 		return (
@@ -79,8 +79,8 @@ function returntableBodyByStation(
 				key={index}
 				cellNumber={index}
 				stationName={station}
-				editSchedule={editSchedule}
-				checkForScheduleChanges={checkForScheduleChanges}
+				editCells={editCells}
+				checkForSchedulesChanges={checkForSchedulesChanges}
 				cellValue={stationSchedule[index]}
 				currentlyDragged={currentlyDragged}
 				setCurrentlyDragged={setCurrentlyDragged}

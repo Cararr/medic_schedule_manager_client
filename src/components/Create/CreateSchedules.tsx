@@ -12,7 +12,6 @@ import {
 	StationSchedules,
 	DateForm,
 } from '../../types';
-import './CreateSchedules.css';
 import { createdMessage, warningMessage } from '../../WinBox/winboxMessages';
 
 export const CreateSchedules: React.FunctionComponent = () => {
@@ -20,31 +19,37 @@ export const CreateSchedules: React.FunctionComponent = () => {
 		from: Utilities.formatDateString(new Date()),
 		to: Utilities.formatDateString(Utilities.incrementDateByDay(new Date())),
 	});
-	//zmiana currenta
+
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [schedules, setschedules] = useState<StationSchedules>(
+	const [stationSchedules, setStationSchedules] = useState<StationSchedules>(
 		Utilities.returnEmptyDailyShift()
 	);
-	const editSchedule = (
+
+	const editCells = (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
 	) => {
-		setschedules((prev) => {
+		setStationSchedules((prev) => {
 			const updatedSchedule = { ...prev };
 			updatedSchedule[stationName][cellNumber] = newCellValue;
 			return updatedSchedule;
 		});
 	};
-	const autoGenerateSchedule = async () => {
+
+	const generateSchedule = async () => {
 		Get.generateSchedule(dateForm.from).then((schedules) => {
-			setschedules((prev) => (schedules ? { ...prev, schedules } : prev));
+			setStationSchedules((prev) =>
+				schedules ? { ...prev, schedules } : prev
+			);
 		});
 	};
+
 	const clearSchedule = () => {
-		setschedules(Utilities.returnEmptyDailyShift());
+		setStationSchedules(Utilities.returnEmptyDailyShift());
 	};
+
 	const createSchedules = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		if (!Utilities.checkIfEndDateIsAfterBegin(dateForm.from, dateForm.to))
@@ -58,21 +63,22 @@ export const CreateSchedules: React.FunctionComponent = () => {
 		const response = await Post.schedules({
 			from: dateForm.from,
 			to: dateForm.to,
-			schedules: schedules,
+			schedules: stationSchedules,
 		});
 		setIsLoading(false);
 
 		response?.ok
 			? createdMessage()
 			: warningMessage(
-					'Error',
-					'Action aborted, something went wrong. Sorry!',
+					'Action aborted!',
+					'Something went wrong, please try again later.',
 					170
 			  );
 	};
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
 
 	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
+
 	useEffect(() => {
 		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
 	}, []);
@@ -82,19 +88,19 @@ export const CreateSchedules: React.FunctionComponent = () => {
 	return (
 		<div>
 			<div className="schedules">
-				{isUserAdmin && <EmployeesList schedules={schedules} />}
+				{isUserAdmin && <EmployeesList stationSchedules={stationSchedules} />}
 				<main className="section-schedules-central">
 					<Tables
 						currentlyDragged={currentlyDragged}
 						setCurrentlyDragged={setCurrentlyDragged}
-						schedules={schedules}
-						editSchedule={editSchedule}
+						stationSchedules={stationSchedules}
+						editCells={editCells}
 						workStageSpans={workStageSpans}
 					/>
 				</main>
 				{
 					<ActionPanel
-						autoGenerateSchedule={autoGenerateSchedule}
+						generateSchedule={generateSchedule}
 						clearSchedule={clearSchedule}
 						dateForm={dateForm}
 						setDateForm={setDateForm}

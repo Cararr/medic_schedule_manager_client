@@ -37,8 +37,8 @@ export interface Comment {
 	content: string;
 }
 
-export interface FullSchedule {
-	schedules: StationSchedules;
+export interface Schedules {
+	stationSchedules: StationSchedules;
 	homeRehabilitations: HomeRehabilitation[];
 	comment: Comment;
 }

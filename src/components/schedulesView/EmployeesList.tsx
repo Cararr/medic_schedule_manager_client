@@ -4,8 +4,8 @@ import { StationSchedules, Employee } from '../../types';
 import './EmployeesList.css';
 
 interface Props {
-	schedules: StationSchedules;
-	checkForScheduleChanges?: () => void;
+	stationSchedules: StationSchedules;
+	checkForSchedulesChanges?: () => void;
 }
 
 export const EmployeesList: React.FunctionComponent<Props> = (props) => {
@@ -18,7 +18,7 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 
 	const employees = useEmployees();
 	const employeesList = employees?.map((employee) => {
-		const occurrences = countOccurrences(props.schedules, employee.id);
+		const occurrences = countOccurrences(props.stationSchedules, employee.id);
 		const fontColor = returnFontColor(occurrences);
 		return (
 			<li key={employee.id}>
@@ -27,7 +27,7 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 					draggable={true}
 					onDragOver={handleOnDragOver}
 					onDragStart={(e) => handleOnDragStart(e, employee)}
-					onDragEnd={props.checkForScheduleChanges}
+					onDragEnd={props.checkForSchedulesChanges}
 					style={{ color: fontColor, fontWeight: 'bold' }}
 				>
 					{`${employee.firstName} ${employee.lastName}`}

@@ -7,12 +7,12 @@ import './TableCell.css';
 interface Props {
 	cellNumber: number;
 	stationName: string;
-	editSchedule: (
+	editCells: (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
 	) => void;
-	checkForScheduleChanges?: () => void;
+	checkForSchedulesChanges?: () => void;
 	cellValue: Employee | null;
 	currentlyDragged: string;
 	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
@@ -25,14 +25,14 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 		const dataTransferred = e.dataTransfer?.getData('employee');
 		const employee = dataTransferred ? JSON.parse(dataTransferred) : null;
 		if (employee) {
-			//swap logic
+			//swap
 			if (props.currentlyDragged) {
 				const [stationName, cellNumber] = extractStationAndCellNumberFromId(
 					props.currentlyDragged
 				);
-				props.editSchedule(cellNumber, stationName, props.cellValue);
+				props.editCells(cellNumber, stationName, props.cellValue);
 			}
-			props.editSchedule(props.cellNumber, props.stationName, employee);
+			props.editCells(props.cellNumber, props.stationName, employee);
 			props.setCurrentlyDragged('');
 			removeDragOverClass(e);
 		}
@@ -55,7 +55,7 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 		props.setCurrentlyDragged(target.id);
 		e.dataTransfer.setData('employee', JSON.stringify(props.cellValue));
 		setTimeout(
-			() => props.editSchedule(props.cellNumber, props.stationName, null),
+			() => props.editCells(props.cellNumber, props.stationName, null),
 			0
 		);
 	};
@@ -76,7 +76,7 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 			onDragLeave={isUserAdmin ? handleOnDragLeave : undefined}
 			onDragStart={isUserAdmin ? handleOnDragStart : undefined}
 			onDragOver={isUserAdmin ? handleOnDragOver : undefined}
-			onDragEnd={props.checkForScheduleChanges}
+			onDragEnd={props.checkForSchedulesChanges}
 			onDrop={isUserAdmin ? handleDrop : undefined}
 		>
 			{props.cellValue &&

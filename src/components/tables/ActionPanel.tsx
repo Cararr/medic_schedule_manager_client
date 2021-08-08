@@ -3,10 +3,10 @@ import { DateForm } from '../../types';
 import './ActionPanel.css';
 
 interface Props {
-	autoGenerateSchedule?: () => Promise<void>;
+	generateSchedule?: () => Promise<void>;
 	clearSchedule?: () => void;
 	wasScheduleEdited?: boolean;
-	saveScheudle?: () => Promise<void>;
+	saveScheudles?: () => Promise<void>;
 	dateForm?: DateForm;
 	setDateForm?: React.Dispatch<React.SetStateAction<DateForm>>;
 	createSchedules?: (e: React.SyntheticEvent) => Promise<void>;
@@ -20,7 +20,7 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 	};
 
 	const isCreate = Boolean(props.dateForm);
-	const isView = Boolean(props.saveScheudle);
+	const isView = Boolean(props.saveScheudles);
 
 	const loading = <i className="icon-spin6" style={{ fontSize: '1.5rem' }} />;
 
@@ -83,7 +83,7 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 				{isCreate && (
 					<li>
 						<button
-							onClick={props.autoGenerateSchedule}
+							onClick={props.generateSchedule}
 							className="list-item button-generic"
 						>
 							Generate
@@ -104,7 +104,9 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 					<li>
 						<button
 							disabled={!props.wasScheduleEdited}
-							onClick={props.wasScheduleEdited ? props.saveScheudle : undefined}
+							onClick={
+								props.wasScheduleEdited ? props.saveScheudles : undefined
+							}
 							className={`list-item button-generic ${
 								!props.wasScheduleEdited && 'button-disabled'
 							}`}
