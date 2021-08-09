@@ -4,28 +4,29 @@ import { HomeRehabilitations } from '../schedulesView/HomeRehabilitationsView';
 import { useUser } from '../../context/userContext';
 import Utilities from '../../util/Utilities';
 import {
+	Schedules,
 	StationName,
 	WorkStageSpans,
 	Employee,
-	StationSchedules,
 	HomeRehabilitation,
 	Comment,
 } from '../../types';
 import './Tables.css';
 
 interface Props {
+	schedules: Schedules;
+	checkForSchedulesChanges?: (
+		comment?: Comment,
+		homeRehabilitations?: HomeRehabilitation[]
+	) => void;
 	currentlyDragged: string;
 	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
-	stationSchedules: StationSchedules;
 	editCells: (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
 	) => void;
-	checkForSchedulesChanges?: () => void;
 	workStageSpans: WorkStageSpans[];
-	homeRehabilitations?: HomeRehabilitation[];
-	homeRehabilitationsEdited?: number[];
 	handleHomeRehabilitationChanges?: (
 		{ target }: ChangeEvent<HTMLInputElement>,
 		index: number
@@ -33,21 +34,20 @@ interface Props {
 	removeHomeRehabilitation?: (
 		homeRehabilitation: HomeRehabilitation
 	) => Promise<void>;
-	comment?: Comment;
 	handleCommentChanges?: ({ target }: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 export const Tables: React.FunctionComponent<Props> = (props) => {
 	const tables: JSX.Element[] = [];
-	for (const station in props.stationSchedules) {
+	for (const station in props.schedules.stationSchedules) {
 		const index = returnIndexByStation(station);
 		if (index !== undefined)
 			tables[index] = (
 				<Table
 					key={station}
-					stationSchedule={props.stationSchedules[station]}
-					editCells={props.editCells}
+					stationSchedule={props.schedules.stationSchedules[station]}
 					checkForSchedulesChanges={props.checkForSchedulesChanges}
+					editCells={props.editCells}
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}
 					stationName={station}
@@ -65,13 +65,14 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 		/>
 	);
 
-	return (
+	return isLoading ? (
+		loading
+	) : (
 		<section>
-			{isLoading ? loading : tables}
-			{props.homeRehabilitations &&
-				props.homeRehabilitations.length !== 0 &&
+			{tables}
+			{props.schedules.homeRehabilitations &&
+				props.schedules.homeRehabilitations.length !== 0 &&
 				props.handleHomeRehabilitationChanges &&
-				props.homeRehabilitationsEdited &&
 				props.removeHomeRehabilitation && (
 					<HomeRehabilitations
 						isUserAdmin={isUserAdmin}
@@ -79,22 +80,21 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 						checkForSchedulesChanges={props.checkForSchedulesChanges}
 						currentlyDragged={props.currentlyDragged}
 						setCurrentlyDragged={props.setCurrentlyDragged}
-						homeRehabilitations={props.homeRehabilitations}
+						homeRehabilitations={props.schedules.homeRehabilitations}
 						handleHomeRehabilitationChanges={
 							props.handleHomeRehabilitationChanges
 						}
 						removeHomeRehabilitation={props.removeHomeRehabilitation}
 					/>
 				)}
-			{props.handleHomeRehabilitationChanges &&
-				!isLoading &&
-				(props.comment?.content || isUserAdmin) && (
+			{props.handleCommentChanges &&
+				(props.schedules.comment?.content || isUserAdmin) && (
 					<form className="form-comments">
 						<h3>COMMENTS</h3>
 						<textarea
 							rows={10}
 							maxLength={450}
-							value={props.comment?.content}
+							value={props.schedules.comment?.content}
 							onChange={props.handleCommentChanges}
 							readOnly={!isUserAdmin}
 							className="textarea-comments"

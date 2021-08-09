@@ -11,7 +11,7 @@ export default class Utilities {
 		return user?.role === 'BOSS';
 	}
 
-	static returnEmptyDailyShift(): StationSchedules {
+	static returnEmptyStationSchedules(): StationSchedules {
 		return {
 			KINEZA: new Array(14).fill(null),
 			FIZYKO: new Array(10).fill(null),

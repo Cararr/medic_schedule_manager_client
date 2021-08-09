@@ -18,6 +18,7 @@ export default class Delete {
 			return response.ok;
 		} catch (error) {
 			console.error(error);
+			return false;
 		}
 	};
 

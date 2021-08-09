@@ -15,16 +15,24 @@ import {
 import { createdMessage, warningMessage } from '../../WinBox/winboxMessages';
 
 export const CreateSchedules: React.FunctionComponent = () => {
+	const [stationSchedules, setStationSchedules] = useState<StationSchedules>(
+		Utilities.returnEmptyStationSchedules()
+	);
+
 	const [dateForm, setDateForm] = useState<DateForm>({
 		from: Utilities.formatDateString(new Date()),
 		to: Utilities.formatDateString(Utilities.incrementDateByDay(new Date())),
 	});
 
+	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
+
+	const [currentlyDragged, setCurrentlyDragged] = useState('');
+
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [stationSchedules, setStationSchedules] = useState<StationSchedules>(
-		Utilities.returnEmptyDailyShift()
-	);
+	useEffect(() => {
+		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
+	}, []);
 
 	const editCells = (
 		cellNumber: number,
@@ -47,7 +55,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 	};
 
 	const clearSchedule = () => {
-		setStationSchedules(Utilities.returnEmptyDailyShift());
+		setStationSchedules(Utilities.returnEmptyStationSchedules());
 	};
 
 	const createSchedules = async (e: React.SyntheticEvent) => {
@@ -75,13 +83,6 @@ export const CreateSchedules: React.FunctionComponent = () => {
 					170
 			  );
 	};
-	const [currentlyDragged, setCurrentlyDragged] = useState('');
-
-	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
-
-	useEffect(() => {
-		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
-	}, []);
 
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 
@@ -91,9 +92,13 @@ export const CreateSchedules: React.FunctionComponent = () => {
 				{isUserAdmin && <EmployeesList stationSchedules={stationSchedules} />}
 				<main className="section-schedules-central">
 					<Tables
+						schedules={{
+							stationSchedules,
+							homeRehabilitations: [],
+							comment: Utilities.returnEmptyComment(''),
+						}}
 						currentlyDragged={currentlyDragged}
 						setCurrentlyDragged={setCurrentlyDragged}
-						stationSchedules={stationSchedules}
 						editCells={editCells}
 						workStageSpans={workStageSpans}
 					/>

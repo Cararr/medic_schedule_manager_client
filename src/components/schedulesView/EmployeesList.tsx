@@ -1,11 +1,19 @@
 import React, { DragEvent } from 'react';
 import { useEmployees } from '../../context/employeesContext';
-import { StationSchedules, Employee } from '../../types';
+import {
+	StationSchedules,
+	Employee,
+	HomeRehabilitation,
+	Comment,
+} from '../../types';
 import './EmployeesList.css';
 
 interface Props {
 	stationSchedules: StationSchedules;
-	checkForSchedulesChanges?: () => void;
+	checkForSchedulesChanges?: (
+		comment?: Comment,
+		homeRehabilitations?: HomeRehabilitation[]
+	) => void;
 }
 
 export const EmployeesList: React.FunctionComponent<Props> = (props) => {
@@ -27,7 +35,9 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 					draggable={true}
 					onDragOver={handleOnDragOver}
 					onDragStart={(e) => handleOnDragStart(e, employee)}
-					onDragEnd={props.checkForSchedulesChanges}
+					onDragEnd={() =>
+						props.checkForSchedulesChanges && props.checkForSchedulesChanges()
+					}
 					style={{ color: fontColor, fontWeight: 'bold' }}
 				>
 					{`${employee.firstName} ${employee.lastName}`}

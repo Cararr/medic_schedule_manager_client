@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import { TableCell } from '../tables/TableCell';
 import Utilities from '../../util/Utilities';
 import './HomeRehabilitationsView.css';
-import { HomeRehabilitation, Employee } from '../../types';
+import { HomeRehabilitation, Employee, Comment } from '../../types';
 
 interface Props {
 	isUserAdmin: boolean;
@@ -11,7 +11,10 @@ interface Props {
 		stationName: string,
 		newCellValue: Employee | null
 	) => void;
-	checkForSchedulesChanges?: () => void;
+	checkForSchedulesChanges?: (
+		comment?: Comment,
+		homeRehabilitations?: HomeRehabilitation[]
+	) => void;
 	currentlyDragged: string;
 	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
 	homeRehabilitations: HomeRehabilitation[];
@@ -49,8 +52,8 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 					<TableCell
 						key={index}
 						stationName={'homeRehabilitations'}
-						checkForSchedulesChanges={props.checkForSchedulesChanges}
 						editCells={props.editCells}
+						checkForSchedulesChanges={props.checkForSchedulesChanges}
 						cellValue={hR.employee}
 						cellNumber={index}
 						currentlyDragged={props.currentlyDragged}

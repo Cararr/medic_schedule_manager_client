@@ -1,17 +1,26 @@
 import React from 'react';
 import { TableCell } from './TableCell';
 import './Table.css';
-import { WorkStageSpans, Employee, StationName } from '../../types';
+import {
+	WorkStageSpans,
+	Employee,
+	StationName,
+	HomeRehabilitation,
+	Comment,
+} from '../../types';
 
 interface Props {
 	stationName: string;
 	stationSchedule: (Employee | null)[];
+	checkForSchedulesChanges?: (
+		comment?: Comment,
+		homeRehabilitations?: HomeRehabilitation[]
+	) => void;
 	editCells: (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
 	) => void;
-	checkForSchedulesChanges?: () => void;
 	currentlyDragged: string;
 	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
 	workStageSpans: WorkStageSpans[];
@@ -71,7 +80,10 @@ function returntableBodyByStation(
 	) => void,
 	currentlyDragged: string,
 	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>,
-	checkForSchedulesChanges?: () => void
+	checkForSchedulesChanges?: (
+		comment?: Comment,
+		homeRehabilitations?: HomeRehabilitation[]
+	) => void
 ) {
 	const cells = stationSchedule.map((cell, index) => {
 		return (
@@ -80,8 +92,8 @@ function returntableBodyByStation(
 				cellNumber={index}
 				stationName={station}
 				editCells={editCells}
-				checkForSchedulesChanges={checkForSchedulesChanges}
 				cellValue={stationSchedule[index]}
+				checkForSchedulesChanges={checkForSchedulesChanges}
 				currentlyDragged={currentlyDragged}
 				setCurrentlyDragged={setCurrentlyDragged}
 			/>

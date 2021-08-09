@@ -25,189 +25,23 @@ export const ViewSchedules: React.FunctionComponent = () => {
 		Utilities.formatDateString(new Date())
 	);
 
+	const [initialSchedule, setInitialSchedules] = useState<Schedules>(
+		returnEmptySchedules(dateSelected)
+	);
+
+	const [schedules, setSchedules] = useState<Schedules>(
+		returnEmptySchedules(dateSelected)
+	);
+
+	const [wasScheduleEdited, setWasScheduleEdited] = useState(false);
+
+	const [currentlyDragged, setCurrentlyDragged] = useState('');
+
 	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
 
 	useEffect(() => {
 		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
 	}, []);
-
-	const [initialSchedule, setInitialSchedules] = useState<Schedules>({
-		stationSchedules: Utilities.returnEmptyDailyShift(),
-		homeRehabilitations: [],
-		comment: Utilities.returnEmptyComment(dateSelected),
-	});
-
-	const [schedules, setSchedules] = useState<Schedules>({
-		stationSchedules: Utilities.returnEmptyDailyShift(),
-		homeRehabilitations: [],
-		comment: Utilities.returnEmptyComment(dateSelected),
-	});
-
-	const [wasScheduleEdited, setWasScheduleEdited] = useState(false);
-
-	const editCells = (
-		cellNumber: number,
-		stationName: string,
-		newCellValue: Employee | null
-	) => {
-		setSchedules((prev) => {
-			const updatedSchedule = { ...prev };
-			if (stationName === 'homeRehabilitations') {
-				updatedSchedule.homeRehabilitations[cellNumber].employee = newCellValue;
-				setHomeRehabilitationsEdited((prev) => [
-					...prev,
-					schedules.homeRehabilitations[cellNumber].id,
-				]);
-			} else
-				updatedSchedule.stationSchedules[stationName][cellNumber] =
-					newCellValue;
-
-			return updatedSchedule;
-		});
-	};
-
-	const checkForSchedulesChanges = (
-		newEntity?: HomeRehabilitation | Comment
-	) => {
-		for (const station in initialSchedule.stationSchedules) {
-			if (
-				Object.prototype.hasOwnProperty.call(
-					initialSchedule.stationSchedules,
-					station
-				)
-			) {
-				const initialStationCells = initialSchedule.stationSchedules[station];
-				const updatedStationCells = schedules.stationSchedules[station];
-
-				for (const [index, cellValue] of updatedStationCells.entries()) {
-					if (initialStationCells[index]?.id !== cellValue?.id)
-						return setWasScheduleEdited(true);
-				}
-			}
-			// CHYBA JAKIEŚ PORÓWNANIE DO NEWENITYT BĘDZIE MUSIAŁO BYĆ :(
-			for (const [
-				index,
-				homeRehabilitaiton,
-			] of schedules.homeRehabilitations.entries()) {
-				if (
-					initialSchedule.homeRehabilitations[index].startTime !==
-						homeRehabilitaiton.startTime ||
-					initialSchedule.homeRehabilitations[index].employee?.id !==
-						homeRehabilitaiton.employee?.id ||
-					initialSchedule.homeRehabilitations[index].patient !==
-						homeRehabilitaiton.patient
-				)
-					return setWasScheduleEdited(true);
-			}
-		}
-
-		if (initialSchedule.comment.content !== schedules.comment.content)
-			return setWasScheduleEdited(true);
-
-		return setWasScheduleEdited(false);
-	};
-
-	const saveScheudles = async () => {
-		setWasScheduleEdited(false);
-
-		await Put.schedule(dateSelected, schedules.stationSchedules);
-
-		if (schedules.comment.id && !schedules.comment.content) {
-			await Delete.comment(schedules.comment);
-			setSchedules((prev) => ({
-				...prev,
-				comment: Utilities.returnEmptyComment(dateSelected),
-			}));
-		} else if (schedules.comment.id) await Put.comment(schedules.comment);
-		else {
-			const comment: Comment = await Post.comment(schedules.comment);
-			setSchedules((prev) => ({
-				...prev,
-				comment,
-			}));
-		}
-
-		setInitialSchedules({
-			stationSchedules: cloneDeep(schedules.stationSchedules),
-			homeRehabilitations: cloneDeep(schedules.homeRehabilitations),
-			comment: cloneDeep(schedules.comment),
-		});
-	};
-
-	const [currentlyDragged, setCurrentlyDragged] = useState('');
-
-	const handleCommentChanges = ({
-		target,
-	}: ChangeEvent<HTMLTextAreaElement>) => {
-		const comment = { ...schedules.comment, content: target.value };
-		setSchedules((prev) => ({ ...prev, comment }));
-	};
-
-	const [homeRehabilitationsEdited, setHomeRehabilitationsEdited] = useState<
-		number[]
-	>([]);
-
-	const removeHomeRehabilitation = async (
-		homeRehabilitation: HomeRehabilitation
-	) => {
-		if (await Delete.homeRehabilitation(homeRehabilitation)) {
-			setHomeRehabilitationsEdited((prev) =>
-				prev.filter((id) => id !== homeRehabilitation.id)
-			);
-			setSchedules((prev) => ({
-				...prev,
-				homeRehabilitations: prev.homeRehabilitations.filter(
-					(hR: HomeRehabilitation) => hR.id !== homeRehabilitation.id
-				),
-			}));
-		} else
-			warningMessage(
-				'Action aborted!',
-				'Something went wrong, please try again later.'
-			);
-	};
-
-	/* const saveHomeRehabilitationChanges = async (
-		homeRehabilitation: HomeRehabilitation
-	) => {
-		if (!homeRehabilitation.employee)
-			warningMessage(
-				'Employee is missing',
-				'An employee must be present at home rehabilitation!'
-			);
-		else if (await Put.homeRehabilitation(homeRehabilitation))
-			setHomeRehabilitationsEdited((prev) =>
-				prev.filter((id) => id !== homeRehabilitation.id)
-			);
-	}; */
-
-	const handleHomeRehabilitationChanges = (
-		{ target }: ChangeEvent<HTMLInputElement>,
-		index: number
-	) => {
-		setHomeRehabilitationsEdited((prev) => [
-			...prev,
-			schedules.homeRehabilitations[index].id,
-		]);
-
-		const changedHomeRehabilitaiton = {
-			...schedules.homeRehabilitations[index],
-		};
-		switch (target.name) {
-			case 'startTime':
-				changedHomeRehabilitaiton.startTime = `${target.value}:00`;
-				break;
-			case 'patient':
-				changedHomeRehabilitaiton.patient = target.value;
-				break;
-		}
-
-		setSchedules((prev) => {
-			const homeRehabilitations = cloneDeep(prev.homeRehabilitations);
-			homeRehabilitations[index] = changedHomeRehabilitaiton;
-			return { ...prev, homeRehabilitations };
-		});
-	};
 
 	useEffect(() => {
 		setWasScheduleEdited(false);
@@ -225,9 +59,170 @@ export const ViewSchedules: React.FunctionComponent = () => {
 				homeRehabilitations: cloneDeep(homeRehabilitations),
 				comment: cloneDeep(comment),
 			});
-			setHomeRehabilitationsEdited([]);
 		})();
 	}, [dateSelected]);
+
+	const editCells = (
+		cellNumber: number,
+		stationName: string,
+		newCellValue: Employee | null
+	) => {
+		setSchedules((prev) => {
+			const updatedSchedule = { ...prev };
+			if (stationName === 'homeRehabilitations') {
+				updatedSchedule.homeRehabilitations[cellNumber].employee = newCellValue;
+			} else
+				updatedSchedule.stationSchedules[stationName][cellNumber] =
+					newCellValue;
+
+			return updatedSchedule;
+		});
+	};
+
+	const checkForSchedulesChanges = (
+		comment: Comment = schedules.comment,
+		homeRehabilitations: HomeRehabilitation[] = schedules.homeRehabilitations
+	) => {
+		for (const station in initialSchedule.stationSchedules) {
+			if (
+				Object.prototype.hasOwnProperty.call(
+					initialSchedule.stationSchedules,
+					station
+				)
+			) {
+				const initialStationCells = initialSchedule.stationSchedules[station];
+				const updatedStationCells = schedules.stationSchedules[station];
+
+				for (const [index, cellValue] of updatedStationCells.entries()) {
+					if (initialStationCells[index]?.id !== cellValue?.id)
+						return setWasScheduleEdited(true);
+				}
+			}
+		}
+
+		for (const [index, homeRehabilitaiton] of homeRehabilitations.entries()) {
+			if (
+				initialSchedule.homeRehabilitations[index].startTime !==
+					homeRehabilitaiton.startTime ||
+				initialSchedule.homeRehabilitations[index].employee?.id !==
+					homeRehabilitaiton.employee?.id ||
+				initialSchedule.homeRehabilitations[index].patient !==
+					homeRehabilitaiton.patient
+			)
+				return setWasScheduleEdited(true);
+		}
+
+		if (initialSchedule.comment.content !== comment.content)
+			return setWasScheduleEdited(true);
+
+		return setWasScheduleEdited(false);
+	};
+
+	const saveScheudles = async () => {
+		for (const homeRehabilitation of schedules.homeRehabilitations) {
+			if (!homeRehabilitation.employee)
+				return warningMessage(
+					'Employee is missing',
+					'An employee must be present at home rehabilitation!',
+					170
+				);
+		}
+
+		await Put.schedule(dateSelected, schedules.stationSchedules);
+
+		for (const [
+			index,
+			homeRehabilitation,
+		] of schedules.homeRehabilitations.entries()) {
+			const initialHomeRehabilitation =
+				initialSchedule.homeRehabilitations[index];
+			if (
+				initialHomeRehabilitation.startTime !== homeRehabilitation.startTime ||
+				initialHomeRehabilitation.employee?.id !==
+					homeRehabilitation.employee?.id ||
+				initialHomeRehabilitation.patient !== homeRehabilitation.patient
+			)
+				await Put.homeRehabilitation(homeRehabilitation);
+		}
+
+		if (initialSchedule.comment.content !== schedules.comment.content) {
+			if (schedules.comment.id && !schedules.comment.content) {
+				await Delete.comment(schedules.comment);
+				setSchedules((prev) => ({
+					...prev,
+					comment: Utilities.returnEmptyComment(dateSelected),
+				}));
+			} else if (schedules.comment.id) await Put.comment(schedules.comment);
+			else {
+				const comment: Comment = await Post.comment(schedules.comment);
+				setSchedules((prev) => ({
+					...prev,
+					comment,
+				}));
+			}
+
+			setWasScheduleEdited(false);
+		}
+
+		setInitialSchedules({
+			stationSchedules: cloneDeep(schedules.stationSchedules),
+			homeRehabilitations: cloneDeep(schedules.homeRehabilitations),
+			comment: cloneDeep(schedules.comment),
+		});
+	};
+
+	const handleCommentChanges = ({
+		target,
+	}: ChangeEvent<HTMLTextAreaElement>) => {
+		const comment = { ...schedules.comment, content: target.value };
+		setSchedules((prev) => ({ ...prev, comment }));
+		checkForSchedulesChanges(comment);
+	};
+
+	const handleHomeRehabilitationChanges = (
+		{ target }: ChangeEvent<HTMLInputElement>,
+		index: number
+	) => {
+		const changedHomeRehabilitaiton = {
+			...schedules.homeRehabilitations[index],
+		};
+		switch (target.name) {
+			case 'startTime':
+				changedHomeRehabilitaiton.startTime = `${target.value}:00`;
+				break;
+			case 'patient':
+				changedHomeRehabilitaiton.patient = target.value;
+				break;
+		}
+
+		const homeRehabilitations = cloneDeep(schedules.homeRehabilitations);
+		homeRehabilitations[index] = changedHomeRehabilitaiton;
+
+		setSchedules((prev) => {
+			return { ...prev, homeRehabilitations };
+		});
+
+		checkForSchedulesChanges(schedules.comment, homeRehabilitations);
+	};
+
+	const removeHomeRehabilitation = async (
+		homeRehabilitation: HomeRehabilitation
+	) => {
+		if (await Delete.homeRehabilitation(homeRehabilitation)) {
+			setSchedules((prev) => ({
+				...prev,
+				homeRehabilitations: prev.homeRehabilitations.filter(
+					(hR: HomeRehabilitation) => hR.id !== homeRehabilitation.id
+				),
+			}));
+		} else {
+			return warningMessage(
+				'Action aborted!',
+				'Something went wrong, please try again later.',
+				170
+			);
+		}
+	};
 
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 
@@ -237,8 +232,8 @@ export const ViewSchedules: React.FunctionComponent = () => {
 			<div className="schedules">
 				{isUserAdmin && (
 					<EmployeesList
-						checkForSchedulesChanges={checkForSchedulesChanges}
 						stationSchedules={schedules.stationSchedules}
+						checkForSchedulesChanges={checkForSchedulesChanges}
 					/>
 				)}
 				<main className="section-schedules-central">
@@ -248,17 +243,14 @@ export const ViewSchedules: React.FunctionComponent = () => {
 					/>
 
 					<Tables
+						schedules={schedules}
+						checkForSchedulesChanges={checkForSchedulesChanges}
 						currentlyDragged={currentlyDragged}
 						setCurrentlyDragged={setCurrentlyDragged}
-						stationSchedules={schedules.stationSchedules}
 						editCells={editCells}
-						checkForSchedulesChanges={checkForSchedulesChanges}
 						workStageSpans={workStageSpans}
-						homeRehabilitations={schedules.homeRehabilitations}
-						homeRehabilitationsEdited={homeRehabilitationsEdited}
 						handleHomeRehabilitationChanges={handleHomeRehabilitationChanges}
 						removeHomeRehabilitation={removeHomeRehabilitation}
-						comment={schedules.comment}
 						handleCommentChanges={handleCommentChanges}
 					/>
 				</main>
@@ -272,3 +264,11 @@ export const ViewSchedules: React.FunctionComponent = () => {
 		</div>
 	);
 };
+
+function returnEmptySchedules(dateSelected: string) {
+	return {
+		stationSchedules: Utilities.returnEmptyStationSchedules(),
+		homeRehabilitations: [],
+		comment: Utilities.returnEmptyComment(dateSelected),
+	};
+}

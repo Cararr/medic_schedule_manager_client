@@ -1,6 +1,6 @@
 import React from 'react';
 import { useUser } from '../../context/userContext';
-import { Employee } from '../../types';
+import { Employee, HomeRehabilitation, Comment } from '../../types';
 import Utilities from '../../util/Utilities';
 import './TableCell.css';
 
@@ -12,7 +12,10 @@ interface Props {
 		stationName: string,
 		newCellValue: Employee | null
 	) => void;
-	checkForSchedulesChanges?: () => void;
+	checkForSchedulesChanges?: (
+		comment?: Comment,
+		homeRehabilitations?: HomeRehabilitation[]
+	) => void;
 	cellValue: Employee | null;
 	currentlyDragged: string;
 	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
@@ -76,8 +79,10 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 			onDragLeave={isUserAdmin ? handleOnDragLeave : undefined}
 			onDragStart={isUserAdmin ? handleOnDragStart : undefined}
 			onDragOver={isUserAdmin ? handleOnDragOver : undefined}
-			onDragEnd={props.checkForSchedulesChanges}
 			onDrop={isUserAdmin ? handleDrop : undefined}
+			onDragEnd={() =>
+				props.checkForSchedulesChanges && props.checkForSchedulesChanges()
+			}
 		>
 			{props.cellValue &&
 				`${props.cellValue.firstName} ${props.cellValue.lastName}`}
