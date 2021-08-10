@@ -48,9 +48,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 
 	const generateSchedule = async () => {
 		Get.generateSchedule(dateForm.from).then((schedules) => {
-			setStationSchedules((prev) =>
-				schedules ? { ...prev, schedules } : prev
-			);
+			if (schedules) setStationSchedules(schedules);
 		});
 	};
 
@@ -88,9 +86,9 @@ export const CreateSchedules: React.FunctionComponent = () => {
 
 	return (
 		<div>
-			<div className="schedules">
+			<div className="container-schedules">
 				{isUserAdmin && <EmployeesList stationSchedules={stationSchedules} />}
-				<main className="section-schedules-central">
+				<main className="main-schedules">
 					<Tables
 						schedules={{
 							stationSchedules,

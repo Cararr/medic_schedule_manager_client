@@ -26,8 +26,9 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 
 	const employees = useEmployees();
 	const employeesList = employees?.map((employee) => {
-		const occurrences = countOccurrences(props.stationSchedules, employee.id);
-		const fontColor = returnFontColor(occurrences);
+		const fontColor = returnFontColorByOccurence(
+			countOccurrences(props.stationSchedules, employee.id)
+		);
 		return (
 			<li key={employee.id}>
 				<p
@@ -62,11 +63,14 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 	);
 };
 
-function countOccurrences(schedule: StationSchedules, id: string): number {
+function countOccurrences(
+	stationSchedules: StationSchedules,
+	id: string
+): number {
 	let counter = 0;
-	for (const station in schedule) {
-		if (Object.prototype.hasOwnProperty.call(schedule, station)) {
-			const stationSchedule = schedule[station];
+	for (const station in stationSchedules) {
+		if (Object.prototype.hasOwnProperty.call(stationSchedules, station)) {
+			const stationSchedule = stationSchedules[station];
 			for (const employee of stationSchedule) {
 				if (employee?.id === id) counter++;
 			}
@@ -75,7 +79,7 @@ function countOccurrences(schedule: StationSchedules, id: string): number {
 	return counter;
 }
 
-function returnFontColor(counter: number): string {
+function returnFontColorByOccurence(counter: number): string {
 	if (counter < 3) return 'inherit';
 	else if (counter > 3) return 'hsl(0, 94%, 34%)';
 	else return '#0F00CA';

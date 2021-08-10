@@ -30,7 +30,7 @@ export const SelectDate: React.FunctionComponent<Props> = (props) => {
 	};
 
 	return (
-		<form className="select-date-form">
+		<form className="form-select-date">
 			<label>
 				<h3>Select date:</h3>
 			</label>

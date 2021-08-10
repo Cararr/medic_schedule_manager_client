@@ -229,14 +229,14 @@ export const ViewSchedules: React.FunctionComponent = () => {
 	return (
 		<div>
 			<NavBar />
-			<div className="schedules">
+			<div className="container-schedules">
 				{isUserAdmin && (
 					<EmployeesList
 						stationSchedules={schedules.stationSchedules}
 						checkForSchedulesChanges={checkForSchedulesChanges}
 					/>
 				)}
-				<main className="section-schedules-central">
+				<main className="main-schedules">
 					<SelectDate
 						setDateSelected={setDateSelected}
 						dateSelected={dateSelected}

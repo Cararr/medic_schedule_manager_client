@@ -29,13 +29,13 @@ input:focus {
 	justify-content: space-evenly;
 	margin-top: 5%;
 }
-.schedules {
+.container-schedules {
 	text-align: center;
 	width: 100%;
 	display: flex;
 	padding-top: 1rem;
 }
-.section-schedules-central {
+.main-schedules {
 	display: flex;
 	flex-flow: column;
 	align-items: center;
