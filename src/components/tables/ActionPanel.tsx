@@ -19,8 +19,8 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 			props.setDateForm((prev) => ({ ...prev, [target.name]: target.value }));
 	};
 
-	const isCreate = Boolean(props.dateForm);
-	const isView = Boolean(props.saveScheudles);
+	const createSchedulesView = Boolean(props.dateForm);
+	const schedulesView = Boolean(props.saveScheudles);
 
 	const loading = <i className="icon-spin6" style={{ fontSize: '1.5rem' }} />;
 
@@ -80,44 +80,42 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 		<aside className="action-panel">
 			<h3>Actions</h3>
 			<ul className="list">
-				{isCreate && (
-					<li>
-						<button
-							onClick={props.generateSchedule}
-							className="list-item button-generic"
-						>
+				{createSchedulesView && (
+					<li className="list-item">
+						<button onClick={props.generateSchedule} className="button-generic">
 							Generate
 						</button>
 					</li>
 				)}
-				{isCreate && (
-					<li>
-						<button
-							onClick={props.clearSchedule}
-							className="list-item button-generic"
-						>
+				{createSchedulesView && (
+					<li className="list-item">
+						<button onClick={props.clearSchedule} className="button-generic">
 							Clear
 						</button>
 					</li>
 				)}
-				{isView && (
-					<li>
-						<button
-							disabled={!props.wasScheduleEdited}
-							onClick={
-								props.wasScheduleEdited ? props.saveScheudles : undefined
-							}
-							className={`list-item button-generic ${
-								!props.wasScheduleEdited && 'button-disabled'
-							}`}
-						>
-							Save
-						</button>
+				{schedulesView && (
+					<li className="list-item">
+						{props.isLoading ? (
+							loading
+						) : (
+							<button
+								disabled={!props.wasScheduleEdited}
+								onClick={
+									props.wasScheduleEdited ? props.saveScheudles : undefined
+								}
+								className={`button-generic ${
+									!props.wasScheduleEdited && 'button-disabled'
+								}`}
+							>
+								Save
+							</button>
+						)}
 					</li>
 				)}
 			</ul>
-			{isCreate && dateForm}
-			{isView && statusBar}
+			{createSchedulesView && dateForm}
+			{schedulesView && statusBar}
 		</aside>
 	);
 };

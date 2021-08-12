@@ -14,6 +14,7 @@ import { HomePage } from '../homePage/HomePage';
 import { Create } from '../create/Create';
 import { Vacations } from '../vacations/Vacations';
 import { NotFound } from '../notFound/NotFound';
+import { ScrollTopButton } from '../scrollTopButton/ScrollTopButton';
 
 const App: React.FunctionComponent = () => {
 	return (
@@ -32,6 +33,7 @@ const App: React.FunctionComponent = () => {
 						<AdminRoute path="/create" component={Create} />
 						<Route path="/" component={NotFound} />
 					</Switch>
+					<ScrollTopButton />
 				</BrowserRouter>
 			</EmployeesProvider>
 		</UserProvider>

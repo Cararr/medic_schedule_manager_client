@@ -37,6 +37,8 @@ export const ViewSchedules: React.FunctionComponent = () => {
 
 	const [currentlyDragged, setCurrentlyDragged] = useState('');
 
+	const [isLoading, setIsLoading] = useState(false);
+
 	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
 
 	useEffect(() => {
@@ -128,6 +130,8 @@ export const ViewSchedules: React.FunctionComponent = () => {
 				);
 		}
 
+		setIsLoading(true);
+
 		await Put.schedule(dateSelected, schedules.stationSchedules);
 
 		for (const [
@@ -160,8 +164,6 @@ export const ViewSchedules: React.FunctionComponent = () => {
 					comment,
 				}));
 			}
-
-			setWasScheduleEdited(false);
 		}
 
 		setInitialSchedules({
@@ -169,6 +171,8 @@ export const ViewSchedules: React.FunctionComponent = () => {
 			homeRehabilitations: cloneDeep(schedules.homeRehabilitations),
 			comment: cloneDeep(schedules.comment),
 		});
+		setWasScheduleEdited(false);
+		setIsLoading(false);
 	};
 
 	const handleCommentChanges = ({
@@ -258,6 +262,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 					<ActionPanel
 						wasScheduleEdited={wasScheduleEdited}
 						saveScheudles={saveScheudles}
+						isLoading={isLoading}
 					/>
 				)}
 			</div>

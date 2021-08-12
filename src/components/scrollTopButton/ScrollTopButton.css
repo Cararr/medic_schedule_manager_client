@@ -1,0 +1,10 @@
+.scroll-top {
+	position: fixed;
+	width: 3rem;
+	height: 3rem;
+	background-color: red;
+	bottom: 1rem;
+	right: 1rem;
+	z-index: 2;
+	cursor: pointer;
+}
