@@ -12,7 +12,7 @@ export const ScrollTopButton: React.FunctionComponent = () => {
 		});
 	};
 
-	const toggleVisibility = () => setShowButton(window.pageYOffset > 300);
+	const toggleVisibility = () => setShowButton(window.pageYOffset > 250);
 
 	useEffect(() => {
 		window.addEventListener('scroll', toggleVisibility);
@@ -20,8 +20,14 @@ export const ScrollTopButton: React.FunctionComponent = () => {
 	}, []);
 
 	return (
-		<div onClick={scrollTop} className="scroll-top">
-			<CgArrowUpR />
+		<div
+			style={{
+				display: showButton ? 'initial' : 'none',
+			}}
+			onClick={scrollTop}
+			className="scroll-top"
+		>
+			<CgArrowUpR className="icon-scroll-top" />
 		</div>
 	);
 };

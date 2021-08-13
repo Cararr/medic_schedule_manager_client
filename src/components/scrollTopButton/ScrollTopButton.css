@@ -1,10 +1,30 @@
 .scroll-top {
+	background-color: var(--backgroundYellow);
 	position: fixed;
-	width: 3rem;
-	height: 3rem;
-	background-color: red;
 	bottom: 1rem;
 	right: 1rem;
 	z-index: 2;
 	cursor: pointer;
+	line-height: 0;
+	border-radius: 20px;
+	animation: fadeIn 0.5s;
+	opacity: 0.6;
+	transition: ease-in-out 0.1s opacity;
+}
+.scroll-top:hover {
+	opacity: 1;
+}
+.icon-scroll-top {
+	color: var(--fontColor);
+	width: 3rem;
+	height: 3rem;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0.6;
+	}
 }
