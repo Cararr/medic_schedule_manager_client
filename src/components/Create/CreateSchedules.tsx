@@ -59,7 +59,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 	const createSchedules = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		if (!Utilities.checkIfEndDateIsAfterBegin(dateForm.from, dateForm.to))
-			warningMessage(
+			return warningMessage(
 				'Wrong date set!',
 				'End date cannot come before the beginning!',
 				170
