@@ -131,6 +131,6 @@ function returnEmptyForm(): CreateVacationForm {
 	return {
 		employee: null,
 		from: Utilities.formatDateString(new Date()),
-		to: Utilities.formatDateString(Utilities.incrementDateByDay(new Date())),
+		to: Utilities.formatDateString(Utilities.addDay(new Date())),
 	};
 }

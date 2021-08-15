@@ -32,8 +32,12 @@ export default class Utilities {
 		return time.slice(0, 5);
 	}
 
-	static incrementDateByDay(date: Date) {
+	static addDay(date: Date) {
 		return new Date(date.setDate(date.getDate() + 1));
+	}
+
+	static subtractDay(date: Date) {
+		return new Date(date.setDate(date.getDate() - 1));
 	}
 
 	static checkIfEndDateIsAfterBegin(startDate: string, endDate: string) {

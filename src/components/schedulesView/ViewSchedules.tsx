@@ -64,7 +64,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 		})();
 	}, [dateSelected]);
 
-	const editCells = (
+	const changeCellValue = (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
@@ -251,7 +251,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 						checkForSchedulesChanges={checkForSchedulesChanges}
 						currentlyDragged={currentlyDragged}
 						setCurrentlyDragged={setCurrentlyDragged}
-						editCells={editCells}
+						changeCellValue={changeCellValue}
 						workStageSpans={workStageSpans}
 						handleHomeRehabilitationChanges={handleHomeRehabilitationChanges}
 						removeHomeRehabilitation={removeHomeRehabilitation}

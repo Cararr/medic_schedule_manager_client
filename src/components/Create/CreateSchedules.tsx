@@ -21,7 +21,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 
 	const [dateForm, setDateForm] = useState<DateForm>({
 		from: Utilities.formatDateString(new Date()),
-		to: Utilities.formatDateString(Utilities.incrementDateByDay(new Date())),
+		to: Utilities.formatDateString(Utilities.addDay(new Date())),
 	});
 
 	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
@@ -34,7 +34,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
 	}, []);
 
-	const editCells = (
+	const changeCellValue = (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
@@ -97,7 +97,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 						}}
 						currentlyDragged={currentlyDragged}
 						setCurrentlyDragged={setCurrentlyDragged}
-						editCells={editCells}
+						changeCellValue={changeCellValue}
 						workStageSpans={workStageSpans}
 					/>
 				</main>

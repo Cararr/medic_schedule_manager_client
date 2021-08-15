@@ -18,7 +18,20 @@ export default class Delete {
 			return response.ok;
 		} catch (error) {
 			console.error(error);
-			return false;
+		}
+	};
+
+	static vacation = async (vacationId: string) => {
+		try {
+			const response = await fetch(`${PATH}/vacations/${vacationId}`, {
+				method: 'DELETE',
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				},
+			});
+			return response.ok;
+		} catch (error) {
+			console.error(error);
 		}
 	};
 

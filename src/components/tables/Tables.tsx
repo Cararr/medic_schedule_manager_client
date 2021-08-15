@@ -21,7 +21,7 @@ interface Props {
 	) => void;
 	currentlyDragged: string;
 	setCurrentlyDragged: React.Dispatch<React.SetStateAction<string>>;
-	editCells: (
+	changeCellValue: (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
@@ -47,7 +47,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 					key={station}
 					stationSchedule={props.schedules.stationSchedules[station]}
 					checkForSchedulesChanges={props.checkForSchedulesChanges}
-					editCells={props.editCells}
+					changeCellValue={props.changeCellValue}
 					currentlyDragged={props.currentlyDragged}
 					setCurrentlyDragged={props.setCurrentlyDragged}
 					stationName={station}
@@ -76,7 +76,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 				props.removeHomeRehabilitation && (
 					<HomeRehabilitations
 						isUserAdmin={isUserAdmin}
-						editCells={props.editCells}
+						changeCellValue={props.changeCellValue}
 						checkForSchedulesChanges={props.checkForSchedulesChanges}
 						currentlyDragged={props.currentlyDragged}
 						setCurrentlyDragged={props.setCurrentlyDragged}

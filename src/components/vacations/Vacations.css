@@ -44,3 +44,24 @@ td.fc-day-sun {
 .fc-event-title-container {
 	text-align: center;
 }
+.calendar-event {
+	display: flex;
+	text-align: center;
+}
+.tittle-calendar-event {
+	margin: 0;
+	width: 100%;
+}
+.button-calendar-event {
+	position: absolute;
+	right: 0;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+.fc-event {
+	cursor: grab !important;
+}
+.grabbed {
+	cursor: grabbing !important;
+}

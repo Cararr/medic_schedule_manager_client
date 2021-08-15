@@ -16,7 +16,7 @@ interface Props {
 		comment?: Comment,
 		homeRehabilitations?: HomeRehabilitation[]
 	) => void;
-	editCells: (
+	changeCellValue: (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
@@ -46,7 +46,7 @@ export const Table: React.FunctionComponent<Props> = (props) => {
 			{returntableBodyByStation(
 				props.stationName,
 				props.stationSchedule,
-				props.editCells,
+				props.changeCellValue,
 				props.currentlyDragged,
 				props.setCurrentlyDragged,
 				props.checkForSchedulesChanges
@@ -73,7 +73,7 @@ function returnWorkStageSpans(
 function returntableBodyByStation(
 	station: string,
 	stationSchedule: (Employee | null)[],
-	editCells: (
+	changeCellValue: (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
@@ -91,7 +91,7 @@ function returntableBodyByStation(
 				key={index}
 				cellNumber={index}
 				stationName={station}
-				editCells={editCells}
+				changeCellValue={changeCellValue}
 				cellValue={stationSchedule[index]}
 				checkForSchedulesChanges={checkForSchedulesChanges}
 				currentlyDragged={currentlyDragged}

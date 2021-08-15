@@ -155,8 +155,6 @@ function returnEmptyForm(): CreateHomeRehabilitationForm {
 		patient: '',
 		startTime: '',
 		dateBegin: Utilities.formatDateString(new Date()),
-		dateEnd: Utilities.formatDateString(
-			Utilities.incrementDateByDay(new Date())
-		),
+		dateEnd: Utilities.formatDateString(Utilities.addDay(new Date())),
 	};
 }

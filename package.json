@@ -4,20 +4,20 @@
 	"proxy": "http://localhost:4000",
 	"private": true,
 	"dependencies": {
-		"@fullcalendar/daygrid": "^5.8.0",
-		"@fullcalendar/list": "^5.9.0",
-		"@fullcalendar/react": "^5.8.0",
-		"@testing-library/jest-dom": "^5.11.10",
-		"@testing-library/react": "^11.2.6",
-		"@testing-library/user-event": "^12.8.3",
-		"js-cookie": "^2.2.1",
+		"@fullcalendar/daygrid": "^5.9.0",
+		"@fullcalendar/interaction": "^5.9.0",
+		"@fullcalendar/react": "^5.9.0",
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/react": "^12.0.0",
+		"@testing-library/user-event": "^13.2.1",
+		"js-cookie": "^3.0.0",
 		"lodash": "^4.17.21",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"react-icons": "^4.2.0",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "4.0.3",
-		"web-vitals": "^1.1.1",
+		"web-vitals": "^2.1.0",
 		"winbox": "^0.2.0"
 	},
 	"scripts": {
@@ -45,13 +45,13 @@
 		]
 	},
 	"devDependencies": {
-		"@types/js-cookie": "^2.2.6",
+		"@types/js-cookie": "^2.2.7",
 		"@types/lodash": "^4.14.172",
-		"@types/node": "^15.12.4",
-		"@types/react": "^17.0.11",
-		"@types/react-dom": "^17.0.8",
-		"@types/react-router-dom": "^5.1.7",
-		"@types/winbox": "^0.2.0",
-		"typescript": "^4.3.4"
+		"@types/node": "^16.6.1",
+		"@types/react": "^17.0.18",
+		"@types/react-dom": "^17.0.9",
+		"@types/react-router-dom": "^5.1.8",
+		"@types/winbox": "^0.2.1",
+		"typescript": "^4.3.5"
 	}
 }

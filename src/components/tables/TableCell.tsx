@@ -7,7 +7,7 @@ import './TableCell.css';
 interface Props {
 	cellNumber: number;
 	stationName: string;
-	editCells: (
+	changeCellValue: (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
@@ -33,9 +33,9 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 				const [stationName, cellNumber] = extractStationAndCellNumberFromId(
 					props.currentlyDragged
 				);
-				props.editCells(cellNumber, stationName, props.cellValue);
+				props.changeCellValue(cellNumber, stationName, props.cellValue);
 			}
-			props.editCells(props.cellNumber, props.stationName, employee);
+			props.changeCellValue(props.cellNumber, props.stationName, employee);
 			props.setCurrentlyDragged('');
 			removeDragOverClass(e);
 		}
@@ -58,7 +58,7 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 		props.setCurrentlyDragged(target.id);
 		e.dataTransfer.setData('employee', JSON.stringify(props.cellValue));
 		setTimeout(
-			() => props.editCells(props.cellNumber, props.stationName, null),
+			() => props.changeCellValue(props.cellNumber, props.stationName, null),
 			0
 		);
 	};

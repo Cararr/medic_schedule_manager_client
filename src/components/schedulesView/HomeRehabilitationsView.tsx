@@ -6,7 +6,7 @@ import { HomeRehabilitation, Employee, Comment } from '../../types';
 
 interface Props {
 	isUserAdmin: boolean;
-	editCells: (
+	changeCellValue: (
 		cellNumber: number,
 		stationName: string,
 		newCellValue: Employee | null
@@ -52,7 +52,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 					<TableCell
 						key={index}
 						stationName={'homeRehabilitations'}
-						editCells={props.editCells}
+						changeCellValue={props.changeCellValue}
 						checkForSchedulesChanges={props.checkForSchedulesChanges}
 						cellValue={hR.employee}
 						cellNumber={index}
