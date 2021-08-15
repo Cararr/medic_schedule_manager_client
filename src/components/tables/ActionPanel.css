@@ -1,7 +1,7 @@
 .action-panel {
 	width: 8rem;
 	background-color: var(--backgroundYellow);
-	height: fit-content;
+	height: max-content;
 	position: sticky;
 	top: 3rem;
 	padding: 0.5rem;

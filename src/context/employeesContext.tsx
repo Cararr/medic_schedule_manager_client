@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, ReactNode } from 'react';
 import Get from '../api/Get';
 import { Employee } from '../types';
+import { useUser } from './userContext';
 
 const EmployeesContext = React.createContext<Employee[]>([]);
 const LoadEmployeesContext = React.createContext(() => {});
@@ -14,12 +15,15 @@ export const EmployeesProvider = ({ children }: { children: ReactNode }) => {
 		setEmployees(await Get.employees());
 	};
 
+	const user = useUser();
+
 	useEffect(() => {
-		Get.employees().then((employeesList) => {
-			if (employeesList)
-				setEmployees(employeesList.sort(sortByLastNameAlphabetically));
-		});
-	}, []);
+		if (user)
+			Get.employees().then((employeesList) => {
+				if (employeesList)
+					setEmployees(employeesList.sort(sortByLastNameAlphabetically));
+			});
+	}, [user]);
 
 	return (
 		<EmployeesContext.Provider value={employees}>
