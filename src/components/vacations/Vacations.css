@@ -52,8 +52,9 @@ td.fc-day-sun {
 	margin: 0;
 	width: 100%;
 }
-.button-calendar-event {
+.button-calendar-remove-event {
 	position: absolute;
+	padding: 0;
 	right: 0;
 	background-color: transparent;
 	border: none;

@@ -5,6 +5,8 @@ import FullCalendar, {
 	DatesSetArg,
 	EventApi,
 	EventContentArg,
+	EventDropArg,
+	EventInput,
 } from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, {
@@ -20,7 +22,7 @@ import { warningMessage } from '../../WinBox/winboxMessages';
 
 export const Vacations: React.FunctionComponent = () => {
 	const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-	const [vacations, setVacations] = useState([]);
+	const [vacations, setVacations] = useState<EventInput[]>([]);
 
 	useEffect(() => {
 		setVacations([]);
@@ -42,7 +44,7 @@ export const Vacations: React.FunctionComponent = () => {
 		})();
 	}, [selectedYear]);
 
-	const handleDateSet = (date: DatesSetArg) => {
+	const handleDatesSet = (date: DatesSetArg) => {
 		const displayedYear = new Date(
 			date.start.setMonth(date.start.getMonth() + 1)
 		).getFullYear();
@@ -68,8 +70,10 @@ export const Vacations: React.FunctionComponent = () => {
 			  );
 	};
 
-	const handleEventResize = async (eventResizeInfo: EventResizeDoneArg) => {
-		const event = eventResizeInfo.event;
+	const handleEventResizeAndDrop = async (
+		eventInfo: EventResizeDoneArg | EventDropArg
+	) => {
+		const event = eventInfo.event;
 		if (event._instance) {
 			const vacation: Vacation = {
 				id: Number(event._def.publicId),
@@ -79,19 +83,33 @@ export const Vacations: React.FunctionComponent = () => {
 					Utilities.subtractDay(event._instance?.range.end)
 				),
 			};
+
 			const done = await Put.vacation(vacation);
-			if (done) return;
+			if (done)
+				return setVacations((prev) => {
+					const updatedVacation = {
+						...prev.find((event) => Number(event.id) === vacation.id),
+						start: vacation.from,
+						end: Utilities.formatDateString(
+							Utilities.addDay(new Date(vacation.to))
+						),
+					};
+					return [
+						...[...prev].filter((event) => Number(event.id) !== vacation.id),
+						updatedVacation,
+					];
+				});
 		}
 
-		eventResizeInfo.revert();
+		eventInfo.revert();
 	};
 
 	const eventContent = (eventContentArg: EventContentArg) => (
 		<div className="calendar-event">
 			<p className="tittle-calendar-event">{eventContentArg.event.title}</p>
 			<button
-				onClick={() => handleEventRemove(eventContentArg.event)}
-				className="button-calendar-event"
+				onClick={() => console.log(666)}
+				className="button-calendar-remove-event"
 			>
 				{eventContentArg.isEnd && (
 					<TiDelete style={{ color: 'white', fontSize: '1rem' }} />
@@ -103,25 +121,25 @@ export const Vacations: React.FunctionComponent = () => {
 	return (
 		<div>
 			<NavBar />
-			<main style={{ cursor: 'e-resize !important' }} className="main-calendar">
+			<main className="main-calendar">
 				<FullCalendar
 					plugins={[dayGridPlugin, interactionPlugin]}
-					// weekends={false}
+					locale={'pl'}
+					height="auto"
+					firstDay={1}
+					headerToolbar={{ left: 'prevYear nextYear', center: 'title' }}
+					buttonText={buttonsText}
+					events={vacations}
 					eventContent={eventContent}
+					datesSet={handleDatesSet}
+					// weekends={false}
 					editable
+					eventDragMinDistance={0}
 					eventDragStart={({ el }) => toggleGrabbedClass(el)}
 					eventDragStop={({ el }) => toggleGrabbedClass(el)}
+					eventDrop={handleEventResizeAndDrop}
 					eventResizableFromStart
-					eventDurationEditable
-					eventResize={handleEventResize}
-					firstDay={1}
-					datesSet={handleDateSet}
-					headerToolbar={{ left: 'prevYear nextYear', center: 'title' }}
-					events={vacations}
-					height="auto"
-					locale={'pl'}
-					// navLinks={true}
-					buttonText={buttonsText}
+					eventResize={handleEventResizeAndDrop}
 				/>
 			</main>
 		</div>
