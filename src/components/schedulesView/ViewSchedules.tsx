@@ -237,6 +237,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 				{isUserAdmin && (
 					<EmployeesList
 						stationSchedules={schedules.stationSchedules}
+						homeRehabilitations={schedules.homeRehabilitations}
 						checkForSchedulesChanges={checkForSchedulesChanges}
 					/>
 				)}

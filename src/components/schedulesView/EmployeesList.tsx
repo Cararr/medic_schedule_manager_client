@@ -10,6 +10,7 @@ import './EmployeesList.css';
 
 interface Props {
 	stationSchedules: StationSchedules;
+	homeRehabilitations?: HomeRehabilitation[];
 	checkForSchedulesChanges?: (
 		comment?: Comment,
 		homeRehabilitations?: HomeRehabilitation[]
@@ -27,7 +28,11 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 	const employees = useEmployees();
 	const employeesList = employees?.map((employee) => {
 		const fontColor = returnFontColorByOccurence(
-			countOccurrences(props.stationSchedules, employee.id)
+			countOccurrences(
+				employee.id,
+				props.stationSchedules,
+				props.homeRehabilitations
+			)
 		);
 		return (
 			<li key={employee.id}>
@@ -64,8 +69,9 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 };
 
 function countOccurrences(
+	id: string,
 	stationSchedules: StationSchedules,
-	id: string
+	homeRehabilitations?: HomeRehabilitation[]
 ): number {
 	let counter = 0;
 	for (const station in stationSchedules) {
@@ -76,6 +82,10 @@ function countOccurrences(
 			}
 		}
 	}
+	if (homeRehabilitations)
+		for (const homeRehabilitation of homeRehabilitations) {
+			if (homeRehabilitation.employee?.id === id) counter++;
+		}
 	return counter;
 }
 
