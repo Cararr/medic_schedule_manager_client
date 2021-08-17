@@ -19,6 +19,7 @@ import { Vacation } from '../../types';
 import { TiDelete } from 'react-icons/ti';
 import Delete from '../../api/Delete';
 import { warningMessage } from '../../WinBox/winboxMessages';
+import { useUser } from '../../context/userContext';
 
 export const Vacations: React.FunctionComponent = () => {
 	const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -104,17 +105,42 @@ export const Vacations: React.FunctionComponent = () => {
 		eventInfo.revert();
 	};
 
+	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+
 	const eventContent = (eventContentArg: EventContentArg) => (
 		<div className="calendar-event">
-			<p className="tittle-calendar-event">{eventContentArg.event.title}</p>
-			<button
-				onClick={() => console.log(666)}
-				className="button-calendar-remove-event"
+			<p
+				style={{
+					cursor: isUserAdmin ? 'grab' : 'initial',
+				}}
+				onMouseDown={
+					isUserAdmin
+						? (e: React.SyntheticEvent) => {
+								changeGrabCursor(e.target as HTMLElement, 'grabbing');
+						  }
+						: undefined
+				}
+				onMouseUp={
+					isUserAdmin
+						? (e: React.SyntheticEvent) => {
+								changeGrabCursor(e.target as HTMLElement, 'grab');
+						  }
+						: undefined
+				}
+				className="tittle-calendar-event"
 			>
-				{eventContentArg.isEnd && (
-					<TiDelete style={{ color: 'white', fontSize: '1rem' }} />
-				)}
-			</button>
+				{eventContentArg.event.title}
+			</p>
+			{isUserAdmin && (
+				<button
+					onClick={() => handleEventRemove(eventContentArg.event)}
+					className="button-calendar-remove-event"
+				>
+					{eventContentArg.isEnd && (
+						<TiDelete style={{ color: 'white', fontSize: '1rem' }} />
+					)}
+				</button>
+			)}
 		</div>
 	);
 
@@ -133,10 +159,14 @@ export const Vacations: React.FunctionComponent = () => {
 					eventContent={eventContent}
 					datesSet={handleDatesSet}
 					// weekends={false}
-					editable
-					eventDragMinDistance={0}
-					eventDragStart={({ el }) => toggleGrabbedClass(el)}
-					eventDragStop={({ el }) => toggleGrabbedClass(el)}
+					editable={isUserAdmin}
+					eventDragMinDistance={1}
+					eventDragStop={({ el }) => {
+						changeGrabCursor(
+							el.firstChild?.firstChild?.firstChild as HTMLElement,
+							'grab'
+						);
+					}}
 					eventDrop={handleEventResizeAndDrop}
 					eventResizableFromStart
 					eventResize={handleEventResizeAndDrop}
@@ -146,6 +176,6 @@ export const Vacations: React.FunctionComponent = () => {
 	);
 };
 
-function toggleGrabbedClass(element: HTMLElement) {
-	element.classList.toggle('grabbed');
+function changeGrabCursor(element: HTMLElement, grabType: 'grab' | 'grabbing') {
+	element.style.cursor = grabType;
 }

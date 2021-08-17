@@ -60,9 +60,3 @@ td.fc-day-sun {
 	border: none;
 	cursor: pointer;
 }
-.fc-event {
-	cursor: grab !important;
-}
-.grabbed {
-	cursor: grabbing !important;
-}
