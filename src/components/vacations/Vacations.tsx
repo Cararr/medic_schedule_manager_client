@@ -160,6 +160,9 @@ export const Vacations: React.FunctionComponent = () => {
 					datesSet={handleDatesSet}
 					// weekends={false}
 					editable={isUserAdmin}
+					eventAllow={(dropInfo) => {
+						return ![0, 6].includes(dropInfo.start.getDay());
+					}}
 					eventDragMinDistance={1}
 					eventDragStop={({ el }) => {
 						changeGrabCursor(
