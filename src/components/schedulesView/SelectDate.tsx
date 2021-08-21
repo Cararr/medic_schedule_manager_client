@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import Utilities from '../../util/Utilities';
 import './SelectDate.css';
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 
 interface Props {
 	setDateSelected: React.Dispatch<React.SetStateAction<string>>;
@@ -32,7 +33,7 @@ export const SelectDate: React.FunctionComponent<Props> = (props) => {
 	return (
 		<form className="form-select-date">
 			<label>
-				<h3>Select date:</h3>
+				<h3>Select date</h3>
 			</label>
 			<input
 				required
@@ -40,13 +41,13 @@ export const SelectDate: React.FunctionComponent<Props> = (props) => {
 				value={props.dateSelected}
 				type="date"
 			></input>
-			<div>
+			<div className="container-set-day-buttons">
 				<button
 					onClick={() => toggleDate(-1)}
-					className="button-generic button-fontello"
+					className="button-generic button-change-day"
 					type="button"
 				>
-					<i className="icon-left-dir" />
+					<AiFillCaretLeft />
 				</button>
 				<button
 					onClick={changeDateToToday}
@@ -57,10 +58,10 @@ export const SelectDate: React.FunctionComponent<Props> = (props) => {
 				</button>
 				<button
 					onClick={() => toggleDate(+1)}
-					className="button-generic button-fontello"
+					className="button-generic button-change-day"
 					type="button"
 				>
-					<i className="icon-right-dir" />
+					<AiFillCaretRight />
 				</button>
 			</div>
 		</form>

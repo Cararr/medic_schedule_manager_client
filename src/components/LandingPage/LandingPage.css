@@ -5,10 +5,10 @@
 	justify-content: center;
 }
 .landing-page-header {
-	margin-top: 1rem;
+	font-family: Lato;
+	margin-top: 3rem;
 	font-size: 3rem;
 	margin-bottom: 1rem;
-	width: 25rem;
 	text-align: center;
 }
 .landing-page main {
@@ -17,8 +17,11 @@
 	align-items: center;
 }
 .landing-page-button {
+	background-color: #daf2bb;
+	font-weight: 600;
+	padding: 0 1rem;
 	font-size: 2rem;
-	padding: 10px;
+	letter-spacing: 1px;
 	width: fit-content;
 	margin-top: 1rem;
 }

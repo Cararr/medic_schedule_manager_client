@@ -34,7 +34,7 @@ export const Create: React.FunctionComponent = () => {
 	return (
 		<div>
 			<NavBar />
-			<h1 className="title-create">Select topic to create:</h1>
+			<h1 className="title-create">What would you like to create?</h1>
 			<CardsContainer cards={cards} />
 			<Switch>
 				<Route exact path={`${path}/schedules`}>

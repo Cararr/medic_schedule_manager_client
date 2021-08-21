@@ -1,8 +1,9 @@
 import React, { ChangeEvent } from 'react';
 import { TableCell } from '../tables/TableCell';
 import Utilities from '../../util/Utilities';
-import './HomeRehabilitationsView.css';
 import { HomeRehabilitation, Employee, Comment } from '../../types';
+import './HomeRehabilitationsView.css';
+import { BsTrash } from 'react-icons/bs';
 
 interface Props {
 	isUserAdmin: boolean;
@@ -83,10 +84,13 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 								width: '2rem',
 							}}
 						>
-							<i
+							<BsTrash
 								onClick={() => props.removeHomeRehabilitation(hR)}
-								style={{ fontSize: '1.2rem' }}
-								className="icon-trash-empty"
+								style={{
+									fontSize: '1.2rem',
+									color: 'var(--red)',
+									cursor: 'pointer',
+								}}
 							/>
 						</td>
 					)}

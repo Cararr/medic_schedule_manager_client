@@ -12,6 +12,7 @@ import {
 	Comment,
 } from '../../types';
 import './Tables.css';
+import { CgSpinner } from 'react-icons/cg';
 
 interface Props {
 	schedules: Schedules;
@@ -59,9 +60,13 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 	const isLoading = !Boolean(props.workStageSpans?.length);
 	const loading = (
-		<i
-			style={{ marginTop: '4rem', fontSize: '4rem', display: 'block' }}
-			className="icon-spin6"
+		<CgSpinner
+			className="spin"
+			style={{
+				marginTop: '4rem',
+				fontSize: '6rem',
+				display: 'block',
+			}}
 		/>
 	);
 

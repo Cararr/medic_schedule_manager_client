@@ -6,6 +6,23 @@
 	border-radius: 15px;
 	padding: 1rem;
 }
+.calendar-event {
+	display: flex;
+	text-align: center;
+}
+.tittle-calendar-event {
+	margin: 0;
+	width: 100%;
+}
+.button-calendar-remove-event {
+	position: absolute;
+	padding: 0;
+	right: 0;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+/* Override fc styles */
 .fc-daygrid-body {
 	border-bottom: 1px solid black !important;
 	border-left: 1px solid black !important;
@@ -43,20 +60,4 @@ td.fc-day-sun {
 }
 .fc-event-title-container {
 	text-align: center;
-}
-.calendar-event {
-	display: flex;
-	text-align: center;
-}
-.tittle-calendar-event {
-	margin: 0;
-	width: 100%;
-}
-.button-calendar-remove-event {
-	position: absolute;
-	padding: 0;
-	right: 0;
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
 }

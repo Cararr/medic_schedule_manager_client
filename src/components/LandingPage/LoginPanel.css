@@ -1,5 +1,6 @@
 .login-form {
 	position: absolute;
+	border-radius: 0.5rem;
 	background-color: var(--backgroundYellow);
 	top: 50%;
 	left: 50%;
@@ -19,13 +20,14 @@
 }
 .button-close-window {
 	position: absolute;
+	padding: 0.2rem;
 	right: 0;
 	top: 0;
 	border-radius: 0;
-	background-color: red;
-	font-weight: bold;
-	color: black;
+	background-color: var(--red);
 	border: 1px solid black;
+	display: grid;
+	place-items: center;
 }
 .submit-login-button {
 	font-size: 1.5rem;

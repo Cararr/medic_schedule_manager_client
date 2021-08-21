@@ -59,7 +59,7 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 					onClick={isLoginOn ? closeLoginPanel : openLoginPanel}
 					className="button-generic landing-page-button"
 				>
-					Log in
+					Start
 				</button>
 				{isLoginOn && (
 					<LoginPanel

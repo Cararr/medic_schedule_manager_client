@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { DateForm } from '../../types';
 import './ActionPanel.css';
+import { CgSpinner } from 'react-icons/cg';
 
 interface Props {
 	generateSchedule?: () => Promise<void>;
@@ -22,7 +23,7 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 	const createSchedulesView = Boolean(props.dateForm);
 	const schedulesView = Boolean(props.saveScheudles);
 
-	const loading = <i className="icon-spin6" style={{ fontSize: '1.5rem' }} />;
+	const loading = <CgSpinner className="spin" style={{ fontSize: '1.5rem' }} />;
 
 	const dateForm = (
 		<form

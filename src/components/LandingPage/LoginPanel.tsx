@@ -1,6 +1,7 @@
 import React from 'react';
 import { UserCrudentials } from '../../types';
 import './LoginPanel.css';
+import { ImCross } from 'react-icons/im';
 
 interface Props {
 	handleInputChange: (eventTarget: React.ChangeEvent<HTMLInputElement>) => void;
@@ -18,7 +19,7 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 				onClick={props.closeLoginPanel}
 				className="button-generic button-close-window"
 			>
-				X
+				<ImCross style={{ fontSize: '.8rem' }} />
 			</button>
 			<input
 				required

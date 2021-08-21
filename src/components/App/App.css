@@ -6,7 +6,9 @@ input:focus {
 	box-shadow: 0px 0px 20px var(--backgroundViolet);
 }
 .button-generic {
-	background-color: var(--backgroundViolet);
+	font-family: work sans;
+	font-weight: 600;
+	background-color: var(--backgroundOrange);
 	border: 1px solid black;
 	border-radius: 5px;
 	font-size: 1rem;
@@ -41,4 +43,15 @@ input:focus {
 	align-items: center;
 	flex-grow: 2;
 	flex-shrink: 0;
+}
+.spin {
+	animation: rotate 1s linear infinite;
+}
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
