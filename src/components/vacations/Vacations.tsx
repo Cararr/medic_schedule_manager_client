@@ -36,6 +36,11 @@ export const Vacations: React.FunctionComponent = () => {
 						employee: vacation.employee,
 						title: `${vacation.employee.firstName} ${vacation.employee.lastName}`,
 						color: Utilities.returnColorPerEmployee(vacation.employee.lastName),
+						textColor: Utilities.blackOrWhiteFontForContrast(
+							Utilities.returnColorPerEmployee(vacation.employee.lastName)
+						)
+							? 'black'
+							: 'white',
 						start: vacation.from,
 						end: Utilities.formatDateString(
 							Utilities.addDay(new Date(vacation.to))

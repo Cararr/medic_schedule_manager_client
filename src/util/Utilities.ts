@@ -44,28 +44,41 @@ export default class Utilities {
 		return new Date(endDate) >= new Date(startDate);
 	}
 
-	static returnColorPerEmployee(lastName: string): string {
+	static returnColorPerEmployee(lastName: string) {
 		switch (lastName) {
 			case 'Ka.':
-				return 'black';
+				return '#000000';
 			case 'Ks.':
-				return '';
+				return '#3788d8';
 			case 'Ku.':
-				return 'deeppink';
+				return '#ff1493';
 			case 'P.':
-				return 'brown';
+				return '#a52a2a';
 			case 'S.':
-				return 'darkgoldenrod';
+				return '#b8860b';
 			case 'T.':
-				return 'darkolivegreen';
+				return '#556b2f';
 			case 'W-N.':
-				return 'navy';
+				return '#000080';
 			case 'Wó.':
-				return 'orange';
+				return '#ffa500';
 			case 'Sz.':
-				return 'red';
+				return '#8b4513';
 			default:
 				return '';
 		}
+	}
+
+	static blackOrWhiteFontForContrast(backgroundColorHex: string) {
+		//Int values below were found on StackOverflow, i guess they are some color const, dunno
+		return (
+			[
+				0.299 * parseInt(backgroundColorHex.slice(1, 3), 16),
+				0.587 * parseInt(backgroundColorHex.slice(3, 5), 16),
+				0.114 * parseInt(backgroundColorHex.slice(5, 7), 16),
+			].reduce((a, b) => a + b) /
+				255 >
+			0.5
+		);
 	}
 }

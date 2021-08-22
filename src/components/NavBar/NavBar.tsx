@@ -22,8 +22,6 @@ export const NavBar: React.FunctionComponent = () => {
 
 	useEffect(() => {
 		const toggleBackgroundStyles = () => {
-			console.log(backgroundStyles.backgroundColor);
-
 			if (
 				window.pageYOffset &&
 				backgroundStyles.backgroundColor === 'var(--backgroundBlue)'

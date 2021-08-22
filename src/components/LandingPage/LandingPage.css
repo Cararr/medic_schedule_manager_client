@@ -5,10 +5,9 @@
 	justify-content: center;
 }
 .landing-page-header {
-	color: #ce5819;
 	margin-top: 3rem;
-	font-size: 3rem;
-	margin-bottom: 1rem;
+	font-size: 3.5rem;
+	margin-bottom: 0.5rem;
 	text-align: center;
 }
 .landing-page main {
@@ -20,8 +19,8 @@
 	font-family: Work Sans;
 	font-weight: 600;
 	font-size: 2rem;
-	background-color: #a9c288;
-	border: 1px solid var(--borderColor);
+	background-color: hsl(86, 32%, 60%);
+	border: 2px solid var(--fontColor);
 	border-radius: 5px;
 	cursor: pointer;
 	padding: 0 2rem;
@@ -30,7 +29,7 @@
 	transition: background-color 0.15s ease-in-out;
 }
 .landing-page-button:hover {
-	background-color: #cfebab;
+	background-color: hsl(86, 32%, 45%);
 	transform: none;
 }
 .landing-page img {
