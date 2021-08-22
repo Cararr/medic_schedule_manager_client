@@ -5,7 +5,7 @@
 	justify-content: center;
 }
 .landing-page-header {
-	font-family: Lato;
+	color: #ce5819;
 	margin-top: 3rem;
 	font-size: 3rem;
 	margin-bottom: 1rem;
@@ -17,13 +17,21 @@
 	align-items: center;
 }
 .landing-page-button {
-	background-color: #daf2bb;
+	font-family: Work Sans;
 	font-weight: 600;
-	padding: 0 1rem;
 	font-size: 2rem;
+	background-color: #a9c288;
+	border: 1px solid var(--borderColor);
+	border-radius: 5px;
+	cursor: pointer;
+	padding: 0 2rem;
 	letter-spacing: 1px;
-	width: fit-content;
 	margin-top: 1rem;
+	transition: background-color 0.15s ease-in-out;
+}
+.landing-page-button:hover {
+	background-color: #cfebab;
+	transform: none;
 }
 .landing-page img {
 	height: 15rem;

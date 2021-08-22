@@ -60,7 +60,7 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 
 	return (
 		<aside className="employees-section">
-			<h3>Employees:</h3>
+			<h3>Employees</h3>
 			<ul className="list">
 				{(employees?.length && employeesList) || loading}
 			</ul>

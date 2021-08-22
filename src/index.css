@@ -1,12 +1,13 @@
 @import-normalize;
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap'); /* spróbuj inną grubość */
+/* @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap'); */
 :root {
 	--backgroundBlue: #c8eaf3;
 	--fontColor: #0c1a1f;
 	--backgroundYellow: #eaf3c8;
 	--backgroundViolet: #cdc0f9;
 	--backgroundOrange: #f4af8b;
+	--borderColor: #3f1a06;
 	--red: #f11717;
 	font-size: 22px;
 }
@@ -21,7 +22,15 @@ body {
 	background-color: var(--backgroundBlue);
 	color: var(--fontColor);
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: Girloy;
+}
 @font-face {
-	font-family: 'Gilroy';
-	src: local('Gilroy'), url(./Gilroy-ExtraBold.otf) format('opentype');
+	font-family: 'Girloy';
+	src: local('Girloy'), url('./fonts/Gilroy-ExtraBold.otf') format('opentype');
 }

@@ -1,5 +1,8 @@
 .table-title {
-	font-weight: bold;
+	font-family: Girloy;
 	letter-spacing: 1px;
 	background-color: var(--backgroundViolet) !important;
+}
+.table-title::first-letter {
+	text-transform: capitalize;
 }

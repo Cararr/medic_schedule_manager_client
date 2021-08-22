@@ -10,6 +10,7 @@
 }
 .white-background {
 	background-color: #fff;
+	font-weight: 500;
 	cursor: default;
 }
 .list {
@@ -21,9 +22,12 @@
 	margin: 0;
 }
 .list-item {
-	width: fit-content;
 	height: 1.5rem;
-	margin: 0 0 0.8rem 0;
+	margin: 0 0 0.6rem 0;
+	border-radius: 5px;
+	display: grid;
+	place-items: center;
+	padding: 0 0.25rem;
 }
 .draggable:hover {
 	cursor: grab;
@@ -38,16 +42,18 @@
 .form-comments {
 	width: 32rem;
 	margin-bottom: 1rem;
+	border: 1px solid black;
 }
 .form-comments h3 {
 	background-color: var(--backgroundViolet);
+	font-family: Girloy;
 	width: 100%;
 	height: 3rem;
 	margin: 0;
-	border: 1px solid black;
-	border-bottom: none;
+	border-bottom: 1px solid black;
 	letter-spacing: 1px;
-	font-size: 20px;
+	font-size: 1.1rem;
+	line-height: 25.3;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -58,4 +64,5 @@
 	font-size: 1rem;
 	font-family: inherit;
 	padding: 5px;
+	border: none;
 }

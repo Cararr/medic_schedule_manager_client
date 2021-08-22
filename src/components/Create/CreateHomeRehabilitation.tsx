@@ -49,7 +49,7 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 			)
 		)
 			return warningMessage(
-				'Wrong date set!',
+				'Invalid date!',
 				'End date cannot come before the beginning!',
 				170
 			);
@@ -110,7 +110,7 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 						type="time"
 					/>
 
-					<label>Start date</label>
+					<label>From</label>
 					<input
 						onChange={handleChange}
 						value={formValues.dateBegin}
@@ -119,7 +119,7 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 						required
 					/>
 
-					<label>End date</label>
+					<label>To</label>
 					<input
 						onChange={handleChange}
 						value={formValues.dateEnd}

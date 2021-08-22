@@ -103,7 +103,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 			<table className="table-station">
 				<thead>
 					<tr className="table-title">
-						<td colSpan={3}>HOME REHABILITATIONS</td>
+						<td colSpan={3}>Rehabilitacje w domu pacjenta</td>
 					</tr>
 					<tr>
 						<td>Starts at</td>

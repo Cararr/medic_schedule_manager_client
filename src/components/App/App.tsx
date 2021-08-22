@@ -3,7 +3,6 @@ import { UserProvider } from '../../context/userContext';
 import { EmployeesProvider } from '../../context/employeesContext';
 import '../../WinBox/winBox.css';
 import './App.css';
-import '../../fontello/css/styles.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { LoggedUsersRoute } from '../../RouteTypes/LoggedUsersRoute';
 import { NonLoggedUsersRoute } from '../../RouteTypes/NonLoggedUsersRoute';

@@ -57,7 +57,7 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 				<img alt="Schedule Calendar" src={LandingImage} />
 				<button
 					onClick={isLoginOn ? closeLoginPanel : openLoginPanel}
-					className="button-generic landing-page-button"
+					className="landing-page-button"
 				>
 					Start
 				</button>

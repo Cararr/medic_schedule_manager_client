@@ -38,7 +38,7 @@ export const Table: React.FunctionComponent<Props> = (props) => {
 						className="table-title"
 						colSpan={props.stationName === StationName.WIZYTY ? 1 : 4}
 					>
-						{props.stationName}
+						{props.stationName.toLocaleLowerCase()}
 					</td>
 				</tr>
 				<tr>{returnWorkStageSpans(props.workStageSpans, props.stationName)}</tr>

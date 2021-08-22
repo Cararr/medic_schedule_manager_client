@@ -44,7 +44,7 @@ export const CreateVacation: React.FunctionComponent = () => {
 		e.preventDefault();
 		if (!Utilities.checkIfEndDateIsAfterBegin(formValues.from, formValues.to))
 			return warningMessage(
-				'Wrong date set!',
+				'Invalid date!',
 				'End date cannot come before the beginning!',
 				170
 			);
@@ -87,7 +87,7 @@ export const CreateVacation: React.FunctionComponent = () => {
 						{employeesListOptions}
 					</select>
 
-					<label>Start date</label>
+					<label>From</label>
 					<input
 						onChange={handleChange}
 						value={formValues.from}
@@ -96,7 +96,7 @@ export const CreateVacation: React.FunctionComponent = () => {
 						type="date"
 					/>
 
-					<label>End date</label>
+					<label>To</label>
 					<input
 						onChange={handleChange}
 						value={formValues.to}

@@ -20,8 +20,6 @@ export const NavBar: React.FunctionComponent = () => {
 	const isThisHomePage = window.location.pathname === '/home';
 	const isThisVacations = window.location.pathname === '/vacations';
 
-	console.log(backgroundStyles.backgroundColor);
-
 	useEffect(() => {
 		const toggleBackgroundStyles = () => {
 			console.log(backgroundStyles.backgroundColor);

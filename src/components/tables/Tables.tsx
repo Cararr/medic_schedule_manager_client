@@ -95,7 +95,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 			{props.handleCommentChanges &&
 				(props.schedules.comment?.content || isUserAdmin) && (
 					<form className="form-comments">
-						<h3>COMMENTS</h3>
+						<h3>Informacje</h3>
 						<textarea
 							rows={10}
 							maxLength={450}

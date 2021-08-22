@@ -2,6 +2,7 @@ import React from 'react';
 import { UserCrudentials } from '../../types';
 import './LoginPanel.css';
 import { ImCross } from 'react-icons/im';
+import { CgSpinner } from 'react-icons/cg';
 
 interface Props {
 	handleInputChange: (eventTarget: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,6 +13,8 @@ interface Props {
 }
 
 export const LoginPanel: React.FunctionComponent<Props> = (props) => {
+	const loading = <CgSpinner className="spin" style={{ fontSize: '1.7rem' }} />;
+
 	return (
 		<form onSubmit={props.handleLogin} className="login-form">
 			<button
@@ -42,7 +45,7 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 				maxLength={10}
 			></input>
 			{props.isLoading ? (
-				<i className="icon-spin6" style={{ fontSize: '1.7rem' }} />
+				loading
 			) : (
 				<button type="submit" className="submit-login-button button-generic">
 					Log in
