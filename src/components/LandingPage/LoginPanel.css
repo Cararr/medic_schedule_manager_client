@@ -28,6 +28,7 @@
 	border: 1px solid var(--borderColor);
 	display: grid;
 	place-items: center;
+	cursor: pointer;
 }
 .submit-login-button {
 	font-size: 1.5rem;

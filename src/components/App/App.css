@@ -17,8 +17,7 @@ input:focus {
 	transition: transform 0.05s linear;
 }
 .button-generic:hover {
-	transform: translate(+1px, +1px);
-	border-style: dashed;
+	transform: translate(+1.5px, +1.5px);
 }
 .button-disabled {
 	pointer-events: none;

@@ -11,7 +11,7 @@
 }
 .card:hover {
 	cursor: pointer;
-	transform: translate(-5px, -5px);
+	transform: translate(+5px, +5px);
 }
 .card figcaption {
 	width: 100%;

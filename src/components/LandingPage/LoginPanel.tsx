@@ -13,14 +13,19 @@ interface Props {
 }
 
 export const LoginPanel: React.FunctionComponent<Props> = (props) => {
-	const loading = <CgSpinner className="spin" style={{ fontSize: '1.7rem' }} />;
+	const loading = (
+		<CgSpinner
+			className="spin"
+			style={{ fontSize: '1.7rem', height: '43px' }}
+		/>
+	);
 
 	return (
 		<form onSubmit={props.handleLogin} className="login-form">
 			<button
 				type="button"
 				onClick={props.closeLoginPanel}
-				className="button-generic button-close-window"
+				className="button-close-window"
 			>
 				<ImCross style={{ fontSize: '.8rem' }} />
 			</button>
