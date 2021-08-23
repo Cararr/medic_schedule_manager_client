@@ -4,7 +4,7 @@
 	display: flex;
 	justify-content: center;
 }
-.landing-page-header {
+.header-landing-page {
 	margin-top: 3rem;
 	font-size: 3.5rem;
 	margin-bottom: 0;
@@ -14,23 +14,6 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-}
-.landing-page-button {
-	font-family: Work Sans;
-	font-weight: 600;
-	font-size: 2rem;
-	background-color: hsl(86, 32%, 60%);
-	border: 2px solid var(--fontColor);
-	border-radius: 5px;
-	cursor: pointer;
-	padding: 0 2rem;
-	letter-spacing: 1px;
-	margin-top: 1rem;
-	transition: background-color 0.15s ease-in-out;
-}
-.landing-page-button:hover {
-	background-color: hsl(86, 32%, 45%);
-	transform: none;
 }
 .landing-page img {
 	height: 15rem;

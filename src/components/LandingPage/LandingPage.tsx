@@ -55,12 +55,13 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 		<div className="landing-page">
 			<main>
 				<header>
-					<h1 className="landing-page-header">Medic Schedule Manager</h1>
+					<h1 className="header-landing-page">Medic Schedule Manager</h1>
 				</header>
 				<img alt="Schedule Calendar" src={LandingImage} />
 				<button
 					onClick={isLoginOn ? closeLoginPanel : openLoginPanel}
-					className="landing-page-button"
+					className="button-green"
+					style={{ marginTop: '.5rem', padding: '0 2rem' }}
 				>
 					Start
 				</button>

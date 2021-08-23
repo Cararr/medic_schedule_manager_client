@@ -19,6 +19,21 @@ input:focus {
 .button-generic:hover {
 	transform: translate(+1.5px, +1.5px);
 }
+.button-green {
+	font-family: Work Sans;
+	font-weight: 600;
+	font-size: 2rem;
+	background-color: hsl(86, 32%, 60%);
+	border: 1px solid var(--fontColor);
+	border-radius: 5px;
+	cursor: pointer;
+	letter-spacing: 1px;
+	transition: background-color 0.15s ease-in-out;
+}
+.button-green:hover {
+	background-color: hsl(86, 32%, 45%);
+	transform: none;
+}
 .button-disabled {
 	pointer-events: none;
 }

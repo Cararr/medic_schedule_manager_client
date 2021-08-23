@@ -16,7 +16,7 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 	const loading = (
 		<CgSpinner
 			className="spin"
-			style={{ fontSize: '1.7rem', height: '43px' }}
+			style={{ fontSize: '1.7rem', height: '41px' }}
 		/>
 	);
 
@@ -52,7 +52,7 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 			{props.isLoading ? (
 				loading
 			) : (
-				<button type="submit" className="submit-login-button button-generic">
+				<button type="submit" className="button-submit-login button-green">
 					Log in
 				</button>
 			)}
