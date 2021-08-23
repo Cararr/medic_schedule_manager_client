@@ -77,7 +77,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 			? createdMessage()
 			: warningMessage(
 					'Action aborted!',
-					'Something went wrong, please try again later.',
+					'Something went wrong, please try again later!',
 					170
 			  );
 	};

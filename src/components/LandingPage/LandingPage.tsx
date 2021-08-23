@@ -36,7 +36,10 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 			history.push('/home');
 		} else {
 			setLoginInputValue(returnEmptyLoginValues());
-			warningMessage('Login failed', loginReponse?.message);
+			warningMessage(
+				'Login failed',
+				loginReponse?.message || 'Something went wrong, please try again later!'
+			);
 			setIsLoginOn(false);
 		}
 	};

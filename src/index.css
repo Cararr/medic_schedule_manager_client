@@ -32,5 +32,6 @@ h6 {
 }
 @font-face {
 	font-family: 'Girloy';
-	src: local('Girloy'), url('./fonts/Gilroy-ExtraBold.otf') format('opentype');
+	src: local('Girloy'),
+		url('./resources/fonts/Gilroy-ExtraBold.otf') format('opentype');
 }

@@ -71,7 +71,7 @@ export const Vacations: React.FunctionComponent = () => {
 			? event.remove()
 			: warningMessage(
 					'Action aborted!',
-					'Something went wrong, please try again later.',
+					'Something went wrong, please try again later!',
 					170
 			  );
 	};
