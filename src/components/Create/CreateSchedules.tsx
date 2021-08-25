@@ -47,7 +47,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 	};
 
 	const generateSchedule = async () => {
-		Get.generateSchedule(dateForm.from).then((schedules) => {
+		Get.generateSchedule().then((schedules) => {
 			if (schedules) setStationSchedules(schedules);
 		});
 	};

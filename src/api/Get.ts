@@ -54,9 +54,9 @@ export default class Get {
 		}
 	};
 
-	static generateSchedule = async (from: string) => {
+	static generateSchedule = async () => {
 		try {
-			const response = await fetch(`${PATH}/schedules/generate?date=${from}`);
+			const response = await fetch(`${PATH}/schedules/generate`);
 			if (response.ok) {
 				const jsonRespone = await response.json();
 				return jsonRespone.generatedSchedule;

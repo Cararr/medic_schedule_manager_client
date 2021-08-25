@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LandingImage from '../../resources/images/LandingImage.jpg';
+import LandingImage from '../../resources/images/LandingImage.png';
 import { LoginPanel } from './LoginPanel';
 import { warningMessage } from '../../WinBox/winboxMessages';
 import { login } from '../../api/login';
@@ -52,30 +52,31 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 	};
 
 	return (
-		<div className="landing-page">
-			<main>
-				<header>
-					<h1 className="header-landing-page">Medic Schedule Manager</h1>
-				</header>
-				<img alt="Schedule Calendar" src={LandingImage} />
+		<main className="landing-page">
+			<header className="header-landing-page">
+				<h1 className="header-landing-page-main">Fizjo Medyk</h1>
+				<h3 className="header-landing-page-secoundary">
+					Przestrzeń w sieci dla najlepszej grupy fizjoterapeutów w Świdnicy
+				</h3>
 				<button
 					onClick={isLoginOn ? closeLoginPanel : openLoginPanel}
-					className="button-green"
-					style={{ marginTop: '.5rem', padding: '0 2rem' }}
+					className="button-green button-start"
+					style={{ padding: '0 2rem' }}
 				>
 					Start
 				</button>
-				{isLoginOn && (
-					<LoginPanel
-						handleInputChange={handleInputChange}
-						loginInputValue={loginInputValue}
-						handleLogin={handleLogin}
-						closeLoginPanel={closeLoginPanel}
-						isLoading={isLoading}
-					/>
-				)}
-			</main>
-		</div>
+			</header>
+			<img alt="Schedule Calendar" src={LandingImage} />
+			{isLoginOn && (
+				<LoginPanel
+					handleInputChange={handleInputChange}
+					loginInputValue={loginInputValue}
+					handleLogin={handleLogin}
+					closeLoginPanel={closeLoginPanel}
+					isLoading={isLoading}
+				/>
+			)}
+		</main>
 	);
 };
 

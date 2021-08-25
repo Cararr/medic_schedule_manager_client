@@ -78,12 +78,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 						)}
 					</td>
 					{props.isUserAdmin && (
-						<td
-							style={{
-								backgroundColor: 'var(--backgroundYellow)',
-								width: '2rem',
-							}}
-						>
+						<td className="cell-delete-hr">
 							<BsTrash
 								onClick={() => props.removeHomeRehabilitation(hR)}
 								style={{

@@ -1,6 +1,16 @@
 @import-normalize;
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap');
 /* @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap'); */
+@font-face {
+	font-family: 'Gilroy';
+	src: local('Gilroy'),
+		url('./resources/fonts/Gilroy-ExtraBold.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Gilroy-Light';
+	src: local('Gilroy-Light'),
+		url('./resources/fonts/Gilroy-Light.otf') format('opentype');
+}
 :root {
 	--backgroundBlue: #c8eaf3;
 	--fontColor: #06151a;
@@ -16,6 +26,7 @@
 }
 body {
 	margin: 0;
+	padding: 0;
 	font-family: 'Roboto';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -28,10 +39,5 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: Girloy;
-}
-@font-face {
-	font-family: 'Girloy';
-	src: local('Girloy'),
-		url('./resources/fonts/Gilroy-ExtraBold.otf') format('opentype');
+	font-family: 'Gilroy';
 }
