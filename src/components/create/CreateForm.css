@@ -1,0 +1,50 @@
+.section-create {
+	background-color: var(--backgroundYellow);
+	border: 3px solid black;
+	border-radius: 5px;
+	width: clamp(25rem, 80%, 30rem);
+	margin: 2rem auto 1rem auto;
+	padding: 0.5rem;
+	position: relative;
+}
+.response-create {
+	text-align: center;
+	font-size: 2rem;
+}
+.response-create button {
+	font-size: 1.5rem;
+}
+.header-create {
+	text-align: center;
+	margin-top: 0.5rem;
+}
+.form-create {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.form-create label {
+	margin-bottom: 0.5rem;
+	font-weight: bold;
+}
+.form-create input,
+.form-create select {
+	width: 10rem;
+	font-size: 1rem;
+	border-radius: 5px;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+.form-create select {
+	background-color: var(--backgroundViolet);
+}
+.form-create input[type='date'],
+.form-create input[type='time'] {
+	width: fit-content;
+}
+.form-create button {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	font-size: 1.5rem;
+}

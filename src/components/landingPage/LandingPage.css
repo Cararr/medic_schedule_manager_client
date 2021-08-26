@@ -1,0 +1,32 @@
+.landing-page {
+	width: 100%;
+	height: 100vh;
+	padding: 1rem;
+	position: relative;
+}
+.header-landing-page {
+	width: 60%;
+	margin-left: 2rem;
+	margin-top: 2rem;
+}
+.header-landing-page-main {
+	font-size: 6.5rem;
+	margin: 0;
+}
+.header-landing-page-secoundary {
+	font-family: 'Gilroy-Light';
+	text-align: center;
+	font-size: 1.8rem;
+	margin: 0;
+	margin-top: 2rem;
+}
+.landing-page img {
+	position: absolute;
+	top: 15vh;
+	left: 58%;
+}
+.button-start {
+	margin: auto;
+	display: block;
+	margin-top: 2.5rem;
+}
