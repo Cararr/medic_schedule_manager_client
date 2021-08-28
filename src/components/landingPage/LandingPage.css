@@ -11,6 +11,7 @@
 }
 .header-landing-page-main {
 	font-size: 6.5rem;
+	color: #6f0c0c;
 	margin: 0;
 }
 .header-landing-page-secoundary {
@@ -27,6 +28,15 @@
 }
 .button-start {
 	margin: auto;
+	padding: 1px 0.6rem;
 	display: block;
 	margin-top: 2.5rem;
+	background-color: var(--backgroundOrange);
+	font-size: 2rem;
+	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.button-start:hover {
+	background-color: #6f0c0c;
+	color: #d3c7c5;
+	transform: none;
 }

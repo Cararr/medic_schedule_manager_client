@@ -52,7 +52,7 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 			{props.isLoading ? (
 				loading
 			) : (
-				<button type="submit" className="button-submit-login button-green">
+				<button type="submit" className="button-generic button-submit-login">
 					Log in
 				</button>
 			)}

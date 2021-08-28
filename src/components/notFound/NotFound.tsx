@@ -12,8 +12,8 @@ export const NotFound: React.FunctionComponent = () => {
 			</h1>
 			<Link to="/">
 				<button
-					style={{ marginTop: '.5rem', padding: '0 1rem' }}
-					className="button-green"
+					style={{ fontSize: '1.5rem', marginTop: '.5rem', padding: '0 1rem' }}
+					className="button-generic"
 				>
 					↩
 				</button>

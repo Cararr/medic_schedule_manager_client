@@ -60,10 +60,9 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 				</h3>
 				<button
 					onClick={isLoginOn ? closeLoginPanel : openLoginPanel}
-					className="button-green button-start"
-					style={{ padding: '0 2rem' }}
+					className="button-generic button-start"
 				>
-					Start
+					Zaloguj się
 				</button>
 			</header>
 			<img alt="Schedule Calendar" src={LandingImage} />
