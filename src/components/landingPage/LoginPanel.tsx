@@ -16,12 +16,17 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 	const loading = (
 		<CgSpinner
 			className="spin"
-			style={{ fontSize: '1.7rem', height: '41px' }}
+			style={{
+				fontSize: '1.7rem',
+				height: '41px',
+				margin: 'auto',
+				display: 'block',
+			}}
 		/>
 	);
 
 	return (
-		<form onSubmit={props.handleLogin} className="login-form">
+		<form onSubmit={props.handleLogin} className="form-login">
 			<button
 				type="button"
 				onClick={props.closeLoginPanel}
@@ -29,33 +34,35 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 			>
 				<ImCross style={{ fontSize: '.8rem' }} />
 			</button>
-			<input
-				required
-				max={20}
-				onChange={props.handleInputChange}
-				value={props.loginInputValue.lastName}
-				name="lastName"
-				placeholder="Last Name"
-				type="text"
-				maxLength={30}
-			></input>
-			<input
-				required
-				max={20}
-				onChange={props.handleInputChange}
-				value={props.loginInputValue.password}
-				name="password"
-				placeholder="Password"
-				type="password"
-				maxLength={10}
-			></input>
-			{props.isLoading ? (
-				loading
-			) : (
-				<button type="submit" className="button-generic button-submit-login">
-					Log in
-				</button>
-			)}
+			<div className="login-form-content">
+				<label className="label-login-panel">Last name</label>
+				<input
+					required
+					max={20}
+					onChange={props.handleInputChange}
+					value={props.loginInputValue.lastName}
+					name="lastName"
+					type="text"
+					maxLength={30}
+				></input>
+				<label className="label-login-panel">Password</label>
+				<input
+					required
+					max={20}
+					onChange={props.handleInputChange}
+					value={props.loginInputValue.password}
+					name="password"
+					type="password"
+					maxLength={10}
+				></input>
+				{props.isLoading ? (
+					loading
+				) : (
+					<button type="submit" className="button-generic button-submit-login">
+						Log in
+					</button>
+				)}
+			</div>
 		</form>
 	);
 };

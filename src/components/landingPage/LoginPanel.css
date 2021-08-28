@@ -1,22 +1,30 @@
-.login-form {
+.form-login {
 	position: absolute;
 	border-radius: 0.5rem;
 	background-color: var(--backgroundYellow);
 	top: 50%;
 	left: 50%;
+	padding: 1rem;
 	transform: translate(-50%, -50%);
-	display: flex;
-	flex-direction: column;
-	height: 230px;
+	/* height: 230px; */
 	width: 400px;
-	align-items: center;
-	justify-content: center;
 	border: 5px solid var(--backgroundViolet);
 }
-.login-form input {
+.label-login-panel {
+	display: block;
+	margin-bottom: 0.1rem;
+}
+.form-login input {
 	font-size: 1rem;
-	margin-bottom: 1rem;
+	width: 100%;
+	margin: auto;
+	margin-bottom: 0.5rem;
+	display: block;
 	padding: 5px;
+}
+.login-form-content {
+	width: 80%;
+	margin: auto;
 }
 .button-close-window {
 	position: absolute;
@@ -33,4 +41,6 @@
 .button-submit-login {
 	font-size: 1.5rem;
 	padding: 0 1rem;
+	margin: auto;
+	display: block;
 }

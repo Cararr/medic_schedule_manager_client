@@ -33,10 +33,9 @@
 	margin-top: 2.5rem;
 	background-color: var(--backgroundOrange);
 	font-size: 2rem;
-	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+	transition: background-color 0.15s ease-in;
 }
 .button-start:hover {
-	background-color: #6f0c0c;
-	color: #d3c7c5;
+	background-color: hsl(21, 83%, 65%);
 	transform: none;
 }

@@ -1,9 +1,9 @@
 .main-calendar {
-	width: 60rem;
+	width: 100%;
 	margin: 2rem auto;
-	background-color: var(--backgroundYellow);
-	border: 1px solid black;
-	border-radius: 15px;
+	background-image: url('../../resources/images/notebook.png');
+	border-top: 1px dotted black;
+	border-bottom: 1px dotted black;
 	padding: 1rem;
 }
 .calendar-event {
@@ -23,6 +23,9 @@
 	cursor: pointer;
 }
 /* Override fc styles */
+.fc-scrollgrid {
+	width: auto;
+}
 .fc-daygrid-body {
 	border-bottom: 1px solid black !important;
 	border-left: 1px solid black !important;
