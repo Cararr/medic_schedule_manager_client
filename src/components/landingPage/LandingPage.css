@@ -31,11 +31,11 @@
 	padding: 1px 0.6rem;
 	display: block;
 	margin-top: 2.5rem;
-	background-color: var(--backgroundOrange);
+	background-color: hsl(21, 83%, 65%);
 	font-size: 2rem;
 	transition: background-color 0.15s ease-in;
 }
 .button-start:hover {
-	background-color: hsl(21, 83%, 65%);
+	background-color: var(--backgroundOrange);
 	transform: none;
 }

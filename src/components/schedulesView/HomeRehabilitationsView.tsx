@@ -67,7 +67,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 									props.handleHomeRehabilitationChanges(e, index)
 								}
 								name="patient"
-								maxLength={30}
+								maxLength={20}
 								className="input-home-rehabilitaiton"
 								value={hR.patient}
 								required
