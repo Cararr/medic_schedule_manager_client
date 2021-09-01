@@ -22,6 +22,7 @@ const App: React.FunctionComponent = () => {
 				<BrowserRouter>
 					<Switch>
 						<NonLoggedUsersRoute path="/" exact component={LandingPage} />
+						<NonLoggedUsersRoute path="/login" exact component={LandingPage} />
 						<LoggedUsersRoute
 							path="/schedules"
 							exact

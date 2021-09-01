@@ -20,7 +20,7 @@ export const LoggedUsersRoute = ({
 							'You must be logged to access this page!'
 						);
 					}, 1);
-					return <Redirect to={{ pathname: '/' }} />;
+					return <Redirect to={{ pathname: '/login' }} />;
 				}
 			}}
 		/>

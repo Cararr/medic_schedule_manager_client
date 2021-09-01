@@ -5,14 +5,15 @@ import { warningMessage } from '../../WinBox/winboxMessages';
 import { login } from '../../api/login';
 import { useChangeUser } from '../../context/userContext';
 import { useEmployees, useLoadEmployees } from '../../context/employeesContext';
-import { RouteComponentProps } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { UserCrudentials } from '../../types';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import './LandingPage.css';
 
 export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 	history,
 }) => {
-	const [isLoginOn, setIsLoginOn] = useState(false);
+	const { path } = useRouteMatch();
 	const [loginInputValue, setLoginInputValue] = useState(
 		returnEmptyLoginValues()
 	);
@@ -40,16 +41,12 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 				'Login failed',
 				loginReponse?.message || 'Something went wrong, please try again later!'
 			);
-			setIsLoginOn(false);
 		}
 	};
 
-	const openLoginPanel = () => setIsLoginOn(true);
+	const closeLoginPanel = () => setLoginInputValue(returnEmptyLoginValues());
 
-	const closeLoginPanel = () => {
-		setIsLoginOn(false);
-		setLoginInputValue(returnEmptyLoginValues());
-	};
+	const isLoginPanelOn = path === '/login';
 
 	return (
 		<main className="landing-page">
@@ -58,23 +55,22 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 				<h3 className="header-landing-page-secoundary">
 					Przestrzeń w sieci dla najlepszej grupy fizjoterapeutów w Świdnicy
 				</h3>
-				<button
-					onClick={isLoginOn ? closeLoginPanel : openLoginPanel}
-					className="button-generic button-start"
-				>
-					Zaloguj się
-				</button>
+				<Link to={isLoginPanelOn ? '/' : '/login'}>
+					<button className="button-generic button-start">Zaloguj się</button>
+				</Link>
 			</header>
 			<img alt="Schedule Calendar" src={LandingImage} />
-			{isLoginOn && (
-				<LoginPanel
-					handleInputChange={handleInputChange}
-					loginInputValue={loginInputValue}
-					handleLogin={handleLogin}
-					closeLoginPanel={closeLoginPanel}
-					isLoading={isLoading}
-				/>
-			)}
+			<Switch>
+				<Route exact path={'/login'}>
+					<LoginPanel
+						handleInputChange={handleInputChange}
+						loginInputValue={loginInputValue}
+						handleLogin={handleLogin}
+						closeLoginPanel={closeLoginPanel}
+						isLoading={isLoading}
+					/>
+				</Route>
+			</Switch>
 		</main>
 	);
 };
