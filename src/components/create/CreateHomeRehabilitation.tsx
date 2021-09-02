@@ -42,12 +42,7 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 
 	const handleSubmit = async (e: SyntheticEvent) => {
 		e.preventDefault();
-		if (
-			!Utilities.checkIfEndDateIsAfterBegin(
-				formValues.dateBegin,
-				formValues.dateEnd
-			)
-		)
+		if (!Utilities.checkIfEndDateIsAfterBegin(formValues.from, formValues.to))
 			return warningMessage(
 				'Invalid date!',
 				'End date cannot come before the beginning!',
@@ -94,38 +89,40 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 
 					<label>Patient</label>
 					<input
-						maxLength={250}
+						required
+						maxLength={20}
+						name="patient"
 						onChange={handleChange}
 						value={formValues.patient}
-						name="patient"
-						required
 					/>
 
 					<label>Starts at</label>
 					<input
-						onChange={handleChange}
-						value={Utilities.formatTimeView(formValues.startTime)}
-						name="startTime"
 						required
 						type="time"
+						name="startTime"
+						onChange={handleChange}
+						value={Utilities.formatTimeView(formValues.startTime)}
 					/>
 
 					<label>From</label>
 					<input
-						onChange={handleChange}
-						value={formValues.dateBegin}
-						name="dateBegin"
-						type="date"
 						required
+						type="date"
+						name="from"
+						max="2050-12-31"
+						onChange={handleChange}
+						value={formValues.from}
 					/>
 
 					<label>To</label>
 					<input
-						onChange={handleChange}
-						value={formValues.dateEnd}
-						name="dateEnd"
-						type="date"
 						required
+						type="date"
+						name="to"
+						max="2050-12-31"
+						onChange={handleChange}
+						value={formValues.to}
 					/>
 					<button className="button-generic" type="submit">
 						Create
@@ -154,7 +151,7 @@ function returnEmptyForm(): CreateHomeRehabilitationForm {
 		employee: null,
 		patient: '',
 		startTime: '',
-		dateBegin: Utilities.formatDateString(new Date()),
-		dateEnd: Utilities.formatDateString(Utilities.addDay(new Date())),
+		from: Utilities.formatDateString(new Date()),
+		to: Utilities.formatDateString(Utilities.addDay(new Date())),
 	};
 }

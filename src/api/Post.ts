@@ -46,8 +46,8 @@ export default class Post {
 		homeRehabilitationConfig: CreateHomeRehabilitationForm
 	) => {
 		const body = {
-			from: homeRehabilitationConfig.dateBegin,
-			to: homeRehabilitationConfig.dateEnd,
+			from: homeRehabilitationConfig.from,
+			to: homeRehabilitationConfig.to,
 			homeRehabilitation: {
 				startTime: homeRehabilitationConfig.startTime,
 				employee: homeRehabilitationConfig.employee,

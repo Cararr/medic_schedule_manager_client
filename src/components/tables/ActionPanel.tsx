@@ -33,20 +33,21 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 			<label>From</label>
 			<input
 				required
-				onChange={handleDateChange}
 				type="date"
-				min="2020-01-01"
 				name="from"
+				min="2020-01-01"
+				max="2050-12-31"
 				value={props.dateForm?.from}
+				onChange={handleDateChange}
 			/>
 			<label>To</label>
 			<input
 				required
-				onChange={handleDateChange}
 				type="date"
-				max="2030-12-31"
 				name="to"
+				max="2050-12-31"
 				value={props.dateForm?.to}
+				onChange={handleDateChange}
 			/>
 			{props.isLoading ? (
 				loading

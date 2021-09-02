@@ -37,14 +37,14 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 					<td>
 						{props.isUserAdmin ? (
 							<input
-								onChange={(e) =>
-									props.handleHomeRehabilitationChanges(e, index)
-								}
+								required
+								type="time"
 								name="startTime"
 								className="input-home-rehabilitaiton"
 								value={Utilities.formatTimeView(hR.startTime)}
-								required
-								type="time"
+								onChange={(e) =>
+									props.handleHomeRehabilitationChanges(e, index)
+								}
 							></input>
 						) : (
 							Utilities.formatTimeView(hR.startTime)
@@ -66,12 +66,11 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 								onChange={(e) =>
 									props.handleHomeRehabilitationChanges(e, index)
 								}
+								required
 								name="patient"
 								maxLength={20}
 								className="input-home-rehabilitaiton"
 								value={hR.patient}
-								required
-								type="text"
 							></input>
 						) : (
 							hR.patient

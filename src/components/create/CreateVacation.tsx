@@ -89,20 +89,22 @@ export const CreateVacation: React.FunctionComponent = () => {
 
 					<label>From</label>
 					<input
-						onChange={handleChange}
-						value={formValues.from}
-						name="from"
 						required
 						type="date"
+						name="from"
+						max="2050-12-31"
+						value={formValues.from}
+						onChange={handleChange}
 					/>
 
 					<label>To</label>
 					<input
-						onChange={handleChange}
-						value={formValues.to}
-						name="to"
-						type="date"
 						required
+						type="date"
+						name="to"
+						max="2050-12-31"
+						value={formValues.to}
+						onChange={handleChange}
 					/>
 
 					<button className="button-generic" type="submit">

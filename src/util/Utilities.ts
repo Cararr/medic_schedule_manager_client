@@ -40,8 +40,8 @@ export default class Utilities {
 		return new Date(date.setDate(date.getDate() - 1));
 	}
 
-	static checkIfEndDateIsAfterBegin(startDate: string, endDate: string) {
-		return new Date(endDate) >= new Date(startDate);
+	static checkIfEndDateIsAfterBegin(from: string, to: string) {
+		return new Date(to) >= new Date(from);
 	}
 
 	static returnColorPerEmployee(lastName: string) {

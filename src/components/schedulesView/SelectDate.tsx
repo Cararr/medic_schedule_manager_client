@@ -31,10 +31,11 @@ export const SelectDate: React.FunctionComponent<Props> = (props) => {
 	};
 
 	return (
-		<form className="form-select-date">		
+		<form className="form-select-date">
 			<h3>Select date</h3>
 			<input
 				required
+				max="2050-12-31"
 				onChange={setDate}
 				value={props.dateSelected}
 				type="date"

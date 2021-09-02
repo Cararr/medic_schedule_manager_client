@@ -81,8 +81,8 @@ export interface CreateHomeRehabilitationForm {
 	employee: Employee | null;
 	patient: string;
 	startTime: string;
-	dateBegin: string;
-	dateEnd: string;
+	from: string;
+	to: string;
 }
 
 export interface CreateVacationForm {
