@@ -3,10 +3,11 @@
 }
 .container-set-day-buttons {
 	display: flex;
+	justify-content: center;
 }
 .button-change-day {
 	padding: 0;
-	display: inline-flex;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 1.2rem;
@@ -18,10 +19,7 @@
 	margin-bottom: 0.5rem;
 	margin-top: 0.5rem;
 }
-.form-select-date label {
-	font-weight: bold;
-}
-.form-select-date label h3 {
+.form-select-date h3 {
 	margin: 0;
 	padding: 0;
 }

@@ -31,10 +31,8 @@ export const SelectDate: React.FunctionComponent<Props> = (props) => {
 	};
 
 	return (
-		<form className="form-select-date">
-			<label>
-				<h3>Select date</h3>
-			</label>
+		<form className="form-select-date">		
+			<h3>Select date</h3>
 			<input
 				required
 				onChange={setDate}

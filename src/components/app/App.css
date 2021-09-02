@@ -40,6 +40,14 @@ input:focus {
 	flex-grow: 2;
 	flex-shrink: 0;
 }
+input[type='date'] {
+	text-align: center;
+}
+/* Chrome calendar icon in date input */
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-calendar-picker-indicator {
+	margin: 0;
+}
 .spin {
 	animation: rotate 1s linear infinite;
 }
