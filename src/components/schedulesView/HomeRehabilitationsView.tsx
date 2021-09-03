@@ -60,7 +60,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 						currentlyDragged={props.currentlyDragged}
 						setCurrentlyDragged={props.setCurrentlyDragged}
 					/>
-					<td style={{ width: '14rem' }}>
+					<td style={{ width: '16rem' }}>
 						{props.isUserAdmin ? (
 							<input
 								onChange={(e) =>
