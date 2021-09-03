@@ -41,42 +41,40 @@
 
 ## Introduction
 
-The goal of this application was to digitalize management of schedules at company i currently work at (private health care facility). Previously, schedules were created on papper which took a long time every month. Now the process of schedule creation nad employee management can be **automated and simplified**.
-Only logged users are allowed to enter the service. An account has been created per each employee, boss has been granted permissions to edit content. Navigation is handled with [React Router](https://reactrouter.com/) library.
+The goal of this application was to digitalize management of schedules at company i currently work at (private health care facility). Previously, schedules were created on papper which which unnecessarily took a lot of time for the manager. This application will **automate and simplify** the process of schedule creation nad employee management.
+Only logged users are allowed to enter the service. An account has been created per each employee, manager has been granted permissions to edit content. Navigation is handled with [React Router](https://reactrouter.com/) library.
 
 ## View
 
 ### Schedules
 
-An example of daily plan. This view consist of three parts: schedules, divided to four stations, a home rehabilitations view and a comment section. While normal employee can only view it, boss can change every piece of information. Employees can be moved by drag&drop system.
+This view consist of three parts: schedules, divided to four stations, a home rehabilitations view and a comment section. While normal employee can only view it, manager can modify the content. Employees can be moved by drag&drop system.
 
 ![Schedules](./previewImages/schedulesView.png)
 
-> Boss view of schedules allow to edit all parts of a daily plan.
+> Manager view of schedules allow to edit all parts of a daily plan.
 
 ### Vacations
 
-Vacations view is rendered as a monthly calendar with an external API
+Vacations are shown as a calendar with a month view by an external API
 [Fullcalendar](https://fullcalendar.io/).
 
 ![Calendar](./previewImages/calendarView.png)
 
-> Boss view of a calendar allow to resize, move and remove each vacation.
+> Manager view of a calendar allow to resize, move and remove each vacation.
 
 ## Create
 
 ![Create Panel](./previewImages/createPanel.png)
 
-This section is available only to user with boss permissions. When topic of interest is selected a
-
-simple admin panel appears from where an instance of schedule/home rehabilitation/vacation can be made.
+This section is available only to user with manager permissions. When topic of interest is selected a simple admin panel appears from where an instance of schedule/home rehabilitation/vacation can be made.
 
 <img align="right" src="./previewImages/generatorPanel.png"/>
 
 ### Generator
 
-During creation of this application, it was always clear what would it's main feature be - an automated schedule generator which will save a lot of time. In current version, 1.0, generator returns a fully composed daily schedule accordance with the general guidelines (e.g. an employee cant be at two diffent stations at the same time, can't work on two shifts, can't stay at "masaz" station twice a day and each "masaz" and "wizyty" station cell must be occupied etc.). After receiving proposed by generator schedule user can modify it with drag&drop system used in [view schedules](#schedules) section.
-**TODO**: further version of generator will ask user before generating a schedule for a list of employees available and compose a generator for given crew.
+During creation of this application, it was always clear what would it's main feature be - an automated schedule generator which will save a lot of time. In current version, 1.0, generator returns a fully composed daily schedule accordance with the general guidelines (an employee cant be at two diffent stations at the same time, can't work on two shifts, can't stay at "masaz" station twice a day and each "masaz" and "wizyty" station cell must be occupied etc.). After receiving proposed by generator schedule user can modify it with drag&drop system used in [view schedules section](#schedules).
+**TODO**: further version of generator will ask user before generating a schedule for a list of employees available and compose a schedule for given crew.
 
 ## Winbox
 
@@ -90,4 +88,4 @@ Application is running on [Amazon EC2](https://aws.amazon.com/ec2/?ec2-whats-new
 
 ---
 
-> _Do you want to see more of my work? Visit my [Github](https://github.com/Cararr) account or contact me at cararr@tlen.pl!_
+> _Interested in my work? check out more at my [Github](https://github.com/Cararr) account or contact me at cararr@tlen.pl!_
