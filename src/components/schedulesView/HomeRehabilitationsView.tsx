@@ -60,7 +60,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 						currentlyDragged={props.currentlyDragged}
 						setCurrentlyDragged={props.setCurrentlyDragged}
 					/>
-					<td style={{ width: '16rem' }}>
+					<td style={{ width: '14rem' }}>
 						{props.isUserAdmin ? (
 							<input
 								onChange={(e) =>
@@ -68,7 +68,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 								}
 								required
 								name="patient"
-								maxLength={20}
+								maxLength={25}
 								className="input-home-rehabilitaiton"
 								value={hR.patient}
 							></input>

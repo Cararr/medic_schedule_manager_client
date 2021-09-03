@@ -10,6 +10,7 @@
 	border: none;
 	font-size: inherit;
 	font-family: inherit;
+	width: 100%;
 }
 .cell-delete-hr {
 	background-color: var(--backgroundYellow);
