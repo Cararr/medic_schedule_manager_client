@@ -50,7 +50,7 @@ export const NavBar: React.FunctionComponent = () => {
 				position: isThisVacations ? 'initial' : 'sticky',
 				...backgroundStyles,
 			}}
-			className="navbar"
+			className="navbar not-printable"
 		>
 			{!isThisHomePage && (
 				<Link style={{ gridColumnStart: 1, justifySelf: 'start' }} to="/home">

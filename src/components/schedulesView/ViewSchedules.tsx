@@ -228,6 +228,16 @@ export const ViewSchedules: React.FunctionComponent = () => {
 		}
 	};
 
+	const printPlan = () => {
+		const pageTitle = document.title;
+		const root = document.querySelector('html');
+		document.title = `Schedules for: ${dateSelected}`;
+		root!.style.fontSize = '19px';
+		window.print();
+		document.title = pageTitle;
+		root!.style.fontSize = '22px';
+	};
+
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 
 	return (
@@ -246,7 +256,6 @@ export const ViewSchedules: React.FunctionComponent = () => {
 						setDateSelected={setDateSelected}
 						dateSelected={dateSelected}
 					/>
-
 					<Tables
 						schedules={schedules}
 						checkForSchedulesChanges={checkForSchedulesChanges}
@@ -263,6 +272,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 					<ActionPanel
 						wasScheduleEdited={wasScheduleEdited}
 						saveScheudles={saveScheudles}
+						printPlan={printPlan}
 						isLoading={isLoading}
 					/>
 				)}

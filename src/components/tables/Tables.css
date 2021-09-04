@@ -39,12 +39,12 @@
 	background-color: rgb(38, 38, 228) !important;
 	color: azure;
 }
-.form-comments {
+.article-comments {
 	width: 32rem;
 	margin-bottom: 1rem;
 	border: 1px solid black;
 }
-.form-comments h3 {
+.article-comments h3 {
 	background-color: var(--backgroundViolet);
 	width: 100%;
 	height: 3rem;

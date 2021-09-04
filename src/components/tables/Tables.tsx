@@ -94,7 +94,11 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 				)}
 			{props.handleCommentChanges &&
 				(props.schedules.comment?.content || isUserAdmin) && (
-					<form className="form-comments">
+					<article
+						className={`article-comments ${
+							!props.schedules.comment?.content && 'not-printable'
+						}`}
+					>
 						<h3>Informacje</h3>
 						<textarea
 							rows={10}
@@ -104,7 +108,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 							readOnly={!isUserAdmin}
 							className="textarea-comments"
 						/>
-					</form>
+					</article>
 				)}
 		</section>
 	);
