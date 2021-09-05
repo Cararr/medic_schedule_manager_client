@@ -99,7 +99,9 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 							!props.schedules.comment?.content && 'not-printable'
 						}`}
 					>
-						<h3>Informacje</h3>
+						<header className="header-comments">
+							<h3>Informacje</h3>
+						</header>
 						<textarea
 							rows={10}
 							maxLength={450}

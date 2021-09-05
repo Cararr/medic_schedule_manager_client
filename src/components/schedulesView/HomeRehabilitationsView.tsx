@@ -77,7 +77,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 						)}
 					</td>
 					{props.isUserAdmin && (
-						<td className="cell-delete-hr not-printable">
+						<td className="cell-delete-hr">
 							<BsTrash
 								onClick={() => props.removeHomeRehabilitation(hR)}
 								style={{

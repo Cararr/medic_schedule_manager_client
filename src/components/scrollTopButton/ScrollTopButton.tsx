@@ -25,7 +25,7 @@ export const ScrollTopButton: React.FunctionComponent = () => {
 				display: showButton ? 'initial' : 'none',
 			}}
 			onClick={scrollTop}
-			className="scroll-top not-printable"
+			className="scroll-top"
 		>
 			<CgArrowUpR className="icon-scroll-top" />
 		</div>

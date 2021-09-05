@@ -2,9 +2,11 @@
 	* {
 		break-inside: avoid;
 	}
-	.not-printable {
-		display: none !important;
-	}
+	.navbar,
+	.scroll-top,
+	.cell-delete-hr,
+	.form-select-date,
+	.not-printable,
 	aside {
 		display: none !important;
 	}
@@ -56,7 +58,8 @@ input[type='date'] {
 }
 /* Chrome calendar icon in date input */
 input[type='date']::-webkit-inner-spin-button,
-input[type='date']::-webkit-calendar-picker-indicator {
+input[type='date']::-webkit-calendar-picker-indicator,
+input[type='time']::-webkit-calendar-picker-indicator {
 	margin: 0;
 }
 .spin {

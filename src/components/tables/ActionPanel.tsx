@@ -11,7 +11,7 @@ interface Props {
 	dateForm?: DateForm;
 	setDateForm?: React.Dispatch<React.SetStateAction<DateForm>>;
 	createSchedules?: (e: React.SyntheticEvent) => Promise<void>;
-	printPlan?: () => void;
+	printSchedules?: () => void;
 	isLoading?: boolean;
 }
 
@@ -118,7 +118,7 @@ export const ActionPanel: React.FunctionComponent<Props> = (props) => {
 				)}
 				{schedulesView && (
 					<li className="list-item">
-						<button className="button-generic" onClick={props.printPlan}>
+						<button className="button-generic" onClick={props.printSchedules}>
 							Print
 						</button>
 					</li>

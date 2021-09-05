@@ -31,7 +31,7 @@ export const SelectDate: React.FunctionComponent<Props> = (props) => {
 	};
 
 	return (
-		<form className="form-select-date not-printable">
+		<form className="form-select-date">
 			<h3>Select date</h3>
 			<input
 				required

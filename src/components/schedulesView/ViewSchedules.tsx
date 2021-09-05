@@ -228,7 +228,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 		}
 	};
 
-	const printPlan = () => {
+	const printSchedules = () => {
 		const pageTitle = document.title;
 		const root = document.querySelector('html');
 		document.title = `Schedules for: ${dateSelected}`;
@@ -272,7 +272,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 					<ActionPanel
 						wasScheduleEdited={wasScheduleEdited}
 						saveScheudles={saveScheudles}
-						printPlan={printPlan}
+						printSchedules={printSchedules}
 						isLoading={isLoading}
 					/>
 				)}
