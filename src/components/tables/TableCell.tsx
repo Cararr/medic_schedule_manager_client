@@ -55,12 +55,14 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 
 	const handleOnDragStart = (e: React.DragEvent<HTMLTableCellElement>) => {
 		const target = e.target as HTMLTableCellElement;
-		props.setCurrentlyDragged(target.id);
 		e.dataTransfer.setData('employee', JSON.stringify(props.cellValue));
-		setTimeout(
-			() => props.changeCellValue(props.cellNumber, props.stationName, null),
-			0
-		);
+		if (!e.ctrlKey) {
+			props.setCurrentlyDragged(target.id);
+			setTimeout(
+				() => props.changeCellValue(props.cellNumber, props.stationName, null),
+				0
+			);
+		}
 	};
 
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
