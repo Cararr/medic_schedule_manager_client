@@ -23,16 +23,16 @@ import { useUser } from '../../context/userContext';
 
 export const Vacations: React.FunctionComponent = () => {
 	const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-	const [vacations, setVacations] = useState<EventInput[]>([]);
+	const [vacationEvents, setVacationEvents] = useState<EventInput[]>([]);
 
 	useEffect(() => {
-		setVacations([]);
+		setVacationEvents([]);
 		(async function () {
 			const annualVacations = await Get.vacationsByYear(selectedYear);
 			if (annualVacations)
-				setVacations(
+				setVacationEvents(
 					annualVacations.map((vacation: Vacation) => ({
-						id: vacation.id,
+						id: vacation.id.toString(),
 						employee: vacation.employee,
 						title: `${vacation.employee.firstName} ${vacation.employee.lastName}`,
 						color: Utilities.returnColorPerEmployee(vacation.employee.lastName),
@@ -67,13 +67,16 @@ export const Vacations: React.FunctionComponent = () => {
 
 	const handleEventRemove = async (event: EventApi) => {
 		const done = await Delete.vacation(event._def.publicId);
-		done
-			? event.remove()
-			: warningMessage(
-					'Action aborted!',
-					'Something went wrong, please try again later!',
-					170
-			  );
+		if (done) {
+			setVacationEvents((prev) =>
+				prev.filter((vacation) => vacation.id !== event._def.publicId)
+			);
+		} else
+			warningMessage(
+				'Action aborted!',
+				'Something went wrong, please try again later!',
+				170
+			);
 	};
 
 	const handleEventResizeAndDrop = async (
@@ -92,7 +95,7 @@ export const Vacations: React.FunctionComponent = () => {
 
 			const done = await Put.vacation(vacation);
 			if (done)
-				return setVacations((prev) => {
+				return setVacationEvents((prev) => {
 					const updatedVacation = {
 						...prev.find((event) => Number(event.id) === vacation.id),
 						start: vacation.from,
@@ -160,7 +163,7 @@ export const Vacations: React.FunctionComponent = () => {
 					firstDay={1}
 					headerToolbar={{ left: 'prevYear nextYear', center: 'title' }}
 					buttonText={buttonsText}
-					events={vacations}
+					events={vacationEvents}
 					eventContent={eventContent}
 					datesSet={handleDatesSet}
 					// weekends={false}

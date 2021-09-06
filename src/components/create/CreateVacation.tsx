@@ -4,7 +4,7 @@ import Post from '../../api/Post';
 import Utilities from '../../util/Utilities';
 import { warningMessage } from '../../WinBox/winboxMessages';
 import { CreateVacationForm } from '../../types';
-import './CreateForm.css';
+import './Create.css';
 
 export const CreateVacation: React.FunctionComponent = () => {
 	const employees = useEmployees();
@@ -65,7 +65,7 @@ export const CreateVacation: React.FunctionComponent = () => {
 				style={{ marginTop: response?.ok ? '5rem' : 0 }}
 				className="response-create"
 			>
-				<h3>
+				<h3 style={{ marginBottom: '1rem' }}>
 					{response?.ok
 						? jsonResponse.message
 						: failMessage + jsonResponse.message}
@@ -78,12 +78,16 @@ export const CreateVacation: React.FunctionComponent = () => {
 	};
 
 	return (
-		<section className="section-create" style={{ height: '21rem' }}>
+		<section className="section-create" style={{ height: '19rem' }}>
 			<h2 className="header-create">Create vacation</h2>
 			{submitResponse || (
 				<form onSubmit={handleSubmit} className="form-create">
 					<label>Employee</label>
-					<select onChange={handleChange} name="employee">
+					<select
+						className="select-employee"
+						onChange={handleChange}
+						name="employee"
+					>
 						{employeesListOptions}
 					</select>
 

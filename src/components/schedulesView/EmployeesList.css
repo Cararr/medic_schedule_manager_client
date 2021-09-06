@@ -1,11 +1,9 @@
 .employees-section {
-	background-color: var(--backgroundViolet);
-	position: sticky;
-	width: 8rem;
-	top: 3rem;
 	margin-left: 0.5rem;
-	border: 1px solid black;
-	padding: 0 1rem;
-	height: max-content;
-	border-radius: 10px;
+}
+.employees-section h3 {
+	margin-bottom: 0.5rem;
+}
+.employees-section .list-item {
+	padding: 0 5px;
 }

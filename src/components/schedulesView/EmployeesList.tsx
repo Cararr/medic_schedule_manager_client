@@ -35,19 +35,18 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 			)
 		);
 		return (
-			<li key={employee.id}>
-				<p
-					className="list-item draggable"
-					draggable={true}
-					onDragOver={handleOnDragOver}
-					onDragStart={(e) => handleOnDragStart(e, employee)}
-					onDragEnd={() =>
-						props.checkForSchedulesChanges && props.checkForSchedulesChanges()
-					}
-					style={{ color: fontColor, fontWeight: 'bold' }}
-				>
-					{`${employee.firstName} ${employee.lastName}`}
-				</p>
+			<li
+				key={employee.id}
+				className="list-item draggable"
+				draggable={true}
+				onDragOver={handleOnDragOver}
+				onDragStart={(e) => handleOnDragStart(e, employee)}
+				onDragEnd={() =>
+					props.checkForSchedulesChanges && props.checkForSchedulesChanges()
+				}
+				style={{ color: fontColor, fontWeight: 'bold' }}
+			>
+				<p>{`${employee.firstName} ${employee.lastName}`}</p>
 			</li>
 		);
 	});

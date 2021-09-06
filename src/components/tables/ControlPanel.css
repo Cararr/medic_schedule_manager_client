@@ -1,15 +1,7 @@
-.action-panel {
-	width: 8rem;
-	background-color: var(--backgroundViolet);
-	height: max-content;
-	position: sticky;
-	top: 3rem;
-	padding: 0.5rem;
-	border: 1px solid black;
+.control-panel {
 	margin-right: 0.5rem;
-	border-radius: 10px;
 }
-.action-panel h3 {
+.control-panel h3 {
 	margin-top: 0;
 	margin-bottom: 0.5rem;
 }
@@ -32,4 +24,8 @@
 	font-size: 0.8rem;
 	border-radius: 5px;
 	margin: 0.5rem 0;
+}
+.list-tips {
+	list-style: disc inside;
+	font-size: 0.8rem;
 }

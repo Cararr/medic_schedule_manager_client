@@ -3,7 +3,7 @@ import Get from '../../api/Get';
 import Post from '../../api/Post';
 import { EmployeesList } from '../schedulesView/EmployeesList';
 import { Tables } from '../tables/Tables';
-import { ActionPanel } from '../tables/ActionPanel';
+import { ControlPanel } from '../tables/ControlPanel';
 import Utilities from '../../util/Utilities';
 import { useUser } from '../../context/userContext';
 import {
@@ -102,7 +102,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 					/>
 				</main>
 				{
-					<ActionPanel
+					<ControlPanel
 						generateSchedule={generateSchedule}
 						clearSchedule={clearSchedule}
 						dateForm={dateForm}

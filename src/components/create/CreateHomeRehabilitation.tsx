@@ -4,7 +4,6 @@ import Post from '../../api/Post';
 import Utilities from '../../util/Utilities';
 import { warningMessage } from '../../WinBox/winboxMessages';
 import { CreateHomeRehabilitationForm } from '../../types';
-import './CreateForm.css';
 
 export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 	const employees = useEmployees();
@@ -78,7 +77,7 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 	};
 
 	return (
-		<section className="section-create" style={{ height: '29rem' }}>
+		<section className="section-create" style={{ height: '26rem' }}>
 			<h2 className="header-create">Create home rehabilitation</h2>
 			{submitResponse || (
 				<form onSubmit={handleSubmit} className="form-create">
@@ -90,7 +89,7 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 					<label>Patient</label>
 					<input
 						required
-						maxLength={20}
+						maxLength={25}
 						name="patient"
 						onChange={handleChange}
 						value={formValues.patient}

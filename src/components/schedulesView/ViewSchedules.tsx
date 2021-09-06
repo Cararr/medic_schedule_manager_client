@@ -5,7 +5,7 @@ import Put from '../../api/Put';
 import Delete from '../../api/Delete';
 import { EmployeesList } from './EmployeesList';
 import { Tables } from '../tables/Tables';
-import { ActionPanel } from '../tables/ActionPanel';
+import { ControlPanel } from '../tables/ControlPanel';
 import { NavBar } from '../navBar/NavBar';
 import { SelectDate } from './SelectDate';
 import Utilities from '../../util/Utilities';
@@ -269,7 +269,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 					/>
 				</main>
 				{isUserAdmin && (
-					<ActionPanel
+					<ControlPanel
 						wasScheduleEdited={wasScheduleEdited}
 						saveScheudles={saveScheudles}
 						printSchedules={printSchedules}

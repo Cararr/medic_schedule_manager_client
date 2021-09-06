@@ -18,6 +18,33 @@ a {
 input:focus {
 	box-shadow: 0px 0px 20px var(--backgroundViolet);
 }
+kbd {
+	background-color: #eee;
+	border-radius: 3px;
+	border: 1px solid #b4b4b4;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+		0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+	color: #333;
+	display: inline-block;
+	font-size: 0.85em;
+	font-weight: 700;
+	line-height: 1;
+	padding: 2px 4px;
+	white-space: nowrap;
+}
+aside {
+	background-color: var(--backgroundViolet);
+	height: max-content;
+	width: 8rem;
+	position: sticky;
+	top: 3rem;
+	padding: 0.5rem;
+	border: 1px solid black;
+	border-radius: 10px;
+}
+input {
+	padding: 1px 2px;
+}
 .button-generic {
 	font-family: Work Sans;
 	font-weight: 600;
