@@ -12,7 +12,11 @@ import {
 	StationSchedules,
 	DateForm,
 } from '../../types';
-import { createdMessage, warningMessage } from '../../WinBox/winboxMessages';
+import {
+	createdMessage,
+	tipsWinbox,
+	warningMessage,
+} from '../../WinBox/winboxMessages';
 
 export const CreateSchedules: React.FunctionComponent = () => {
 	const [stationSchedules, setStationSchedules] = useState<StationSchedules>(
@@ -30,8 +34,12 @@ export const CreateSchedules: React.FunctionComponent = () => {
 
 	const [isLoading, setIsLoading] = useState(false);
 
+	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+
 	useEffect(() => {
 		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
+		const Winbox = tipsWinbox();
+		return () => Winbox.close();
 	}, []);
 
 	const changeCellValue = (
@@ -62,7 +70,8 @@ export const CreateSchedules: React.FunctionComponent = () => {
 			return warningMessage(
 				'Invalid date!',
 				'End date cannot come before the beginning!',
-				170
+				170,
+				17
 			);
 
 		setIsLoading(true);
@@ -81,8 +90,6 @@ export const CreateSchedules: React.FunctionComponent = () => {
 					170
 			  );
 	};
-
-	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 
 	return (
 		<div>

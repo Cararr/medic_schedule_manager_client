@@ -7,6 +7,7 @@
 	.cell-delete-hr,
 	.form-select-date,
 	.not-printable,
+	.winbox,
 	aside {
 		display: none !important;
 	}

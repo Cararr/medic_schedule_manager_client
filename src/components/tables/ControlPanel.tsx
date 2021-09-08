@@ -116,17 +116,6 @@ export const ControlPanel: React.FunctionComponent<Props> = (props) => {
 			<ul className="list">
 				{schedulesView && schedulesViewActions}
 				{createSchedulesView && createSchedulesViewActions}
-				<li className="list-item">
-					<h3>Tips</h3>
-					<ul className="list-tips">
-						<li>
-							<p>
-								Hold <kbd>Ctrl</kbd> while dragging an employee to copy them
-								between cells.
-							</p>
-						</li>
-					</ul>
-				</li>
 			</ul>
 		</aside>
 	);

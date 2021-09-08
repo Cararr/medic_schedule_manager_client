@@ -8,7 +8,7 @@
 	filter: invert(1);
 }
 .wb-body {
-	padding: 0 1rem;
+	padding: 1rem;
 	background-color: var(--backgroundYellow);
 	display: grid;
 	place-items: center;
@@ -17,4 +17,10 @@
 	text-align: center;
 	font-family: Roboto;
 	margin: 0;
+}
+.winbox-list-tips {
+	list-style: decimal inside;
+}
+.winbox-list-tips li {
+	margin-bottom: 0.5rem;
 }

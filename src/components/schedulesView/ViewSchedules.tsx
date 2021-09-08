@@ -10,7 +10,7 @@ import { NavBar } from '../navBar/NavBar';
 import { SelectDate } from './SelectDate';
 import Utilities from '../../util/Utilities';
 import { useUser } from '../../context/userContext';
-import { warningMessage } from '../../WinBox/winboxMessages';
+import { warningMessage, tipsWinbox } from '../../WinBox/winboxMessages';
 import {
 	Employee,
 	Schedules,
@@ -41,9 +41,15 @@ export const ViewSchedules: React.FunctionComponent = () => {
 
 	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
 
+	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+
 	useEffect(() => {
 		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
-	}, []);
+		if (isUserAdmin) {
+			const Winbox = tipsWinbox();
+			return () => Winbox.close();
+		}
+	}, [isUserAdmin]);
 
 	useEffect(() => {
 		setWasScheduleEdited(false);
@@ -237,8 +243,6 @@ export const ViewSchedules: React.FunctionComponent = () => {
 		document.title = pageTitle;
 		root!.style.fontSize = '22px';
 	};
-
-	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 
 	return (
 		<div>

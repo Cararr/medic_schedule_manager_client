@@ -32,6 +32,7 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	background-color: var(--backgroundBlue);
 	color: var(--fontColor);
+	min-height: 100vh;
 }
 h1,
 h2,

@@ -46,7 +46,8 @@ export const CreateVacation: React.FunctionComponent = () => {
 			return warningMessage(
 				'Invalid date!',
 				'End date cannot come before the beginning!',
-				170
+				170,
+				17
 			);
 
 		setSubmitResponse(
