@@ -6,7 +6,6 @@
 	left: 50%;
 	padding: 1rem;
 	transform: translate(-50%, -50%);
-	/* height: 230px; */
 	width: 400px;
 	border: 5px solid var(--backgroundViolet);
 }
@@ -39,8 +38,7 @@
 	cursor: pointer;
 }
 .button-submit-login {
-	font-size: 1.5rem;
-	padding: 0 1rem;
+	font-size: 1.2rem;
 	margin: auto;
 	display: block;
 }

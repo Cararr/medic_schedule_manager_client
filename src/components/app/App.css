@@ -38,7 +38,7 @@ aside {
 	height: max-content;
 	width: 8rem;
 	position: sticky;
-	top: 3rem;
+	top: 15vh;
 	padding: 0.5rem;
 	border: 1px solid black;
 	border-radius: 10px;

@@ -55,10 +55,12 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 				<h3 className="header-landing-page-secoundary">
 					Przestrzeń w sieci dla najlepszej grupy fizjoterapeutów w Świdnicy
 				</h3>
-				<Link to={isLoginPanelOn ? '/' : '/login'}>
-					<button className="button-generic button-start">Zaloguj się</button>
-				</Link>
 			</header>
+			<div className="container-button-login">
+				<Link to={isLoginPanelOn ? '/' : '/login'}>
+					<button className="button-generic button-login">Start</button>
+				</Link>
+			</div>
 			<img alt="Schedule Calendar" src={LandingImage} />
 			<Switch>
 				<Route exact path={'/login'}>

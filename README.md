@@ -48,7 +48,7 @@ Only logged users are allowed to enter the service. An account has been created 
 
 ### Schedules
 
-This view consist of three parts: schedules, divided to four stations, a home rehabilitations view and a comment section. While normal employee can only view it, manager can modify the content. Employees can be moved by drag&drop system.
+This view consist of three parts: schedules, divided to four stations, a home rehabilitations view and a comment section. While normal employee can only view it, manager can modify the content. Employees can be moved by drag&drop system. Full daily plan can be converted to .pdf and printed.
 
 ![Schedules](./previewImages/schedulesView.png)
 

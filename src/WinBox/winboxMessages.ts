@@ -30,7 +30,7 @@ export const createdMessage = () => {
 	const config = {
 		...genericSettings,
 		background: '#d2e589',
-		right: 17,
+		right: 17, // 17 - scrollbar width
 		y: 170,
 		html: `<h2>👍</h2>`,
 	};

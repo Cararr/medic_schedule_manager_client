@@ -26,16 +26,21 @@
 	top: 15vh;
 	left: 58%;
 }
-.button-start {
-	margin: auto;
+.button-login {
 	padding: 1px 0.6rem;
 	display: block;
-	margin-top: 2.5rem;
 	background-color: hsl(21, 83%, 65%);
-	font-size: 2rem;
+	font-size: 2.2rem;
 	transition: background-color 0.15s ease-in;
 }
-.button-start:hover {
+.button-login:hover {
 	background-color: var(--backgroundOrange);
 	transform: none;
+}
+.container-button-login {
+	width: 60%;
+	margin-left: 2rem;
+	margin-top: 2.5rem;
+	display: flex;
+	justify-content: center;
 }
