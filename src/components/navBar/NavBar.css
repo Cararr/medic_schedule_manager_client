@@ -1,9 +1,10 @@
 .navbar {
 	top: 0;
+	box-sizing: content-box;
 	z-index: 2;
-	width: 100%;
+	width: 98%;
 	height: 3rem;
-	padding: 0 1rem;
+	padding: 0 1%;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	align-items: center;
