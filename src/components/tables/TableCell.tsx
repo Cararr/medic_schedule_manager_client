@@ -65,11 +65,15 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 		}
 	};
 
-	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+	const user = useUser();
 
-	const className = `white-background ${
-		props.cellValue && isUserAdmin && 'draggable'
-	}`;
+	const isUserAdmin = Utilities.checkIfUserIsAdmin(user);
+
+	const className = `${
+		user?.lastName === props.cellValue?.lastName
+			? 'orange-background'
+			: 'white-background'
+	} ${props.cellValue && isUserAdmin && 'draggable'}`;
 
 	const isCellDraggable = Boolean(props.cellValue) && isUserAdmin;
 

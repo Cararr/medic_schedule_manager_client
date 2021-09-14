@@ -7,10 +7,16 @@
 	height: 3rem;
 	border: 1px solid black;
 }
-.white-background {
-	background-color: #fff;
+.white-background,
+.orange-background {
 	font-weight: 500;
 	cursor: default;
+}
+.white-background {
+	background-color: #fff;
+}
+.orange-background {
+	background-color: var(--backgroundOrange);
 }
 .list {
 	list-style-type: none;

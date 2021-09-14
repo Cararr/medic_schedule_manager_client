@@ -46,7 +46,10 @@ export const tipsWinbox = () => {
 		html: `
 		<ol class="winbox-list-tips">
 			<li>			
-				Hold <kbd>Ctrl</kbd> while dragging an employee to copy it					between cells.				
+				Hold <kbd>Ctrl</kbd> while dragging an employee to copy him/her between cells.				
+			</li>
+			<li>
+			<span class="font-blue">Blue</span> employee's name on list means he/she appears three times on a schedule. <span class="font-red">Red</span> font suggest he/she is overloaded (appears more than three times durning a day). 
 			</li>
 		</ol>`,
 		class: 'no-full no-max modern',

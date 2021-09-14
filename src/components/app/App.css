@@ -90,6 +90,12 @@ input[type='date']::-webkit-calendar-picker-indicator,
 input[type='time']::-webkit-calendar-picker-indicator {
 	margin: 0;
 }
+.font-red {
+	color: hsl(0, 94%, 34%);
+}
+.font-blue {
+	color: #0f00ca;
+}
 .spin {
 	animation: rotate 1s linear infinite;
 }
