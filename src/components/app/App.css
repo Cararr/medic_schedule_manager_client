@@ -63,11 +63,6 @@ input {
 .button-disabled {
 	pointer-events: none;
 }
-.container-card {
-	display: flex;
-	justify-content: space-evenly;
-	margin-top: 5%;
-}
 .container-schedules {
 	text-align: center;
 	width: 100%;
@@ -105,5 +100,10 @@ input[type='time']::-webkit-calendar-picker-indicator {
 	}
 	to {
 		transform: rotate(360deg);
+	}
+}
+@media only screen and (max-width: 500px) {
+	aside {
+		display: none;
 	}
 }

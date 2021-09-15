@@ -8,6 +8,7 @@
 	transform: translate(-50%, -50%);
 	width: 400px;
 	border: 5px solid var(--backgroundViolet);
+	z-index: 3;
 }
 .label-login-panel {
 	display: block;
@@ -21,7 +22,7 @@
 	display: block;
 	padding: 5px;
 }
-.login-form-content {
+.form-login-content {
 	width: 80%;
 	margin: auto;
 }
@@ -37,8 +38,18 @@
 	place-items: center;
 	cursor: pointer;
 }
+.container-button-submit-login {
+	height: 1.6rem;
+	display: flex;
+	justify-content: center;
+}
 .button-submit-login {
 	font-size: 1.2rem;
-	margin: auto;
 	display: block;
+}
+@media only screen and (max-width: 500px) {
+	.form-login {
+		width: 90%;
+		top: 60%;
+	}
 }

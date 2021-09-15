@@ -18,8 +18,7 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 		<CgSpinner
 			className="spin"
 			style={{
-				fontSize: '1.8rem',
-				height: 35,
+				fontSize: '1.54rem',
 				margin: 'auto',
 				display: 'block',
 			}}
@@ -34,7 +33,7 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 				</button>
 			</Link>
 
-			<div className="login-form-content">
+			<div className="form-login-content">
 				<label className="label-login-panel">Login</label>
 				<input
 					required
@@ -55,13 +54,18 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 					type="password"
 					maxLength={10}
 				></input>
-				{props.isLoading ? (
-					loading
-				) : (
-					<button type="submit" className="button-generic button-submit-login">
-						Zaloguj sie
-					</button>
-				)}
+				<div className="container-button-submit-login">
+					{props.isLoading ? (
+						loading
+					) : (
+						<button
+							type="submit"
+							className="button-generic button-submit-login"
+						>
+							Zaloguj sie
+						</button>
+					)}
+				</div>
 			</div>
 		</form>
 	);

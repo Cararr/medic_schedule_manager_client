@@ -17,7 +17,11 @@ export const Card: React.FunctionComponent<Props> = (props) => {
 			onClick={() => props.handleCardClick(props.cardIndex)}
 			to={props.pathName}
 		>
-			<figure className={`card ${props.clickedClass}`}>
+			<figure
+				className={`card ${props.clickedClass} ${
+					props.itemName === 'Create' && 'card-create'
+				}`}
+			>
 				<img alt={`${props.itemName}`} src={props.image} />
 				<figcaption>{props.itemName}</figcaption>
 			</figure>

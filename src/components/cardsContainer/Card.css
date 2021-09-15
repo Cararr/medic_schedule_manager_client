@@ -9,6 +9,9 @@
 	text-align: center;
 	transition: transform 0.05s ease-in-out;
 }
+.card img {
+	max-width: 100%;
+}
 .card:hover {
 	cursor: pointer;
 	transform: translate(+5px, +5px);
@@ -23,4 +26,12 @@
 	cursor: pointer;
 	transform: translate(+2px, +2px);
 	border-style: dashed;
+}
+@media only screen and (max-width: 500px) {
+	.card {
+		/* margin-bottom: 0.5rem; */
+	}
+	.card-create {
+		display: none;
+	}
 }

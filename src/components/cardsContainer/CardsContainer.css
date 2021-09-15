@@ -3,3 +3,10 @@
 	justify-content: space-evenly;
 	margin-top: 5%;
 }
+@media only screen and (max-width: 500px) {
+	.container-card {
+		min-height: 85vh;
+		flex-direction: column;
+		align-items: center;
+	}
+}

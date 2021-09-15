@@ -7,7 +7,9 @@
 .header-landing-page {
 	width: 60%;
 	margin-left: 2rem;
-	margin-top: 2rem;
+	margin-top: 10vh;
+	z-index: 2;
+	position: relative;
 }
 .header-landing-page-main {
 	font-size: 6.5rem;
@@ -43,4 +45,27 @@
 	margin-top: 2.5rem;
 	display: flex;
 	justify-content: center;
+}
+@media only screen and (max-width: 500px) {
+	.landing-page {
+		padding: 0;
+	}
+	.header-landing-page-secoundary {
+		display: none;
+	}
+	.header-landing-page {
+		width: 100%;
+		margin: 0;
+		text-align: center;
+	}
+	.landing-page img {
+		max-width: 100%;
+		margin-top: -1rem;
+		position: initial;
+		z-index: 1;
+	}
+	.container-button-login {
+		width: initial;
+		margin: 0 0 0.5rem 0;
+	}
 }

@@ -42,3 +42,8 @@ h5,
 h6 {
 	font-family: 'Gilroy';
 }
+@media only screen and (max-width: 500px) {
+	:root {
+		font-size: 14px;
+	}
+}

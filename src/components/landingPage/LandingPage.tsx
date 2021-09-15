@@ -29,8 +29,11 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 	const handleLogin = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		setIsLoading(true);
+
 		const loginReponse = await login(loginInputValue);
+
 		setIsLoading(false);
+
 		if (loginReponse?.passed) {
 			if (!employees.length) loadEmployees();
 			changeUser(loginReponse.user);
@@ -56,12 +59,12 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 					Przestrzeń w sieci dla najlepszej grupy fizjoterapeutów w Świdnicy
 				</h3>
 			</header>
+			<img alt="Schedule Calendar" src={LandingImage} />
 			<div className="container-button-login">
 				<Link to={isLoginPanelOn ? '/' : '/login'}>
 					<button className="button-generic button-login">Start</button>
 				</Link>
 			</div>
-			<img alt="Schedule Calendar" src={LandingImage} />
 			<Switch>
 				<Route exact path={'/login'}>
 					<LoginPanel
