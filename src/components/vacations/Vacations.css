@@ -1,6 +1,6 @@
 .main-calendar {
 	width: 100%;
-	margin: 2rem auto;
+	margin-top: 2rem;
 	background-image: url('../../resources/images/notebook.png');
 	border-top: 1px dotted black;
 	border-bottom: 1px dotted black;
@@ -62,4 +62,9 @@ td.fc-day-sun {
 }
 .fc-event-title-container {
 	text-align: center;
+}
+@media only screen and (max-width: 500px) {
+	.main-calendar {
+		padding: 1rem 0;
+	}
 }

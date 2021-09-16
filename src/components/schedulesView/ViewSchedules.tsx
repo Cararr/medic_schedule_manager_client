@@ -43,13 +43,15 @@ export const ViewSchedules: React.FunctionComponent = () => {
 
 	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
 
+	const isMobileDevice = window.screen.width < 500;
+
 	useEffect(() => {
 		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
-		if (isUserAdmin) {
+		if (isUserAdmin && !isMobileDevice) {
 			const Winbox = tipsWinbox();
 			return () => Winbox.close();
 		}
-	}, [isUserAdmin]);
+	}, [isUserAdmin, isMobileDevice]);
 
 	useEffect(() => {
 		setWasScheduleEdited(false);

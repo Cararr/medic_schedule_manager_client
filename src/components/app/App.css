@@ -106,4 +106,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
 	aside {
 		display: none;
 	}
+	.main-schedules {
+		width: 100%;
+	}
 }

@@ -73,7 +73,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 	return isLoading ? (
 		loading
 	) : (
-		<section>
+		<section className="section-tables">
 			{tables}
 			{props.schedules.homeRehabilitations &&
 				props.schedules.homeRehabilitations.length !== 0 &&

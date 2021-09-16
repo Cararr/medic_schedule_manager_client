@@ -25,6 +25,8 @@ export const Vacations: React.FunctionComponent = () => {
 	const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 	const [vacationEvents, setVacationEvents] = useState<EventInput[]>([]);
 
+	const isMobileDevice = window.screen.width < 500;
+
 	useEffect(() => {
 		setVacationEvents([]);
 		(async function () {
@@ -139,7 +141,7 @@ export const Vacations: React.FunctionComponent = () => {
 			>
 				{eventContentArg.event.title}
 			</p>
-			{isUserAdmin && (
+			{isUserAdmin && !isMobileDevice && (
 				<button
 					onClick={() => handleEventRemove(eventContentArg.event)}
 					className="button-calendar-remove-event"
@@ -161,13 +163,16 @@ export const Vacations: React.FunctionComponent = () => {
 					locale={'pl'}
 					height="auto"
 					firstDay={1}
-					headerToolbar={{ left: 'prevYear nextYear', center: 'title' }}
+					headerToolbar={{
+						left: !isMobileDevice ? 'prevYear nextYear' : '',
+						center: 'title',
+					}}
 					buttonText={buttonsText}
 					events={vacationEvents}
 					eventContent={eventContent}
 					datesSet={handleDatesSet}
 					// weekends={false}
-					editable={isUserAdmin}
+					editable={isUserAdmin && !isMobileDevice}
 					eventAllow={(dropInfo) => {
 						return ![0, 6].includes(dropInfo.start.getDay());
 					}}

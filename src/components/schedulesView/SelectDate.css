@@ -1,16 +1,6 @@
 .form-select-date {
 	margin-bottom: 1rem;
 }
-.container-set-day-buttons {
-	display: flex;
-	justify-content: center;
-}
-.button-change-day {
-	padding: 1px 0.1rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
 .form-select-date input {
 	color: black;
 	font-size: 1rem;
@@ -21,6 +11,25 @@
 .form-select-date h3 {
 	margin: 0;
 }
+.container-set-day-buttons {
+	display: flex;
+	justify-content: center;
+}
+.button-change-day {
+	padding: 1px 0.1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .button-today {
 	margin: 0 0.5rem;
+}
+
+@media only screen and (max-width: 500px) {
+	.button-today,
+	.button-change-day,
+	.form-select-date h3,
+	.form-select-date input {
+		font-size: 1.5rem;
+	}
 }

@@ -53,29 +53,31 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 
 	return (
 		<main className="landing-page">
-			<header className="header-landing-page">
-				<h1 className="header-landing-page-main">Fizjo Medyk</h1>
-				<h3 className="header-landing-page-secoundary">
-					Przestrzeń w sieci dla najlepszej grupy fizjoterapeutów w Świdnicy
-				</h3>
-			</header>
-			<img alt="Schedule Calendar" src={LandingImage} />
-			<div className="container-button-login">
-				<Link to={isLoginPanelOn ? '/' : '/login'}>
-					<button className="button-generic button-login">Start</button>
-				</Link>
+			<div>
+				<header className="header-landing-page">
+					<h1 className="header-landing-page-main">Fizjo Medyk</h1>
+					<h3 className="header-landing-page-secoundary">
+						Przestrzeń w sieci dla najlepszej grupy fizjoterapeutów w Świdnicy
+					</h3>
+				</header>
+				<img alt="Schedule Calendar" src={LandingImage} />
+				<div className="container-button-login">
+					<Link to={isLoginPanelOn ? '/' : '/login'}>
+						<button className="button-generic button-login">Start</button>
+					</Link>
+				</div>
+				<Switch>
+					<Route exact path={'/login'}>
+						<LoginPanel
+							handleInputChange={handleInputChange}
+							loginInputValue={loginInputValue}
+							handleLogin={handleLogin}
+							closeLoginPanel={closeLoginPanel}
+							isLoading={isLoading}
+						/>
+					</Route>
+				</Switch>
 			</div>
-			<Switch>
-				<Route exact path={'/login'}>
-					<LoginPanel
-						handleInputChange={handleInputChange}
-						loginInputValue={loginInputValue}
-						handleLogin={handleLogin}
-						closeLoginPanel={closeLoginPanel}
-						isLoading={isLoading}
-					/>
-				</Route>
-			</Switch>
 		</main>
 	);
 };
