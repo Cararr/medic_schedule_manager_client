@@ -52,7 +52,7 @@ export const tipsWinbox = () => {
 			<span class="font-blue">Blue</span> employee's name on list means he/she appears three times on a schedule. <span class="font-red">Red</span> font suggest he/she is overloaded (appears more than three times durning a day). 
 			</li>
 		</ol>`,
-		class: 'no-full no-max modern',
+		class: 'no-full no-max no-close modern',
 	};
 	return new WinBox('Tips', config).minimize(true);
 };
