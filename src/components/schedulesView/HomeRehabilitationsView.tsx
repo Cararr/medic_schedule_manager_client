@@ -6,7 +6,7 @@ import './HomeRehabilitationsView.css';
 import { BsTrash } from 'react-icons/bs';
 
 interface Props {
-	isUserAdmin: boolean;
+	isUserBoss: boolean;
 	changeCellValue: (
 		cellNumber: number,
 		stationName: string,
@@ -35,7 +35,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 			return (
 				<tr key={hR.id}>
 					<td>
-						{props.isUserAdmin ? (
+						{props.isUserBoss ? (
 							<input
 								required
 								type="time"
@@ -61,7 +61,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 						setCurrentlyDragged={props.setCurrentlyDragged}
 					/>
 					<td style={{ width: '14rem' }}>
-						{props.isUserAdmin ? (
+						{props.isUserBoss ? (
 							<input
 								onChange={(e) =>
 									props.handleHomeRehabilitationChanges(e, index)
@@ -76,7 +76,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 							hR.patient
 						)}
 					</td>
-					{props.isUserAdmin && (
+					{props.isUserBoss && (
 						<td className="cell-delete-hr">
 							<BsTrash
 								onClick={() => props.removeHomeRehabilitation(hR)}

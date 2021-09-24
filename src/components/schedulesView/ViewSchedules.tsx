@@ -41,17 +41,17 @@ export const ViewSchedules: React.FunctionComponent = () => {
 
 	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
 
-	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser());
 
 	const isMobileDevice = window.screen.width < 500;
 
 	useEffect(() => {
 		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
-		if (isUserAdmin && !isMobileDevice) {
+		if (isUserBoss && !isMobileDevice) {
 			const Winbox = tipsWinbox();
 			return () => Winbox.close();
 		}
-	}, [isUserAdmin, isMobileDevice]);
+	}, [isUserBoss, isMobileDevice]);
 
 	useEffect(() => {
 		setWasScheduleEdited(false);
@@ -250,7 +250,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 		<div>
 			<NavBar />
 			<div className="container-schedules">
-				{isUserAdmin && (
+				{isUserBoss && (
 					<EmployeesList
 						stationSchedules={schedules.stationSchedules}
 						homeRehabilitations={schedules.homeRehabilitations}
@@ -274,7 +274,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 						handleCommentChanges={handleCommentChanges}
 					/>
 				</main>
-				{isUserAdmin && (
+				{isUserBoss && (
 					<ControlPanel
 						wasScheduleEdited={wasScheduleEdited}
 						saveScheudles={saveScheudles}

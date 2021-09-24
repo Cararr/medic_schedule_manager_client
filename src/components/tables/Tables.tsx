@@ -57,7 +57,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 			);
 	}
 
-	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser());
 	const isLoading = !Boolean(props.workStageSpans?.length);
 	const loading = (
 		<CgSpinner
@@ -80,7 +80,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 				props.handleHomeRehabilitationChanges &&
 				props.removeHomeRehabilitation && (
 					<HomeRehabilitations
-						isUserAdmin={isUserAdmin}
+						isUserBoss={isUserBoss}
 						changeCellValue={props.changeCellValue}
 						checkForSchedulesChanges={props.checkForSchedulesChanges}
 						currentlyDragged={props.currentlyDragged}
@@ -93,7 +93,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 					/>
 				)}
 			{props.handleCommentChanges &&
-				(props.schedules.comment?.content || isUserAdmin) && (
+				(props.schedules.comment?.content || isUserBoss) && (
 					<article
 						className={`article-comments ${
 							!props.schedules.comment?.content && 'not-printable'
@@ -107,7 +107,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 							maxLength={450}
 							value={props.schedules.comment?.content}
 							onChange={props.handleCommentChanges}
-							readOnly={!isUserAdmin}
+							readOnly={!isUserBoss}
 							className="textarea-comments"
 						/>
 					</article>

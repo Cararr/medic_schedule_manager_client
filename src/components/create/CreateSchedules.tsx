@@ -34,7 +34,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 
 	const [isLoading, setIsLoading] = useState(false);
 
-	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser());
 
 	useEffect(() => {
 		Get.workStageSpans().then((stages) => setworkStageSpans(stages));
@@ -94,7 +94,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 	return (
 		<div>
 			<div className="container-schedules">
-				{isUserAdmin && <EmployeesList stationSchedules={stationSchedules} />}
+				{isUserBoss && <EmployeesList stationSchedules={stationSchedules} />}
 				<main className="main-schedules">
 					<Tables
 						schedules={{

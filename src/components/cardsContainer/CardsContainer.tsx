@@ -5,7 +5,7 @@ import './CardsContainer.css';
 
 interface Props {
 	cards: CardProperties[];
-	isUserAdmin?: boolean;
+	isUserBoss?: boolean;
 }
 
 export const CardsContainer: React.FunctionComponent<Props> = (props) => {
@@ -14,7 +14,7 @@ export const CardsContainer: React.FunctionComponent<Props> = (props) => {
 	const handleCardClick = (index: number) => setCardClicked(index);
 
 	const cards = props.cards.map((card: CardProperties, index: number) => {
-		if (!card.adminOnly || (card.adminOnly && props.isUserAdmin))
+		if (!card.adminOnly || (card.adminOnly && props.isUserBoss))
 			return (
 				<Card
 					key={card.name}

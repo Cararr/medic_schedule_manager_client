@@ -67,25 +67,25 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 
 	const user = useUser();
 
-	const isUserAdmin = Utilities.checkIfUserIsAdmin(user);
+	const isUserBoss = Utilities.checkIfUserIsAdmin(user);
 
 	const className = `${
 		user?.lastName === props.cellValue?.lastName
 			? 'orange-background'
 			: 'white-background'
-	} ${props.cellValue && isUserAdmin && 'draggable'}`;
+	} ${props.cellValue && isUserBoss && 'draggable'}`;
 
-	const isCellDraggable = Boolean(props.cellValue) && isUserAdmin;
+	const isCellDraggable = Boolean(props.cellValue) && isUserBoss;
 
 	return (
 		<td
 			id={`${props.stationName}-${props.cellNumber}`}
 			className={className}
 			draggable={isCellDraggable}
-			onDragLeave={isUserAdmin ? handleOnDragLeave : undefined}
-			onDragStart={isUserAdmin ? handleOnDragStart : undefined}
-			onDragOver={isUserAdmin ? handleOnDragOver : undefined}
-			onDrop={isUserAdmin ? handleDrop : undefined}
+			onDragLeave={isUserBoss ? handleOnDragLeave : undefined}
+			onDragStart={isUserBoss ? handleOnDragStart : undefined}
+			onDragOver={isUserBoss ? handleOnDragOver : undefined}
+			onDrop={isUserBoss ? handleDrop : undefined}
 			onDragEnd={() =>
 				props.checkForSchedulesChanges && props.checkForSchedulesChanges()
 			}

@@ -9,7 +9,7 @@ import Utilities from '../../util/Utilities';
 import './HomePage.css';
 
 export const HomePage: React.FunctionComponent = () => {
-	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser());
 
 	const cards = [
 		{
@@ -33,7 +33,7 @@ export const HomePage: React.FunctionComponent = () => {
 	return (
 		<div>
 			<NavBar />
-			<CardsContainer isUserAdmin={isUserAdmin} cards={cards} />
+			<CardsContainer isUserBoss={isUserBoss} cards={cards} />
 		</div>
 	);
 };

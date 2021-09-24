@@ -115,23 +115,23 @@ export const Vacations: React.FunctionComponent = () => {
 		eventInfo.revert();
 	};
 
-	const isUserAdmin = Utilities.checkIfUserIsAdmin(useUser());
+	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser());
 
 	const eventContent = (eventContentArg: EventContentArg) => (
 		<div className="calendar-event">
 			<p
 				style={{
-					cursor: isUserAdmin ? 'grab' : 'initial',
+					cursor: isUserBoss ? 'grab' : 'initial',
 				}}
 				onMouseDown={
-					isUserAdmin
+					isUserBoss
 						? (e: React.SyntheticEvent) => {
 								changeGrabCursor(e.target as HTMLElement, 'grabbing');
 						  }
 						: undefined
 				}
 				onMouseUp={
-					isUserAdmin
+					isUserBoss
 						? (e: React.SyntheticEvent) => {
 								changeGrabCursor(e.target as HTMLElement, 'grab');
 						  }
@@ -141,7 +141,7 @@ export const Vacations: React.FunctionComponent = () => {
 			>
 				{eventContentArg.event.title}
 			</p>
-			{isUserAdmin && !isMobileDevice && (
+			{isUserBoss && !isMobileDevice && (
 				<button
 					onClick={() => handleEventRemove(eventContentArg.event)}
 					className="button-calendar-remove-event"
@@ -172,7 +172,7 @@ export const Vacations: React.FunctionComponent = () => {
 					eventContent={eventContent}
 					datesSet={handleDatesSet}
 					// weekends={false}
-					editable={isUserAdmin && !isMobileDevice}
+					editable={isUserBoss && !isMobileDevice}
 					eventAllow={(dropInfo) => {
 						return ![0, 6].includes(dropInfo.start.getDay());
 					}}
