@@ -47,7 +47,10 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 		}
 	};
 
-	const closeLoginPanel = () => setLoginInputValue(returnEmptyLoginValues());
+	const handleCloseLoginPanel = () => {
+		setLoginInputValue(returnEmptyLoginValues());
+		history.push('/');
+	};
 
 	const isLoginPanelOn = path === '/login';
 
@@ -72,7 +75,7 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 							handleInputChange={handleInputChange}
 							loginInputValue={loginInputValue}
 							handleLogin={handleLogin}
-							closeLoginPanel={closeLoginPanel}
+							handleCloseLoginPanel={handleCloseLoginPanel}
 							isLoading={isLoading}
 						/>
 					</Route>

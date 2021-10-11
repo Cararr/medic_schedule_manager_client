@@ -96,7 +96,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 				(props.schedules.comment?.content || isUserBoss) && (
 					<article
 						className={`article-comments ${
-							!props.schedules.comment?.content && 'not-printable'
+							!props.schedules.comment?.content ? 'not-printable' : ''
 						}`}
 					>
 						<header className="header-comments">

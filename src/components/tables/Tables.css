@@ -43,9 +43,9 @@ li:last-child {
 	color: azure;
 }
 .article-comments {
-	width: 32rem;
 	margin-bottom: 1rem;
 	border: 1px solid black;
+	line-height: 0;
 }
 .header-comments {
 	background-color: var(--backgroundViolet);

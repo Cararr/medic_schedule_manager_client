@@ -11,6 +11,8 @@ export const NavBar: React.FunctionComponent = () => {
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+	const isMobileDevice = window.screen.width < 500;
+
 	const user = useUser();
 	const isUserBoss = Utilities.checkIfUserIsAdmin(user);
 	const changeUser = useChangeUser();
@@ -50,7 +52,7 @@ export const NavBar: React.FunctionComponent = () => {
 	return (
 		<nav
 			style={{
-				position: isThisVacations ? 'initial' : 'sticky',
+				position: isThisVacations && !isMobileDevice ? 'initial' : 'sticky',
 				backgroundColor: isNavBarTransparent
 					? 'var(--backgroundBlue)'
 					: 'var(--backgroundYellow)',
@@ -96,7 +98,7 @@ export const NavBar: React.FunctionComponent = () => {
 						<li className="dropdown-list-item">
 							<Link to="/vacations">Vacations</Link>
 						</li>
-						{isUserBoss && (
+						{isUserBoss && !isMobileDevice && (
 							<li className="dropdown-list-item">
 								<Link to="/create">Create</Link>
 							</li>

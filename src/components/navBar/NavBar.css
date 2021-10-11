@@ -22,7 +22,6 @@
 }
 .dropdown-content {
 	position: absolute;
-	left: 0;
 	top: calc(100% + 0.5rem);
 	background-color: var(--backgroundYellow);
 	padding: 1rem;
@@ -33,6 +32,7 @@
 	transform: translateY(-20px);
 	transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
 	list-style: none;
+	z-index: 5;
 }
 .dropdown-menu-trigger {
 	border: none;
@@ -49,4 +49,18 @@
 }
 .dropdown-list-item:hover {
 	text-decoration: underline;
+}
+
+@media only screen and (max-width: 500px) {
+	.navbar {
+		font-size: 1.5rem;
+	}
+	.dropdown-content {
+		width: 100vw;
+		left: -1vw;
+		text-align: center;
+		display: grid;
+		place-items: center;
+		overflow: visible;
+	}
 }

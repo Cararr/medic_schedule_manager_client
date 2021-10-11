@@ -3,13 +3,12 @@ import { UserCrudentials } from '../../types';
 import './LoginPanel.css';
 import { ImCross } from 'react-icons/im';
 import { CgSpinner } from 'react-icons/cg';
-import { Link } from 'react-router-dom';
 
 interface Props {
 	handleInputChange: (eventTarget: React.ChangeEvent<HTMLInputElement>) => void;
 	loginInputValue: UserCrudentials;
 	handleLogin: (e: React.SyntheticEvent) => void;
-	closeLoginPanel: () => void;
+	handleCloseLoginPanel: () => void;
 	isLoading: boolean;
 }
 
@@ -27,11 +26,13 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 
 	return (
 		<form onSubmit={props.handleLogin} className="form-login">
-			<Link to="/">
-				<button type="button" className="button-close-window">
-					<ImCross style={{ fontSize: '.8rem' }} />
-				</button>
-			</Link>
+			<button
+				onClick={props.handleCloseLoginPanel}
+				type="button"
+				className="button-close-window"
+			>
+				<ImCross style={{ fontSize: '.8rem' }} />
+			</button>
 
 			<div className="form-login-content">
 				<label className="label-login-panel">Login</label>

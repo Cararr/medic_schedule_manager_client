@@ -167,6 +167,7 @@ export const Vacations: React.FunctionComponent = () => {
 						left: !isMobileDevice ? 'prevYear nextYear' : '',
 						center: 'title',
 					}}
+					stickyHeaderDates={!isMobileDevice}
 					buttonText={buttonsText}
 					events={vacationEvents}
 					eventContent={eventContent}
