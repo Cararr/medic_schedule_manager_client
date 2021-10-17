@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Card.css';
 
 interface Props {
@@ -7,24 +7,20 @@ interface Props {
 	itemName: string;
 	image: string;
 	cardIndex: number;
-	clickedClass: string | boolean;
-	handleCardClick: (index: number) => void;
 }
 
 export const Card: React.FunctionComponent<Props> = (props) => {
 	return (
-		<Link
-			onClick={() => props.handleCardClick(props.cardIndex)}
+		<NavLink
+			activeStyle={{
+				borderStyle: 'dashed',
+				transform: 'translate(+5px, +5px)',
+			}}
 			to={props.pathName}
+			className={`card ${props.itemName === 'Create' && 'card-create'}`}
 		>
-			<figure
-				className={`card ${props.clickedClass} ${
-					props.itemName === 'Create' && 'card-create'
-				}`}
-			>
-				<img alt={`${props.itemName}`} src={props.image} />
-				<figcaption>{props.itemName}</figcaption>
-			</figure>
-		</Link>
+			<img alt={`${props.itemName}`} src={props.image} />
+			<figcaption>{props.itemName}</figcaption>
+		</NavLink>
 	);
 };

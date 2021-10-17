@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card } from './Card';
 import { CardProperties } from '../../types';
 import './CardsContainer.css';
@@ -9,10 +9,6 @@ interface Props {
 }
 
 export const CardsContainer: React.FunctionComponent<Props> = (props) => {
-	const [cardClicked, setCardClicked] = useState<number | null>(null);
-
-	const handleCardClick = (index: number) => setCardClicked(index);
-
 	const cards = props.cards.map((card: CardProperties, index: number) => {
 		if (!card.adminOnly || (card.adminOnly && props.isUserBoss))
 			return (
@@ -22,8 +18,6 @@ export const CardsContainer: React.FunctionComponent<Props> = (props) => {
 					itemName={card.name}
 					image={card.image}
 					cardIndex={index}
-					clickedClass={cardClicked === index && 'card-clicked'}
-					handleCardClick={handleCardClick}
 				/>
 			);
 		return '';

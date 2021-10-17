@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useUser, useChangeUser } from '../../context/userContext';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import './NavBar.css';
@@ -93,14 +93,20 @@ export const NavBar: React.FunctionComponent = () => {
 						className="dropdown-content"
 					>
 						<li className="dropdown-list-item">
-							<Link to="/schedules">Schedules</Link>
+							<NavLink activeClassName="link-active" to="/schedules">
+								Schedules
+							</NavLink>
 						</li>
 						<li className="dropdown-list-item">
-							<Link to="/vacations">Vacations</Link>
+							<NavLink activeClassName="link-active" to="/vacations">
+								Vacations
+							</NavLink>
 						</li>
 						{isUserBoss && !isMobileDevice && (
 							<li className="dropdown-list-item">
-								<Link to="/create">Create</Link>
+								<NavLink activeClassName="link-active" to="/create">
+									Create
+								</NavLink>
 							</li>
 						)}
 					</ul>
@@ -108,7 +114,11 @@ export const NavBar: React.FunctionComponent = () => {
 			)}
 			<h3 className="header-navbar">{`${user?.firstName} ${user?.lastName}`}</h3>
 			<Link style={{ gridColumnStart: 3, justifySelf: 'end' }} to="/">
-				<button onClick={logOut} className="button-generic" type="button">
+				<button
+					onClick={logOut}
+					className="button-generic button-logout"
+					type="button"
+				>
 					Log out
 				</button>
 			</Link>

@@ -109,4 +109,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
 	.main-schedules {
 		width: 100%;
 	}
+	.hide-on-mobile {
+		display: none;
+	}
 }

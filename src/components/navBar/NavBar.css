@@ -50,10 +50,16 @@
 .dropdown-list-item:hover {
 	text-decoration: underline;
 }
+.link-active {
+	text-decoration: underline;
+}
 
 @media only screen and (max-width: 500px) {
 	.navbar {
 		font-size: 1.5rem;
+	}
+	.button-logout {
+		font-size: inherit;
 	}
 	.dropdown-content {
 		width: 100vw;

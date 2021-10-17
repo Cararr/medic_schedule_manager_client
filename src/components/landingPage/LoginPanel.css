@@ -37,6 +37,7 @@
 	display: grid;
 	place-items: center;
 	cursor: pointer;
+	font-size: 0.8rem;
 }
 .container-button-submit-login {
 	height: 1.6rem;
@@ -68,5 +69,8 @@
 	}
 	.button-submit-login {
 		font-size: 1.8rem;
+	}
+	.button-close-window {
+		font-size: 1.2rem;
 	}
 }

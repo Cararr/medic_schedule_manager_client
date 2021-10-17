@@ -31,7 +31,7 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 				type="button"
 				className="button-close-window"
 			>
-				<ImCross style={{ fontSize: '.8rem' }} />
+				<ImCross />
 			</button>
 
 			<div className="form-login-content">
