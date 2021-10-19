@@ -65,7 +65,7 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 		}
 	};
 
-	const user = useUser();
+	const { user } = useUser();
 
 	const isUserBoss = Utilities.checkIfUserIsAdmin(user);
 

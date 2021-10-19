@@ -41,7 +41,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 
 	const [workStageSpans, setworkStageSpans] = useState<WorkStageSpans[]>([]);
 
-	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser());
+	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser().user);
 
 	const isMobileDevice = window.screen.width < 500;
 

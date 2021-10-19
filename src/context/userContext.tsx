@@ -2,13 +2,12 @@ import React, { useState, useContext, ReactNode } from 'react';
 import Cookies from 'js-cookie';
 import { Employee } from '../types';
 
-const UserContext = React.createContext<Employee | null>(null);
-const ChangeUserContext = React.createContext<
-	(newUser?: Employee | null) => void
->((newUser) => {});
+const UserContext = React.createContext<{
+	user: Employee | null;
+	changeUser: (newUser?: Employee | null) => void;
+}>({ user: null, changeUser: () => {} });
 
 export const useUser = () => useContext(UserContext);
-export const useChangeUser = () => useContext(ChangeUserContext);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
 	const currentUser = Cookies.get('user')
@@ -20,10 +19,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 	const changeUser = (newUser: Employee | null = null) => setUser(newUser);
 
 	return (
-		<UserContext.Provider value={user}>
-			<ChangeUserContext.Provider value={changeUser}>
-				{children}
-			</ChangeUserContext.Provider>
+		<UserContext.Provider value={{ user, changeUser }}>
+			{children}
 		</UserContext.Provider>
 	);
 };

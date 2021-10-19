@@ -3,11 +3,15 @@ import Get from '../api/Get';
 import { Employee } from '../types';
 import { useUser } from './userContext';
 
-const EmployeesContext = React.createContext<Employee[]>([]);
-const LoadEmployeesContext = React.createContext(() => {});
+const EmployeesContext = React.createContext<{
+	employees: Employee[];
+	loadEmployees: () => void;
+}>({
+	employees: [],
+	loadEmployees: () => {},
+});
 
 export const useEmployees = () => useContext(EmployeesContext);
-export const useLoadEmployees = () => useContext(LoadEmployeesContext);
 
 export const EmployeesProvider = ({ children }: { children: ReactNode }) => {
 	const [employees, setEmployees] = useState([]);
@@ -15,7 +19,7 @@ export const EmployeesProvider = ({ children }: { children: ReactNode }) => {
 		setEmployees(await Get.employees());
 	};
 
-	const user = useUser();
+	const { user } = useUser();
 
 	useEffect(() => {
 		if (user)
@@ -26,10 +30,8 @@ export const EmployeesProvider = ({ children }: { children: ReactNode }) => {
 	}, [user]);
 
 	return (
-		<EmployeesContext.Provider value={employees}>
-			<LoadEmployeesContext.Provider value={loadEmployees}>
-				{children}
-			</LoadEmployeesContext.Provider>
+		<EmployeesContext.Provider value={{ employees, loadEmployees }}>
+			{children}
 		</EmployeesContext.Provider>
 	);
 };

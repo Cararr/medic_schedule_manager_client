@@ -9,7 +9,7 @@ import Utilities from '../../util/Utilities';
 import './HomePage.css';
 
 export const HomePage: React.FunctionComponent = () => {
-	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser());
+	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser().user);
 
 	const cards = [
 		{

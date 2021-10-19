@@ -3,11 +3,11 @@ import LandingImage from '../../resources/images/LandingImage.png';
 import { LoginPanel } from './LoginPanel';
 import { warningMessage } from '../../WinBox/winboxMessages';
 import { login } from '../../api/login';
-import { useChangeUser } from '../../context/userContext';
-import { useEmployees, useLoadEmployees } from '../../context/employeesContext';
+import { useEmployees } from '../../context/employeesContext';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { UserCrudentials } from '../../types';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { useUser } from '../../context/userContext';
 import './LandingPage.css';
 
 export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
@@ -22,9 +22,8 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 	const handleInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
 		setLoginInputValue((prev) => ({ ...prev, [target.name]: target.value }));
 
-	const changeUser = useChangeUser();
-	const employees = useEmployees();
-	const loadEmployees = useLoadEmployees();
+	const { changeUser } = useUser();
+	const { employees, loadEmployees } = useEmployees();
 
 	const handleLogin = async (e: React.SyntheticEvent) => {
 		e.preventDefault();

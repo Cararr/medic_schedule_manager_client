@@ -25,7 +25,7 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 		e.stopPropagation();
 	};
 
-	const employees = useEmployees();
+	const { employees } = useEmployees();
 	const employeesList = employees?.map((employee) => {
 		const fontColor = returnFontColorByOccurence(
 			countOccurrences(

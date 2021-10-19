@@ -7,7 +7,7 @@ export const LoggedUsersRoute = ({
 	component: Component,
 	...rest
 }: RoutingProperties) => {
-	const user = useUser();
+	const { user } = useUser();
 	return (
 		<Route
 			{...rest}

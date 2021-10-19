@@ -6,7 +6,7 @@ import { warningMessage } from '../../WinBox/winboxMessages';
 import { CreateHomeRehabilitationForm } from '../../types';
 
 export const CreateHomeRehabilitation: React.FunctionComponent = () => {
-	const employees = useEmployees();
+	const { employees } = useEmployees();
 	const [formValues, setFormValues] = useState<CreateHomeRehabilitationForm>(
 		returnEmptyForm()
 	);

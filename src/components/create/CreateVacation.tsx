@@ -7,7 +7,7 @@ import { CreateVacationForm } from '../../types';
 import './Create.css';
 
 export const CreateVacation: React.FunctionComponent = () => {
-	const employees = useEmployees();
+	const { employees } = useEmployees();
 	const [formValues, setFormValues] = useState<CreateVacationForm>(
 		returnEmptyForm()
 	);

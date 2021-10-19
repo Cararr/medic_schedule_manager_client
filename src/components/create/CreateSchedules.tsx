@@ -34,7 +34,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 
 	const [isLoading, setIsLoading] = useState(false);
 
-	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser());
+	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser().user);
 
 	useEffect(() => {
 		Get.workStageSpans().then((stages) => setworkStageSpans(stages));

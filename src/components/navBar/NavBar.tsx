@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useUser, useChangeUser } from '../../context/userContext';
+import { useUser } from '../../context/userContext';
 import { Link, NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { RiArrowDropDownLine } from 'react-icons/ri';
@@ -13,9 +13,8 @@ export const NavBar: React.FunctionComponent = () => {
 
 	const isMobileDevice = window.screen.width < 500;
 
-	const user = useUser();
+	const { user, changeUser } = useUser();
 	const isUserBoss = Utilities.checkIfUserIsAdmin(user);
-	const changeUser = useChangeUser();
 	const logOut = () => {
 		changeUser();
 		Cookies.remove('user');

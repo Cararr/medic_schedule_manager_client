@@ -57,7 +57,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 			);
 	}
 
-	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser());
+	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser().user);
 	const isLoading = !Boolean(props.workStageSpans?.length);
 	const loading = (
 		<CgSpinner

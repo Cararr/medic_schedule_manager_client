@@ -115,7 +115,7 @@ export const Vacations: React.FunctionComponent = () => {
 		eventInfo.revert();
 	};
 
-	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser());
+	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser().user);
 
 	const eventContent = (eventContentArg: EventContentArg) => (
 		<div className="calendar-event">
