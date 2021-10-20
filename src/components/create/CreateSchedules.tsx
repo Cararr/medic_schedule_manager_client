@@ -5,7 +5,7 @@ import { EmployeesList } from '../schedulesView/EmployeesList';
 import { Tables } from '../tables/Tables';
 import { ControlPanel } from '../tables/ControlPanel';
 import Utilities from '../../util/Utilities';
-import { useUser } from '../../context/userContext';
+import { useUser } from '../../providers/userContext';
 import {
 	Employee,
 	WorkStageSpans,

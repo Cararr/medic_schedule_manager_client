@@ -69,8 +69,8 @@ export default class Utilities {
 		}
 	}
 
-	static blackOrWhiteFontForContrast(backgroundColorHex: string) {
-		//Int values below were found on StackOverflow, i guess they are some color const, dunno
+	static matchFontColorToBackground(backgroundColorHex: string) {
+		// float values were found on StackOverflow, i guess they are some color const, dunno
 		return (
 			[
 				0.299 * parseInt(backgroundColorHex.slice(1, 3), 16),

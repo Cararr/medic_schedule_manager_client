@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUser } from '../../context/userContext';
+import { useUser } from '../../providers/userContext';
 import { Employee, HomeRehabilitation, Comment } from '../../types';
 import Utilities from '../../util/Utilities';
 import './TableCell.css';

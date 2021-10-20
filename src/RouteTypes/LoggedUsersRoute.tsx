@@ -1,5 +1,5 @@
 import { Route, Redirect } from 'react-router-dom';
-import { useUser } from '../context/userContext';
+import { useUser } from '../providers/userContext';
 import { warningMessage } from '../WinBox/winboxMessages';
 import { RoutingProperties } from '../types';
 

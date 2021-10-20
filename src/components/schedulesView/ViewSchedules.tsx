@@ -9,7 +9,7 @@ import { ControlPanel } from '../tables/ControlPanel';
 import { NavBar } from '../navBar/NavBar';
 import { SelectDate } from './SelectDate';
 import Utilities from '../../util/Utilities';
-import { useUser } from '../../context/userContext';
+import { useUser } from '../../providers/userContext';
 import { warningMessage, tipsWinbox } from '../../WinBox/winboxMessages';
 import {
 	Employee,

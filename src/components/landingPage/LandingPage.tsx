@@ -3,11 +3,11 @@ import LandingImage from '../../resources/images/LandingImage.png';
 import { LoginPanel } from './LoginPanel';
 import { warningMessage } from '../../WinBox/winboxMessages';
 import { login } from '../../api/login';
-import { useEmployees } from '../../context/employeesContext';
+import { useEmployees } from '../../providers/employeesContext';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { UserCrudentials } from '../../types';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { useUser } from '../../context/userContext';
+import { useUser } from '../../providers/userContext';
 import './LandingPage.css';
 
 export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({

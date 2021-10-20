@@ -1,5 +1,5 @@
 import React, { DragEvent } from 'react';
-import { useEmployees } from '../../context/employeesContext';
+import { useEmployees } from '../../providers/employeesContext';
 import {
 	StationSchedules,
 	Employee,

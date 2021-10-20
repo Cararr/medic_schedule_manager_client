@@ -19,7 +19,7 @@ import { Vacation } from '../../types';
 import { TiDelete } from 'react-icons/ti';
 import Delete from '../../api/Delete';
 import { warningMessage } from '../../WinBox/winboxMessages';
-import { useUser } from '../../context/userContext';
+import { useUser } from '../../providers/userContext';
 
 export const Vacations: React.FunctionComponent = () => {
 	const currentYear = new Date().getFullYear();
@@ -39,7 +39,7 @@ export const Vacations: React.FunctionComponent = () => {
 						employee: vacation.employee,
 						title: `${vacation.employee.firstName} ${vacation.employee.lastName}`,
 						color: Utilities.returnColorPerEmployee(vacation.employee.lastName),
-						textColor: Utilities.blackOrWhiteFontForContrast(
+						textColor: Utilities.matchFontColorToBackground(
 							Utilities.returnColorPerEmployee(vacation.employee.lastName)
 						)
 							? 'black'
