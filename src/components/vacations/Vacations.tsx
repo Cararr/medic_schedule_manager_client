@@ -22,7 +22,8 @@ import { warningMessage } from '../../WinBox/winboxMessages';
 import { useUser } from '../../context/userContext';
 
 export const Vacations: React.FunctionComponent = () => {
-	const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+	const currentYear = new Date().getFullYear();
+	const [selectedYear, setSelectedYear] = useState(currentYear);
 	const [vacationEvents, setVacationEvents] = useState<EventInput[]>([]);
 
 	const isMobileDevice = window.screen.width < 500;
@@ -166,6 +167,10 @@ export const Vacations: React.FunctionComponent = () => {
 					headerToolbar={{
 						left: !isMobileDevice ? 'prevYear nextYear' : '',
 						center: 'title',
+					}}
+					titleFormat={{
+						year: currentYear === selectedYear ? undefined : 'numeric',
+						month: 'long',
 					}}
 					stickyHeaderDates={!isMobileDevice}
 					buttonText={buttonsText}
