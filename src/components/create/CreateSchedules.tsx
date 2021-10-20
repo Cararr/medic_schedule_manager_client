@@ -5,7 +5,7 @@ import { EmployeesList } from '../schedulesView/EmployeesList';
 import { Tables } from '../tables/Tables';
 import { ControlPanel } from '../tables/ControlPanel';
 import Utilities from '../../util/Utilities';
-import { useUser } from '../../providers/userContext';
+import { useUser } from '../../providers/UserContext';
 import {
 	Employee,
 	WorkStageSpans,
@@ -15,7 +15,7 @@ import {
 import {
 	createdMessage,
 	tipsWinbox,
-	warningMessage,
+	errorMessage,
 } from '../../WinBox/winboxMessages';
 
 export const CreateSchedules: React.FunctionComponent = () => {
@@ -67,7 +67,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 	const createSchedules = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		if (!Utilities.checkIfEndDateIsAfterBegin(dateForm.from, dateForm.to))
-			return warningMessage(
+			return errorMessage(
 				'Invalid date!',
 				'End date cannot come before the beginning!',
 				170,
@@ -84,7 +84,7 @@ export const CreateSchedules: React.FunctionComponent = () => {
 
 		response?.ok
 			? createdMessage()
-			: warningMessage(
+			: errorMessage(
 					'Action aborted!',
 					'Something went wrong, please try again later!',
 					170

@@ -4,7 +4,7 @@ import VacationsImage from '../../resources/images/VacationsImage.png';
 import CreateImage from '../../resources/images/CreateImage.png';
 import { NavBar } from '../navBar/NavBar';
 import { CardsContainer } from '../cardsContainer/CardsContainer';
-import { useUser } from '../../providers/userContext';
+import { useUser } from '../../providers/UserContext';
 import Utilities from '../../util/Utilities';
 import './HomePage.css';
 

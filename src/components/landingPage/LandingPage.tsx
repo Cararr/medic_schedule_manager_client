@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import LandingImage from '../../resources/images/LandingImage.png';
 import { LoginPanel } from './LoginPanel';
-import { warningMessage } from '../../WinBox/winboxMessages';
+import { errorMessage } from '../../WinBox/winboxMessages';
 import { login } from '../../api/login';
-import { useEmployees } from '../../providers/employeesContext';
+import { useEmployees } from '../../providers/EmployeesContext';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { UserCrudentials } from '../../types';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { useUser } from '../../providers/userContext';
+import { useUser } from '../../providers/UserContext';
 import './LandingPage.css';
 
 export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
@@ -39,7 +39,7 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 			history.push('/home');
 		} else {
 			setLoginInputValue(returnEmptyLoginValues());
-			warningMessage(
+			errorMessage(
 				'Login failed',
 				loginReponse?.message || 'Something went wrong, please try again later!'
 			);

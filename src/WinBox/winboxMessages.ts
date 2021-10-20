@@ -10,7 +10,7 @@ const genericSettings = {
 	class: 'no-full no-max no-min modern',
 };
 
-export const warningMessage = (
+export const errorMessage = (
 	title: string,
 	message: string,
 	y: string | number = 'center',

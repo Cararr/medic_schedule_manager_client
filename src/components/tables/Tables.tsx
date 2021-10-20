@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { Table } from './Table';
 import { HomeRehabilitations } from '../schedulesView/HomeRehabilitationsView';
-import { useUser } from '../../providers/userContext';
+import { useUser } from '../../providers/UserContext';
 import Utilities from '../../util/Utilities';
 import {
 	Schedules,

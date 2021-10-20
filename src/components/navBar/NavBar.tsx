@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useUser } from '../../providers/userContext';
+import { useUser } from '../../providers/UserContext';
 import { Link, NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { RiArrowDropDownLine } from 'react-icons/ri';

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react';
-import { useEmployees } from '../../providers/employeesContext';
+import { useEmployees } from '../../providers/EmployeesContext';
 import Post from '../../api/Post';
 import Utilities from '../../util/Utilities';
-import { warningMessage } from '../../WinBox/winboxMessages';
+import { errorMessage } from '../../WinBox/winboxMessages';
 import { CreateHomeRehabilitationForm } from '../../types';
 
 export const CreateHomeRehabilitation: React.FunctionComponent = () => {
@@ -42,7 +42,7 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 	const handleSubmit = async (e: SyntheticEvent) => {
 		e.preventDefault();
 		if (!Utilities.checkIfEndDateIsAfterBegin(formValues.from, formValues.to))
-			return warningMessage(
+			return errorMessage(
 				'Invalid date!',
 				'End date cannot come before the beginning!',
 				170,

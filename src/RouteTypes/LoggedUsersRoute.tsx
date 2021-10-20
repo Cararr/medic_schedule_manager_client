@@ -1,6 +1,6 @@
 import { Route, Redirect } from 'react-router-dom';
-import { useUser } from '../providers/userContext';
-import { warningMessage } from '../WinBox/winboxMessages';
+import { useUser } from '../providers/UserContext';
+import { errorMessage } from '../WinBox/winboxMessages';
 import { RoutingProperties } from '../types';
 
 export const LoggedUsersRoute = ({
@@ -15,7 +15,7 @@ export const LoggedUsersRoute = ({
 				if (user) return <Component {...props} />;
 				else {
 					setTimeout(() => {
-						warningMessage(
+						errorMessage(
 							'Access denied!',
 							'You must be logged to access this page!'
 						);

@@ -9,8 +9,8 @@ import { ControlPanel } from '../tables/ControlPanel';
 import { NavBar } from '../navBar/NavBar';
 import { SelectDate } from './SelectDate';
 import Utilities from '../../util/Utilities';
-import { useUser } from '../../providers/userContext';
-import { warningMessage, tipsWinbox } from '../../WinBox/winboxMessages';
+import { useUser } from '../../providers/UserContext';
+import { errorMessage, tipsWinbox } from '../../WinBox/winboxMessages';
 import {
 	Employee,
 	Schedules,
@@ -131,7 +131,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 	const saveScheudles = async () => {
 		for (const homeRehabilitation of schedules.homeRehabilitations) {
 			if (!homeRehabilitation.employee)
-				return warningMessage(
+				return errorMessage(
 					'Employee is missing',
 					'An employee must be present at home rehabilitation!',
 					170
@@ -228,7 +228,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 				),
 			}));
 		} else {
-			return warningMessage(
+			return errorMessage(
 				'Action aborted!',
 				'Something went wrong, please try again later!',
 				170

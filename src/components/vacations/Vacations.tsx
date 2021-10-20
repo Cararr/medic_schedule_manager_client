@@ -18,8 +18,8 @@ import Utilities from '../../util/Utilities';
 import { Vacation } from '../../types';
 import { TiDelete } from 'react-icons/ti';
 import Delete from '../../api/Delete';
-import { warningMessage } from '../../WinBox/winboxMessages';
-import { useUser } from '../../providers/userContext';
+import { errorMessage } from '../../WinBox/winboxMessages';
+import { useUser } from '../../providers/UserContext';
 
 export const Vacations: React.FunctionComponent = () => {
 	const currentYear = new Date().getFullYear();
@@ -75,7 +75,7 @@ export const Vacations: React.FunctionComponent = () => {
 				prev.filter((vacation) => vacation.id !== event._def.publicId)
 			);
 		} else
-			warningMessage(
+			errorMessage(
 				'Action aborted!',
 				'Something went wrong, please try again later!',
 				170
