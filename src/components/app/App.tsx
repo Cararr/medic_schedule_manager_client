@@ -1,17 +1,17 @@
 import React from 'react';
-import { AppProviders } from '../../providers/AppProviders';
+import { AppProviders } from 'providers/AppProviders';
 import { Route } from 'react-router-dom';
-import { LoggedUsersRoute } from '../../RouteTypes/LoggedUsersRoute';
-import { NonLoggedUsersRoute } from '../../RouteTypes/NonLoggedUsersRoute';
-import { AdminRoute } from '../../RouteTypes/AdminRoute';
-import { ViewSchedules } from '../schedulesView/ViewSchedules';
+import { LoggedUsersRoute } from 'RouteTypes/LoggedUsersRoute';
+import { NonLoggedUsersRoute } from 'RouteTypes/NonLoggedUsersRoute';
+import { AdminRoute } from 'RouteTypes/AdminRoute';
+import { ViewSchedules } from 'components/schedulesView/ViewSchedules';
 import './App.css';
-import { LandingPage } from '../landingPage/LandingPage';
-import { HomePage } from '../homePage/HomePage';
-import { Create } from '../create/Create';
-import { Vacations } from '../vacations/Vacations';
-import { NotFound } from '../notFound/NotFound';
-import '../../WinBox/winBox.css';
+import { LandingPage } from 'components/landingPage/LandingPage';
+import { HomePage } from 'components/homePage/HomePage';
+import { Create } from 'components/create/Create';
+import { Vacations } from 'components/vacations/Vacations';
+import { NotFound } from 'components/notFound/NotFound';
+import 'WinBox/winBox.css';
 
 const App: React.FunctionComponent = () => {
 	return (

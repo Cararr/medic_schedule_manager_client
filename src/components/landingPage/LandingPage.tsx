@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import LandingImage from '../../resources/images/LandingImage.png';
+import LandingImage from 'resources/images/LandingImage.png';
 import { LoginPanel } from './LoginPanel';
-import { errorMessage } from '../../WinBox/winboxMessages';
-import { login } from '../../api/login';
-import { useEmployees } from '../../providers/EmployeesContext';
+import { errorMessage } from 'WinBox/winboxMessages';
+import { login } from 'api/login';
+import { useEmployees } from 'providers/EmployeesContext';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { UserCrudentials } from '../../types';
+import { UserCrudentials } from 'types';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { useUser } from '../../providers/UserContext';
+import { useUser } from 'providers/UserContext';
 import './LandingPage.css';
 
 export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({

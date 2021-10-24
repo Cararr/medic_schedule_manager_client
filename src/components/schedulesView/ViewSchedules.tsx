@@ -1,23 +1,23 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import Get from '../../api/Get';
-import Post from '../../api/Post';
-import Put from '../../api/Put';
-import Delete from '../../api/Delete';
+import Get from 'api/Get';
+import Post from 'api/Post';
+import Put from 'api/Put';
+import Delete from 'api/Delete';
 import { EmployeesList } from './EmployeesList';
-import { Tables } from '../tables/Tables';
-import { ControlPanel } from '../tables/ControlPanel';
-import { NavBar } from '../navBar/NavBar';
+import { Tables } from 'components/tables/Tables';
+import { ControlPanel } from 'components/tables/ControlPanel';
+import { NavBar } from 'components/navBar/NavBar';
 import { SelectDate } from './SelectDate';
-import Utilities from '../../util/Utilities';
-import { useUser } from '../../providers/UserContext';
-import { errorMessage, tipsWinbox } from '../../WinBox/winboxMessages';
+import Utilities from 'util/Utilities';
+import { useUser } from 'providers/UserContext';
+import { errorMessage, tipsWinbox } from 'WinBox/winboxMessages';
 import {
 	Employee,
 	Schedules,
 	HomeRehabilitation,
 	WorkStageSpans,
 	Comment,
-} from '../../types';
+} from 'types';
 import { cloneDeep } from 'lodash';
 
 export const ViewSchedules: React.FunctionComponent = () => {

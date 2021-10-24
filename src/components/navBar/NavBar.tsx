@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useUser } from '../../providers/UserContext';
+import { useUser } from 'providers/UserContext';
 import { Link, NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import './NavBar.css';
-import Utilities from '../../util/Utilities';
+import Utilities from 'util/Utilities';
 
 export const NavBar: React.FunctionComponent = () => {
 	const [isNavBarTransparent, setIsNavBarTransparent] = useState(true);

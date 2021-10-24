@@ -26,6 +26,6 @@
 }
 .winbox.min .wb-min {
 	display: inline-block !important;
-	background-image: url('../resources/images/MaximizeIcon.png');
+	background-image: url('resources/images/MaximizeIcon.png');
 	background-position: center;
 }

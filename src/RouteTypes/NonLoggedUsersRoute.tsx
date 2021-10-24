@@ -1,6 +1,6 @@
 import { Route, Redirect } from 'react-router-dom';
-import { useUser } from '../providers/UserContext';
-import { RoutingProperties } from '../types';
+import { useUser } from 'providers/UserContext';
+import { RoutingProperties } from 'types';
 
 export const NonLoggedUsersRoute = ({
 	component: Component,

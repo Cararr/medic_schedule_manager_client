@@ -7,7 +7,7 @@ import {
 	StationName,
 	HomeRehabilitation,
 	Comment,
-} from '../../types';
+} from 'types';
 
 interface Props {
 	stationName: string;

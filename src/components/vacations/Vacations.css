@@ -1,7 +1,7 @@
 .main-calendar {
 	width: 100%;
 	margin-top: 2rem;
-	background-image: url('../../resources/images/CalendarBackground.png');
+	background-image: url('resources/images/CalendarBackground.png');
 	border-top: 1px dotted black;
 	border-bottom: 1px dotted black;
 	padding: 1rem;

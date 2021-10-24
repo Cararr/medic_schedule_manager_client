@@ -1,6 +1,6 @@
 import React, { useState, useContext, ReactNode } from 'react';
 import Cookies from 'js-cookie';
-import { Employee } from '../types';
+import { Employee } from 'types';
 
 const UserContext = React.createContext<{
 	user: Employee | null;

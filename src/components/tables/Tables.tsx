@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import { Table } from './Table';
-import { HomeRehabilitations } from '../schedulesView/HomeRehabilitationsView';
-import { useUser } from '../../providers/UserContext';
-import Utilities from '../../util/Utilities';
+import { HomeRehabilitations } from 'components/schedulesView/HomeRehabilitationsView';
+import { useUser } from 'providers/UserContext';
+import Utilities from 'util/Utilities';
 import {
 	Schedules,
 	StationName,
@@ -10,7 +10,7 @@ import {
 	Employee,
 	HomeRehabilitation,
 	Comment,
-} from '../../types';
+} from 'types';
 import './Tables.css';
 import { CgSpinner } from 'react-icons/cg';
 

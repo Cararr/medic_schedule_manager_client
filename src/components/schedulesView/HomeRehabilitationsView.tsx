@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
-import { TableCell } from '../tables/TableCell';
-import Utilities from '../../util/Utilities';
-import { HomeRehabilitation, Employee, Comment } from '../../types';
+import { TableCell } from 'components/tables/TableCell';
+import Utilities from 'util/Utilities';
+import { HomeRehabilitation, Employee, Comment } from 'types';
 import './HomeRehabilitationsView.css';
 import { BsTrash } from 'react-icons/bs';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserCrudentials } from '../../types';
+import { UserCrudentials } from 'types';
 import './LoginPanel.css';
 import { ImCross } from 'react-icons/im';
 import { CgSpinner } from 'react-icons/cg';

@@ -1,4 +1,4 @@
-import { PATH } from '../config.json';
+import { PATH } from 'config.json';
 
 export const login = async (inputValues: {}) => {
 	try {

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react';
-import { useEmployees } from '../../providers/EmployeesContext';
-import Post from '../../api/Post';
-import Utilities from '../../util/Utilities';
-import { errorMessage } from '../../WinBox/winboxMessages';
-import { CreateHomeRehabilitationForm } from '../../types';
+import { useEmployees } from 'providers/EmployeesContext';
+import Post from 'api/Post';
+import Utilities from 'util/Utilities';
+import { errorMessage } from 'WinBox/winboxMessages';
+import { CreateHomeRehabilitationForm } from 'types';
 
 export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 	const { employees } = useEmployees();

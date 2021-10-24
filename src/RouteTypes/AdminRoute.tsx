@@ -1,8 +1,8 @@
 import { Route, Redirect } from 'react-router-dom';
-import { useUser } from '../providers/UserContext';
-import { errorMessage } from '../WinBox/winboxMessages';
-import Utilities from '../util/Utilities';
-import { RoutingProperties } from '../types';
+import { useUser } from 'providers/UserContext';
+import { errorMessage } from 'WinBox/winboxMessages';
+import Utilities from 'util/Utilities';
+import { RoutingProperties } from 'types';
 
 export const AdminRoute = ({
 	component: Component,

@@ -1,9 +1,9 @@
 import React from 'react';
-import SchedulesImage from '../../resources/images/SchedulesImage.png';
-import VacationsImage from '../../resources/images/VacationsImage.png';
-import HomeImage from '../../resources/images/HomeImage.png';
-import { NavBar } from '../navBar/NavBar';
-import { CardsContainer } from '../cardsContainer/CardsContainer';
+import SchedulesImage from 'resources/images/SchedulesImage.png';
+import VacationsImage from 'resources/images/VacationsImage.png';
+import HomeImage from 'resources/images/HomeImage.png';
+import { NavBar } from 'components/navBar/NavBar';
+import { CardsContainer } from 'components/cardsContainer/CardsContainer';
 import { CreateSchedules } from './CreateSchedules';
 import { CreateVacation } from './CreateVacation';
 import { CreateHomeRehabilitation } from './CreateHomeRehabilitation';

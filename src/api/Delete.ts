@@ -1,5 +1,5 @@
-import { PATH } from '../config.json';
-import { HomeRehabilitation, Comment } from '../types';
+import { PATH } from 'config.json';
+import { HomeRehabilitation, Comment } from 'types';
 
 export default class Delete {
 	static homeRehabilitation = async (

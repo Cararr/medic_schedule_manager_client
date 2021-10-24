@@ -1,11 +1,6 @@
 import React, { DragEvent } from 'react';
-import { useEmployees } from '../../providers/EmployeesContext';
-import {
-	StationSchedules,
-	Employee,
-	HomeRehabilitation,
-	Comment,
-} from '../../types';
+import { useEmployees } from 'providers/EmployeesContext';
+import { StationSchedules, Employee, HomeRehabilitation, Comment } from 'types';
 import './EmployeesList.css';
 
 interface Props {

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, ReactNode } from 'react';
-import Get from '../api/Get';
-import { Employee } from '../types';
+import Get from 'api/Get';
+import { Employee } from 'types';
 import { useUser } from './UserContext';
 
 const EmployeesContext = React.createContext<{

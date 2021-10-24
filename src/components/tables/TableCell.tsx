@@ -1,7 +1,7 @@
 import React from 'react';
-import { useUser } from '../../providers/UserContext';
-import { Employee, HomeRehabilitation, Comment } from '../../types';
-import Utilities from '../../util/Utilities';
+import { useUser } from 'providers/UserContext';
+import { Employee, HomeRehabilitation, Comment } from 'types';
+import Utilities from 'util/Utilities';
 import './TableCell.css';
 
 interface Props {

@@ -1,11 +1,11 @@
 import React from 'react';
-import SchedulesImage from '../../resources/images/SchedulesImage.png';
-import VacationsImage from '../../resources/images/VacationsImage.png';
-import CreateImage from '../../resources/images/CreateImage.png';
-import { NavBar } from '../navBar/NavBar';
-import { CardsContainer } from '../cardsContainer/CardsContainer';
-import { useUser } from '../../providers/UserContext';
-import Utilities from '../../util/Utilities';
+import SchedulesImage from 'resources/images/SchedulesImage.png';
+import VacationsImage from 'resources/images/VacationsImage.png';
+import CreateImage from 'resources/images/CreateImage.png';
+import { NavBar } from 'components/navBar/NavBar';
+import { CardsContainer } from 'components/cardsContainer/CardsContainer';
+import { useUser } from 'providers/UserContext';
+import Utilities from 'util/Utilities';
 import './HomePage.css';
 
 export const HomePage: React.FunctionComponent = () => {

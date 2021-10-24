@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import Utilities from '../../util/Utilities';
+import Utilities from 'util/Utilities';
 import './SelectDate.css';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 

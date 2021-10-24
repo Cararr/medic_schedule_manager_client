@@ -1,4 +1,4 @@
-import { Employee, Comment, StationSchedules } from '../types';
+import { Employee, Comment, StationSchedules } from 'types';
 
 export default class Utilities {
 	static formatDateString(date: Date) {

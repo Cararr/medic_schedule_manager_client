@@ -1,9 +1,9 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react';
-import { useEmployees } from '../../providers/EmployeesContext';
-import Post from '../../api/Post';
-import Utilities from '../../util/Utilities';
-import { errorMessage } from '../../WinBox/winboxMessages';
-import { CreateVacationForm } from '../../types';
+import { useEmployees } from 'providers/EmployeesContext';
+import Post from 'api/Post';
+import Utilities from 'util/Utilities';
+import { errorMessage } from 'WinBox/winboxMessages';
+import { CreateVacationForm } from 'types';
 import './Create.css';
 
 export const CreateVacation: React.FunctionComponent = () => {

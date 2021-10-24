@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { DateForm } from '../../types';
+import { DateForm } from 'types';
 import './ControlPanel.css';
 import { CgSpinner } from 'react-icons/cg';
 

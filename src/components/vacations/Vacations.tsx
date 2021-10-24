@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavBar } from '../navBar/NavBar';
+import { NavBar } from 'components/navBar/NavBar';
 import './Vacations.css';
 import FullCalendar, {
 	DatesSetArg,
@@ -12,14 +12,14 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, {
 	EventResizeDoneArg,
 } from '@fullcalendar/interaction';
-import Get from '../../api/Get';
-import Put from '../../api/Put';
-import Utilities from '../../util/Utilities';
-import { Vacation } from '../../types';
+import Get from 'api/Get';
+import Put from 'api/Put';
+import Utilities from 'util/Utilities';
+import { Vacation } from 'types';
 import { TiDelete } from 'react-icons/ti';
-import Delete from '../../api/Delete';
-import { errorMessage } from '../../WinBox/winboxMessages';
-import { useUser } from '../../providers/UserContext';
+import Delete from 'api/Delete';
+import { errorMessage } from 'WinBox/winboxMessages';
+import { useUser } from 'providers/UserContext';
 
 export const Vacations: React.FunctionComponent = () => {
 	const currentYear = new Date().getFullYear();

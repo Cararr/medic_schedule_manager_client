@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from './Card';
-import { CardProperties } from '../../types';
+import { CardProperties } from 'types';
 import './CardsContainer.css';
 
 interface Props {
