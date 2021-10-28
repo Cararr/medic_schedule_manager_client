@@ -1,6 +1,5 @@
 import React from 'react';
 import { TableCell } from './TableCell';
-import './Table.css';
 import {
 	WorkStageSpans,
 	Employee,
@@ -8,6 +7,7 @@ import {
 	HomeRehabilitation,
 	Comment,
 } from 'types';
+import globalStyles from 'globalStyles.module.scss';
 
 interface Props {
 	stationName: string;
@@ -28,14 +28,14 @@ interface Props {
 
 export const Table: React.FunctionComponent<Props> = (props) => {
 	return (
-		<table className="table-station">
+		<table className={globalStyles.table}>
 			<thead>
 				<tr>
 					{props.stationName === StationName.WIZYTY
 						? [invisibleCell(0), invisibleCell(1)]
 						: undefined}
 					<td
-						className="table-title"
+						className={globalStyles.tableTitle}
 						colSpan={props.stationName === StationName.WIZYTY ? 1 : 4}
 					>
 						{props.stationName.toLocaleLowerCase()}

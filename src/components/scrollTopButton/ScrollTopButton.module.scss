@@ -1,4 +1,4 @@
-.scroll-top {
+.container {
 	background-color: var(--backgroundOrange);
 	position: fixed;
 	bottom: 1rem;
@@ -11,10 +11,10 @@
 	opacity: 0.6;
 	transition: ease-in-out 0.1s opacity;
 }
-.scroll-top:hover {
+.container:hover {
 	opacity: 1;
 }
-.icon-scroll-top {
+.icon {
 	color: var(--fontColor);
 	width: 3rem;
 	height: 3rem;

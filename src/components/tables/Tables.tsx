@@ -11,8 +11,9 @@ import {
 	HomeRehabilitation,
 	Comment,
 } from 'types';
-import './Tables.css';
 import { CgSpinner } from 'react-icons/cg';
+import styles from './tables.module.scss';
+import globalStyles from 'globalStyles.module.scss';
 
 interface Props {
 	schedules: Schedules;
@@ -61,7 +62,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 	const isLoading = !Boolean(props.workStageSpans?.length);
 	const loading = (
 		<CgSpinner
-			className="spin"
+			className={globalStyles.spin}
 			style={{
 				marginTop: '4rem',
 				fontSize: '6rem',
@@ -73,7 +74,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 	return isLoading ? (
 		loading
 	) : (
-		<section className="section-tables">
+		<>
 			{tables}
 			{props.schedules.homeRehabilitations &&
 				props.schedules.homeRehabilitations.length !== 0 &&
@@ -95,11 +96,11 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 			{props.handleCommentChanges &&
 				(props.schedules.comment?.content || isUserBoss) && (
 					<article
-						className={`article-comments ${
-							!props.schedules.comment?.content ? 'not-printable' : ''
+						className={`${styles.informations} ${
+							!props.schedules.comment?.content ? globalStyles.notPrintable : ''
 						}`}
 					>
-						<header className="header-comments">
+						<header className={styles.informationsHeader}>
 							<h3>Informacje</h3>
 						</header>
 						<textarea
@@ -108,11 +109,11 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 							value={props.schedules.comment?.content}
 							onChange={props.handleCommentChanges}
 							readOnly={!isUserBoss}
-							className="textarea-comments"
+							className={styles.informationsContent}
 						/>
 					</article>
 				)}
-		</section>
+		</>
 	);
 };
 

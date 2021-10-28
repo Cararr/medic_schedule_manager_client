@@ -1,12 +1,11 @@
 import React from 'react';
-import SchedulesImage from 'resources/images/SchedulesImage.png';
-import VacationsImage from 'resources/images/VacationsImage.png';
-import CreateImage from 'resources/images/CreateImage.png';
+import SchedulesImage from 'assets/images/SchedulesImage.png';
+import VacationsImage from 'assets/images/VacationsImage.png';
+import CreateImage from 'assets/images/CreateImage.png';
 import { NavBar } from 'components/navBar/NavBar';
 import { CardsContainer } from 'components/cardsContainer/CardsContainer';
 import { useUser } from 'providers/UserContext';
 import Utilities from 'util/Utilities';
-import './HomePage.css';
 
 export const HomePage: React.FunctionComponent = () => {
 	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser().user);
@@ -31,9 +30,9 @@ export const HomePage: React.FunctionComponent = () => {
 	];
 
 	return (
-		<div>
+		<>
 			<NavBar />
 			<CardsContainer isUserBoss={isUserBoss} cards={cards} />
-		</div>
+		</>
 	);
 };

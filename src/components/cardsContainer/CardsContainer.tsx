@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from './Card';
 import { CardProperties } from 'types';
-import './CardsContainer.css';
+import styles from './cardsContainer.module.scss';
 
 interface Props {
 	cards: CardProperties[];
@@ -23,5 +23,5 @@ export const CardsContainer: React.FunctionComponent<Props> = (props) => {
 		return '';
 	});
 
-	return <section className="container-card">{cards}</section>;
+	return <section className={styles.container}>{cards}</section>;
 };

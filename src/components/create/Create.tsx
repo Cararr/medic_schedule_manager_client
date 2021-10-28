@@ -1,14 +1,14 @@
 import React from 'react';
-import SchedulesImage from 'resources/images/SchedulesImage.png';
-import VacationsImage from 'resources/images/VacationsImage.png';
-import HomeImage from 'resources/images/HomeImage.png';
+import SchedulesImage from 'assets/images/SchedulesImage.png';
+import VacationsImage from 'assets/images/VacationsImage.png';
+import HomeImage from 'assets/images/HomeImage.png';
 import { NavBar } from 'components/navBar/NavBar';
 import { CardsContainer } from 'components/cardsContainer/CardsContainer';
 import { CreateSchedules } from './CreateSchedules';
 import { CreateVacation } from './CreateVacation';
 import { CreateHomeRehabilitation } from './CreateHomeRehabilitation';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import './Create.css';
+import styles from './create.module.scss';
 
 export const Create: React.FunctionComponent = () => {
 	const { path } = useRouteMatch();
@@ -32,9 +32,9 @@ export const Create: React.FunctionComponent = () => {
 	];
 
 	return (
-		<div>
+		<>
 			<NavBar />
-			<h1 className="title-create">What would you like to create?</h1>
+			<h1 className={styles.createHeader}>What would you like to create?</h1>
 			<CardsContainer cards={cards} />
 			<Switch>
 				<Route exact path={`${path}/schedules`}>
@@ -47,6 +47,6 @@ export const Create: React.FunctionComponent = () => {
 					<CreateHomeRehabilitation />
 				</Route>
 			</Switch>
-		</div>
+		</>
 	);
 };

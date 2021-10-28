@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CgArrowUpR } from 'react-icons/cg';
-import './ScrollTopButton.css';
+import styles from './ScrollTopButton.module.scss';
+import globalStyles from 'globalStyles.module.scss';
 
 export const ScrollTopButton: React.FunctionComponent = () => {
 	const [showButton, setShowButton] = useState(false);
@@ -25,9 +26,9 @@ export const ScrollTopButton: React.FunctionComponent = () => {
 				display: showButton ? 'initial' : 'none',
 			}}
 			onClick={scrollTop}
-			className="scroll-top"
+			className={`${styles.container} ${globalStyles.notPrintable}`}
 		>
-			<CgArrowUpR className="icon-scroll-top" />
+			<CgArrowUpR className={styles.icon} />
 		</div>
 	);
 };

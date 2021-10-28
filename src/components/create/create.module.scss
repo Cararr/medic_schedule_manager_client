@@ -1,8 +1,8 @@
-.title-create {
+.createHeader {
 	text-align: center;
 	width: 100%;
 }
-.section-create {
+.section {
 	background-color: var(--backgroundYellow);
 	border: 3px solid black;
 	border-radius: 5px;
@@ -11,43 +11,42 @@
 	padding: 0.5rem;
 	position: relative;
 }
-.response-create {
+.header {
+	text-align: center;
+	margin: 0.5rem 0;
+}
+.response {
 	text-align: center;
 	font-size: 2rem;
 }
-.response-create button {
+.response button {
 	font-size: 1.5rem;
 }
-.header-create {
-	text-align: center;
-	/* margin-top: 0.5rem; */
-	margin: 0.5rem 0;
-}
-.form-create {
+.form {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
-.form-create label {
+.form label {
 	margin-bottom: 0.2rem;
 	font-weight: bold;
 }
-.form-create input,
-.form-create select {
+.form input,
+.form select {
 	font-size: 1rem;
 	border-radius: 5px;
 	margin-bottom: 1rem;
 	text-align: center;
 }
-.form-create select {
+.form select {
 	background-color: var(--backgroundViolet);
 }
-.form-create input[type='date'],
-.form-create input[type='time'] {
+.form input[type='date'],
+.form input[type='time'] {
 	width: fit-content;
 }
-.form-create button {
+.form button {
 	margin-top: 0.6rem;
 	margin-bottom: 1rem;
 	font-size: 1.5rem;

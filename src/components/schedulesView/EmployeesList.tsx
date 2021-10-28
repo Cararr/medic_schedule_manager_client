@@ -1,7 +1,8 @@
 import React, { DragEvent } from 'react';
 import { useEmployees } from 'providers/EmployeesContext';
 import { StationSchedules, Employee, HomeRehabilitation, Comment } from 'types';
-import './EmployeesList.css';
+import styles from './schedules.module.scss';
+import globalStyles from 'globalStyles.module.scss';
 
 interface Props {
 	stationSchedules: StationSchedules;
@@ -22,7 +23,7 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 
 	const { employees } = useEmployees();
 	const employeesList = employees?.map((employee) => {
-		const fontColor = returnFontColorByOccurence(
+		const fontColor = returnColorByOccurence(
 			countOccurrences(
 				employee.id,
 				props.stationSchedules,
@@ -32,7 +33,7 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 		return (
 			<li
 				key={employee.id}
-				className="list-item draggable"
+				className={`${globalStyles.listItem} ${globalStyles.draggable}`}
 				draggable={true}
 				onDragOver={handleOnDragOver}
 				onDragStart={(e) => handleOnDragStart(e, employee)}
@@ -48,14 +49,14 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 
 	const loading = (
 		<li>
-			<p className="list-item">Loading...</p>
+			<p className={globalStyles.listItem}>Loading...</p>
 		</li>
 	);
 
 	return (
-		<aside className="employees-section">
+		<aside className={styles.employees}>
 			<h3>Employees</h3>
-			<ul className="list">
+			<ul className={globalStyles.list}>
 				{(employees?.length && employeesList) || loading}
 			</ul>
 		</aside>
@@ -83,7 +84,7 @@ function countOccurrences(
 	return counter;
 }
 
-function returnFontColorByOccurence(counter: number): string {
+function returnColorByOccurence(counter: number): string {
 	if (counter < 3) return 'inherit';
 	else if (counter > 3) return 'hsl(0, 94%, 34%)';
 	else return '#0F00CA';

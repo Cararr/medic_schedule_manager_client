@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LandingImage from 'resources/images/LandingImage.png';
+import LandingImage from 'assets/images/LandingImage.png';
 import { LoginPanel } from './LoginPanel';
 import { errorMessage } from 'WinBox/winboxMessages';
 import { login } from 'api/login';
@@ -8,7 +8,8 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import { UserCrudentials } from 'types';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useUser } from 'providers/UserContext';
-import './LandingPage.css';
+import styles from './landingPage.module.scss';
+import globalStyles from 'globalStyles.module.scss';
 
 export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 	history,
@@ -54,32 +55,32 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 	const isLoginPanelOn = path === '/login';
 
 	return (
-		<main className="landing-page">
-			<div>
-				<header className="header-landing-page">
-					<h1 className="header-landing-page-main">Fizjo Medyk</h1>
-					<h3 className="header-landing-page-secoundary">
-						Przestrzeń w sieci dla najlepszej grupy fizjoterapeutów w Świdnicy
-					</h3>
-				</header>
-				<img alt="Schedule Calendar" src={LandingImage} />
-				<div className="container-button-login">
-					<Link to={isLoginPanelOn ? '/' : '/login'}>
-						<button className="button-generic button-login">Start</button>
-					</Link>
-				</div>
-				<Switch>
-					<Route exact path={'/login'}>
-						<LoginPanel
-							handleInputChange={handleInputChange}
-							loginInputValue={loginInputValue}
-							handleLogin={handleLogin}
-							handleCloseLoginPanel={handleCloseLoginPanel}
-							isLoading={isLoading}
-						/>
-					</Route>
-				</Switch>
+		<main className={styles.landingPage}>
+			<header className={styles.headerContainer}>
+				<h1 className={styles.mainHeader}>Fizjo Medyk</h1>
+				<h3 className={styles.secoundaryHeader}>
+					Przestrzeń w sieci dla najlepszej grupy fizjoterapeutów w Świdnicy
+				</h3>
+			</header>
+			<img alt="Schedule Calendar" src={LandingImage} />
+			<div className={styles.loginButtonContainer}>
+				<Link to={isLoginPanelOn ? '/' : '/login'}>
+					<button className={`${globalStyles.button} ${styles.loginButton}`}>
+						Start
+					</button>
+				</Link>
 			</div>
+			<Switch>
+				<Route exact path={'/login'}>
+					<LoginPanel
+						handleInputChange={handleInputChange}
+						loginInputValue={loginInputValue}
+						handleLogin={handleLogin}
+						handleCloseLoginPanel={handleCloseLoginPanel}
+						isLoading={isLoading}
+					/>
+				</Route>
+			</Switch>
 		</main>
 	);
 };

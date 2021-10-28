@@ -2,7 +2,8 @@ import React from 'react';
 import { useUser } from 'providers/UserContext';
 import { Employee, HomeRehabilitation, Comment } from 'types';
 import Utilities from 'util/Utilities';
-import './TableCell.css';
+import styles from './tables.module.scss';
+import globalStyles from 'globalStyles.module.scss';
 
 interface Props {
 	cellNumber: number;
@@ -44,8 +45,8 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 	const handleOnDragOver = (e: React.DragEvent<HTMLTableCellElement>) => {
 		e.preventDefault();
 		const target = e.target as HTMLTableCellElement;
-		if (!target.className.includes('cell-drag-over'))
-			target.className += ' cell-drag-over';
+		if (!target.className.includes(styles.dragOver))
+			target.className += ` ${styles.dragOver}`;
 	};
 
 	const handleOnDragLeave = (e: React.DragEvent<HTMLTableCellElement>) => {
@@ -71,9 +72,9 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 
 	const className = `${
 		user?.lastName === props.cellValue?.lastName
-			? 'orange-background'
-			: 'white-background'
-	} ${props.cellValue && isUserBoss && 'draggable'}`;
+			? globalStyles.orangeBackground
+			: globalStyles.whiteBackground
+	} ${props.cellValue && isUserBoss && globalStyles.draggable}`;
 
 	const isCellDraggable = Boolean(props.cellValue) && isUserBoss;
 
@@ -101,7 +102,7 @@ function removeDragOverClass({
 }: React.DragEvent<HTMLTableCellElement>) {
 	(target as HTMLTableCellElement).className = (
 		target as HTMLTableCellElement
-	).className.replace(' cell-drag-over', '');
+	).className.replace(` ${styles.dragOver}`, '');
 }
 
 function extractStationAndCellNumberFromId(id: string): [string, number] {

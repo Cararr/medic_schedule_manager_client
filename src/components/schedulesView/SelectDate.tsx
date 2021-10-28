@@ -1,7 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import Utilities from 'util/Utilities';
-import './SelectDate.css';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
+import styles from './schedules.module.scss';
+import globalStyles from 'globalStyles.module.scss';
 
 interface Props {
 	setDateSelected: React.Dispatch<React.SetStateAction<string>>;
@@ -31,7 +32,7 @@ export const SelectDate: React.FunctionComponent<Props> = (props) => {
 	};
 
 	return (
-		<form className="form-select-date">
+		<form className={`${styles.selectDate} ${globalStyles.notPrintable}`}>
 			<h3>Select date</h3>
 			<input
 				required
@@ -40,24 +41,25 @@ export const SelectDate: React.FunctionComponent<Props> = (props) => {
 				value={props.dateSelected}
 				type="date"
 			></input>
-			<div className="container-set-day-buttons">
+			<div className={styles.setDateButtons}>
 				<button
 					onClick={() => toggleDate(-1)}
-					className="button-generic button-change-day"
+					className={`${globalStyles.button} ${styles.dateButton}`}
 					type="button"
 				>
 					<AiFillCaretLeft />
 				</button>
 				<button
 					onClick={changeDateToToday}
-					className="button-generic button-today"
+					className={`${globalStyles.button} ${styles.dateButton}`}
+					style={{ margin: '0 0.5rem', padding: '1px 0.5rem' }}
 					type="button"
 				>
 					Today
 				</button>
 				<button
 					onClick={() => toggleDate(+1)}
-					className="button-generic button-change-day"
+					className={`${globalStyles.button} ${styles.dateButton}`}
 					type="button"
 				>
 					<AiFillCaretRight />

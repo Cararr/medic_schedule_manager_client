@@ -1,0 +1,152 @@
+.landingPage {
+	width: 100%;
+	padding: 1rem;
+	position: relative;
+	height: 100vh;
+}
+.landingPage img {
+	position: absolute;
+	top: 15vh;
+	left: 58%;
+}
+.headerContainer {
+	width: 60%;
+	margin-left: 2rem;
+	margin-top: 10vh;
+}
+.mainHeader {
+	font-size: 6.5rem;
+	color: #6f0c0c;
+	margin: 0;
+}
+.secoundaryHeader {
+	font-family: 'Gilroy-Light';
+	text-align: center;
+	font-size: 1.8rem;
+	margin: 0;
+	margin-top: 2rem;
+}
+.loginButtonContainer {
+	width: 60%;
+	margin-left: 2rem;
+	margin-top: 2.5rem;
+	display: flex;
+	justify-content: center;
+}
+.loginButton {
+	padding: 1px 0.6rem;
+	display: block;
+	background-color: hsl(21, 83%, 65%);
+	font-size: 2.2rem;
+	transition: background-color 0.15s ease-in;
+}
+.loginButton:hover {
+	background-color: var(--backgroundOrange);
+	transform: none;
+}
+
+.form {
+	position: absolute;
+	border-radius: 0.5rem;
+	background-color: var(--backgroundYellow);
+	top: 50%;
+	left: 50%;
+	padding: 1rem;
+	transform: translate(-50%, -50%);
+	width: 400px;
+	border: 5px solid var(--backgroundViolet);
+	z-index: 3;
+}
+.form input {
+	font-size: 1rem;
+	width: 100%;
+	margin: auto;
+	margin-bottom: 0.5rem;
+	display: block;
+	padding: 5px;
+}
+.buttonClose {
+	position: absolute;
+	padding: 0.2rem;
+	right: 0;
+	top: 0;
+	border-radius: 0;
+	background-color: var(--red);
+	border: 1px solid var(--borderColor);
+	display: grid;
+	place-items: center;
+	cursor: pointer;
+	font-size: 0.8rem;
+}
+.label {
+	display: block;
+	margin-bottom: 0.1rem;
+}
+.formContent {
+	width: 80%;
+	margin: auto;
+}
+.submitButtonContainer {
+	height: 1.6rem;
+	display: flex;
+	justify-content: center;
+}
+.submitButton {
+	font-size: 1.2rem;
+	display: block;
+}
+@media only screen and (max-width: 500px) {
+	.landingPage {
+		padding: 1rem 0;
+		display: flex;
+		align-items: center;
+		height: initial;
+	}
+	.landingPage img {
+		max-width: 100%;
+		position: initial;
+		margin-bottom: 1rem;
+	}
+	.headerContainer {
+		width: 100%;
+		margin: 0 0 1rem 0;
+		text-align: center;
+	}
+	.mainHeader {
+		font-size: 7.5rem;
+	}
+	.secoundaryHeader {
+		display: none;
+	}
+	.loginButtonContainer {
+		width: initial;
+		margin: 0;
+	}
+	.loginButton {
+		font-size: 3rem;
+	}
+	.form {
+		width: 70%;
+		top: 60%;
+		display: flex;
+		align-items: center;
+		font-size: 2rem;
+	}
+	.form input {
+		font-size: 2rem;
+	}
+	.label {
+		display: block;
+		margin-bottom: 0.1rem;
+	}
+	.submitButtonContainer {
+		height: 2.6rem;
+		margin-top: 1rem;
+	}
+	.submitButton {
+		font-size: 1.8rem;
+	}
+	.buttonClose {
+		font-size: 1.2rem;
+	}
+}

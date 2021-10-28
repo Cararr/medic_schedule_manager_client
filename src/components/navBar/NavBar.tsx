@@ -3,8 +3,9 @@ import { useUser } from 'providers/UserContext';
 import { Link, NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { RiArrowDropDownLine } from 'react-icons/ri';
-import './NavBar.css';
 import Utilities from 'util/Utilities';
+import styles from './NavBar.module.scss';
+import globalStyles from 'globalStyles.module.scss';
 
 export const NavBar: React.FunctionComponent = () => {
 	const [isNavBarTransparent, setIsNavBarTransparent] = useState(true);
@@ -39,8 +40,8 @@ export const NavBar: React.FunctionComponent = () => {
 	useEffect(() => {
 		const hideDropDown = ({ target }: Event) => {
 			const element = target as Element;
-			if (element.matches('.dropdown-menu-trigger')) return;
-			if (!element.matches('.dropdown-content')) setIsMenuOpen(false);
+			if (element.matches(`.${styles.menuTrigger}`)) return;
+			if (!element.matches(`.${styles.menuContent}`)) setIsMenuOpen(false);
 		};
 		document.addEventListener('click', hideDropDown);
 		return () => {
@@ -59,20 +60,20 @@ export const NavBar: React.FunctionComponent = () => {
 					? 'none'
 					: '0 1px 3px 0 rgba(244, 175, 139, 0.9)',
 			}}
-			className="navbar"
+			className={`${globalStyles.notPrintable} ${styles.nav}`}
 		>
 			{!isThisHomePage && (
-				<div className="dropdown-menu">
+				<div className={styles.menu}>
 					<button
 						onClick={() => {
 							setIsMenuOpen(isMenuOpen ? false : true);
 						}}
-						className="dropdown-menu-trigger"
+						className={styles.menuTrigger}
 						style={{ fontWeight: isMenuOpen ? 600 : 200 }}
 					>
 						Menu
 						<RiArrowDropDownLine
-							className="dropdown-menu-trigger"
+							className={styles.menuTrigger}
 							style={{
 								transform: isMenuOpen ? 'rotate(180deg)' : '',
 								transition: 'transform .15s ease-in-out',
@@ -89,21 +90,21 @@ export const NavBar: React.FunctionComponent = () => {
 								  }
 								: {}
 						}
-						className="dropdown-content"
+						className={styles.menuContent}
 					>
-						<li className="dropdown-list-item">
-							<NavLink activeClassName="link-active" to="/schedules">
+						<li className={styles.listItem}>
+							<NavLink activeClassName={styles.activeLink} to="/schedules">
 								Schedules
 							</NavLink>
 						</li>
-						<li className="dropdown-list-item">
-							<NavLink activeClassName="link-active" to="/vacations">
+						<li className={styles.listItem}>
+							<NavLink activeClassName={styles.activeLink} to="/vacations">
 								Vacations
 							</NavLink>
 						</li>
 						{isUserBoss && !isMobileDevice && (
-							<li className="dropdown-list-item">
-								<NavLink activeClassName="link-active" to="/create">
+							<li className={styles.listItem}>
+								<NavLink activeClassName={styles.activeLink} to="/create">
 									Create
 								</NavLink>
 							</li>
@@ -111,13 +112,11 @@ export const NavBar: React.FunctionComponent = () => {
 					</ul>
 				</div>
 			)}
-			<h3 className="header-navbar">{`${user?.firstName} ${user?.lastName}`}</h3>
+			<h3
+				className={styles.header}
+			>{`${user?.firstName} ${user?.lastName}`}</h3>
 			<Link style={{ gridColumnStart: 3, justifySelf: 'end' }} to="/">
-				<button
-					onClick={logOut}
-					className="button-generic button-logout"
-					type="button"
-				>
+				<button onClick={logOut} className={globalStyles.button} type="button">
 					Log out
 				</button>
 			</Link>

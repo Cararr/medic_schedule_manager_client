@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './Card.css';
+import styles from './cardsContainer.module.scss';
 
 interface Props {
 	pathName: string;
@@ -17,7 +17,9 @@ export const Card: React.FunctionComponent<Props> = (props) => {
 				transform: 'translate(+5px, +5px)',
 			}}
 			to={props.pathName}
-			className={`card ${props.itemName === 'Create' && 'card-create'}`}
+			className={`${styles.card} ${
+				props.itemName === 'Create' ? styles.hidden : ''
+			}`}
 		>
 			<img alt={`${props.itemName}`} src={props.image} />
 			<figcaption>{props.itemName}</figcaption>

@@ -4,7 +4,9 @@ import Post from 'api/Post';
 import Utilities from 'util/Utilities';
 import { errorMessage } from 'WinBox/winboxMessages';
 import { CreateVacationForm } from 'types';
-import './Create.css';
+import { CgSpinner } from 'react-icons/cg';
+import styles from './create.module.scss';
+import globalStyles from 'globalStyles.module.scss';
 
 export const CreateVacation: React.FunctionComponent = () => {
 	const { employees } = useEmployees();
@@ -51,8 +53,13 @@ export const CreateVacation: React.FunctionComponent = () => {
 			);
 
 		setSubmitResponse(
-			<div className="response-create" style={{ marginTop: '5rem' }}>
-				{<i className="icon-spin6" style={{ fontSize: '5rem' }} />}
+			<div className={styles.response} style={{ marginTop: '5rem' }}>
+				<CgSpinner
+					className={globalStyles.spin}
+					style={{
+						fontSize: '5rem',
+					}}
+				/>
 			</div>
 		);
 
@@ -64,14 +71,18 @@ export const CreateVacation: React.FunctionComponent = () => {
 		setSubmitResponse(
 			<div
 				style={{ marginTop: response?.ok ? '5rem' : 0 }}
-				className="response-create"
+				className={styles.response}
 			>
 				<h3 style={{ marginBottom: '1rem' }}>
 					{response?.ok
 						? jsonResponse.message
 						: failMessage + jsonResponse.message}
 				</h3>
-				<button onClick={resetForm} type="button" className="button-generic">
+				<button
+					onClick={resetForm}
+					type="button"
+					className={globalStyles.button}
+				>
 					Back
 				</button>
 			</div>
@@ -79,16 +90,12 @@ export const CreateVacation: React.FunctionComponent = () => {
 	};
 
 	return (
-		<section className="section-create" style={{ height: '19rem' }}>
-			<h2 className="header-create">Create vacation</h2>
+		<section className={styles.section} style={{ height: '19rem' }}>
+			<h2 className={styles.header}>Create vacation</h2>
 			{submitResponse || (
-				<form onSubmit={handleSubmit} className="form-create">
+				<form onSubmit={handleSubmit} className={styles.form}>
 					<label>Employee</label>
-					<select
-						className="select-employee"
-						onChange={handleChange}
-						name="employee"
-					>
+					<select onChange={handleChange} name="employee">
 						{employeesListOptions}
 					</select>
 
@@ -112,7 +119,7 @@ export const CreateVacation: React.FunctionComponent = () => {
 						onChange={handleChange}
 					/>
 
-					<button className="button-generic" type="submit">
+					<button className={globalStyles.button} type="submit">
 						Create
 					</button>
 				</form>

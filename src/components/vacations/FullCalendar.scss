@@ -1,27 +1,3 @@
-.main-calendar {
-	width: 100%;
-	margin-top: 2rem;
-	background-image: url('resources/images/CalendarBackground.png');
-	border-top: 1px dotted black;
-	border-bottom: 1px dotted black;
-	padding: 1rem;
-}
-.calendar-event {
-	display: flex;
-	text-align: center;
-}
-.tittle-calendar-event {
-	margin: 0;
-	width: 100%;
-}
-.button-calendar-remove-event {
-	position: absolute;
-	right: 0;
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-}
-/* Override fc styles */
 .fc-scrollgrid {
 	width: auto;
 }
@@ -62,9 +38,4 @@ td.fc-day-sun {
 }
 .fc-event-title-container {
 	text-align: center;
-}
-@media only screen and (max-width: 500px) {
-	.main-calendar {
-		padding: 1rem 0;
-	}
 }

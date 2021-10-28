@@ -19,6 +19,7 @@ import {
 	Comment,
 } from 'types';
 import { cloneDeep } from 'lodash';
+import globalStyles from 'globalStyles.module.scss';
 
 export const ViewSchedules: React.FunctionComponent = () => {
 	const [dateSelected, setDateSelected] = useState(
@@ -247,9 +248,9 @@ export const ViewSchedules: React.FunctionComponent = () => {
 	};
 
 	return (
-		<div>
+		<>
 			<NavBar />
-			<div className="container-schedules">
+			<div className={globalStyles.schedulesContainer}>
 				{isUserBoss && (
 					<EmployeesList
 						stationSchedules={schedules.stationSchedules}
@@ -257,7 +258,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 						checkForSchedulesChanges={checkForSchedulesChanges}
 					/>
 				)}
-				<main className="main-schedules">
+				<main className={globalStyles.schedulesContent}>
 					<SelectDate
 						setDateSelected={setDateSelected}
 						dateSelected={dateSelected}
@@ -283,7 +284,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 					/>
 				)}
 			</div>
-		</div>
+		</>
 	);
 };
 

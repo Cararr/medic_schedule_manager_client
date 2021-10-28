@@ -1,0 +1,28 @@
+.container {
+	width: 100%;
+	margin-top: 2rem;
+	background-image: url('../../assets/images/CalendarBackground.png');
+	border-top: 1px dotted black;
+	border-bottom: 1px dotted black;
+	padding: 1rem;
+}
+.event {
+	display: flex;
+	text-align: center;
+}
+.eventTittle {
+	margin: 0;
+	width: 100%;
+}
+.button {
+	position: absolute;
+	right: 0;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+@media only screen and (max-width: 500px) {
+	.container {
+		padding: 1rem 0;
+	}
+}

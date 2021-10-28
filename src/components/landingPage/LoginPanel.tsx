@@ -1,8 +1,9 @@
 import React from 'react';
 import { UserCrudentials } from 'types';
-import './LoginPanel.css';
 import { ImCross } from 'react-icons/im';
 import { CgSpinner } from 'react-icons/cg';
+import styles from './landingPage.module.scss';
+import globalStyles from 'globalStyles.module.scss';
 
 interface Props {
 	handleInputChange: (eventTarget: React.ChangeEvent<HTMLInputElement>) => void;
@@ -15,7 +16,7 @@ interface Props {
 export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 	const loading = (
 		<CgSpinner
-			className="spin"
+			className={globalStyles.spin}
 			style={{
 				fontSize: '1.54rem',
 				margin: 'auto',
@@ -25,17 +26,17 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 	);
 
 	return (
-		<form onSubmit={props.handleLogin} className="form-login">
+		<form onSubmit={props.handleLogin} className={styles.form}>
 			<button
 				onClick={props.handleCloseLoginPanel}
 				type="button"
-				className="button-close-window"
+				className={styles.buttonClose}
 			>
 				<ImCross />
 			</button>
 
-			<div className="form-login-content">
-				<label className="label-login-panel">Login</label>
+			<div className={styles.formContent}>
+				<label className={styles.label}>Login</label>
 				<input
 					required
 					max={20}
@@ -45,7 +46,7 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 					type="text"
 					maxLength={30}
 				></input>
-				<label className="label-login-panel">Hasło</label>
+				<label className={styles.label}>Hasło</label>
 				<input
 					required
 					max={20}
@@ -55,13 +56,13 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 					type="password"
 					maxLength={10}
 				></input>
-				<div className="container-button-submit-login">
+				<div className={styles.submitButtonContainer}>
 					{props.isLoading ? (
 						loading
 					) : (
 						<button
 							type="submit"
-							className="button-generic button-submit-login"
+							className={`${globalStyles.button} ${styles.submitButton}`}
 						>
 							Zaloguj sie
 						</button>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { NavBar } from 'components/navBar/NavBar';
-import './Vacations.css';
 import FullCalendar, {
 	DatesSetArg,
 	EventApi,
@@ -20,6 +19,8 @@ import { TiDelete } from 'react-icons/ti';
 import Delete from 'api/Delete';
 import { errorMessage } from 'WinBox/winboxMessages';
 import { useUser } from 'providers/UserContext';
+import './FullCalendar.scss';
+import styles from './Vacations.module.scss';
 
 export const Vacations: React.FunctionComponent = () => {
 	const currentYear = new Date().getFullYear();
@@ -119,7 +120,7 @@ export const Vacations: React.FunctionComponent = () => {
 	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser().user);
 
 	const eventContent = (eventContentArg: EventContentArg) => (
-		<div className="calendar-event">
+		<div className={styles.event}>
 			<p
 				style={{
 					cursor: isUserBoss ? 'grab' : 'initial',
@@ -138,14 +139,14 @@ export const Vacations: React.FunctionComponent = () => {
 						  }
 						: undefined
 				}
-				className="tittle-calendar-event"
+				className={styles.eventTittle}
 			>
 				{eventContentArg.event.title}
 			</p>
 			{isUserBoss && !isMobileDevice && (
 				<button
 					onClick={() => handleEventRemove(eventContentArg.event)}
-					className="button-calendar-remove-event"
+					className={styles.button}
 				>
 					{eventContentArg.isEnd && (
 						<TiDelete style={{ color: 'white', fontSize: '1rem' }} />
@@ -156,9 +157,9 @@ export const Vacations: React.FunctionComponent = () => {
 	);
 
 	return (
-		<div>
+		<>
 			<NavBar />
-			<main className="main-calendar">
+			<main className={styles.container}>
 				<FullCalendar
 					plugins={[dayGridPlugin, interactionPlugin]}
 					locale={'pl'}
@@ -194,7 +195,7 @@ export const Vacations: React.FunctionComponent = () => {
 					eventResize={handleEventResizeAndDrop}
 				/>
 			</main>
-		</div>
+		</>
 	);
 };
 

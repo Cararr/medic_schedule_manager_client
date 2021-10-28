@@ -2,8 +2,9 @@ import React, { ChangeEvent } from 'react';
 import { TableCell } from 'components/tables/TableCell';
 import Utilities from 'util/Utilities';
 import { HomeRehabilitation, Employee, Comment } from 'types';
-import './HomeRehabilitationsView.css';
 import { BsTrash } from 'react-icons/bs';
+import styles from './schedules.module.scss';
+import globalStyles from 'globalStyles.module.scss';
 
 interface Props {
 	isUserBoss: boolean;
@@ -40,7 +41,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 								required
 								type="time"
 								name="startTime"
-								className="input-home-rehabilitaiton"
+								className={styles.hrInput}
 								value={Utilities.formatTimeView(hR.startTime)}
 								onChange={(e) =>
 									props.handleHomeRehabilitationChanges(e, index)
@@ -69,7 +70,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 								required
 								name="patient"
 								maxLength={25}
-								className="input-home-rehabilitaiton"
+								className={styles.hrInput}
 								value={hR.patient}
 							></input>
 						) : (
@@ -77,7 +78,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 						)}
 					</td>
 					{props.isUserBoss && (
-						<td className="cell-delete-hr">
+						<td className={`${styles.trashIcon} ${globalStyles.notPrintable}`}>
 							<BsTrash
 								onClick={() => props.removeHomeRehabilitation(hR)}
 								style={{
@@ -93,10 +94,10 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 		});
 
 	return (
-		<section className="section-home-rehabilitations">
-			<table className="table-station">
+		<section className={styles.homeRehabilitations}>
+			<table className={globalStyles.table}>
 				<thead>
-					<tr className="table-title">
+					<tr className={globalStyles.tableTitle}>
 						<td colSpan={3}>Rehabilitacje w domu pacjenta</td>
 					</tr>
 					<tr>
@@ -105,7 +106,9 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 						<td>Patient</td>
 					</tr>
 				</thead>
-				<tbody className="white-background">{homeRehabilitationsView}</tbody>
+				<tbody className={globalStyles.whiteBackground}>
+					{homeRehabilitationsView}
+				</tbody>
 			</table>
 		</section>
 	);

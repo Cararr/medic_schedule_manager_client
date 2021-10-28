@@ -4,6 +4,9 @@ import Post from 'api/Post';
 import Utilities from 'util/Utilities';
 import { errorMessage } from 'WinBox/winboxMessages';
 import { CreateHomeRehabilitationForm } from 'types';
+import { CgSpinner } from 'react-icons/cg';
+import styles from './create.module.scss';
+import globalStyles from 'globalStyles.module.scss';
 
 export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 	const { employees } = useEmployees();
@@ -50,8 +53,13 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 			);
 
 		setSubmitResponse(
-			<div style={{ marginTop: '8rem' }} className="response-create">
-				{<i className="icon-spin6" style={{ fontSize: '5rem' }} />}
+			<div style={{ marginTop: '8rem' }} className={styles.response}>
+				<CgSpinner
+					className={globalStyles.spin}
+					style={{
+						fontSize: '5rem',
+					}}
+				/>
 			</div>
 		);
 
@@ -63,14 +71,18 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 		setSubmitResponse(
 			<div
 				style={{ marginTop: response?.ok ? '8rem' : 0 }}
-				className="response-create"
+				className={styles.response}
 			>
 				<h3>
 					{response?.ok
 						? jsonResponse.message
 						: failMessage + jsonResponse.message}
 				</h3>
-				<button onClick={resetForm} type="button" className="button-generic">
+				<button
+					onClick={resetForm}
+					type="button"
+					className={globalStyles.button}
+				>
 					Back
 				</button>
 			</div>
@@ -78,10 +90,10 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 	};
 
 	return (
-		<section className="section-create" style={{ height: '26rem' }}>
-			<h2 className="header-create">Create home rehabilitation</h2>
+		<section className={styles.section} style={{ height: '26rem' }}>
+			<h2 className={styles.header}>Create home rehabilitation</h2>
 			{submitResponse || (
-				<form onSubmit={handleSubmit} className="form-create">
+				<form onSubmit={handleSubmit} className={styles.form}>
 					<label>Employee</label>
 					<select onChange={handleChange} name="employee">
 						{employeesListOptions}
@@ -124,7 +136,7 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 						onChange={handleChange}
 						value={formValues.to}
 					/>
-					<button className="button-generic" type="submit">
+					<button className={globalStyles.button} type="submit">
 						Create
 					</button>
 				</form>

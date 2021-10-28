@@ -12,6 +12,7 @@ import {
 	tipsWinbox,
 	errorMessage,
 } from 'WinBox/winboxMessages';
+import globalStyles from 'globalStyles.module.scss';
 
 export const CreateSchedules: React.FunctionComponent = () => {
 	const [stationSchedules, setStationSchedules] = useState<StationSchedules>(
@@ -87,33 +88,31 @@ export const CreateSchedules: React.FunctionComponent = () => {
 	};
 
 	return (
-		<div>
-			<div className="container-schedules">
-				{isUserBoss && <EmployeesList stationSchedules={stationSchedules} />}
-				<main className="main-schedules">
-					<Tables
-						schedules={{
-							stationSchedules,
-							homeRehabilitations: [],
-							comment: Utilities.returnEmptyComment(''),
-						}}
-						currentlyDragged={currentlyDragged}
-						setCurrentlyDragged={setCurrentlyDragged}
-						changeCellValue={changeCellValue}
-						workStageSpans={workStageSpans}
-					/>
-				</main>
-				{
-					<ControlPanel
-						generateSchedule={generateSchedule}
-						clearSchedule={clearSchedule}
-						dateForm={dateForm}
-						setDateForm={setDateForm}
-						createSchedules={createSchedules}
-						isLoading={isLoading}
-					/>
-				}
-			</div>
+		<div className={globalStyles.schedulesContainer}>
+			{isUserBoss && <EmployeesList stationSchedules={stationSchedules} />}
+			<main className={globalStyles.schedulesContent}>
+				<Tables
+					schedules={{
+						stationSchedules,
+						homeRehabilitations: [],
+						comment: Utilities.returnEmptyComment(''),
+					}}
+					currentlyDragged={currentlyDragged}
+					setCurrentlyDragged={setCurrentlyDragged}
+					changeCellValue={changeCellValue}
+					workStageSpans={workStageSpans}
+				/>
+			</main>
+			{
+				<ControlPanel
+					generateSchedule={generateSchedule}
+					clearSchedule={clearSchedule}
+					dateForm={dateForm}
+					setDateForm={setDateForm}
+					createSchedules={createSchedules}
+					isLoading={isLoading}
+				/>
+			}
 		</div>
 	);
 };

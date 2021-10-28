@@ -1,22 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './NotFound.css';
+import styles from './NotFound.module.scss';
+import globalStyles from 'globalStyles.module.scss';
 
 export const NotFound: React.FunctionComponent = () => {
 	return (
-		<header className="not-found">
+		<header className={styles.header}>
 			<h1>
 				Not Found!
 				<br />
 				🥺
 			</h1>
 			<Link to="/">
-				<button
-					style={{ fontSize: '1.5rem', marginTop: '.5rem', padding: '0 1rem' }}
-					className="button-generic"
-				>
-					↩
-				</button>
+				<button className={`${globalStyles.button} ${styles.button}`}>↩</button>
 			</Link>
 		</header>
 	);

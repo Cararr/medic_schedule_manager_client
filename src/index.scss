@@ -1,0 +1,106 @@
+@import-normalize;
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@font-face {
+	font-family: 'Gilroy';
+	src: local('Gilroy'),
+		url('./assets/fonts/Gilroy-ExtraBold.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Gilroy-Light';
+	src: local('Gilroy-Light'),
+		url('./assets/fonts/Gilroy-Light.otf') format('opentype');
+}
+:root {
+	--backgroundBlue: #c8eaf3;
+	--fontColor: #06151a;
+	--backgroundYellow: #eaf3c8;
+	--backgroundViolet: #cdc0f9;
+	--backgroundOrange: #f4af8b;
+	--borderColor: #3f1a06;
+	--red: #f11717;
+	font-size: 22px;
+}
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+body {
+	font-family: 'Roboto';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: var(--backgroundBlue);
+	color: var(--fontColor);
+	min-height: 100vh;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Gilroy';
+}
+a {
+	color: inherit;
+	text-decoration: none;
+}
+input:focus {
+	box-shadow: 0px 0px 20px var(--backgroundViolet);
+}
+kbd {
+	background-color: #eee;
+	border-radius: 3px;
+	border: 1px solid #b4b4b4;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+		0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+	color: #333;
+	display: inline-block;
+	font-size: 0.85em;
+	font-weight: 700;
+	line-height: 1;
+	padding: 2px 4px;
+	white-space: nowrap;
+}
+aside {
+	background-color: var(--backgroundViolet);
+	height: max-content;
+	width: 8rem;
+	position: sticky;
+	top: 15vh;
+	padding: 0.5rem;
+	border: 1px solid black;
+	border-radius: 10px;
+}
+input {
+	padding: 1px 2px;
+}
+input[type='date'] {
+	text-align: center;
+}
+li:last-child {
+	margin-bottom: 0 !important;
+}
+/* Chrome calendar icon in date input */
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-calendar-picker-indicator,
+input[type='time']::-webkit-calendar-picker-indicator {
+	margin: 0;
+}
+@media only screen and (max-width: 500px) {
+	:root {
+		font-size: 14px;
+	}
+	aside {
+		display: none;
+	}
+}
+@media print {
+	* {
+		break-inside: avoid;
+	}
+	aside {
+		display: none !important;
+	}
+}
