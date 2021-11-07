@@ -141,7 +141,17 @@ export const ViewSchedules: React.FunctionComponent = () => {
 
 		setIsLoading(true);
 
-		await Put.schedule(dateSelected, schedules.stationSchedules);
+		const badUpdateMessage = {
+			title: 'Action aborted!',
+			content: "Couldn't update a schedule!",
+		};
+
+		let success: boolean | undefined = await Put.schedule(
+			dateSelected,
+			schedules.stationSchedules
+		);
+		if (!success)
+			return errorMessage(badUpdateMessage.title, badUpdateMessage.content);
 
 		for (const [
 			index,
@@ -154,24 +164,29 @@ export const ViewSchedules: React.FunctionComponent = () => {
 				initialHomeRehabilitation.employee?.id !==
 					homeRehabilitation.employee?.id ||
 				initialHomeRehabilitation.patient !== homeRehabilitation.patient
-			)
-				await Put.homeRehabilitation(homeRehabilitation);
+			) {
+				success = await Put.instance(
+					'home-rehabilitations',
+					homeRehabilitation
+				);
+				if (!success)
+					return errorMessage(badUpdateMessage.title, badUpdateMessage.content);
+			}
 		}
 
 		if (initialSchedule.comment.content !== schedules.comment.content) {
 			if (schedules.comment.id && !schedules.comment.content) {
-				await Delete.comment(schedules.comment);
+				await Delete.instance('comments', schedules.comment.id);
 				setSchedules((prev) => ({
 					...prev,
 					comment: Utilities.returnEmptyComment(dateSelected),
 				}));
-			} else if (schedules.comment.id) await Put.comment(schedules.comment);
+			} else if (schedules.comment.id)
+				await Put.instance('comments', schedules.comment);
 			else {
-				const comment: Comment = await Post.comment(schedules.comment);
-				setSchedules((prev) => ({
-					...prev,
-					comment,
-				}));
+				const success = await Post.instance('comments', schedules.comment);
+				if (!success)
+					return errorMessage(badUpdateMessage.title, badUpdateMessage.content);
 			}
 		}
 
@@ -221,7 +236,7 @@ export const ViewSchedules: React.FunctionComponent = () => {
 	const removeHomeRehabilitation = async (
 		homeRehabilitation: HomeRehabilitation
 	) => {
-		if (await Delete.homeRehabilitation(homeRehabilitation)) {
+		if (await Delete.instance('home-rehabilitations', homeRehabilitation.id)) {
 			setSchedules((prev) => ({
 				...prev,
 				homeRehabilitations: prev.homeRehabilitations.filter(

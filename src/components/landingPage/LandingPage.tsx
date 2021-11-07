@@ -30,20 +30,22 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 		e.preventDefault();
 		setIsLoading(true);
 
-		const loginReponse = await login(loginInputValue);
+		const response = await login(loginInputValue);
 
 		setIsLoading(false);
 
-		if (loginReponse?.passed) {
+		if (response?.status === 201) {
 			if (!employees.length) loadEmployees();
-			changeUser(loginReponse.user);
+			changeUser(response.data.user);
 			history.push('/home');
 		} else {
 			setLoginInputValue(returnEmptyLoginValues());
-			errorMessage(
-				'Login failed',
-				loginReponse?.message || 'Something went wrong, please try again later!'
-			);
+			if (!response || ![400, 401].includes(response.status))
+				return errorMessage(
+					'Login failed',
+					'Something went wrong, please try again later!'
+				);
+			errorMessage('Login failed', response.data.message);
 		}
 	};
 

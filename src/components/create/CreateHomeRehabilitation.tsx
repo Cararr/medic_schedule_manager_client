@@ -63,20 +63,27 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 			</div>
 		);
 
-		const failMessage = 'Create failed. Reason: ';
-		const response = await Post.homeRehabilitations(formValues);
-		const jsonResponse =
-			response?.status === 500 ? 'server failed' : await response?.json();
+		const payload = {
+			from: formValues.from,
+			to: formValues.to,
+			homeRehabilitation: {
+				startTime: formValues.startTime,
+				employee: formValues.employee,
+				patient: formValues.patient,
+			},
+		};
+
+		const success = await Post.instance('home-rehabilitations', payload);
 
 		setSubmitResponse(
 			<div
-				style={{ marginTop: response?.ok ? '8rem' : 0 }}
+				style={{ marginTop: success ? '8rem' : 0 }}
 				className={styles.response}
 			>
-				<h3>
-					{response?.ok
-						? jsonResponse.message
-						: failMessage + jsonResponse.message}
+				<h3 style={{ marginBottom: '1rem' }}>
+					{success
+						? 'Created!'
+						: 'Action aborted, something went wrong. Sorry!'}
 				</h3>
 				<button
 					onClick={resetForm}

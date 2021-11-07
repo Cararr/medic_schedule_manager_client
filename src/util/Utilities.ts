@@ -71,14 +71,14 @@ export default class Utilities {
 
 	static matchFontColorToBackground(backgroundColorHex: string) {
 		// float values were found on StackOverflow, i guess they are some color const, dunno
-		return (
-			[
-				0.299 * parseInt(backgroundColorHex.slice(1, 3), 16),
-				0.587 * parseInt(backgroundColorHex.slice(3, 5), 16),
-				0.114 * parseInt(backgroundColorHex.slice(5, 7), 16),
-			].reduce((a, b) => a + b) /
-				255 >
+		return [
+			0.299 * parseInt(backgroundColorHex.slice(1, 3), 16),
+			0.587 * parseInt(backgroundColorHex.slice(3, 5), 16),
+			0.114 * parseInt(backgroundColorHex.slice(5, 7), 16),
+		].reduce((a, b) => a + b) /
+			255 >
 			0.5
-		);
+			? '#000000'
+			: '#ffffff';
 	}
 }

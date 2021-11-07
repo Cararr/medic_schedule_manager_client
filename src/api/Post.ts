@@ -1,93 +1,30 @@
-import { PATH } from 'config.json';
-import {
-	postSchedulesPayload,
-	CreateHomeRehabilitationForm,
-	Comment,
-	CreateVacationForm,
-} from 'types';
+import api from './api';
+
+type instanceType =
+	| 'schedules'
+	| 'home-rehabilitations'
+	| 'vacations'
+	| 'comments';
 
 export default class Post {
-	static schedules = async (payload: postSchedulesPayload) => {
-		const body = JSON.stringify(payload);
+	static instance = async (type: instanceType, payload: {}) => {
 		try {
-			const response = await fetch(`${PATH}/schedules`, {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body,
-			});
-			return response;
+			const body = createRequestBody(type, payload);
+			const response = await api.post(`/${type}`, body);
+			return response.status === 201;
 		} catch (error) {
 			console.error(error);
 		}
 	};
+}
 
-	static vacation = async (vacation: CreateVacationForm) => {
-		try {
-			const body = JSON.stringify({ vacation });
-			const config = {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body,
-			};
-			const response = await fetch(`${PATH}/vacations/`, config);
-			return response;
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	static homeRehabilitations = async (
-		homeRehabilitationConfig: CreateHomeRehabilitationForm
-	) => {
-		const body = {
-			from: homeRehabilitationConfig.from,
-			to: homeRehabilitationConfig.to,
-			homeRehabilitation: {
-				startTime: homeRehabilitationConfig.startTime,
-				employee: homeRehabilitationConfig.employee,
-				patient: homeRehabilitationConfig.patient,
-			},
-		};
-
-		try {
-			const response = await fetch(`${PATH}/home-rehabilitations`, {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(body),
-			});
-			return response;
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	static comment = async (comment: Comment) => {
-		try {
-			const body = JSON.stringify({ comment });
-			const config = {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body,
-			};
-			const response = await fetch(`${PATH}/comments/`, config);
-			if (response.ok) {
-				const jsonRespone = await response.json();
-				return jsonRespone.comment;
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	};
+function createRequestBody(type: instanceType, payload: {}) {
+	switch (type) {
+		case 'comments':
+			return { comment: payload };
+		case 'vacations':
+			return { vacation: payload };
+		default:
+			return payload;
+	}
 }

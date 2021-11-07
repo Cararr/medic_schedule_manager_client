@@ -1,90 +1,50 @@
-import { PATH } from 'config.json';
 import { StationSchedules, HomeRehabilitation, Comment, Vacation } from 'types';
+import api from './api';
+
+type instanceType =
+	| 'schedules'
+	| 'home-rehabilitations'
+	| 'vacations'
+	| 'comments';
 
 export default class Put {
-	static schedule = async (date: string, schedules: StationSchedules) => {
-		try {
-			const body = JSON.stringify({ schedules });
-			const config = {
-				method: 'PUT',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body,
-			};
-			const response = await fetch(`${PATH}/schedules/${date}`, config);
-			if (response.ok) {
-				const jsonRespone = await response.json();
-				return jsonRespone;
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	static homeRehabilitation = async (
-		homeRehabilitation: HomeRehabilitation
+	static instance = async (
+		type: instanceType,
+		payload: Comment | Vacation | HomeRehabilitation
 	) => {
 		try {
-			const body = JSON.stringify({ homeRehabilitation });
-			const config = {
-				method: 'PUT',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body,
-			};
-			const response = await fetch(
-				`${PATH}/home-rehabilitations/${homeRehabilitation.id}`,
-				config
-			);
-			if (response.ok) {
-				const jsonRespone = await response.json();
-				return jsonRespone;
-			}
+			const body = createRequestBody(type, payload);
+			const response = await api.put(`/${type}/${payload.id}`, body);
+			return response.status === 200;
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
-	static vacation = async (vacation: Vacation) => {
+	static schedule = async (date: string, schedules: StationSchedules) => {
 		try {
-			const body = JSON.stringify({ vacation });
-			const config = {
-				method: 'PUT',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body,
-			};
-			const response = await fetch(`${PATH}/vacations/${vacation.id}`, config);
-			return response.ok;
+			const response = await api.put(`/schedules/${date}`, {
+				schedules,
+			});
+			return response.status === 200;
 		} catch (error) {
 			console.error(error);
 		}
 	};
+}
 
-	static comment = async (comment: Comment) => {
-		try {
-			const body = JSON.stringify({ comment });
-			const config = {
-				method: 'PUT',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body,
-			};
-			const response = await fetch(`${PATH}/comments/${comment.id}`, config);
-			if (response.ok) {
-				const jsonRespone = await response.json();
-				return jsonRespone;
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	};
+function createRequestBody(
+	type: instanceType,
+	payload: Comment | Vacation | HomeRehabilitation
+) {
+	switch (type) {
+		case 'comments':
+			return { comment: payload };
+		case 'home-rehabilitations':
+			return { homeRehabilitation: payload };
+		case 'vacations':
+			return { vacation: payload };
+		default:
+			return payload;
+	}
 }

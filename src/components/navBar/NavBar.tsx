@@ -53,9 +53,7 @@ export const NavBar: React.FunctionComponent = () => {
 		<nav
 			style={{
 				position: isThisVacations && !isMobileDevice ? 'initial' : 'sticky',
-				backgroundColor: isNavBarTransparent
-					? 'var(--backgroundBlue)'
-					: 'var(--backgroundYellow)',
+				backgroundColor: isNavBarTransparent ? '' : 'var(--backgroundYellow)',
 				boxShadow: isNavBarTransparent
 					? 'none'
 					: '0 1px 3px 0 rgba(244, 175, 139, 0.9)',

@@ -1,22 +1,8 @@
-import { PATH } from 'config.json';
+import api from './api';
 
 export const login = async (inputValues: {}) => {
 	try {
-		const body = JSON.stringify(inputValues);
-		const config = {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body,
-		};
-		const response = await fetch(`${PATH}/login`, config);
-		if ([201, 400, 401].includes(response.status)) {
-			const jsonRespone = await response.json();
-			jsonRespone.passed = response.ok;
-			return jsonRespone;
-		}
+		return await api.post('/login', inputValues);
 	} catch (error) {
 		console.error(error);
 	}

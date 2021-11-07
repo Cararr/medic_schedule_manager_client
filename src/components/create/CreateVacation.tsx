@@ -63,20 +63,17 @@ export const CreateVacation: React.FunctionComponent = () => {
 			</div>
 		);
 
-		const failMessage = 'Create failed. Reason: ';
-		const response = await Post.vacation(formValues);
-		const jsonResponse =
-			response?.status === 500 ? 'server failed' : await response?.json();
+		const success = await Post.instance('vacations', formValues);
 
 		setSubmitResponse(
 			<div
-				style={{ marginTop: response?.ok ? '5rem' : 0 }}
+				style={{ marginTop: success ? '5rem' : 0 }}
 				className={styles.response}
 			>
 				<h3 style={{ marginBottom: '1rem' }}>
-					{response?.ok
-						? jsonResponse.message
-						: failMessage + jsonResponse.message}
+					{success
+						? 'Created!'
+						: 'Action aborted, something went wrong. Sorry!'}
 				</h3>
 				<button
 					onClick={resetForm}

@@ -71,14 +71,14 @@ export const CreateSchedules: React.FunctionComponent = () => {
 			);
 
 		setIsLoading(true);
-		const response = await Post.schedules({
+		const success = await Post.instance('schedules', {
 			from: dateForm.from,
 			to: dateForm.to,
 			schedules: stationSchedules,
 		});
 		setIsLoading(false);
 
-		response?.ok
+		success
 			? createdMessage()
 			: errorMessage(
 					'Action aborted!',

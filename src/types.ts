@@ -71,7 +71,7 @@ export interface DateForm {
 	to: string;
 }
 
-export interface postSchedulesPayload {
+export interface postSchedulesForm {
 	from: string;
 	to: string;
 	schedules: StationSchedules;

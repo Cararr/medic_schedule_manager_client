@@ -42,9 +42,7 @@ export const Vacations: React.FunctionComponent = () => {
 						color: Utilities.returnColorPerEmployee(vacation.employee.lastName),
 						textColor: Utilities.matchFontColorToBackground(
 							Utilities.returnColorPerEmployee(vacation.employee.lastName)
-						)
-							? 'black'
-							: 'white',
+						),
 						start: vacation.from,
 						end: Utilities.formatDateString(
 							Utilities.addDay(new Date(vacation.to))
@@ -70,8 +68,11 @@ export const Vacations: React.FunctionComponent = () => {
 	};
 
 	const handleEventRemove = async (event: EventApi) => {
-		const done = await Delete.vacation(event._def.publicId);
-		if (done) {
+		const success = await Delete.instance(
+			'vacations',
+			Number(event._def.publicId)
+		);
+		if (success) {
 			setVacationEvents((prev) =>
 				prev.filter((vacation) => vacation.id !== event._def.publicId)
 			);
@@ -97,8 +98,8 @@ export const Vacations: React.FunctionComponent = () => {
 				),
 			};
 
-			const done = await Put.vacation(vacation);
-			if (done)
+			const success = await Put.instance('vacations', vacation);
+			if (success)
 				return setVacationEvents((prev) => {
 					const updatedVacation = {
 						...prev.find((event) => Number(event.id) === vacation.id),
@@ -119,7 +120,7 @@ export const Vacations: React.FunctionComponent = () => {
 
 	const isUserBoss = Utilities.checkIfUserIsAdmin(useUser().user);
 
-	const eventContent = (eventContentArg: EventContentArg) => (
+	const eventContent = (eventInfo: EventContentArg) => (
 		<div className={styles.event}>
 			<p
 				style={{
@@ -141,15 +142,22 @@ export const Vacations: React.FunctionComponent = () => {
 				}
 				className={styles.eventTittle}
 			>
-				{eventContentArg.event.title}
+				{eventInfo.event.title}
 			</p>
 			{isUserBoss && !isMobileDevice && (
 				<button
-					onClick={() => handleEventRemove(eventContentArg.event)}
+					onClick={() => handleEventRemove(eventInfo.event)}
 					className={styles.button}
 				>
-					{eventContentArg.isEnd && (
-						<TiDelete style={{ color: 'white', fontSize: '1rem' }} />
+					{eventInfo.isEnd && (
+						<TiDelete
+							style={{
+								color: Utilities.matchFontColorToBackground(
+									eventInfo.backgroundColor
+								),
+								fontSize: '1rem',
+							}}
+						/>
 					)}
 				</button>
 			)}
