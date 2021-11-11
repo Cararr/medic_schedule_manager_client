@@ -41,7 +41,7 @@ export const tipsWinbox = () => {
 	const config = {
 		...genericSettings,
 		background: 'var(--backgroundViolet)',
-		height: '',
+		height: 340,
 		right: 17,
 		html: `
 		<ol class="winbox-list-tips">
