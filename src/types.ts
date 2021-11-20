@@ -85,12 +85,6 @@ export interface CreateHomeRehabilitationForm {
 	to: string;
 }
 
-export interface CreateVacationForm {
-	employee: Employee | null;
-	from: string;
-	to: string;
-}
-
 export interface Vacation {
 	id: number;
 	from: string;

@@ -1,50 +1,39 @@
-import React, { useState, useEffect, SyntheticEvent } from 'react';
+import React, { useState } from 'react';
 import { useEmployees } from 'providers/EmployeesContext';
 import Post from 'api/Post';
 import Utilities from 'util/Utilities';
 import { errorMessage } from 'WinBox/winboxMessages';
-import { CreateVacationForm } from 'types';
 import { CgSpinner } from 'react-icons/cg';
 import styles from './create.module.scss';
 import globalStyles from 'globalStyles.module.scss';
+import { FieldValues, useForm } from 'react-hook-form';
 
 export const CreateVacation: React.FunctionComponent = () => {
 	const { employees } = useEmployees();
-	const [formValues, setFormValues] = useState<CreateVacationForm>(
-		returnEmptyForm()
-	);
+
+	const { register, handleSubmit } = useForm({ defaultValues: {} });
 
 	const [submitResponse, setSubmitResponse] = useState<JSX.Element | null>(
 		null
 	);
 
-	useEffect(() => {
-		setFormValues((prev) => ({ ...prev, employee: employees[0] }));
-	}, [employees]);
-
 	const employeesListOptions = employees.map((employee) => (
 		<option
 			key={employee.id}
-			value={JSON.stringify(employee)}
+			value={employee.id}
 		>{`${employee.firstName} ${employee.lastName}`}</option>
 	));
 
-	const handleChange = ({
-		target,
-	}: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
-		setFormValues((prev) => ({
-			...prev,
-			[target.name]: returnValueByInputName(target),
-		}));
+	const resetForm = () => setSubmitResponse(null);
 
-	const resetForm = () => {
-		setSubmitResponse(null);
-		setFormValues({ ...returnEmptyForm(), employee: employees[0] });
-	};
+	const onSubmit = async (formData: FieldValues) => {
+		console.log(formData);
+		formData['employee'] = employees.find(
+			(emp) => (emp.id = formData['employee'].id)
+		);
+		console.log(formData);
 
-	const handleSubmit = async (e: SyntheticEvent) => {
-		e.preventDefault();
-		if (!Utilities.checkIfEndDateIsAfterBegin(formValues.from, formValues.to))
+		if (!Utilities.checkIfEndDateIsAfterBegin(formData.from, formData.to))
 			return errorMessage(
 				'Invalid date!',
 				'End date cannot come before the beginning!',
@@ -63,7 +52,7 @@ export const CreateVacation: React.FunctionComponent = () => {
 			</div>
 		);
 
-		const success = await Post.instance('vacations', formValues);
+		const success = await Post.instance('vacations', formData);
 
 		setSubmitResponse(
 			<div
@@ -90,30 +79,28 @@ export const CreateVacation: React.FunctionComponent = () => {
 		<section className={styles.section} style={{ height: '19rem' }}>
 			<h2 className={styles.header}>Create vacation</h2>
 			{submitResponse || (
-				<form onSubmit={handleSubmit} className={styles.form}>
+				<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
 					<label>Employee</label>
-					<select onChange={handleChange} name="employee">
-						{employeesListOptions}
-					</select>
+					<select {...register('employee')}>{employeesListOptions}</select>
 
 					<label>From</label>
 					<input
-						required
+						{...register('from', {
+							max: '2050-12-31',
+							value: Utilities.formatDateString(new Date()),
+						})}
 						type="date"
-						name="from"
-						max="2050-12-31"
-						value={formValues.from}
-						onChange={handleChange}
+						required
 					/>
 
 					<label>To</label>
 					<input
-						required
+						{...register('to', {
+							max: '2050-12-31',
+							value: Utilities.formatDateString(Utilities.addDay(new Date())),
+						})}
 						type="date"
-						name="to"
-						max="2050-12-31"
-						value={formValues.to}
-						onChange={handleChange}
+						required
 					/>
 
 					<button className={globalStyles.button} type="submit">
@@ -124,24 +111,3 @@ export const CreateVacation: React.FunctionComponent = () => {
 		</section>
 	);
 };
-
-function returnValueByInputName(
-	eventTarget: EventTarget & (HTMLInputElement | HTMLSelectElement)
-) {
-	switch (eventTarget.name) {
-		case 'employee':
-			return JSON.parse(eventTarget.value);
-		case 'startTime':
-			return `${eventTarget.value}:00`;
-		default:
-			return eventTarget.value;
-	}
-}
-
-function returnEmptyForm(): CreateVacationForm {
-	return {
-		employee: null,
-		from: Utilities.formatDateString(new Date()),
-		to: Utilities.formatDateString(Utilities.addDay(new Date())),
-	};
-}
