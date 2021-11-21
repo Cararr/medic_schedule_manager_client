@@ -1,50 +1,39 @@
-import React, { useState, useEffect, SyntheticEvent } from 'react';
+import React, { useState } from 'react';
 import { useEmployees } from 'providers/EmployeesContext';
+import { FieldValues, useForm } from 'react-hook-form';
 import Post from 'api/Post';
 import Utilities from 'util/Utilities';
 import { errorMessage } from 'WinBox/winboxMessages';
-import { CreateHomeRehabilitationForm } from 'types';
 import { CgSpinner } from 'react-icons/cg';
 import styles from './create.module.scss';
 import globalStyles from 'globalStyles.module.scss';
 
 export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 	const { employees } = useEmployees();
-	const [formValues, setFormValues] = useState<CreateHomeRehabilitationForm>(
-		returnEmptyForm()
-	);
 
-	const [submitResponse, setSubmitResponse] = useState<JSX.Element | null>(
-		null
-	);
+	const { register, handleSubmit } = useForm({
+		defaultValues: {
+			employee: null,
+			patient: '',
+			startTime: '',
+			from: Utilities.formatDateString(new Date()),
+			to: Utilities.formatDateString(Utilities.addDay(new Date())),
+		},
+	});
 
-	useEffect(() => {
-		setFormValues((prev) => ({ ...prev, employee: employees[0] }));
-	}, [employees]);
+	const [response, setResponse] = useState<JSX.Element | null>(null);
 
 	const employeesListOptions = employees.map((employee) => (
 		<option
 			key={employee.id}
-			value={JSON.stringify(employee)}
+			value={employee.id}
 		>{`${employee.firstName} ${employee.lastName}`}</option>
 	));
 
-	const handleChange = ({
-		target,
-	}: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
-		setFormValues((prev) => ({
-			...prev,
-			[target.name]: returnValueByInputName(target),
-		}));
+	const clearResponse = () => setResponse(null);
 
-	const resetForm = () => {
-		setSubmitResponse(null);
-		setFormValues({ ...returnEmptyForm(), employee: employees[0] });
-	};
-
-	const handleSubmit = async (e: SyntheticEvent) => {
-		e.preventDefault();
-		if (!Utilities.checkIfEndDateIsAfterBegin(formValues.from, formValues.to))
+	const onSubmit = async (formData: FieldValues) => {
+		if (!Utilities.checkIfEndDateIsAfterBegin(formData.from, formData.to))
 			return errorMessage(
 				'Invalid date!',
 				'End date cannot come before the beginning!',
@@ -52,7 +41,7 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 				17
 			);
 
-		setSubmitResponse(
+		setResponse(
 			<div style={{ marginTop: '8rem' }} className={styles.response}>
 				<CgSpinner
 					className={globalStyles.spin}
@@ -64,18 +53,19 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 		);
 
 		const payload = {
-			from: formValues.from,
-			to: formValues.to,
+			from: formData.from,
+			to: formData.to,
 			homeRehabilitation: {
-				startTime: formValues.startTime,
-				employee: formValues.employee,
-				patient: formValues.patient,
+				startTime: `${formData.startTime}:00`,
+				employee:
+					employees.find((emp) => emp.id === formData.employee) || employees[0],
+				patient: formData.patient,
 			},
 		};
 
 		const success = await Post.instance('home-rehabilitations', payload);
 
-		setSubmitResponse(
+		setResponse(
 			<div
 				style={{ marginTop: success ? '8rem' : 0 }}
 				className={styles.response}
@@ -86,7 +76,7 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 						: 'Action aborted, something went wrong. Sorry!'}
 				</h3>
 				<button
-					onClick={resetForm}
+					onClick={clearResponse}
 					type="button"
 					className={globalStyles.button}
 				>
@@ -96,53 +86,35 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 		);
 	};
 
+	const maxLength = 25;
+	const max = '2050-12-31';
+
 	return (
 		<section className={styles.section} style={{ height: '26rem' }}>
 			<h2 className={styles.header}>Create home rehabilitation</h2>
-			{submitResponse || (
-				<form onSubmit={handleSubmit} className={styles.form}>
+			{response || (
+				<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
 					<label>Employee</label>
-					<select onChange={handleChange} name="employee">
+					<select required {...register('employee')}>
 						{employeesListOptions}
 					</select>
 
 					<label>Patient</label>
 					<input
 						required
-						maxLength={25}
-						name="patient"
-						onChange={handleChange}
-						value={formValues.patient}
+						{...register('patient', {
+							maxLength,
+						})}
 					/>
 
 					<label>Starts at</label>
-					<input
-						required
-						type="time"
-						name="startTime"
-						onChange={handleChange}
-						value={Utilities.formatTimeView(formValues.startTime)}
-					/>
+					<input required type="time" {...register('startTime')} />
 
 					<label>From</label>
-					<input
-						required
-						type="date"
-						name="from"
-						max="2050-12-31"
-						onChange={handleChange}
-						value={formValues.from}
-					/>
+					<input required type="date" {...register('from', { max })} />
 
 					<label>To</label>
-					<input
-						required
-						type="date"
-						name="to"
-						max="2050-12-31"
-						onChange={handleChange}
-						value={formValues.to}
-					/>
+					<input required type="date" {...register('to', { max })} />
 					<button className={globalStyles.button} type="submit">
 						Create
 					</button>
@@ -151,26 +123,3 @@ export const CreateHomeRehabilitation: React.FunctionComponent = () => {
 		</section>
 	);
 };
-
-function returnValueByInputName(
-	eventTarget: EventTarget & (HTMLInputElement | HTMLSelectElement)
-) {
-	switch (eventTarget.name) {
-		case 'employee':
-			return JSON.parse(eventTarget.value);
-		case 'startTime':
-			return `${eventTarget.value}:00`;
-		default:
-			return eventTarget.value;
-	}
-}
-
-function returnEmptyForm(): CreateHomeRehabilitationForm {
-	return {
-		employee: null,
-		patient: '',
-		startTime: '',
-		from: Utilities.formatDateString(new Date()),
-		to: Utilities.formatDateString(Utilities.addDay(new Date())),
-	};
-}
