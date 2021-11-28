@@ -3,7 +3,6 @@ import { UserCrudentials } from 'types';
 import { ImCross } from 'react-icons/im';
 import { CgSpinner } from 'react-icons/cg';
 import styles from './landingPage.module.scss';
-import globalStyles from 'globalStyles.module.scss';
 
 interface Props {
 	handleInputChange: (eventTarget: React.ChangeEvent<HTMLInputElement>) => void;
@@ -16,7 +15,7 @@ interface Props {
 export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 	const loading = (
 		<CgSpinner
-			className={globalStyles.spin}
+			className="spin"
 			style={{
 				fontSize: '1.54rem',
 				margin: 'auto',
@@ -35,8 +34,8 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 				<ImCross />
 			</button>
 
-			<div className={styles.formContent}>
-				<label className={styles.label}>Login</label>
+			<div className={styles.content}>
+				<label>Login</label>
 				<input
 					required
 					max={20}
@@ -46,7 +45,7 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 					type="text"
 					maxLength={30}
 				></input>
-				<label className={styles.label}>Hasło</label>
+				<label>Hasło</label>
 				<input
 					required
 					max={20}
@@ -56,14 +55,11 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 					type="password"
 					maxLength={10}
 				></input>
-				<div className={styles.submitButtonContainer}>
+				<div className={styles.submitButton}>
 					{props.isLoading ? (
 						loading
 					) : (
-						<button
-							type="submit"
-							className={`${globalStyles.button} ${styles.submitButton}`}
-						>
+						<button type="submit" className="button">
 							Zaloguj sie
 						</button>
 					)}

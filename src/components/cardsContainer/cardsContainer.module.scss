@@ -3,30 +3,30 @@
 	justify-content: space-evenly;
 	align-items: center;
 	margin-top: 5%;
-}
-.card {
-	padding: 5px;
-	margin: 0;
-	max-width: 12rem;
-	background-color: var(--backgroundYellow);
-	border: 3px solid black;
-	border-radius: 5px;
-	padding-bottom: 0.5rem;
-	text-align: center;
-	transition: transform 0.05s ease-in-out;
-}
-.card img {
-	max-width: 100%;
-}
-.card:hover {
-	cursor: pointer;
-	transform: translate(+5px, +5px);
-}
-.card figcaption {
-	width: 100%;
-	padding: 0 5px;
-	font-size: 1.5rem;
-	font-weight: bold;
+	.card {
+		padding: 5px;
+		margin: 0;
+		max-width: 12rem;
+		background-color: var(--backgroundYellow);
+		border: 3px solid black;
+		border-radius: 5px;
+		padding-bottom: 0.5rem;
+		text-align: center;
+		transition: transform 0.05s ease-in-out;
+		&:hover {
+			cursor: pointer;
+			transform: translate(+5px, +5px);
+		}
+		img {
+			max-width: 100%;
+		}
+		figcaption {
+			width: 100%;
+			padding: 0 5px;
+			font-size: 1.5rem;
+			font-weight: bold;
+		}
+	}
 }
 @media only screen and (max-width: 500px) {
 	.hidden {

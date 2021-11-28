@@ -9,7 +9,6 @@ import { UserCrudentials } from 'types';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useUser } from 'providers/UserContext';
 import styles from './landingPage.module.scss';
-import globalStyles from 'globalStyles.module.scss';
 
 export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 	history,
@@ -58,20 +57,20 @@ export const LandingPage: React.FunctionComponent<RouteComponentProps> = ({
 
 	return (
 		<main className={styles.landingPage}>
-			<header className={styles.headerContainer}>
-				<h1 className={styles.mainHeader}>Fizjo Medyk</h1>
-				<h3 className={styles.secoundaryHeader}>
+			<header>
+				<h1>Fizjo Medyk</h1>
+				<h3>
 					Przestrzeń w sieci dla najlepszej grupy fizjoterapeutów w Świdnicy
 				</h3>
+				<div className={styles.buttonContainer}>
+					<Link to={isLoginPanelOn ? '/' : '/login'}>
+						<button className="button">Start</button>
+					</Link>
+				</div>
 			</header>
-			<img alt="Schedule Calendar" src={LandingImage} />
-			<div className={styles.loginButtonContainer}>
-				<Link to={isLoginPanelOn ? '/' : '/login'}>
-					<button className={`${globalStyles.button} ${styles.loginButton}`}>
-						Start
-					</button>
-				</Link>
-			</div>
+			<figure>
+				<img alt="Schedule Calendar" src={LandingImage} />
+			</figure>
 			<Switch>
 				<Route exact path={'/login'}>
 					<LoginPanel

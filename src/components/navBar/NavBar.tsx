@@ -5,7 +5,6 @@ import Cookies from 'js-cookie';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import Utilities from 'util/Utilities';
 import styles from './NavBar.module.scss';
-import globalStyles from 'globalStyles.module.scss';
 
 export const NavBar: React.FunctionComponent = () => {
 	const [isNavBarTransparent, setIsNavBarTransparent] = useState(true);
@@ -58,7 +57,7 @@ export const NavBar: React.FunctionComponent = () => {
 					? 'none'
 					: '0 1px 3px 0 rgba(244, 175, 139, 0.9)',
 			}}
-			className={`${globalStyles.notPrintable} ${styles.nav}`}
+			className={`not-printable ${styles.nav}`}
 		>
 			{!isThisHomePage && (
 				<div className={styles.menu}>
@@ -88,21 +87,20 @@ export const NavBar: React.FunctionComponent = () => {
 								  }
 								: {}
 						}
-						className={styles.menuContent}
 					>
-						<li className={styles.listItem}>
-							<NavLink activeClassName={styles.activeLink} to="/schedules">
+						<li>
+							<NavLink activeClassName={styles.active} to="/schedules">
 								Schedules
 							</NavLink>
 						</li>
-						<li className={styles.listItem}>
-							<NavLink activeClassName={styles.activeLink} to="/vacations">
+						<li>
+							<NavLink activeClassName={styles.active} to="/vacations">
 								Vacations
 							</NavLink>
 						</li>
 						{isUserBoss && !isMobileDevice && (
-							<li className={styles.listItem}>
-								<NavLink activeClassName={styles.activeLink} to="/create">
+							<li>
+								<NavLink activeClassName={styles.active} to="/create">
 									Create
 								</NavLink>
 							</li>
@@ -114,7 +112,7 @@ export const NavBar: React.FunctionComponent = () => {
 				className={styles.header}
 			>{`${user?.firstName} ${user?.lastName}`}</h3>
 			<Link style={{ gridColumnStart: 3, justifySelf: 'end' }} to="/">
-				<button onClick={logOut} className={globalStyles.button} type="button">
+				<button onClick={logOut} className="button" type="button">
 					Log out
 				</button>
 			</Link>
