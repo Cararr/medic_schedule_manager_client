@@ -3,7 +3,7 @@ import { TableCell } from 'components/tables/TableCell';
 import Utilities from 'util/Utilities';
 import { HomeRehabilitation, Employee, Comment } from 'types';
 import { BsTrash } from 'react-icons/bs';
-import styles from './schedules.module.scss';
+import styles from './tables.module.scss';
 import globalStyles from 'globalStyles.module.scss';
 
 interface Props {

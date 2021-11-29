@@ -39,13 +39,13 @@
 .buttonDisabled {
 	pointer-events: none;
 }
-.schedulesContainer {
+.schedules {
 	text-align: center;
 	width: 100%;
 	display: flex;
 	padding-top: 1rem;
 }
-.schedulesContent {
+.content {
 	display: flex;
 	flex-flow: column;
 	align-items: center;

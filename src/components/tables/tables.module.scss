@@ -59,8 +59,25 @@
 	border-radius: 5px;
 	margin: 0.5rem 0;
 }
+.homeRehabilitations {
+	margin-bottom: 2rem;
+}
+.hrInput {
+	text-align: center;
+	border: none;
+	font-size: inherit;
+	font-family: inherit;
+}
+.trashIcon {
+	background-color: var(--backgroundYellow);
+	width: 2rem !important;
+	line-height: 0;
+}
 @media only screen and (max-width: 500px) {
 	.informations {
 		width: 100%;
+	}
+	.trashIcon {
+		display: none;
 	}
 }

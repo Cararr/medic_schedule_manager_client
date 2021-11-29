@@ -1,0 +1,53 @@
+.createHeader {
+	text-align: center;
+	width: 100%;
+}
+.section {
+	background-color: var(--backgroundYellow);
+	border: 3px solid black;
+	border-radius: 5px;
+	width: clamp(25rem, 80%, 30rem);
+	margin: 2rem auto 1rem auto;
+	padding: 0.5rem;
+	position: relative;
+}
+.header {
+	text-align: center;
+	margin: 0.5rem 0;
+}
+.response {
+	text-align: center;
+	font-size: 2rem;
+}
+.response button {
+	font-size: 1.5rem;
+}
+.form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.form label {
+	margin-bottom: 0.2rem;
+	font-weight: bold;
+}
+.form input,
+.form select {
+	font-size: 1rem;
+	border-radius: 5px;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+.form select {
+	background-color: var(--backgroundViolet);
+}
+.form input[type='date'],
+.form input[type='time'] {
+	width: fit-content;
+}
+.form button {
+	margin-top: 0.6rem;
+	margin-bottom: 1rem;
+	font-size: 1.5rem;
+}

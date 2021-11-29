@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Get from 'api/Get';
 import Post from 'api/Post';
-import { EmployeesList } from 'components/schedulesView/EmployeesList';
+import { EmployeesList } from 'components/schedules/EmployeesList';
 import { Tables } from 'components/tables/Tables';
 import { ControlPanel } from 'components/tables/ControlPanel';
 import Utilities from 'util/Utilities';

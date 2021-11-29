@@ -4,7 +4,7 @@ import VacationsImage from 'assets/images/VacationsImage.png';
 import HomeImage from 'assets/images/HomeImage.png';
 import { NavBar } from 'components/navBar/NavBar';
 import { CardsContainer } from 'components/cardsContainer/CardsContainer';
-import { CreateSchedules } from './CreateSchedules';
+import { CreateSchedules } from 'components/schedules/CreateSchedules';
 import { CreateVacation } from './CreateVacation';
 import { CreateHomeRehabilitation } from './CreateHomeRehabilitation';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';

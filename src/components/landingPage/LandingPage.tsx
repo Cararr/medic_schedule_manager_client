@@ -19,7 +19,9 @@ export const LandingPage: React.FunctionComponent = () => {
 				</h3>
 				<div className={styles.buttonContainer}>
 					<Link to={isLoginPanelOn ? '/' : '/login'}>
-						<button className="button">Start</button>
+						<button className="button" type="button">
+							Start
+						</button>
 					</Link>
 				</div>
 			</header>

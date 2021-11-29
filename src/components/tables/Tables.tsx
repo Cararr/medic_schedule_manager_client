@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { Table } from './Table';
-import { HomeRehabilitations } from 'components/schedulesView/HomeRehabilitationsView';
+import { HomeRehabilitations } from './HomeRehabilitations';
 import { useUser } from 'providers/UserContext';
 import Utilities from 'util/Utilities';
 import {

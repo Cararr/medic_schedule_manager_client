@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import { LoggedUsersRoute } from 'RouteTypes/LoggedUsersRoute';
 import { NonLoggedUsersRoute } from 'RouteTypes/NonLoggedUsersRoute';
 import { AdminRoute } from 'RouteTypes/AdminRoute';
-import { ViewSchedules } from 'components/schedulesView/ViewSchedules';
+import { ViewSchedules } from 'components/schedules/ViewSchedules';
 import { LandingPage } from 'components/landingPage/LandingPage';
 import { HomePage } from 'components/homePage/HomePage';
 import { Create } from 'components/create/Create';
