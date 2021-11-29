@@ -1,18 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { UserCrudentials } from 'types';
 import { ImCross } from 'react-icons/im';
 import { CgSpinner } from 'react-icons/cg';
+import { useHistory } from 'react-router';
+import { errorMessage } from 'WinBox/winboxMessages';
+import { login } from 'api/login';
+import { useEmployees } from 'providers/EmployeesContext';
+import { useUser } from 'providers/UserContext';
+import { FieldValues, useForm } from 'react-hook-form';
 import styles from './landingPage.module.scss';
 
-interface Props {
-	handleInputChange: (eventTarget: React.ChangeEvent<HTMLInputElement>) => void;
-	loginInputValue: UserCrudentials;
-	handleLogin: (e: React.SyntheticEvent) => void;
-	handleCloseLoginPanel: () => void;
-	isLoading: boolean;
-}
+export const LoginPanel: React.FunctionComponent = () => {
+	const history = useHistory();
 
-export const LoginPanel: React.FunctionComponent<Props> = (props) => {
+	const [isLoading, setIsLoading] = useState(false);
+
+	const { changeUser } = useUser();
+	const { employees, loadEmployees } = useEmployees();
+
+	const { register, handleSubmit, reset } = useForm({
+		defaultValues: returnEmptyLoginValues(),
+	});
+
+	const onSubmit = async (formData: FieldValues) => {
+		setIsLoading(true);
+
+		const response = await login(formData);
+
+		setIsLoading(false);
+
+		reset(returnEmptyLoginValues());
+
+		if (response?.status === 201) {
+			if (!employees.length) loadEmployees();
+			changeUser(response.data.user);
+			history.push('/home');
+		} else {
+			if (!response || ![400, 401].includes(response.status))
+				return errorMessage(
+					'Login failed',
+					'Something went wrong, please try again later!'
+				);
+			errorMessage('Login failed', response.data.message);
+		}
+	};
+
+	const handleCloseLoginPanel = () => history.push('/');
+
 	const loading = (
 		<CgSpinner
 			className="spin"
@@ -25,9 +59,9 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 	);
 
 	return (
-		<form onSubmit={props.handleLogin} className={styles.form}>
+		<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
 			<button
-				onClick={props.handleCloseLoginPanel}
+				onClick={handleCloseLoginPanel}
 				type="button"
 				className={styles.buttonClose}
 			>
@@ -36,27 +70,15 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 
 			<div className={styles.content}>
 				<label>Login</label>
-				<input
-					required
-					max={20}
-					onChange={props.handleInputChange}
-					value={props.loginInputValue.lastName}
-					name="lastName"
-					type="text"
-					maxLength={30}
-				></input>
+				<input required {...register('lastName', { maxLength: 30 })} />
 				<label>Hasło</label>
 				<input
 					required
-					max={20}
-					onChange={props.handleInputChange}
-					value={props.loginInputValue.password}
-					name="password"
+					{...register('password', { maxLength: 10 })}
 					type="password"
-					maxLength={10}
-				></input>
+				/>
 				<div className={styles.submitButton}>
-					{props.isLoading ? (
+					{isLoading ? (
 						loading
 					) : (
 						<button type="submit" className="button">
@@ -68,3 +90,8 @@ export const LoginPanel: React.FunctionComponent<Props> = (props) => {
 		</form>
 	);
 };
+
+const returnEmptyLoginValues = (): UserCrudentials => ({
+	lastName: '',
+	password: '',
+});
