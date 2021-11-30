@@ -1,3 +1,5 @@
+@import 'global.scss';
+
 .container {
 	display: flex;
 	justify-content: space-evenly;
@@ -12,7 +14,7 @@
 		border-radius: 5px;
 		padding-bottom: 0.5rem;
 		text-align: center;
-		transition: transform 0.05s ease-in-out;
+		transition: $transition;
 		&:hover {
 			cursor: pointer;
 			transform: translate(+5px, +5px);

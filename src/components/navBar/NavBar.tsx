@@ -73,7 +73,6 @@ export const NavBar: React.FunctionComponent = () => {
 							className={styles.menuTrigger}
 							style={{
 								transform: isMenuOpen ? 'rotate(180deg)' : '',
-								transition: 'transform .15s ease-in-out',
 							}}
 						/>
 					</button>

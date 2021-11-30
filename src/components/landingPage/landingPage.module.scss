@@ -1,3 +1,5 @@
+@import 'global.scss';
+
 .landingPage {
 	width: 100vw;
 	padding: 1rem;
@@ -27,11 +29,11 @@
 	}
 	button {
 		padding: 1px 0.6rem;
-		background-color: hsl(21, 83%, 65%);
+		background-color: $backgroundOrange;
 		font-size: 2.2rem;
-		transition: background-color 0.15s ease-in;
+		transition: $transition;
 		&:hover {
-			background-color: var(--backgroundOrange);
+			background-color: darken($backgroundOrange, 5%);
 			transform: none;
 		}
 	}
@@ -43,13 +45,13 @@
 .form {
 	position: absolute;
 	border-radius: 0.5rem;
-	background-color: var(--backgroundYellow);
+	background-color: $backgroundYellow;
 	top: 50%;
 	left: 50%;
 	padding: 1rem;
 	transform: translate(-50%, -50%);
 	width: 400px;
-	border: 5px solid var(--backgroundViolet);
+	border: 5px solid $backgroundViolet;
 	z-index: 3;
 	input {
 		font-size: 1rem;
@@ -65,8 +67,8 @@
 		right: 0;
 		top: 0;
 		border-radius: 0;
-		background-color: var(--red);
-		border: 1px solid var(--borderColor);
+		background-color: $red;
+		border: 1px solid $borderColor;
 		display: grid;
 		place-items: center;
 		cursor: pointer;

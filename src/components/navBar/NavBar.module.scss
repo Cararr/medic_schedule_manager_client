@@ -1,3 +1,5 @@
+@import 'global.scss';
+
 .nav {
 	top: 0;
 	box-sizing: content-box;
@@ -8,14 +10,14 @@
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	align-items: center;
-	transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	transition: $transition;
 	.menuTrigger {
 		border: none;
 		font-family: 'Roboto';
 		font-size: inherit;
 		background-color: inherit;
 		cursor: pointer;
-		transition: font-weight 0.15s ease-in-out;
+		transition: $transition;
 	}
 	.menu {
 		grid-column-start: 1;
@@ -24,14 +26,14 @@
 		ul {
 			position: absolute;
 			top: calc(100% + 0.5rem);
-			background-color: var(--backgroundYellow);
+			background-color: $backgroundYellow;
 			padding: 1rem;
 			border-radius: 5px;
 			box-shadow: 0 2px 5px 0 rgba(244, 175, 139, 0.9);
 			opacity: 0;
 			pointer-events: none;
 			transform: translateY(-20px);
-			transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+			transition: $transition;
 			list-style: none;
 			z-index: 5;
 			li {

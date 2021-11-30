@@ -1,9 +1,11 @@
+@import 'global.scss';
+
 .createHeader {
 	text-align: center;
 	width: 100%;
 }
 .section {
-	background-color: var(--backgroundYellow);
+	background-color: $backgroundYellow;
 	border: 3px solid black;
 	border-radius: 5px;
 	width: clamp(25rem, 80%, 30rem);
@@ -40,7 +42,7 @@
 	text-align: center;
 }
 .form select {
-	background-color: var(--backgroundViolet);
+	background-color: $backgroundViolet;
 }
 .form input[type='date'],
 .form input[type='time'] {
