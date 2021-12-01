@@ -2,7 +2,6 @@ import React, { DragEvent } from 'react';
 import { useEmployees } from 'providers/EmployeesContext';
 import { StationSchedules, Employee, HomeRehabilitation, Comment } from 'types';
 import styles from './schedules.module.scss';
-import globalStyles from 'globalStyles.module.scss';
 
 interface Props {
 	stationSchedules: StationSchedules;
@@ -33,7 +32,7 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 		return (
 			<li
 				key={employee.id}
-				className={`${globalStyles.listItem} ${globalStyles.draggable}`}
+				className="list-item draggable"
 				draggable={true}
 				onDragOver={handleOnDragOver}
 				onDragStart={(e) => handleOnDragStart(e, employee)}
@@ -49,14 +48,14 @@ export const EmployeesList: React.FunctionComponent<Props> = (props) => {
 
 	const loading = (
 		<li>
-			<p className={globalStyles.listItem}>Loading...</p>
+			<p className="list-item">Loading...</p>
 		</li>
 	);
 
 	return (
 		<aside className={styles.employees}>
 			<h3>Employees</h3>
-			<ul className={globalStyles.list}>
+			<ul className="list">
 				{(employees?.length && employeesList) || loading}
 			</ul>
 		</aside>

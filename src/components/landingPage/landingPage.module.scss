@@ -92,7 +92,7 @@
 		}
 	}
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: $mobile-width) {
 	.form {
 		width: 70%;
 		top: 60%;

@@ -107,11 +107,3 @@ input[type='time']::-webkit-calendar-picker-indicator {
 		transform: rotate(360deg);
 	}
 }
-@media only screen and (max-width: 500px) {
-	aside {
-		display: none;
-	}
-	.table {
-		width: 100%;
-	}
-}

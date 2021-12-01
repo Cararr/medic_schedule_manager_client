@@ -13,7 +13,6 @@ import {
 } from 'types';
 import { CgSpinner } from 'react-icons/cg';
 import styles from './tables.module.scss';
-import globalStyles from 'globalStyles.module.scss';
 
 interface Props {
 	schedules: Schedules;
@@ -62,7 +61,7 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 	const isLoading = !Boolean(props.workStageSpans?.length);
 	const loading = (
 		<CgSpinner
-			className={globalStyles.spin}
+			className="spin"
 			style={{
 				marginTop: '4rem',
 				fontSize: '6rem',
@@ -97,10 +96,10 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 				(props.schedules.comment?.content || isUserBoss) && (
 					<article
 						className={`${styles.informations} ${
-							!props.schedules.comment?.content ? globalStyles.notPrintable : ''
+							!props.schedules.comment?.content ? 'not-printable' : ''
 						}`}
 					>
-						<header className={styles.informationsHeader}>
+						<header>
 							<h3>Informacje</h3>
 						</header>
 						<textarea
@@ -109,7 +108,6 @@ export const Tables: React.FunctionComponent<Props> = (props) => {
 							value={props.schedules.comment?.content}
 							onChange={props.handleCommentChanges}
 							readOnly={!isUserBoss}
-							className={styles.informationsContent}
 						/>
 					</article>
 				)}

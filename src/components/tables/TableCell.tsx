@@ -3,7 +3,6 @@ import { useUser } from 'providers/UserContext';
 import { Employee, HomeRehabilitation, Comment } from 'types';
 import Utilities from 'util/Utilities';
 import styles from './tables.module.scss';
-import globalStyles from 'globalStyles.module.scss';
 
 interface Props {
 	cellNumber: number;
@@ -72,9 +71,9 @@ export const TableCell: React.FunctionComponent<Props> = (props) => {
 
 	const className = `${
 		user?.lastName === props.cellValue?.lastName
-			? globalStyles.orangeBackground
-			: globalStyles.whiteBackground
-	} ${props.cellValue && isUserBoss && globalStyles.draggable}`;
+			? styles.backgroundOrange
+			: styles.backgroundWhite
+	} ${props.cellValue && isUserBoss && 'draggable'}`;
 
 	const isCellDraggable = Boolean(props.cellValue) && isUserBoss;
 

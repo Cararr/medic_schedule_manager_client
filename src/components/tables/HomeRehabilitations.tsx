@@ -4,7 +4,6 @@ import Utilities from 'util/Utilities';
 import { HomeRehabilitation, Employee, Comment } from 'types';
 import { BsTrash } from 'react-icons/bs';
 import styles from './tables.module.scss';
-import globalStyles from 'globalStyles.module.scss';
 
 interface Props {
 	isUserBoss: boolean;
@@ -41,7 +40,6 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 								required
 								type="time"
 								name="startTime"
-								className={styles.hrInput}
 								value={Utilities.formatTimeView(hR.startTime)}
 								onChange={(e) =>
 									props.handleHomeRehabilitationChanges(e, index)
@@ -70,7 +68,6 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 								required
 								name="patient"
 								maxLength={25}
-								className={styles.hrInput}
 								value={hR.patient}
 							></input>
 						) : (
@@ -78,15 +75,8 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 						)}
 					</td>
 					{props.isUserBoss && (
-						<td className={`${styles.trashIcon} ${globalStyles.notPrintable}`}>
-							<BsTrash
-								onClick={() => props.removeHomeRehabilitation(hR)}
-								style={{
-									fontSize: '1.2rem',
-									color: 'var(--red)',
-									cursor: 'pointer',
-								}}
-							/>
+						<td className={`${styles.trash} not-printable`}>
+							<BsTrash onClick={() => props.removeHomeRehabilitation(hR)} />
 						</td>
 					)}
 				</tr>
@@ -95,9 +85,9 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 
 	return (
 		<section className={styles.homeRehabilitations}>
-			<table className={globalStyles.table}>
+			<table className={styles.table}>
 				<thead>
-					<tr className={globalStyles.tableTitle}>
+					<tr className={styles.tableTitle}>
 						<td colSpan={3}>Rehabilitacje w domu pacjenta</td>
 					</tr>
 					<tr>
@@ -106,7 +96,7 @@ export const HomeRehabilitations: React.FunctionComponent<Props> = (props) => {
 						<td>Patient</td>
 					</tr>
 				</thead>
-				<tbody className={globalStyles.whiteBackground}>
+				<tbody className={styles.backgroundWhite}>
 					{homeRehabilitationsView}
 				</tbody>
 			</table>

@@ -1,3 +1,5 @@
+@import '../../global.scss';
+
 .container {
 	width: 100%;
 	margin-top: 2rem;
@@ -21,7 +23,7 @@
 	border: none;
 	cursor: pointer;
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: $mobile-width) {
 	.container {
 		padding: 1rem 0;
 	}

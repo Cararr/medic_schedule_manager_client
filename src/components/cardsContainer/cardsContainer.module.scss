@@ -30,12 +30,12 @@
 		}
 	}
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: $mobile-width) {
 	.hidden {
 		display: none;
 	}
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: $mobile-width) {
 	.container {
 		min-height: 85vh;
 		flex-direction: column;

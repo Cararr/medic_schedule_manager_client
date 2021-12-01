@@ -2,7 +2,6 @@ import React, { ChangeEvent } from 'react';
 import { DateForm } from 'types';
 import { CgSpinner } from 'react-icons/cg';
 import styles from './tables.module.scss';
-import globalStyles from 'globalStyles.module.scss';
 
 interface Props {
 	generateSchedule?: () => Promise<void>;
@@ -20,38 +19,36 @@ export const ControlPanel: React.FunctionComponent<Props> = (props) => {
 	const createSchedulesView = Boolean(props.dateForm);
 	const schedulesView = Boolean(props.saveScheudles);
 
-	const loading = (
-		<CgSpinner className={globalStyles.spin} style={{ fontSize: '1.5rem' }} />
-	);
+	const loading = <CgSpinner className="spin" style={{ fontSize: '1.5rem' }} />;
 
 	const schedulesViewActions = [
-		<li key={1} className={globalStyles.listItem}>
+		<li key={1} className="list-item">
 			{props.isLoading ? (
 				loading
 			) : (
 				<button
 					disabled={!props.wasScheduleEdited}
 					onClick={props.wasScheduleEdited ? props.saveScheudles : undefined}
-					className={`${globalStyles.button} ${
-						!props.wasScheduleEdited && globalStyles.buttonDisabled
+					className={`button ${
+						!props.wasScheduleEdited ? 'button-disabled' : ''
 					}`}
 				>
 					Save
 				</button>
 			)}
 		</li>,
-		<li key={2} className={globalStyles.listItem}>
-			<button className={globalStyles.button} onClick={props.printSchedules}>
+		<li key={2} className="list-item">
+			<button className="button" onClick={props.printSchedules}>
 				Print
 			</button>
 		</li>,
-		<li key={3} className={globalStyles.listItem}>
+		<li key={3} className="list-item">
 			<h3>Status</h3>
-			<p className={styles.statusText}>
+			<p className={styles.status}>
 				{props.wasScheduleEdited ? 'Unsaved changes!' : 'No changes to save'}
 			</p>
 			<div
-				className={styles.statusBar}
+				className={styles.bar}
 				style={{
 					backgroundColor: props.wasScheduleEdited ? 'yellow' : 'green',
 				}}
@@ -65,20 +62,20 @@ export const ControlPanel: React.FunctionComponent<Props> = (props) => {
 	};
 
 	const createSchedulesViewActions = [
-		<li key={1} className={globalStyles.listItem}>
-			<button onClick={props.generateSchedule} className={globalStyles.button}>
+		<li key={1} className="list-item">
+			<button onClick={props.generateSchedule} className="button">
 				Generate
 			</button>
 		</li>,
-		<li key={2} className={globalStyles.listItem}>
-			<button onClick={props.clearSchedule} className={globalStyles.button}>
+		<li key={2} className="list-item">
+			<button onClick={props.clearSchedule} className="button">
 				Clear
 			</button>
 		</li>,
 		<form
 			key={3}
 			onSubmit={props.createSchedules}
-			className={`${styles.date} ${globalStyles.listItem}`}
+			className={`${styles.date} list-item`}
 		>
 			<label>From</label>
 			<input
@@ -102,11 +99,7 @@ export const ControlPanel: React.FunctionComponent<Props> = (props) => {
 			{props.isLoading ? (
 				loading
 			) : (
-				<button
-					style={{ marginTop: '.5rem' }}
-					className={globalStyles.button}
-					type="submit"
-				>
+				<button style={{ marginTop: '.5rem' }} className="button" type="submit">
 					Create
 				</button>
 			)}
@@ -116,7 +109,7 @@ export const ControlPanel: React.FunctionComponent<Props> = (props) => {
 	return (
 		<aside className={styles.controlPanel}>
 			<h3>Actions</h3>
-			<ul className={styles.list}>
+			<ul className="list">
 				{schedulesView && schedulesViewActions}
 				{createSchedulesView && createSchedulesViewActions}
 			</ul>

@@ -7,7 +7,7 @@ import {
 	HomeRehabilitation,
 	Comment,
 } from 'types';
-import globalStyles from 'globalStyles.module.scss';
+import styles from './tables.module.scss';
 
 interface Props {
 	stationName: string;
@@ -28,14 +28,14 @@ interface Props {
 
 export const Table: React.FunctionComponent<Props> = (props) => {
 	return (
-		<table className={globalStyles.table}>
+		<table className={styles.table}>
 			<thead>
 				<tr>
 					{props.stationName === StationName.WIZYTY
 						? [invisibleCell(0), invisibleCell(1)]
 						: undefined}
 					<td
-						className={globalStyles.tableTitle}
+						className={styles.tableTitle}
 						colSpan={props.stationName === StationName.WIZYTY ? 1 : 4}
 					>
 						{props.stationName.toLocaleLowerCase()}

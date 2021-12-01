@@ -1,16 +1,7 @@
 @import-normalize;
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-@font-face {
-	font-family: 'Gilroy';
-	src: local('Gilroy'),
-		url('./assets/fonts/Gilroy-ExtraBold.otf') format('opentype');
-}
-@font-face {
-	font-family: 'Gilroy-Light';
-	src: local('Gilroy-Light'),
-		url('./assets/fonts/Gilroy-Light.otf') format('opentype');
-}
+@import 'sass/variables.scss';
+@import 'sass/fonts.scss';
+
 :root {
 	--backgroundBlue: #c8eaf3;
 	--fontColor: #06151a;
@@ -21,15 +12,6 @@
 	--red: #f11717;
 	font-size: 22px;
 }
-
-$backgroundBlue: #c8eaf3;
-$fontColor: #06151a;
-$backgroundYellow: #eaf3c8;
-$backgroundViolet: #cdc0f9;
-$backgroundOrange: #f4af8b;
-$borderColor: #3f1a06;
-$red: #f11717;
-$transition: all 0.15s ease-in-out;
 
 * {
 	box-sizing: border-box;
@@ -98,7 +80,7 @@ input[type='date']::-webkit-calendar-picker-indicator,
 input[type='time']::-webkit-calendar-picker-indicator {
 	margin: 0;
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: $mobile-width) {
 	:root {
 		font-size: 14px;
 	}
@@ -133,7 +115,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
 	display: grid;
 	place-items: center;
 }
-.draggable:hover {
+.draggable {
 	&:hover {
 		cursor: grab;
 		background-color: blue;
@@ -170,34 +152,6 @@ input[type='time']::-webkit-calendar-picker-indicator {
 		flex-shrink: 0;
 	}
 }
-.table {
-	border-collapse: collapse;
-	margin-bottom: 2rem;
-	td {
-		width: 8rem;
-		height: 3rem;
-		border: 1px solid black;
-	}
-	&-title {
-		font-family: 'Gilroy';
-		font-size: 1.2rem;
-		letter-spacing: 1px;
-		background-color: $backgroundViolet !important;
-		&::first-letter {
-			text-transform: capitalize;
-		}
-	}
-}
-.background {
-	font-weight: 500;
-	cursor: default;
-	&-wite {
-		background-color: #fff;
-	}
-	&-orange {
-		background-color: $backgroundOrange;
-	}
-}
 input[type='date'] {
 	text-align: center;
 }
@@ -224,7 +178,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
 		transform: rotate(360deg);
 	}
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: $mobile-width) {
 	aside {
 		display: none;
 	}
