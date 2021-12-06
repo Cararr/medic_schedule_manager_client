@@ -6,7 +6,6 @@ import Delete from 'api/Delete';
 import { EmployeesList } from './EmployeesList';
 import { Tables } from 'components/tables/Tables';
 import { ControlPanel } from 'components/tables/ControlPanel';
-import { NavBar } from 'components/navBar/NavBar';
 import { SelectDate } from './SelectDate';
 import Utilities from 'util/Utilities';
 import { useUser } from 'providers/UserContext';
@@ -263,43 +262,40 @@ export const ViewSchedules: React.FunctionComponent = () => {
 	};
 
 	return (
-		<>
-			<NavBar />
-			<div className={styles.schedules}>
-				{isUserBoss && (
-					<EmployeesList
-						stationSchedules={schedules.stationSchedules}
-						homeRehabilitations={schedules.homeRehabilitations}
-						checkForSchedulesChanges={checkForSchedulesChanges}
-					/>
-				)}
-				<main className={styles.content}>
-					<SelectDate
-						setDateSelected={setDateSelected}
-						dateSelected={dateSelected}
-					/>
-					<Tables
-						schedules={schedules}
-						checkForSchedulesChanges={checkForSchedulesChanges}
-						currentlyDragged={currentlyDragged}
-						setCurrentlyDragged={setCurrentlyDragged}
-						changeCellValue={changeCellValue}
-						workStageSpans={workStageSpans}
-						handleHomeRehabilitationChanges={handleHomeRehabilitationChanges}
-						removeHomeRehabilitation={removeHomeRehabilitation}
-						handleCommentChanges={handleCommentChanges}
-					/>
-				</main>
-				{isUserBoss && (
-					<ControlPanel
-						wasScheduleEdited={wasScheduleEdited}
-						saveScheudles={saveScheudles}
-						printSchedules={printSchedules}
-						isLoading={isLoading}
-					/>
-				)}
-			</div>
-		</>
+		<div className={styles.schedules}>
+			{isUserBoss && (
+				<EmployeesList
+					stationSchedules={schedules.stationSchedules}
+					homeRehabilitations={schedules.homeRehabilitations}
+					checkForSchedulesChanges={checkForSchedulesChanges}
+				/>
+			)}
+			<main className={styles.content}>
+				<SelectDate
+					setDateSelected={setDateSelected}
+					dateSelected={dateSelected}
+				/>
+				<Tables
+					schedules={schedules}
+					checkForSchedulesChanges={checkForSchedulesChanges}
+					currentlyDragged={currentlyDragged}
+					setCurrentlyDragged={setCurrentlyDragged}
+					changeCellValue={changeCellValue}
+					workStageSpans={workStageSpans}
+					handleHomeRehabilitationChanges={handleHomeRehabilitationChanges}
+					removeHomeRehabilitation={removeHomeRehabilitation}
+					handleCommentChanges={handleCommentChanges}
+				/>
+			</main>
+			{isUserBoss && (
+				<ControlPanel
+					wasScheduleEdited={wasScheduleEdited}
+					saveScheudles={saveScheudles}
+					printSchedules={printSchedules}
+					isLoading={isLoading}
+				/>
+			)}
+		</div>
 	);
 };
 

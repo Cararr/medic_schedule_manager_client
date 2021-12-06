@@ -1,0 +1,28 @@
+@mixin phone {
+	@media (max-width: 500px) {
+		@content;
+	}
+}
+@mixin tablet {
+	@media (max-width: 900px) {
+		@content;
+	}
+}
+@mixin desktop {
+	@media (max-width: 1200px) {
+		@content;
+	}
+}
+@mixin big-desktop {
+	@media (min-width: 1800px) {
+		@content;
+	}
+}
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { UserCrudentials } from 'types';
 import { ImCross } from 'react-icons/im';
 import { CgSpinner } from 'react-icons/cg';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { errorMessage } from 'WinBox/winboxMessages';
 import { login } from 'api/login';
 import { useEmployees } from 'providers/EmployeesContext';
@@ -11,7 +11,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import styles from './landingPage.module.scss';
 
 export const LoginPanel: React.FunctionComponent = () => {
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -34,7 +34,8 @@ export const LoginPanel: React.FunctionComponent = () => {
 		if (response?.status === 201) {
 			if (!employees.length) loadEmployees();
 			changeUser(response.data.user);
-			history.push('/home');
+
+			navigate('/home');
 		} else {
 			if (!response || ![400, 401].includes(response.status))
 				return errorMessage(
@@ -45,7 +46,7 @@ export const LoginPanel: React.FunctionComponent = () => {
 		}
 	};
 
-	const handleCloseLoginPanel = () => history.push('/');
+	const handleCloseLoginPanel = () => navigate('/');
 
 	const loading = (
 		<CgSpinner

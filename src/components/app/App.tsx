@@ -1,29 +1,12 @@
 import React from 'react';
-import { AppProviders } from 'providers/AppProviders';
-import { Route } from 'react-router-dom';
-import { LoggedUsersRoute } from 'RouteTypes/LoggedUsersRoute';
-import { NonLoggedUsersRoute } from 'RouteTypes/NonLoggedUsersRoute';
-import { AdminRoute } from 'RouteTypes/AdminRoute';
-import { ViewSchedules } from 'components/schedules/ViewSchedules';
-import { LandingPage } from 'components/landingPage/LandingPage';
-import { HomePage } from 'components/homePage/HomePage';
-import { Create } from 'components/create/Create';
-import { Vacations } from 'components/vacations/Vacations';
-import { NotFound } from 'components/notFound/NotFound';
-import 'WinBox/winBox.css';
+import { AuthenticatedApp } from './AuthenticatedApp';
+import { UnauthenticatedApp } from './UnauthenticatedApp';
+import { useUser } from 'providers/UserContext';
 
 const App: React.FunctionComponent = () => {
-	return (
-		<AppProviders>
-			<NonLoggedUsersRoute path="/" exact component={LandingPage} />
-			<NonLoggedUsersRoute path="/login" exact component={LandingPage} />
-			<LoggedUsersRoute path="/schedules" exact component={ViewSchedules} />
-			<LoggedUsersRoute path="/home" exact component={HomePage} />
-			<LoggedUsersRoute path="/vacations" exact component={Vacations} />
-			<AdminRoute path="/create" component={Create} />
-			<Route path="/" component={NotFound} />
-		</AppProviders>
-	);
+	const { user } = useUser();
+
+	return user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
 };
 
 export default App;

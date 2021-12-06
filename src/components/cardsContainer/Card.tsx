@@ -12,10 +12,14 @@ interface Props {
 export const Card: React.FunctionComponent<Props> = (props) => {
 	return (
 		<NavLink
-			activeStyle={{
-				borderStyle: 'dashed',
-				transform: 'translate(+5px, +5px)',
-			}}
+			style={({ isActive }) =>
+				isActive
+					? {
+							borderStyle: 'dashed',
+							transform: 'translate(+5px, +5px)',
+					  }
+					: {}
+			}
 			to={props.pathName}
 			className={`${styles.card} ${
 				props.itemName === 'Create' ? styles.hidden : ''

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { NavBar } from 'components/navBar/NavBar';
 import FullCalendar, {
 	DatesSetArg,
 	EventApi,
@@ -165,45 +164,42 @@ export const Vacations: React.FunctionComponent = () => {
 	);
 
 	return (
-		<>
-			<NavBar />
-			<main className={styles.container}>
-				<FullCalendar
-					plugins={[dayGridPlugin, interactionPlugin]}
-					locale={'pl'}
-					height="auto"
-					firstDay={1}
-					headerToolbar={{
-						left: !isMobileDevice ? 'prevYear nextYear' : '',
-						center: 'title',
-					}}
-					titleFormat={{
-						year: currentYear === selectedYear ? undefined : 'numeric',
-						month: 'long',
-					}}
-					stickyHeaderDates={!isMobileDevice}
-					buttonText={buttonsText}
-					events={vacationEvents}
-					eventContent={eventContent}
-					datesSet={handleDatesSet}
-					// weekends={false}
-					editable={isUserBoss && !isMobileDevice}
-					eventAllow={(dropInfo) => {
-						return ![0, 6].includes(dropInfo.start.getDay());
-					}}
-					eventDragMinDistance={1}
-					eventDragStop={({ el }) => {
-						changeGrabCursor(
-							el.firstChild?.firstChild?.firstChild as HTMLElement,
-							'grab'
-						);
-					}}
-					eventDrop={handleEventResizeAndDrop}
-					eventResizableFromStart
-					eventResize={handleEventResizeAndDrop}
-				/>
-			</main>
-		</>
+		<main className={styles.container}>
+			<FullCalendar
+				plugins={[dayGridPlugin, interactionPlugin]}
+				locale={'pl'}
+				height="auto"
+				firstDay={1}
+				headerToolbar={{
+					left: !isMobileDevice ? 'prevYear nextYear' : '',
+					center: 'title',
+				}}
+				titleFormat={{
+					year: currentYear === selectedYear ? undefined : 'numeric',
+					month: 'long',
+				}}
+				stickyHeaderDates={!isMobileDevice}
+				buttonText={buttonsText}
+				events={vacationEvents}
+				eventContent={eventContent}
+				datesSet={handleDatesSet}
+				// weekends={false}
+				editable={isUserBoss && !isMobileDevice}
+				eventAllow={(dropInfo) => {
+					return ![0, 6].includes(dropInfo.start.getDay());
+				}}
+				eventDragMinDistance={1}
+				eventDragStop={({ el }) => {
+					changeGrabCursor(
+						el.firstChild?.firstChild?.firstChild as HTMLElement,
+						'grab'
+					);
+				}}
+				eventDrop={handleEventResizeAndDrop}
+				eventResizableFromStart
+				eventResize={handleEventResizeAndDrop}
+			/>
+		</main>
 	);
 };
 

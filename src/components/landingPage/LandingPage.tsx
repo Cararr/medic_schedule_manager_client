@@ -2,13 +2,11 @@ import React from 'react';
 import LandingImage from 'assets/images/LandingImage.png';
 import { LoginPanel } from './LoginPanel';
 import { Link } from 'react-router-dom';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { useMatch } from 'react-router-dom';
 import styles from './landingPage.module.scss';
 
 export const LandingPage: React.FunctionComponent = () => {
-	const { path } = useRouteMatch();
-
-	const isLoginPanelOn = path === '/login';
+	const isLoginPanelOn = useMatch('/login');
 
 	return (
 		<main className={styles.landingPage}>
@@ -28,11 +26,7 @@ export const LandingPage: React.FunctionComponent = () => {
 			<figure>
 				<img alt="Schedule Calendar" src={LandingImage} />
 			</figure>
-			<Switch>
-				<Route exact path={'/login'}>
-					<LoginPanel />
-				</Route>
-			</Switch>
+			{isLoginPanelOn && <LoginPanel />}
 		</main>
 	);
 };

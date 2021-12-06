@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useUser } from 'providers/UserContext';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink, useMatch } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import Utilities from 'util/Utilities';
@@ -20,8 +20,9 @@ export const NavBar: React.FunctionComponent = () => {
 		Cookies.remove('user');
 	};
 
-	const isThisHomePage = window.location.pathname === '/home';
-	const isThisVacations = window.location.pathname === '/vacations';
+	const homePage = useMatch('/home');
+	const vacationsPage = useMatch('/vacations');
+	const notFoundPage = useMatch('/404');
 
 	useEffect(() => {
 		const toggleBackgroundStyles = () => {
@@ -48,10 +49,10 @@ export const NavBar: React.FunctionComponent = () => {
 		};
 	}, []);
 
-	return (
+	return notFoundPage ? null : (
 		<nav
 			style={{
-				position: isThisVacations && !isMobileDevice ? 'initial' : 'sticky',
+				position: vacationsPage && !isMobileDevice ? 'initial' : 'sticky',
 				backgroundColor: isNavBarTransparent ? '' : 'var(--backgroundYellow)',
 				boxShadow: isNavBarTransparent
 					? 'none'
@@ -59,7 +60,7 @@ export const NavBar: React.FunctionComponent = () => {
 			}}
 			className={`not-printable ${styles.nav}`}
 		>
-			{!isThisHomePage && (
+			{!homePage && (
 				<div className={styles.menu}>
 					<button
 						onClick={() => {
@@ -88,18 +89,27 @@ export const NavBar: React.FunctionComponent = () => {
 						}
 					>
 						<li>
-							<NavLink activeClassName={styles.active} to="/schedules">
+							<NavLink
+								className={({ isActive }) => (isActive ? styles.active : '')}
+								to="/schedules"
+							>
 								Schedules
 							</NavLink>
 						</li>
 						<li>
-							<NavLink activeClassName={styles.active} to="/vacations">
+							<NavLink
+								className={({ isActive }) => (isActive ? styles.active : '')}
+								to="/vacations"
+							>
 								Vacations
 							</NavLink>
 						</li>
 						{isUserBoss && !isMobileDevice && (
 							<li>
-								<NavLink activeClassName={styles.active} to="/create">
+								<NavLink
+									className={({ isActive }) => (isActive ? styles.active : '')}
+									to="/create"
+								>
 									Create
 								</NavLink>
 							</li>
@@ -110,11 +120,14 @@ export const NavBar: React.FunctionComponent = () => {
 			<h3
 				className={styles.header}
 			>{`${user?.firstName} ${user?.lastName}`}</h3>
-			<Link style={{ gridColumnStart: 3, justifySelf: 'end' }} to="/">
-				<button onClick={logOut} className="button" type="button">
-					Log out
-				</button>
-			</Link>
+			<button
+				onClick={logOut}
+				className="button"
+				style={{ gridColumnStart: 3, justifySelf: 'end' }}
+				type="button"
+			>
+				Log out
+			</button>
 		</nav>
 	);
 };

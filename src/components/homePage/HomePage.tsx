@@ -2,7 +2,6 @@ import React from 'react';
 import SchedulesImage from 'assets/images/SchedulesImage.png';
 import VacationsImage from 'assets/images/VacationsImage.png';
 import CreateImage from 'assets/images/CreateImage.png';
-import { NavBar } from 'components/navBar/NavBar';
 import { CardsContainer } from 'components/cardsContainer/CardsContainer';
 import { useUser } from 'providers/UserContext';
 import Utilities from 'util/Utilities';
@@ -29,10 +28,5 @@ export const HomePage: React.FunctionComponent = () => {
 		},
 	];
 
-	return (
-		<>
-			<NavBar />
-			<CardsContainer isUserBoss={isUserBoss} cards={cards} />
-		</>
-	);
+	return <CardsContainer isUserBoss={isUserBoss} cards={cards} />;
 };

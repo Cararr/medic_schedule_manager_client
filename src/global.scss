@@ -1,6 +1,7 @@
 @import-normalize;
 @import 'sass/variables.scss';
 @import 'sass/fonts.scss';
+@import 'sass/utilities.scss';
 
 :root {
 	--backgroundBlue: #c8eaf3;
@@ -11,6 +12,9 @@
 	--borderColor: #3f1a06;
 	--red: #f11717;
 	font-size: 22px;
+	@include phone {
+		font-size: 14px;
+	}
 }
 
 * {
@@ -64,6 +68,9 @@ aside {
 	padding: 0.5rem;
 	border: 1px solid black;
 	border-radius: 10px;
+	@include phone {
+		display: none;
+	}
 }
 input {
 	padding: 1px 2px;
@@ -80,25 +87,12 @@ input[type='date']::-webkit-calendar-picker-indicator,
 input[type='time']::-webkit-calendar-picker-indicator {
 	margin: 0;
 }
-@media only screen and (max-width: $mobile-width) {
-	:root {
-		font-size: 14px;
-	}
-	aside {
-		display: none;
-	}
-}
 @media print {
 	* {
 		break-inside: avoid;
 	}
 	aside {
 		display: none !important;
-	}
-}
-@media print {
-	* {
-		break-inside: avoid;
 	}
 	.not-printable {
 		display: none !important;
@@ -169,20 +163,4 @@ input[type='time']::-webkit-calendar-picker-indicator {
 }
 .spin {
 	animation: rotate 1s linear infinite;
-}
-@keyframes rotate {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-}
-@media only screen and (max-width: $mobile-width) {
-	aside {
-		display: none;
-	}
-	.table {
-		width: 100%;
-	}
 }

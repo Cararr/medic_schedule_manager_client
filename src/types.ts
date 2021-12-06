@@ -1,5 +1,3 @@
-import { RouteComponentProps } from 'react-router-dom';
-
 export enum employeeRole {
 	BOSS = 'BOSS',
 	EMPLOYEE = 'EMPLOYEE',
@@ -56,9 +54,8 @@ export interface CardProperties {
 }
 
 export interface RoutingProperties {
-	component: React.FunctionComponent<RouteComponentProps>;
+	component: React.FunctionComponent;
 	path: string;
-	exact?: boolean;
 }
 
 export interface WorkStageSpans {

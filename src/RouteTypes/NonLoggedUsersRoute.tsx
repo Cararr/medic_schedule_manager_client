@@ -1,22 +1,16 @@
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';
 import { useUser } from 'providers/UserContext';
 import { RoutingProperties } from 'types';
 
 export const NonLoggedUsersRoute = ({
 	component: Component,
-	...rest
+	path,
 }: RoutingProperties) => {
 	const { user } = useUser();
 	return (
 		<Route
-			{...rest}
-			render={(props) => {
-				return !user ? (
-					<Component {...props} />
-				) : (
-					<Redirect to={{ pathname: '/home' }} />
-				);
-			}}
+			path={path}
+			element={!user ? <Component /> : <Navigate to={{ pathname: '/home' }} />}
 		/>
 	);
 };

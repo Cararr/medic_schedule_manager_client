@@ -17,6 +17,9 @@
 			text-transform: capitalize;
 		}
 	}
+	@include phone {
+		width: 100%;
+	}
 }
 .background {
 	font-weight: 500;
